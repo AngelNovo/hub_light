@@ -20,3 +20,5 @@ Route::get('/', function () {
 
 Route::get('/tipus_usuari', [tipus_usuari_controller::class,'get_all']);
 Route::post('/tipus_usuari',[tipus_usuari_controller::class,'store']);
+
+Route::get('/contingut',[contingut_controller::class,'get_all']);

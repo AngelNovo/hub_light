@@ -2,6 +2,6 @@
 set/p commit= Quins son els canvis?
 git add .
 git commit -m "%commit%"
-git push origin main
+git push origin master
 pause
 exit

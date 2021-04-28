@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 26-04-2021 a las 20:59:30
+-- Tiempo de generación: 28-04-2021 a las 20:40:53
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.4.16
 
@@ -64,11 +64,20 @@ CREATE TABLE `contingut` (
   `majoria_edat` tinyint(1) NOT NULL DEFAULT '0',
   `reportat` tinyint(1) NOT NULL DEFAULT '0',
   `estadistica` int(10) UNSIGNED NOT NULL,
+  `propietari` int(10) UNSIGNED NOT NULL,
   `tipus_contingut` int(10) UNSIGNED NOT NULL,
   `drets_autor` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `contingut`
+--
+
+INSERT INTO `contingut` (`id`, `titol`, `portada`, `link_copyright`, `url`, `descripcio`, `majoria_edat`, `reportat`, `estadistica`, `propietari`, `tipus_contingut`, `drets_autor`, `created_at`, `updated_at`) VALUES
+(1, 'test', '', '', '', 'test', 0, 0, 1, 1, 1, 1, '2021-04-28 17:36:54', NULL),
+(2, 'test2', '', '', '', 'test2', 1, 0, 2, 2, 1, 1, '2021-04-28 17:37:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -83,6 +92,13 @@ CREATE TABLE `dret_autor` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `dret_autor`
+--
+
+INSERT INTO `dret_autor` (`id_dret`, `tipus`, `icona`, `created_at`, `updated_at`) VALUES
+(1, 'sense', '', '2021-04-28 14:40:07', NULL);
 
 -- --------------------------------------------------------
 
@@ -102,6 +118,14 @@ CREATE TABLE `estadistiques` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `estadistiques`
+--
+
+INSERT INTO `estadistiques` (`id_estadistica`, `q_comentaris`, `q_likes`, `q_seguidors`, `q_seguits`, `q_likes_mensuals`, `q_comentaris_mensuals`, `created_at`, `updated_at`) VALUES
+(1, 10, 10, 10, 10, 10, 10, '2021-04-28 14:36:27', NULL),
+(2, 0, 0, 0, 0, 0, 0, '2021-04-28 15:03:03', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -115,6 +139,14 @@ CREATE TABLE `estadistiques_contingut` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `estadistiques_contingut`
+--
+
+INSERT INTO `estadistiques_contingut` (`id_estadistica`, `q_comentaris`, `q_likes`, `created_at`, `updated_at`) VALUES
+(1, 10, 10, '2021-04-28 14:39:05', NULL),
+(2, 0, 0, '2021-04-28 15:16:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -248,6 +280,13 @@ CREATE TABLE `tipus_contingut` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `tipus_contingut`
+--
+
+INSERT INTO `tipus_contingut` (`id`, `tipus`, `icona`, `created_at`, `updated_at`) VALUES
+(1, 'text', '', '2021-04-28 14:39:32', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -260,6 +299,14 @@ CREATE TABLE `tipus_usuari` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipus_usuari`
+--
+
+INSERT INTO `tipus_usuari` (`id`, `tipus`, `created_at`, `updated_at`) VALUES
+(1, 'usuari', '2021-04-28 14:35:00', '2021-04-28 14:35:00'),
+(2, 'admin', '2021-04-28 15:02:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -291,6 +338,14 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `nom`, `password`, `email`, `email_verified_at`, `alies`, `foto`, `link`, `data-naixement`, `data-registre`, `actiu`, `deshabilitat`, `suspes`, `es_admin`, `nivell_gravetat`, `grups_disponibles`, `recomendat`, `estadistica`, `tipus`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@test.com', '2021-04-28 14:36:52', 'test', '', '', '2021-04-06 14:36:52', '', 0, 0, 0, 0, 10, 0, '', 1, 1, NULL, '2021-04-28 14:36:52', NULL),
+(2, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@admin.com', '2021-04-28 15:03:12', 'admin', '', '', '2021-04-04 15:03:12', '', 1, 0, 0, 1, 10, 0, '', 2, 2, NULL, '2021-04-28 15:03:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -358,7 +413,8 @@ ALTER TABLE `contingut`
   ADD PRIMARY KEY (`id`),
   ADD KEY `contingut_estadistica_foreign` (`estadistica`),
   ADD KEY `contingut_tipus_contingut_foreign` (`tipus_contingut`),
-  ADD KEY `contingut_drets_autor_foreign` (`drets_autor`);
+  ADD KEY `contingut_drets_autor_foreign` (`drets_autor`),
+  ADD KEY `contingut_propietari_foreign` (`propietari`);
 
 --
 -- Indices de la tabla `dret_autor`
@@ -484,25 +540,25 @@ ALTER TABLE `avis`
 -- AUTO_INCREMENT de la tabla `contingut`
 --
 ALTER TABLE `contingut`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `dret_autor`
 --
 ALTER TABLE `dret_autor`
-  MODIFY `id_dret` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_dret` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `estadistiques`
 --
 ALTER TABLE `estadistiques`
-  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `estadistiques_contingut`
 --
 ALTER TABLE `estadistiques_contingut`
-  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -532,19 +588,19 @@ ALTER TABLE `missatge`
 -- AUTO_INCREMENT de la tabla `tipus_contingut`
 --
 ALTER TABLE `tipus_contingut`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tipus_usuari`
 --
 ALTER TABLE `tipus_usuari`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `xat`
@@ -569,6 +625,7 @@ ALTER TABLE `avis_usuari`
 ALTER TABLE `contingut`
   ADD CONSTRAINT `contingut_drets_autor_foreign` FOREIGN KEY (`drets_autor`) REFERENCES `dret_autor` (`id_dret`) ON DELETE CASCADE,
   ADD CONSTRAINT `contingut_estadistica_foreign` FOREIGN KEY (`estadistica`) REFERENCES `estadistiques_contingut` (`id_estadistica`) ON DELETE CASCADE,
+  ADD CONSTRAINT `contingut_propietari_foreign` FOREIGN KEY (`propietari`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `contingut_tipus_contingut_foreign` FOREIGN KEY (`tipus_contingut`) REFERENCES `tipus_contingut` (`id`) ON DELETE CASCADE;
 
 --

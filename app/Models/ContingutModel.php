@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tipus_usuari extends Model
+class ContingutModel extends Model
 {
     use HasFactory;
-
-    protected $table = 'tipus_usuari';
+    protected $table = 'contingut';
     protected $primaryKey = 'id';
-    protected $fillable = ['tipus'];
+    protected $fillable = ['tipus','created_at','updated_at'];
 }

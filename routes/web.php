@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\tipus_usuari_controller;
+use App\Http\Controllers\ContingutController;
+use App\Http\Controllers\TipusUsuariController;
+use App\Http\Controllers\UsuariController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +17,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('front.home');
 });
 
-Route::get('/tipus_usuari', [tipus_usuari_controller::class,'get_all']);
-Route::post('/tipus_usuari',[tipus_usuari_controller::class,'store']);
+// *Usuari*
+Route::get('/usuaris',[UsuariController::class,'getAll']);
+Route::get('/usuaris/{id}',[UsuariController::class,'get']);
+// *Tipus usuari*
+Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
+Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
+// *Contingut*
+Route::get('/contingut',[ContingutController::class,'getAll']);
+Route::get('/contingut/{id}',[ContingutController::class,'get']);
+// *Drets autor*
 
-Route::get('/contingut',[contingut_controller::class,'get_all']);
+// *Xat*
+
+// *Usuari estadistiques*
+
+//  *Contingut estadistiques*

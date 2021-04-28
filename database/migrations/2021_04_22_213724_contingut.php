@@ -24,11 +24,13 @@ class Contingut extends Migration
             $table->boolean("majoria_edat")->default("0");
             $table->boolean("reportat")->default("0");
             $table->unsignedInteger("estadistica");
+            $table->unsignedInteger("propietari");
             $table->unsignedInteger('tipus_contingut');
             $table->unsignedInteger('drets_autor');
             $table->foreign('estadistica')->references('id_estadistica')->on('estadistiques_contingut')->onDelete('cascade');
             $table->foreign('tipus_contingut')->references('id')->on('tipus_contingut')->onDelete('cascade');
             $table->foreign('drets_autor')->references('id_dret')->on('dret_autor')->onDelete('cascade');
+            $table->foreign('propietari')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
 
         });

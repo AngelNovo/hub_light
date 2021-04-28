@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\tipus_usuari;
+use App\Models\TipusUsuariModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class tipus_usuari_controller extends Controller
+class TipusUsuariController extends Controller
 {
-    public function get_all() {
+    public function getAll() {
         $results = DB::table('tipus_usuari')->get();
-        dd($results);
+        return $results;
     }
 
     public function store(Request $request) {
         $request->validate([
             'tipus'=>'required'
         ]);
-        $tipus=tipus_usuari::create([
+        $tipus=TipusUsuariModel::create([
             'tipus'=>$request->input('tipus')
         ]);
         $aux = ["correcte"=>$request->tipus];

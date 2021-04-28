@@ -1,4 +1,4 @@
 @echo off
-git pull origin main
+git pull origin master
 pause
 exit

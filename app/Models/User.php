@@ -20,6 +20,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'email_verified_at',
+        'data-naixement',
+        'estadistica',
+        'actiu',
+        'deshabilitat',
+        'suspes',
+        'es_admin',
+        'nivell_gravetat',
+        'grups_disponibles',
+        'recomendat',
+        'tipus',
+        'created_at',
+        'updated_at'
     ];
 
     /**

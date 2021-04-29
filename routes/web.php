@@ -23,6 +23,7 @@ Route::get('/', function () {
 // *Usuari*
 Route::get('/usuaris',[UsuariController::class,'getAll']);
 Route::get('/usuaris/{id}',[UsuariController::class,'get']);
+Route::post('/usuaris/{id}',[UsuariController::class,'get']);
 // *Tipus usuari*
 Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
 Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
@@ -36,3 +37,9 @@ Route::get('/contingut/{id}',[ContingutController::class,'get']);
 // *Usuari estadistiques*
 
 //  *Contingut estadistiques*
+
+// *ADMIN*
+Route::get('/back/admin/login/{id}',[UsuariController::class,'getAdmin']);
+Route::get('/back/admin/home', function() {
+    return view('back.home');
+});

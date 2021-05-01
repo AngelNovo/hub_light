@@ -15,34 +15,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
         <script src={{URL::asset('js/back/sidebar.js')}}></script>
-        <script src={{URL::asset('js/back/admin_info.js')}}></script>
-        <script>
-            $(document).ready(function() {
-                ajax_call(2);
-                function ajax_call(id) {
-                    $.ajax({
-                    url: "/usuaris/"+id,
-                    type: "POST",
-                    data:{
-                        _token:'{{ csrf_token() }}'
-                    },
-                    cache: false,
-                    dataType: 'json',
-                    success: function(data){
-                        document.getElementById("nom").innerHTML=data.nom;
-                        if(data.es_admin===1) {
-                            document.getElementById("rol").innerHTML='Admin';
-                        }
-                    }
-                });
-                }
-            });
-        </script>
 </head>
 <body>
     <div class="page-wrapper chiller-theme toggled">
-        @include("back.layout.nav")
-        @yield("content")
+        @if (Auth::user() && Auth::user()->es_admin===1)
+            @include("back.layout.nav")
+            @yield("content")
+        @else
+            <script>window.location = "/home";</script>
+        @endif
     </div>
 </body>
 </html>

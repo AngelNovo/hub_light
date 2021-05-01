@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContingutController;
 use App\Http\Controllers\TipusUsuariController;
 use App\Http\Controllers\UsuariController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*

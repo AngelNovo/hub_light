@@ -192,10 +192,15 @@
     margin-top: 4px;
   }
 
-  .sidebar-wrapper .sidebar-header .user-info .user-status i {
+  .con {
     font-size: 8px;
     margin-right: 4px;
     color: #5cb85c;
+  }
+  .nocon {
+    font-size: 8px;
+    margin-right: 4px;
+    color: #C00;
   }
 
   /*-----------------------sidebar-search------------------------*/

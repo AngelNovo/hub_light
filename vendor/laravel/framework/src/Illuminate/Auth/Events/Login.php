@@ -2,7 +2,9 @@
 
 namespace Illuminate\Auth\Events;
 
+use App\Models\User;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class Login
 {
@@ -42,5 +44,8 @@ class Login
         $this->user = $user;
         $this->guard = $guard;
         $this->remember = $remember;
+        User::where('id',Auth::user()->id)->update([
+            'actiu'=>1
+        ]);
     }
 }

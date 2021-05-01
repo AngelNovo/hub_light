@@ -12,15 +12,25 @@
         </div>
         <div class="sidebar-header">
           <div class="user-pic">
-            <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
-              alt="User picture">
+            @if (Auth::user()->foto===null)
+                <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                alt="User picture">
+                @else
+                <img class="img-responsive img-rounded" src={{asset("images/".Auth::user()->foto)}}
+                alt="User picture">
+            @endif
           </div>
           <div class="user-info">
-            <span id="nom" class="user-name"></span>
+            <span id="nom" class="user-name">{{ Auth::user()->name }}</span>
             <span id="rol" class="user-role"></span>
             <span class="user-status">
-              <i class="fa fa-circle"></i>
-              <span>Conectado</span>
+              @if (Auth::user()->actiu===1)
+                <i class="fa fa-circle con"></i>
+                <span>Conectado</span>
+                @else
+                    <i class="fa fa-circle nocon"></i>
+                    <span>No conectado</span>
+              @endif
             </span>
           </div>
         </div>

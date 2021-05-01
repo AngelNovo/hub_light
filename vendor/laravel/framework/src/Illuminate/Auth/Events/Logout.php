@@ -2,7 +2,9 @@
 
 namespace Illuminate\Auth\Events;
 
+use App\Models\User;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class Logout
 {
@@ -33,5 +35,8 @@ class Logout
     {
         $this->user = $user;
         $this->guard = $guard;
+        User::where('id',Auth::user()->id)->update([
+            'actiu'=>0
+        ]);
     }
 }

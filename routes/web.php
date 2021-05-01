@@ -43,3 +43,7 @@ Route::get('/back/admin/login/{id}',[UsuariController::class,'getAdmin']);
 Route::get('/back/admin/home', function() {
     return view('back.home');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

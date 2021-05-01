@@ -16,15 +16,15 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->engine= "InnoDB";
             $table->increments('id');
-            $table->string('nom');
+            $table->string('name');
             $table->string('password');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('alies');
-            $table->string('foto');
-            $table->string('link');
-            $table->timestamp('data-naixement');
-            $table->string('data-registre');
+            $table->string('alies')->default(null);
+            $table->string('foto')->default(null);
+            $table->string('link')->default(null);
+            $table->timestamp('data-naixement')->default(null);
+            $table->string('data-registre')->default(null);
             $table->boolean('actiu')->default('0');
             $table->boolean('deshabilitat')->default('0');
             $table->boolean('suspes')->default('0');

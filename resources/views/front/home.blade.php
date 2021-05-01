@@ -1,5 +1,5 @@
-@extends("layout.app")
+@extends("front.layout.app")
 
 @section("content")
-    <h1 class="text-center">Test home</h1>
+    <h1 title='test' class="text-center">Test home</h1>
 @endsection

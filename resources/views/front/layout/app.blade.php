@@ -9,8 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    @include("layout.nav")
+    @include("front.layout.nav")
     @yield("content")
-    @include("layout.footer")
+    @include("front.layout.footer")
 </body>
 </html>

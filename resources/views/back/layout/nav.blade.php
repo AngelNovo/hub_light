@@ -16,7 +16,7 @@
                 <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
                 alt="User picture">
                 @else
-                <img class="img-responsive img-rounded" src={{asset("images/".Auth::user()->foto)}}
+                <img class="img-responsive img-rounded" src={{asset("images/perfil/usuarios/".Auth::user()->foto)}}
                 alt="User picture">
             @endif
           </div>
@@ -86,7 +86,7 @@
       </div>
       <!-- sidebar-content  -->
       <div class="sidebar-footer">
-        <a href="/contingut">
+        <a href={{ url('/logout') }}>
           <i class="fa fa-power-off"></i>
         </a>
       </div>

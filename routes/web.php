@@ -25,6 +25,7 @@ Route::get('/', function () {
 Route::get('/usuaris',[UsuariController::class,'getAll']);
 Route::get('/usuaris/{id}',[UsuariController::class,'get']);
 Route::post('/usuaris/{id}',[UsuariController::class,'get']);
+Route::get('/logout',[UsuariController::class,'logout']);
 // *Tipus usuari*
 Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
 Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
@@ -41,8 +42,10 @@ Route::get('/contingut/{id}',[ContingutController::class,'get']);
 
 // *ADMIN*
 Route::get('/back/admin/login/{id}',[UsuariController::class,'getAdmin']);
-Route::get('/back/admin/home', function() {
-    return view('back.home');
+Route::group(['middleware'=>'auth'], function() {
+    Route::get('/back/admin/home', function() {
+        return view('back.home');
+    });
 });
 
 Auth::routes();

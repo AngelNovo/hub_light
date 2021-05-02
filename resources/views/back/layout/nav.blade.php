@@ -41,9 +41,9 @@
               <span>General</span>
             </li>
             <li class="sidebar-dropdown">
-              <a href="#" id="#page_nav_dashboard">
+              <a href="#" id="#page_nav_perfil">
                 <i class="fa fa-tachometer-alt"></i>
-                <span>Dashboard</span>
+                <span>Perfil</span>
               </a>
             </li>
             <li class="sidebar-dropdown">

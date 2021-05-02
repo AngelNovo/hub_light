@@ -26,6 +26,8 @@ Route::get('/usuaris',[UsuariController::class,'getAll']);
 Route::get('/usuaris/{id}',[UsuariController::class,'get']);
 Route::post('/usuaris/{id}',[UsuariController::class,'get']);
 Route::get('/logout',[UsuariController::class,'logout']);
+Route::put('/usuaris/update',[UsuariController::class,'update']);
+Route::put('/usuaris/update/foto',[UsuariController::class,'updateFoto']);
 // *Tipus usuari*
 Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
 Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
@@ -49,5 +51,20 @@ Route::group(['middleware'=>'auth'], function() {
 });
 
 Auth::routes();
-
+// Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Explorar
+Route::get('/explorar',function() {
+    return view('front.explorar');
+});
+
+// Recomendados
+Route::get('/recomendados',function() {
+    return view('front.recomendados');
+});
+
+// Destacados
+Route::get('/destacados',function() {
+    return view('front.destacados');
+});

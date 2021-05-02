@@ -15,7 +15,7 @@ class UsuariController extends Controller
     }
     public function get($id) {
         $result = User::find($id);
-        return $result;
+        return view('front.perfil');
     }
     public function getAdmin($id) {
         $result = User::find($id);
@@ -25,5 +25,33 @@ class UsuariController extends Controller
     public function logout() {
         Auth::logout();
         return view('front.home');
+    }
+
+    public function update(Request $request) {
+        $usuari = User::where('id',Auth::user()->id)
+        ->update([
+            "name"=>$request["name"],
+            "email"=>$request["email"],
+            "password"=>md5($request["password"])
+        ]);
+    }
+    public function updateFoto(Request $request) {
+        $nombre=Auth::user()->foto;
+        $request->validate([
+            'foto'=>'required|mimes:jpg,png,jpeg,gif|max:1024'
+        ]);
+
+        if($nombre!=="avatar.jpg") {
+            unlink(public_path("/images/perfil/usuarios/$nombre"));
+        }
+
+        $newImageName=time().'-'.$request->name.'.'.$request->foto->extension();
+
+        $request->foto->move(public_path('/images/perfil/usuarios'),$newImageName);
+        $usuari = User::where('id',Auth::user()->id)
+        ->update([
+            "foto"=>$newImageName
+        ]);
+        return redirect($request->ruta);
     }
 }

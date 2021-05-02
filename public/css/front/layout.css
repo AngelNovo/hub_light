@@ -1,0 +1,101 @@
+/* ==================================== variables ===============================================*/
+:root {
+    --lightGreen: #eafcb9;
+    --green: #daec92;
+    --greenShadow:#c5d67fa3;
+    --darkGreen: #b9e28c;
+  }
+/* ==================================== fuentes ===============================================*/
+@font-face {
+  font-family: "LeagueSpartan";
+  src: url("fonts/LeagueSpartan-Bold.otf");
+}
+/* ==================================== header ===============================================*/
+.navbar{
+    position: fixed;
+    background-color: var(--green);
+    width: 100%;
+    padding: 15px;
+    box-shadow: 0px 0px 5px 5px rgb(180, 180, 180);
+    z-index: 1000;
+}
+
+.navbar-brand{
+    font-size: 2em;
+    font-family: LeagueSpartan;
+}
+
+#navbarSupportedContent ul{
+    position:relative;
+    margin-left: auto;
+  margin-right: 10%;
+}
+
+.navbar input{
+    background-color: var(--lightGreen);
+}
+
+li .nav-link{
+    border-radius: 10%;
+    width: 70px;
+    text-align: center;
+}
+
+li .nav-link:hover{
+    background-color: var(--greenShadow);
+    animation: navbar-hover 0.5s forwards;
+}
+
+i{
+    color: black;
+    font-size: 35px;
+}
+
+.dropdown-menu{
+    background-color: var(--lightGreen);
+}
+
+.dropdown-menu a:hover{
+    background-color: var(--greenShadow);
+}
+
+.nav-identificador{
+    margin-left: 15px;
+}
+/* ==================================== contenido ===============================================*/
+.container{
+    padding-top: 100px;
+}
+/* ==================================== responsive ===============================================*/
+@media (max-width: 991px) {
+    li .nav-link {
+      width: 100%;
+    }
+
+    #navbarSupportedContent form{
+        justify-content: center;
+    }
+  }
+/* ==================================== keyframes ===============================================*/
+@keyframes navbar-hover {
+    from{
+        transform: scale(1);
+    }
+
+    to{
+        transform: scale(1.2);
+    }
+}
+/* .header .navbar .navbar-collapse ul{
+    float: right;
+}
+i{
+    color: black;
+    font-size: 50px;
+}
+
+ .show{
+     margin-top: 20px;
+    background-color: white;
+    box-shadow: 0px 5px 5px 5px rgb(180, 180, 180);
+} */

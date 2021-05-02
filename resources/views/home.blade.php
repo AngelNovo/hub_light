@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('front.layout.app')
 
 @section('content')
 <div class="container">
@@ -13,8 +13,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    @if (!empty(Auth::user()))
+                    {{Auth::user()->id}}
+                    <img src={{asset("images/perfil/usuarios/".Auth::user()->foto)}}>
                     {{ __('You are logged in!') }}
+                    @endif
                 </div>
             </div>
         </div>

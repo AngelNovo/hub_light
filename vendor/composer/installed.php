@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '45e9e9b86a6e7a152927bf41f77efe1ea100a150',
+    'reference' => '4fc49eb1bc656b9425f00f2fa5675e5dfddb78b9',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -37,6 +37,15 @@
       array (
       ),
       'reference' => 'dff976c2f3487d42c1db75a3b180e2b9f0e72ce0',
+    ),
+    'components/jquery' => 
+    array (
+      'pretty_version' => '3.5.1',
+      'version' => '3.5.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b33e8f0f9a1cb2ae390cf05d766a900b53d2125b',
     ),
     'cordoval/hamcrest-php' => 
     array (
@@ -463,7 +472,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '45e9e9b86a6e7a152927bf41f77efe1ea100a150',
+      'reference' => '4fc49eb1bc656b9425f00f2fa5675e5dfddb78b9',
     ),
     'laravel/sail' => 
     array (

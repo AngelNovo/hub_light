@@ -62,9 +62,37 @@ i{
 .nav-identificador{
     margin-left: 15px;
 }
+
+.header-perfil-img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+    background-color: white;
+}
+
+.dropdown-menu p{
+    text-align: center;
+}
+
+.dropdown-item i{
+    margin-right: 10px;
+}
+
+.dropdown-divider{
+    border-top: 1px dashed #344637;
+}
 /* ==================================== contenido ===============================================*/
-.container{
+.content{
     padding-top: 100px;
+    min-height: 100vh;
+    background-color: blanchedalmond;
+    width: 100%;
+}
+/* ==================================== footer ===============================================*/
+footer{
+    background-color: var(--green);
 }
 /* ==================================== responsive ===============================================*/
 @media (max-width: 991px) {

@@ -18,17 +18,27 @@
       <li class="nav-item">
         <a class="nav-link" href="#"><i class="fa pe-7s-medal" title="Destacados"> </i></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fa pe-7s-upload" title="Subir contenido"> </i></a>
+      </li>
+      @if (!empty(Auth::user()))
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="pe-7s-user" title="Perfil"></i>
+          <img src={{asset("images/perfil/usuarios/".Auth::user()->foto)}} class="header-perfil-img">
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <p>¡Bienvenido {{Auth::user()->name}}!</p>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>         
+          <a class="dropdown-item" href={{url('logout')}}><i class="fa pe-7s-back-2" title="Cerrar sesión"> </i>Cerrar sesión</a>
         </div>
       </li>
+      @else
+      <li class="nav-item">
+        <a class="nav-link" href={{url('login')}}><i class="fa pe-7s-user" title="Registrarse/Iniciar sesion"> </i></a>
+      </li>
+      @endif
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

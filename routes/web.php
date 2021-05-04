@@ -24,7 +24,6 @@ Route::get('/', function () {
 // *Usuari*
 Route::get('/usuaris',[UsuariController::class,'getAll']);
 Route::get('/usuaris/{id}',[UsuariController::class,'get']);
-Route::post('/usuaris/{id}',[UsuariController::class,'get']);
 Route::get('/logout',[UsuariController::class,'logout']);
 Route::put('/usuaris/update',[UsuariController::class,'update']);
 Route::put('/usuaris/update/foto',[UsuariController::class,'updateFoto']);

@@ -45,24 +45,31 @@
                 <i class="fa fa-tachometer-alt"></i>
                 <span>Perfil</span>
               </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href={{url('/back/admin/home')}}>Gestión
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="sidebar-dropdown">
               <a href="#">
                 <i class="fa fa-user"></i>
-                <span>Users</span>
+                <span>Usuarios</span>
               </a>
               <div class="sidebar-submenu">
                 <ul>
                   <li>
                     <a href="#">Adminify
-
                     </a>
                   </li>
                   <li>
-                    <a href="#">Notification</a>
+                    <a href="#">Notificación</a>
                   </li>
                   <li>
-                    <a href="#">Ban</a>
+                    <a href="#">Bloquear</a>
                   </li>
                 </ul>
               </div>

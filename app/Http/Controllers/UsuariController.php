@@ -15,7 +15,7 @@ class UsuariController extends Controller
     }
     public function get($id) {
         $result = User::find($id);
-        return view('front.perfil');
+        return view('front.perfil')->with('user',$result);
     }
     public function getAdmin($id) {
         $result = User::find($id);

@@ -30,7 +30,10 @@
           <p>¡Bienvenido {{Auth::user()->name}}!</p>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>         
+          <a class="dropdown-item" href="#">Another action</a>
+          @if (Auth::user()->es_admin===1)
+            <a class="dropdown-item" href={{url('/back/admin/home')}}>Backoffice</a>
+          @endif
           <a class="dropdown-item" href={{url('logout')}}><i class="fa pe-7s-back-2" title="Cerrar sesión"> </i>Cerrar sesión</a>
         </div>
       </li>

@@ -17,10 +17,6 @@ class UsuariController extends Controller
         $result = User::find($id);
         return view('front.perfil')->with('user',$result);
     }
-    public function getAdmin($id) {
-        $result = User::find($id);
-        return view('back.home')->with('user',$result);
-    }
 
     public function logout() {
         Auth::logout();

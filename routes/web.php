@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContingutController;
 use App\Http\Controllers\TipusUsuariController;
 use App\Http\Controllers\UsuariController;
@@ -42,16 +43,21 @@ Route::get('/contingut/{id}',[ContingutController::class,'get']);
 //  *Contingut estadistiques*
 
 // *ADMIN*
-Route::get('/back/admin/login/{id}',[UsuariController::class,'getAdmin']);
 Route::group(['middleware'=>'auth'], function() {
     Route::get('/back/admin/home', function() {
         return view('back.home');
     });
+    Route::get('/back/admin/u/adminify', [AdminController::class,'adminify']);
+    Route::put('/back/admin/u/adminify', [AdminController::class,'makeAdmin']);
+    Route::get('/back/admin/u/block/', [AdminController::class,'getBlocked']);
+    Route::put('/back/admin/u/block', [AdminController::class,'blockUser']);
+    Route::get('/back/admin/u/notify', [AdminController::class,'getUsersNotify']);
+    Route::post('/back/admin/u/notify', [AdminController::class,'insertNotify']);
 });
 
 Auth::routes();
 // Home
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Explorar
 Route::get('/explorar',function() {

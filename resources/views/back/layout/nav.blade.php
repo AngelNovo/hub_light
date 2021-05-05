@@ -41,35 +41,35 @@
               <span>General</span>
             </li>
             <li class="sidebar-dropdown">
-              <a href="#" id="#page_nav_perfil">
+              <a href="#" id="page_nav_perfil">
                 <i class="fa fa-tachometer-alt"></i>
                 <span>Perfil</span>
               </a>
               <div class="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href={{url('/back/admin/home')}}>Gestión
+                    <a href={{url('/back/admin/home')}} id="gestion">Gestión
                     </a>
                   </li>
                 </ul>
               </div>
             </li>
             <li class="sidebar-dropdown">
-              <a href="#">
+              <a href="#" id="page_nav_usuario">
                 <i class="fa fa-user"></i>
                 <span>Usuarios</span>
               </a>
               <div class="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href="#">Adminify
+                    <a href={{url('/back/admin/u/adminify')}} id="adminify">Adminify
                     </a>
                   </li>
                   <li>
-                    <a href="#">Notificación</a>
+                    <a href={{url('/back/admin/u/notify')}} id="notificacion">Notificación</a>
                   </li>
                   <li>
-                    <a href="#">Bloquear</a>
+                    <a href={{url('/back/admin/u/block')}} id="bloquear">Bloquear</a>
                   </li>
                 </ul>
               </div>

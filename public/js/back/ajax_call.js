@@ -1,6 +1,7 @@
 $(document).ready(function() {
-    let info = $("#table-info");
 
+    let info = $("#table-info");
+    // Perfil
     $(info).on('focusout',function(e) {
 
         $.ajax({
@@ -18,6 +19,7 @@ $(document).ready(function() {
                 console.log(data);
             }
         });
-
     });
+
+
 });

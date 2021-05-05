@@ -11,10 +11,11 @@
   crossorigin="anonymous"></script>    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="icon" href={{URL::asset("/favicon.ico")}}>
-    <link rel="stylesheet" href={{URL::asset("/css/front/layout.css")}}>
-    <link rel="stylesheet" href={{URL::asset("/css/front/pe-icon-7-stroke.css")}}>
-    <script src="{{URL::asset("/js/front/responsive.js")}}"></script>
+    <link rel="icon" href={{asset("/favicon.ico")}}>
+    <link rel="stylesheet" href={{asset("/css/front/layout.css")}}>
+    <link rel="stylesheet" href={{asset("/css/front/pe-icon-7-stroke.css")}}>
+    <script src="{{asset("/js/front/responsive.js")}}"></script>
+    <script src="{{asset("/js/front/layout.js")}}"></script>
 </head>
 <body>
     @include("front.layout.nav")

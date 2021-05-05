@@ -16,7 +16,7 @@
     background-color: var(--green);
     width: 100%;
     padding: 15px;
-    box-shadow: 0px 0px 5px 5px rgb(180, 180, 180);
+    box-shadow: 0px 0px 5px 5px rgb(134, 134, 134);
     z-index: 1000;
 }
 
@@ -53,9 +53,10 @@ i{
 
 .dropdown-menu{
     background-color: var(--lightGreen);
+    box-shadow: 1px 2px 2px  rgb(134, 134, 134);
 }
 
-.dropdown-menu a:hover{
+.dropdown-menu a:hover, .isSelected{
     background-color: var(--greenShadow);
 }
 
@@ -76,6 +77,12 @@ i{
     text-align: center;
 }
 
+.dropdown-item, .nav-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .dropdown-item i{
     margin-right: 10px;
 }
@@ -85,9 +92,11 @@ i{
 }
 /* ==================================== contenido ===============================================*/
 .content{
-    padding-top: 100px;
+    padding-top: 120px;
+    padding-left: 15%;
+    padding-right: 15%;
     min-height: 100vh;
-    background-color: blanchedalmond;
+    background-color: rgb(246, 248, 232);
     width: 100%;
 }
 /* ==================================== footer ===============================================*/
@@ -96,12 +105,27 @@ footer{
 }
 /* ==================================== responsive ===============================================*/
 @media (max-width: 991px) {
+    .dropdown-menu{
+        box-shadow: 0px 0px 2px  rgb(134, 134, 134);
+    }
+
     li .nav-link {
       width: 100%;
     }
 
     #navbarSupportedContent form{
         justify-content: center;
+    }
+
+    .navbar-collapse{
+        max-height: 80vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .content{
+        padding-left: 0;
+        padding-right: 0;
     }
   }
 /* ==================================== keyframes ===============================================*/

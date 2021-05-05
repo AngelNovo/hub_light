@@ -2,14 +2,12 @@
 
 @section("content")
 <div class="content">
-    
+
 </div>
 <script>
     $(document).ready(function(){
         $(".isSelected").removeClass("isSelected");
-        $("#Nav-Inicio").addClass("isSelected");
+        $("#Nav-Recomendados").addClass("isSelected");
     });   
 </script>
 @endsection
-
-

@@ -47,7 +47,9 @@
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
                                     </label>
+                                    
                                 </div>
+                                <a href={{url('/register')}} >No tengo cuenta</i></a>
                             </div>
                         </div>
 

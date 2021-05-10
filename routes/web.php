@@ -78,4 +78,4 @@ Route::get('/destacados',function() {
 
 // Opciones
 Route::get('/opciones/{id}',[UsuariController::class,'opciones']);
-Route::put('/opciones/perfil/{id}',[UsuariController::class,'updatePerfil']);
+Route::put('/opciones/perfil',[UsuariController::class,'updatePerfil']);

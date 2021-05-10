@@ -2,7 +2,6 @@
 //Pdsnfskdfkd
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -57,33 +56,31 @@ class UsuariController extends Controller
         return redirect($request->ruta);
     }
     public function updatePerfil(Request $request) {
+
         $nombre=Auth::user()->foto;
         $request->validate([
-            'foto'=>'required|mimes:jpg,png,jpeg,gif|max:1024',
-            'fondo'=>'required|mimes:jpg,png,jpeg,gif|max:1024'
+            'foto'=>'required|mimes:jpg,png,jpeg,gif|max:1024'
         ]);
-
+        // Foto perfil
         if($nombre!=="avatar.jpg") {
             unlink(public_path("/images/perfil/usuarios/$nombre"));
         }
-
-        $newImageName=time().'-'.$request->name.'.'.$request->foto->extension();
-        $request->foto->move(public_path('/images/perfil/usuarios'),$newImageName);
-
-        $fondo = Auth::user()->fondo;
-        if($fondo!=="fondoDefault.jpg") {
-            unlink(public_path("/images/fondo/$fondo"));
+        $avatar=time().'-'.$request->name.'.'.$request->foto->extension();
+        $request->foto->move(public_path('/images/perfil/usuarios'),$avatar);
+        // Fondo
+        if($nombre!=="fondoDefault.jpg") {
+            unlink(public_path("/images/perfil/usuarios/fondo/".Auth::user()->fondo));
         }
-
-        $newImageName=time().'-'.$request->name.'.'.$request->fondo->extension();
-        $request->fondo->move(public_path('/images/fondo'),$newImageName);
-
+        $fondo=time().'-'.Auth::user()->name.'.'.$request->fondo->extension();
+        $request->fondo->move(public_path('/images/perfil/usuarios/fondo'),$fondo);
+        // Update
         $usuari = User::where('id',Auth::user()->id)
         ->update([
-            "foto"=>$newImageName,
-            "alias"=>$request->input('alias'),
+            "foto"=>$avatar,
+            "alies"=>$request->alias,
             "fondo"=>$fondo
         ]);
-        return redirect("/opciones/".Auth::user()->id);
+        return redirect("/");
+
     }
 }

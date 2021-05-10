@@ -11,8 +11,8 @@
         <div class="row">
 
                 <div class="card hovercard">
-                    <div class="cardheader" style="background-image: url({{asset('images/perfil/fondo/'.$user->fondo)}});">
-                        <input id="file-input-fondo" name="fondo" type="file" form="formPerfil"/> 
+                    <div class="cardheader" style="background-image: url({{asset('images/perfil/usuarios/fondo/'.$user->fondo)}});">
+                        <input id="file-input-fondo" name="fondo" type="file" form="formPerfil"/>
                     </div>
                     <div class="avatar">
                         <label for="file-input">
@@ -20,7 +20,7 @@
                                 <img style="cursor: pointer;" src={{asset('images/perfil/usuarios/'.$user->foto)}} alt="Foto de perfil" data-toggle="tooltip" data-placement="right" title="Haz clic para cambiar la foto de perfil" class="foto-perfil">
                                 </div>
                             </label>
-                        <input id="file-input" name="foto" hidden type="file" form="formPerfil"/>    
+                        <input id="file-input" name="foto" hidden type="file" form="formPerfil"/>
                     </div>
                     @if ($user->actiu==1)
                     <div class="conectado active"></div>
@@ -81,6 +81,6 @@
             }
         });
 
-    });   
+    });
 </script>
 @endsection

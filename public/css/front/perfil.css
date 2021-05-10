@@ -12,6 +12,7 @@
 .card {
     padding-top: 20px;
     margin: 10px 0 20px 0;
+    margin-left: 10%;
     background-color: rgba(214, 224, 226, 0.2);
     border-top-width: 0;
     border-bottom-width: 2px;
@@ -214,7 +215,7 @@
     margin-bottom: -100px;
 }
 
-.card.hovercard .avatar img {
+.card.hovercard .avatar label .upload-icon img {
     width: 250px;
     height: 250px;
     max-width: 250px;
@@ -245,9 +246,49 @@
     text-overflow: ellipsis;
 }
 
+.card.hovercard .info .desc i{
+    font-size: 15px;
+}
+
 .card.hovercard .bottom {
     padding: 0 20px;
     margin-bottom: 17px;
 }
 
-.btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
+.bottom .btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
+
+.estado{
+    height: 30px;
+    width: 30px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    opacity: 0.8;
+}
+
+.estado i{
+    font-size: 25px;
+}
+
+.conectado{
+    height: 20px;
+    width: 20px;
+    background-color: rgb(218, 218, 218);
+    border-radius: 50%;
+    border-style: solid;
+    border-color: rgb(148, 148, 148);
+    border-width: 2px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    opacity: 0.8;
+}
+
+.active{
+    background-color: rgb(118, 194, 115);
+    border-color: rgb(59, 95, 58);
+}

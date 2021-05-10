@@ -36,7 +36,7 @@
             
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href={{url("/usuaris/".Auth::user()->id)}}><i class="fa pe-7s-id" title="Cerrar sesión"> </i><span>Perfil</span></a>
-          <a class="dropdown-item" href="#"><i class="fa pe-7s-config" title="Cerrar sesión"> </i>Opciones</a>
+          <a class="dropdown-item"href={{url("/opciones/".Auth::user()->id)}}><i class="fa pe-7s-config" title="Cerrar sesión"> </i>Opciones</a>
           @if (Auth::user()->es_admin===1)
             <a class="dropdown-item" href={{url('/back/admin/home')}}> <i class="fa pe-7s-server" title="Subir contenido"> </i><span>Backoffice</span></a>
           @endif

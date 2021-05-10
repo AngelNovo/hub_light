@@ -59,7 +59,6 @@
 </div>
 <script>
     $(document).ready(function(){
-        $(document).preventDefault();
         $(".isSelected").removeClass("isSelected");
         $("#Nav-Perfil").addClass("isSelected");
 

@@ -33,10 +33,10 @@
 </head>
 <body>
     @if (Auth::user()->es_admin!=1)
-        <script>window.location= "/home"</script>
+        <script>window.location= "/"</script>
     @endif
     @if (Auth::user()->deshabilitat===1)
-        <script>window.location= "/home"</script>
+        <script>window.location= "/"</script>
     @endif
     <div class="page-wrapper chiller-theme toggled">
 

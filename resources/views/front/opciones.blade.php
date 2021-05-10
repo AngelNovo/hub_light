@@ -40,15 +40,15 @@
                         <div class="title">
                             <h1>{{$user->name}}</h1>
                         </div>
-                        <div class="desc" id="Alias-Input">Alias:<input id="text-Alias" name="Alias" type="text" value={{$user->alies}} form="formPerfil" /></div>
+                        <div class="desc" id="Alias-Input">Alias:<input id="text-Alias" name="alias" type="text" value={{$user->alies}} form="formPerfil" /></div>
                         <div class="desc" title="Fecha Nacimiento"><i class="pe-7s-gift"></i>{{date("d/m/Y",strtotime($user->data_naixement))}}</div>
                         <div class="desc" title="Fecha Creacion Usuario"><i class="pe-7s-stopwatch"></i>{{$user->created_at->diffForHumans()}}</div>
                     </div>
                     <div class="bottom">
-                        <input type="submit" value="Actualizar Perfil"/>
+                        <input type="submit" form="formPerfil" value="Actualizar Perfil"/>
                     </div>
                 </div>
-                <form id="formPerfil" action="/usuaris/update/foto" method="POST" enctype="multipart/form-data">
+                <form id="formPerfil" action="/opciones/perfil" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                 </form>
@@ -59,6 +59,7 @@
 </div>
 <script>
     $(document).ready(function(){
+        $(document).preventDefault();
         $(".isSelected").removeClass("isSelected");
         $("#Nav-Perfil").addClass("isSelected");
 

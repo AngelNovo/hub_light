@@ -84,6 +84,6 @@ class UsuariController extends Controller
             "alias"=>$request->input('alias'),
             "fondo"=>$fondo
         ]);
-        return redirect($request->ruta);
+        return redirect("/opciones/".Auth::user()->id);
     }
 }

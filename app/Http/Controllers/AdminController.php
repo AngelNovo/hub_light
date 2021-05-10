@@ -37,11 +37,6 @@ class AdminController extends Controller
         return view('back.notificacion')->with('users',$users)->with('data',$this->data);
     }
 
-    public function getTipusUser() {
-        $types=TipusUsuariModel::all();
-        return view("back.typeCrud")->with('types',$types);
-    }
-
     public function makeAdmin(Request $request) {
         $id = $request->input('id');
         $aux= $request->input('aux');

@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 class TipusUsuariController extends Controller
 {
     public function getAll() {
-        $results = DB::table('tipus_usuari')->get();
-        return $results;
+        $types = DB::table('tipus_usuari')->get();
+        return view('back.typeCrud')->with('types',$types);
     }
 
     public function store(Request $request) {
@@ -21,6 +21,6 @@ class TipusUsuariController extends Controller
             'tipus'=>$request->input('tipus')
         ]);
         $aux = ["correcte"=>$request->tipus];
-        return redirect('/')->with('resposta',$aux);
+        return redirect('/back/admin/tipususer')->with('resposta',$aux);
     }
 }

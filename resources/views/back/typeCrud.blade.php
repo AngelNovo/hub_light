@@ -3,7 +3,6 @@
 @section('content')
 <input type="hidden" id="page" value="typeUser" />
 <input type="hidden" id="sub" value="crud" />
-<script src={{asset('js/back/adminify.js')}}></script>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newModal">
     Nuevo tipo de usuario
@@ -12,16 +11,14 @@
   <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="newModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <form action="/back/admin/typeUser" method="POST">
+        <form action="/back/admin/tipususer" method="POST" enctype="multipart/form-data">
+            @method('POST')
             @csrf
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Nuevo tipo de usuario</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-                </button>
+                <h5 class="modal-title" id="newModalTitle">Nuevo tipo de usuario</h5>
               </div>
               <div class="modal-body">
-                <input type="text" name="test" id="1">
+                <input type="text" name="tipus" required>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

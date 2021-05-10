@@ -17,7 +17,6 @@ class UsuariController extends Controller
         $result = User::find($id);
         $result->created_at->diffForHumans();
         $result->updated_at->diffForHumans();
-        dd($result);
         return view('front.perfil')->with('user',$result);
     }
 

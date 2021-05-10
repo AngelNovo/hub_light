@@ -12,15 +12,15 @@
 
                 <div class="card hovercard">
                     <div class="cardheader" style="background-image: url({{asset('images/perfil/fondo/'.$user->fondo)}});">
-    
+                        <input id="file-input-fondo" name="fondo" type="file" form="formPerfil"/> 
                     </div>
                     <div class="avatar">
                         <label for="file-input">
                             <div class="upload-icon">
-                                <img style="cursor: pointer;" src={{asset('images/perfil/usuarios/'.Auth::user()->foto)}} alt="Foto de perfil" data-toggle="tooltip" data-placement="right" title="Haz clic para cambiar la foto de perfil" class="foto-perfil">
+                                <img style="cursor: pointer;" src={{asset('images/perfil/usuarios/'.$user->foto)}} alt="Foto de perfil" data-toggle="tooltip" data-placement="right" title="Haz clic para cambiar la foto de perfil" class="foto-perfil">
                                 </div>
                             </label>
-                        <input id="file-input" name="foto" hidden type="file"/>    
+                        <input id="file-input" name="foto" hidden type="file" form="formPerfil"/>    
                     </div>
                     @if ($user->actiu==1)
                     <div class="conectado active"></div>
@@ -40,27 +40,12 @@
                         <div class="title">
                             <h1>{{$user->name}}</h1>
                         </div>
-                        <div class="desc" id="Alias-Input">Alias: <span>{{$user->alies}}<span> <input id="text-Alias" name="Alias" type="text" value={{$user->alies}} />    </div>
-                        <div class="desc">Curious developer</div>
-                        <div class="desc">Tech geek</div>
-                        <div class="desc" title="Fecha Nacimiento"><i class="pe-7s-gift"></i>{{$user->data_naixement}}</div>
-                        <div class="desc" title="Fecha Creacion Usuario"><i class="pe-7s-stopwatch"></i>{{$user->created_at}}</div>
+                        <div class="desc" id="Alias-Input">Alias:<input id="text-Alias" name="Alias" type="text" value={{$user->alies}} form="formPerfil" /></div>
+                        <div class="desc" title="Fecha Nacimiento"><i class="pe-7s-gift"></i>{{date("d/m/Y",strtotime($user->data_naixement))}}</div>
+                        <div class="desc" title="Fecha Creacion Usuario"><i class="pe-7s-stopwatch"></i>{{$user->created_at->diffForHumans()}}</div>
                     </div>
                     <div class="bottom">
-                        <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a class="btn btn-danger btn-sm" rel="publisher"
-                           href="https://plus.google.com/+ahmshahnuralam">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a class="btn btn-primary btn-sm" rel="publisher"
-                           href="https://plus.google.com/shahnuralam">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a class="btn btn-warning btn-sm" rel="publisher" href="https://plus.google.com/shahnuralam">
-                            <i class="fa fa-behance"></i>
-                        </a>
+                        <input type="submit" value="Actualizar Perfil"/>
                     </div>
                 </div>
                 <form id="formPerfil" action="/usuaris/update/foto" method="POST" enctype="multipart/form-data">
@@ -95,13 +80,7 @@
 
             }
         });
-        $("#Alias-Input input").hide();
-        $("#Alias-Input").click(function() {
-            $("#Alias-Input input").show();
-        });
-        $("#Alias-Input").focusout(function() {
-            $("#Alias-Input input").hide();
-        });
+
     });   
 </script>
 @endsection

@@ -15,7 +15,16 @@ class UsuariController extends Controller
     }
     public function get($id) {
         $result = User::find($id);
+        $result->created_at->diffForHumans();
+        $result->updated_at->diffForHumans();
         return view('front.perfil')->with('user',$result);
+    }
+
+    public function opciones($id) {
+        $result = User::find($id);
+        $result->created_at->diffForHumans();
+        $result->updated_at->diffForHumans();
+        return view('front.opciones')->with('user',$result);
     }
 
     public function logout() {

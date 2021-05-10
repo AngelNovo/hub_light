@@ -26,27 +26,34 @@ $(document).ready(function() {
         });
     });
 
-    $("select").on('change',function(e) {
-        let avis=e.target.value;
-        let user=e.target.closest("tr");
-        user=$(this).closest('tr').data('id');
+    $('form').on('submit',function(e) {
+        e.preventDefault();
+        let selects=$('select');
+        for(let i=1;i<selects.length;i++) {
+            if(selects[i].value>0) {
+            let avis=selects[i].value;
+            let user=selects[i].closest("tr");
+            user=$(user).data('id');
 
-        $.ajax({
-            url: "/back/admin/u/notify",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: "POST",
-            data: {
-                avis: avis,
-                user: user
-            },
-            dataType: 'json',
+            $.ajax({
+                url: "/back/admin/u/notify",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                data: {
+                    avis: avis,
+                    user: user
+                },
+                dataType: 'json',
 
-            success: function(data){
-                console.log(data);
+                success: function(data){
+                    console.log(data);
+                }
+
+            });
             }
-
-        });
+        }
+        $('select').val(0);
     });
 });

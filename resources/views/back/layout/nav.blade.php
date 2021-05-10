@@ -37,6 +37,10 @@
         <!-- sidebar-search  -->
         <div class="sidebar-menu">
           <ul>
+            <li>
+                <a href={{url('/')}}><i class="fa fa-home"></i> Home
+                </a>
+              </li>
             <li class="header-menu">
               <span>General</span>
             </li>
@@ -75,14 +79,15 @@
               </div>
             </li>
             <li class="sidebar-dropdown">
-              <a href="#">
+              <a href="#" id="page_nav_typeUser">
                 <i class="fa fa-users"></i>
                 <span>User type</span>
               </a>
               <div class="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href="#">Crud</a>
+                    <a href={{url('/back/admin/tipususer')}} id="crud">CRUD
+                    </a>
                   </li>
                 </ul>
               </div>

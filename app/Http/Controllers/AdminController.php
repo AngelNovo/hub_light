@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AvisModel;
 use App\Models\AvisUsuariModel;
+use App\Models\TipusUsuariModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +35,11 @@ class AdminController extends Controller
         ];
         // dd($this->data);
         return view('back.notificacion')->with('users',$users)->with('data',$this->data);
+    }
+
+    public function getTipusUser() {
+        $types=TipusUsuariModel::all();
+        return view("back.typeCrud")->with('types',$types);
     }
 
     public function makeAdmin(Request $request) {

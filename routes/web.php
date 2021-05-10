@@ -53,6 +53,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::put('/back/admin/u/block', [AdminController::class,'blockUser']);
     Route::get('/back/admin/u/notify', [AdminController::class,'getUsersNotify']);
     Route::post('/back/admin/u/notify', [AdminController::class,'insertNotify']);
+    Route::get('/back/admin/tipususer', [AdminController::class,'getTipusUser']);
 });
 
 Auth::routes();
@@ -73,3 +74,6 @@ Route::get('/recomendados',function() {
 Route::get('/destacados',function() {
     return view('front.destacados');
 });
+
+// Opciones
+Route::get('/opciones/{id}',[UsuariController::class,'opciones']);

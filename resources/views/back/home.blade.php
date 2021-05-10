@@ -16,7 +16,7 @@
                 <div class="ml-3 w-90">
                     <h4 class="mb-0 mt-0 text-center">Gestor de perfil de: {{Auth::user()->name}}</h4>
                     <br>
-                    <div class="image col-10 mx-auto d-block mh-25">
+                    <div class="image text-center">
                         <label for="file-input">
                             <div class="upload-icon">
 

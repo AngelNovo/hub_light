@@ -21,8 +21,8 @@
                     <td><input type="text" class="form-control" name="nombre" value={{$user->name}} disabled></td>
                     <td class="text-center">
                         <select name="avis" aria-label="Elige un aviso a enviar" class="form-select">
+                            <option value="0" selected>Elige un aviso a enviar</option>
                             @foreach ($data["avis"] as $avis)
-                                <option hidden selected>Elige un aviso a enviar</option>
                                 <option value={{$avis->id}}>{{$avis->explicacio}}</option>
                             @endforeach
                         </select>
@@ -31,5 +31,6 @@
             @endforeach
         </tbody>
     </table>
+    <button type="submit" class="btn btn-danger text-center">Enviar avisos</button>
 </form>
 @endsection

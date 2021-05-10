@@ -17,8 +17,6 @@ $(document).ready(function(e) {
 
             document.getElementById("btn").hidden=false;
 
-            console.log($("#file-input").serialize());
-
         }
     });
 });

@@ -77,7 +77,7 @@ class RegisterController extends Controller
             'estadistica'=>$aux,
             'tipus'=>1,
             'alies'=>$data["alias"],
-            'data-naixement'=>$data["data-naixement"]
+            'data-naixement'=>$data["data_naixement"]
         ]);
     }
 }

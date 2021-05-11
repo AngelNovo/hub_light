@@ -57,30 +57,40 @@ class UsuariController extends Controller
     }
     public function updatePerfil(Request $request) {
 
+        $update=[];
+
         $nombre=Auth::user()->foto;
         $request->validate([
-            'foto'=>'required|mimes:jpg,png,jpeg,gif|max:1024'
+            'foto'=>'mimes:jpg,png,jpeg,gif|max:1024',
+            'fondo'=>'mimes:jpg,png,jpeg,gif|max:1024'
         ]);
         // Foto perfil
-        if($nombre!=="avatar.jpg") {
-            unlink(public_path("/images/perfil/usuarios/$nombre"));
+        if(isset($request->foto)) {
+            if($nombre!=="avatar.jpg") {
+                unlink(public_path("/images/perfil/usuarios/$nombre"));
+            }
+            $avatar=time().'-'.$request->name.'.'.$request->foto->extension();
+            $update["foto"]=$avatar;
+            $request->foto->move(public_path('/images/perfil/usuarios'),$avatar);
         }
-        $avatar=time().'-'.$request->name.'.'.$request->foto->extension();
-        $request->foto->move(public_path('/images/perfil/usuarios'),$avatar);
         // Fondo
-        if($nombre!=="fondoDefault.jpg") {
-            unlink(public_path("/images/perfil/usuarios/fondo/".Auth::user()->fondo));
+        if(isset($request->fondo)) {
+            if($nombre!=="fondoDefault.jpg") {
+                unlink(public_path("/images/perfil/usuarios/fondo/".Auth::user()->fondo));
+            }
+            $fondo=time().'-'.Auth::user()->name.'.'.$request->fondo->extension();
+            $update["fondo"]=$fondo;
+            $request->fondo->move(public_path('/images/perfil/usuarios/fondo'),$fondo);
         }
-        $fondo=time().'-'.Auth::user()->name.'.'.$request->fondo->extension();
-        $request->fondo->move(public_path('/images/perfil/usuarios/fondo'),$fondo);
+        // Alies
+        if(isset($request->alias)) {
+            $update["alies"]=$request->alias;
+            $alies=$request->alias;
+        }
         // Update
         $usuari = User::where('id',Auth::user()->id)
-        ->update([
-            "foto"=>$avatar,
-            "alies"=>$request->alias,
-            "fondo"=>$fondo
-        ]);
-        return redirect("/");
+        ->update($update);
+        return redirect("/opciones/".Auth::user()->id);
 
     }
 }

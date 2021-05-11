@@ -32,7 +32,6 @@ Route::put('/usuaris/update/foto',[UsuariController::class,'updateFoto']);
 Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
 Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
 // *Contingut*
-Route::get('/contingut',[ContingutController::class,'getAll']);
 Route::get('/contingut/{id}',[ContingutController::class,'get']);
 // *Drets autor*
 
@@ -63,9 +62,7 @@ Auth::routes();
 //Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Explorar
-Route::get('/explorar',function() {
-    return view('front.explorar');
-});
+Route::get('/explorar',[ContingutController::class,'getAll']);
 
 // Recomendados
 Route::get('/recomendados',function() {

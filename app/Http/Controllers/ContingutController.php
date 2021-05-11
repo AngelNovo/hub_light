@@ -13,7 +13,7 @@ class ContingutController extends Controller
         ->select('contingut.id','titol','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
         ->get();
-        return $results;
+        return view ('front.explorar')->with('results',$results);
     }
     public function get($id) {
         $results = DB::table('contingut')

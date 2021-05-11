@@ -40,9 +40,11 @@ class AdminController extends Controller
     public function makeAdmin(Request $request) {
         $id = $request->input('id');
         $aux= $request->input('aux');
+        $tipus = ($aux==0) ? 1 : 2 ;
         $user = User::where('id',$id)
         ->update([
-            'es_admin'=>$aux
+            'es_admin'=>$aux,
+            'tipus'=>$tipus
         ]);
         if($user) {
             return 1;

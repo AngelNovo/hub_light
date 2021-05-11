@@ -23,4 +23,9 @@ class TipusUsuariController extends Controller
         $aux = ["correcte"=>$request->tipus];
         return redirect('/back/admin/tipususer')->with('resposta',$aux);
     }
+
+    public function delete(Request $request) {
+        $id = $request->input("id");
+        return $id;
+    }
 }

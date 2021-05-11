@@ -55,6 +55,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/back/admin/u/notify', [AdminController::class,'insertNotify']);
     Route::get('/back/admin/tipususer', [TipusUsuariController::class,'getAll']);
     Route::post('/back/admin/tipususer', [TipusUsuariController::class,'store']);
+    Route::delete('/back/admin/tipususer', [TipusUsuariController::class,'delete']);
 });
 
 Auth::routes();

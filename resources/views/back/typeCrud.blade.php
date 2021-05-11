@@ -3,6 +3,7 @@
 @section('content')
 <input type="hidden" id="page" value="typeUser" />
 <input type="hidden" id="sub" value="crud" />
+<script src={{asset('js/back/delType.js')}}></script>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newModal">
     Nuevo tipo de usuario
@@ -35,8 +36,9 @@
     <table id="tableContent" class="table table-fluid">
         <thead>
             <th>Id</th>
-            <th>Tipus</th>
-            <th>Data creació</th>
+            <th>Tipo</th>
+            <th>Data creación</th>
+            <th>Acción</th>
         </thead>
         <tbody>
             @foreach ($types as $type)
@@ -44,6 +46,11 @@
                     <td><input type="number" class="form-control" name="id" value={{$type->id}} disabled></td>
                     <td><input type="text" class="form-control" name="nombre" value={{$type->tipus}}></td>
                     <td><input type="text" class="form-control" name="nombre" value={{$type->created_at}} disabled></td>
+                    @if ($type->tipus!="usuari" && $type->tipus!="administrador" && $type->tipus!="superadministrador")
+                        <td class="text-center"><span><i class="fas fa-times text-danger" data-toggle="tooltip" data-placement="left" title="Eliminar"></i></span></td>
+                        @else
+                        <td class="text-center"><span><i class="fas fa-lock text-success" data-id="{{$type->id}}" data-toggle="tooltip" data-placement="left" title="Tipo de usuario protegido"></i></span></td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>

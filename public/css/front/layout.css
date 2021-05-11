@@ -71,6 +71,7 @@ i{
     border-style: solid;
     border-width: 1px;
     background-color: white;
+    object-fit: cover;
 }
 
 .dropdown-menu p{

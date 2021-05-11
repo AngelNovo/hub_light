@@ -11,7 +11,7 @@
         <div class="row">
 
                 <div class="card hovercard">
-                    <div class="cardheader" style="background-image: url({{asset('images/perfil/usuarios/fondo/'.$user->fondo)}});">
+                    <div class="cardheader fondo-perfil" style="background-image: url({{asset('images/perfil/usuarios/fondo/'.$user->fondo)}});">
                         <input id="file-input-fondo" name="fondo" type="file" form="formPerfil"/>
                     </div>
                     <div class="avatar">
@@ -74,6 +74,24 @@
 
                 reader.addEventListener("load",function() {
                     previewImage.setAttribute("src", this.result);
+                });
+
+                reader.readAsDataURL(file);
+
+            }
+        });
+
+        $("#file-input-fondo").on("change",function() {
+            let inpFile = $("#file-input-fondo");
+            let previewImage = document.querySelector(".fondo-perfil");
+
+            let file = this.files[0];
+
+            // Si hay un archivo seleccionado, crea un FileReader para poder leerlo, y lo enseña
+            if(file) {
+                const reader = new FileReader('background-image: url("'+ this.result+'")');
+                reader.addEventListener("load",function() {
+                    previewImage.setAttribute("style",'background-image: url("'+ this.result+'")');
                 });
 
                 reader.readAsDataURL(file);

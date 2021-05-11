@@ -8,7 +8,7 @@
         <div class="row">
 
                 <div class="card hovercard">
-                    <div class="cardheader" style="background-image: url({{asset('images/perfil/fondo/'.$user->fondo)}});">
+                    <div class="cardheader" style="background-image: url({{asset('images/perfil/usuarios/fondo/'.$user->fondo)}});">
     
                     </div>
                     <div class="avatar">
@@ -37,10 +37,8 @@
                             <h1>{{$user->name}}</h1>
                         </div>
                         <div class="desc" id="Alias-Input">Alias: <span>{{$user->alies}}<span></div>
-                        <div class="desc">Curious developer</div>
-                        <div class="desc">Tech geek</div>
-                        <div class="desc" title="Fecha Nacimiento"><i class="pe-7s-gift"></i>{{$user->data_naixement}}</div>
-                        <div class="desc" title="Fecha Creacion Usuario"><i class="pe-7s-stopwatch"></i>{{$user->created_at}}</div>
+                        <div class="desc" title="Fecha Nacimiento"><i class="pe-7s-gift"></i>{{date("d/m/Y",strtotime($user->data_naixement))}}</div>
+                        <div class="desc" title="Fecha Creacion Usuario"><i class="pe-7s-stopwatch"></i>{{$user->created_at->diffForHumans()}}</div>
                     </div>
 
                 </div>

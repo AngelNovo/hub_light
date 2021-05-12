@@ -4,12 +4,9 @@
 <link rel="stylesheet" href={{asset("/css/front/perfil.css")}}>
 
 <div class="content">
-
         <div class="row">
-
                 <div class="card hovercard">
-                    <div class="cardheader" style="background-image: url({{asset('images/perfil/usuarios/fondo/'.$user->fondo)}});">
-    
+                    <div class="cardheader" style="background-image: url({{asset('images/perfil/usuarios/fondo/'.$user->fondo)}});">  
                     </div>
                     <div class="avatar">
                         <label>
@@ -40,9 +37,7 @@
                         <div class="desc" title="Fecha Nacimiento"><i class="pe-7s-gift"></i>{{date("d/m/Y",strtotime($user->data_naixement))}}</div>
                         <div class="desc" title="Fecha Creacion Usuario"><i class="pe-7s-stopwatch"></i>{{$user->created_at->diffForHumans()}}</div>
                     </div>
-
                 </div>
-
     </div>
     {{-- <img src={{asset("images/perfil/usuarios/".$user->foto)}} class="img-fluid"/>
     {{$user->name}} --}}

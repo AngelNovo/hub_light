@@ -20,6 +20,7 @@
 <body>
     @include("front.layout.nav")
     @yield("content")
+    @include("front.layout.modal")
     @include("front.layout.footer")
 </body>
 </html>

@@ -18,8 +18,8 @@
                         <label for="file-input">
                             <div class="upload-icon">
                                 <img style="cursor: pointer;" src={{asset('images/perfil/usuarios/'.$user->foto)}} alt="Foto de perfil" data-toggle="tooltip" data-placement="right" title="Haz clic para cambiar la foto de perfil" class="foto-perfil">
-                                </div>
-                            </label>
+                            </div>
+                        </label>
                         <input id="file-input" name="foto" hidden type="file" form="formPerfil"/>
                     </div>
                     @if ($user->actiu==1)

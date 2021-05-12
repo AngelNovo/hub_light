@@ -17,11 +17,11 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href={{url('/destacados')}} id="Nav-Destacados"><i class="fa pe-7s-medal" title="Destacados"> </i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa pe-7s-upload" title="Subir contenido"> </i></a>
-      </li>
+      </li>     
       @if (isset(Auth::user()->id))
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" data-target="#exampleModal"><i class="fa pe-7s-upload" title="Subir contenido"> </i></a>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="Nav-Perfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img src={{asset("images/perfil/usuarios/".Auth::user()->foto)}} class="header-perfil-img" title="Perfil">

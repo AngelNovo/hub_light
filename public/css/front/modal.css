@@ -1,0 +1,16 @@
+.modal{
+    margin-top: 150px;
+}
+
+.modal-body{
+    max-height: 70vh;
+}
+
+.img-portada{
+    width: 100%;
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: cover;
+    border: 5px solid rgba(255,255,255,0.5);
+    position: relative;
+}

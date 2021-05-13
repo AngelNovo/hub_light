@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContingutModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ContingutController extends Controller
@@ -25,14 +26,45 @@ class ContingutController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'portada'=>'mimes:jpg,png,jpeg,gif|max:4096',
+            'arxiu'=>'required|mimes:jpg,png,jpeg,gif|max:10000',
+            'propietariId'=>"required",
+            'derechoA'=>"required",
+            'tipoC'=>"required",
+            'ageRestrict'=>"required"
+        ]);
+
         $typeContent=$request->input('tipoC');
-        $rights=$request->input('derechoA');
-        $linkCopy=$request->input('linkCopy');
-        $desc=$request->input('desc');
+        $rights=(isset($request->input('derechoA'))) ? $request->input('derechoA'):"";
+        $linkCopy=(isset($request->input('linkCopy'))) ? $request->input('linkCopy') : "";
+        $desc= (isset($request->input('desc'))) ? $request->input('desc') : "";
         $portada=$request->input('portada');
         $overAge=$request->input('ageRestrict');
-        $pId=$request->input('propietariId');
         $file=$request->input('arxiu');
+        $pId=Auth::user()->id;
+        $titol=(isset($request->input)) ? $request->input('titol') : "";
+
+        $url=public_path('/contenido/'.$typeContent);
+
+        $archivo=time().'-'.Auth::user()->name.'.'.$file->extension();
+        $file->move($url,$archivo);
+
+        $subido=ContingutModel::create([
+            'propietari'=>$pId,
+            'titol'=>$titol,
+            'drets_autor'=>$rights,
+            'tipus_contingut'=>$typeContent,
+            'link_copyright'=>$linkCopy,
+            'descripcio'=>$desc,
+            'majoria_edat'=>$overAge,
+            'portada'=>$portada,
+            'url'=>$archivo,
+            'reportat'=>0
+        ]);
+
+
 
     }
+
 }

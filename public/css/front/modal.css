@@ -1,16 +1,20 @@
 .modal{
-    margin-top: 150px;
+    margin-top: 10vh;
 }
 
 .modal-body{
     max-height: 70vh;
+    overflow-y: auto;
+    overflow-x:hidden;
 }
 
 .img-portada{
     width: 100%;
-    max-width: 400px;
-    max-height: 400px;
     object-fit: cover;
     border: 5px solid rgba(255,255,255,0.5);
     position: relative;
+}
+
+#desc{
+    width:100%;
 }

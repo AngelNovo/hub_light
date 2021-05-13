@@ -41,7 +41,7 @@ class ContingutController extends Controller
         $desc= (null!=$request->input('desc')) ? $request->input('desc') : "";
         $portada=$request->input('portada');
         $overAge=$request->input('ageRestrict');
-        $file=$request->input('arxiu');
+        $file=(null!=$request->input('arxiu')) ? $request->input('arxiu'): $request->input('arxiu');
         $pId=Auth::user()->id;
         $titol=(null!=$request->input('titol')) ? $request->input('titol') : "";
 

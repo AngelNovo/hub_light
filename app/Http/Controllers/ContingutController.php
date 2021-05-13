@@ -29,7 +29,6 @@ class ContingutController extends Controller
         $request->validate([
             'portada'=>'mimes:jpg,png,jpeg,gif|max:4096',
             'arxiu'=>'required|mimes:jpg,png,jpeg,gif|max:10000',
-            'propietariId'=>"required",
             'derechoA'=>"required",
             'tipoC'=>"required"
         ]);

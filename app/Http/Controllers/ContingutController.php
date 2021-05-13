@@ -26,6 +26,7 @@ class ContingutController extends Controller
     }
 
     public function store(Request $request) {
+        return $request;
         $request->validate([
             'portada'=>'mimes:jpg,png,jpeg,gif|max:4096',
             'arxiu'=>'required|mimes:jpg,png,jpeg,gif|max:10000',

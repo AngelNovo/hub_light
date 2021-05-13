@@ -26,14 +26,14 @@ class ContingutController extends Controller
     }
 
     public function store(Request $request) {
-        return $request;
-        $request->validate([
-            'portada'=>'mimes:jpg,png,jpeg,gif|max:4096',
-            'arxiu'=>'required|mimes:jpg,png,jpeg,gif|max:10000',
-            'file'=>"required",
-            'derechoA'=>"required",
-            'tipoC'=>"required"
-        ]);
+        // return $request;
+        // $request->validate([
+        //     'portada'=>'mimes:jpg,png,jpeg,gif|max:4096',
+        //     'arxiu'=>'required|mimes:jpg,png,jpeg,gif|max:10000',
+        //     'file'=>"required",
+        //     'derechoA'=>"required",
+        //     'tipoC'=>"required"
+        // ]);
 
         $typeContent=$request->input('tipoC');
         $rights=(null!=$request->input('derechoA'))? $request->input('derechoA'):"";

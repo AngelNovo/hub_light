@@ -31,8 +31,7 @@ class ContingutController extends Controller
             'arxiu'=>'required|mimes:jpg,png,jpeg,gif|max:10000',
             'propietariId'=>"required",
             'derechoA'=>"required",
-            'tipoC'=>"required",
-            'ageRestrict'=>"required"
+            'tipoC'=>"required"
         ]);
 
         $typeContent=$request->input('tipoC');

@@ -17,3 +17,6 @@ function quitarAvisos(id) {
     });
 }
 
+function aceptarAviso(id) {
+    console.log(id)
+}

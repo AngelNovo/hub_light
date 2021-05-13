@@ -36,14 +36,14 @@ class ContingutController extends Controller
         ]);
 
         $typeContent=$request->input('tipoC');
-        $rights=(isset($request->input('derechoA'))) ? $request->input('derechoA'):"";
-        $linkCopy=(isset($request->input('linkCopy'))) ? $request->input('linkCopy') : "";
-        $desc= (isset($request->input('desc'))) ? $request->input('desc') : "";
+        $rights=(null!=$request->input('derechoA'))? $request->input('derechoA'):"";
+        $linkCopy=(null!=$request->input('linkCopy')) ? $request->input('linkCopy') : "";
+        $desc= (null!=$request->input('desc')) ? $request->input('desc') : "";
         $portada=$request->input('portada');
         $overAge=$request->input('ageRestrict');
         $file=$request->input('arxiu');
         $pId=Auth::user()->id;
-        $titol=(isset($request->input)) ? $request->input('titol') : "";
+        $titol=(null!=$request->input('titol')) ? $request->input('titol') : "";
 
         $url=public_path('/contenido/'.$typeContent);
 

@@ -63,3 +63,7 @@
   span > i:hover {
       cursor: pointer;
   }
+
+td > span {
+    margin: 10%;
+}

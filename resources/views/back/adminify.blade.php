@@ -17,12 +17,12 @@
         </thead>
         <tbody>
             @foreach ($users as $user)
-                <tr id={{$user->id}}>
-                    <td><input type="number" class="form-control" name="id" value={{$user->id}} disabled></td>
-                    <td><input type="text" class="form-control" name="nombre" value={{$user->name}} disabled></td>
+                <tr id="{{$user->id}}">
+                    <td><input type="number" class="form-control" name="id" value="{{$user->id}}" disabled></td>
+                    <td><input type="text" class="form-control" name="nombre" value="{{$user->name}}" disabled></td>
                     <td class="text-center">
                         <label class="switch">
-                            <input type="checkbox" name="es_admin" value={{$user->es_admin}}  data-id="{{$user->id}}" {{($user->es_admin) ? 'checked' : ""}}>
+                            <input type="checkbox" name="es_admin" value="{{$user->es_admin}}"  data-id="{{$user->id}}" {{($user->es_admin) ? 'checked' : ""}}>
                             <span class="slider round"></span>
                         </label>
                     </td>

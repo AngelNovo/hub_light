@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContingutController;
+use App\Http\Controllers\DerechosAutorController;
+use App\Http\Controllers\TipoContenidoController;
 use App\Http\Controllers\TipusUsuariController;
 use App\Http\Controllers\UsuariController;
 use Illuminate\Support\Facades\Auth;
@@ -33,8 +35,11 @@ Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
 Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
 // *Contingut*
 Route::get('/contingut/{id}',[ContingutController::class,'get']);
+Route::post('/contingut',[ContingutController::class,'store']);
 // *Drets autor*
-
+Route::get('/derechosautor',[DerechosAutorController::class,'getAll']);
+// *Tipo contenido*
+Route::get('/tipocontenido',[TipoContenidoController::class,'getAll']);
 // *Xat*
 
 // *Usuari estadistiques*
@@ -48,18 +53,22 @@ Route::group(['middleware'=>'auth'], function() {
     });
     Route::get('/back/admin/u/adminify', [AdminController::class,'adminify']);
     Route::put('/back/admin/u/adminify', [AdminController::class,'makeAdmin']);
+
     Route::get('/back/admin/u/block/', [AdminController::class,'getBlocked']);
     Route::put('/back/admin/u/block', [AdminController::class,'blockUser']);
+
     Route::get('/back/admin/u/notify', [AdminController::class,'getUsersNotify']);
     Route::post('/back/admin/u/notify', [AdminController::class,'insertNotify']);
+
+    Route::get('/back/admin/u/notifyList', [AdminController::class,'getUsersNotifyList']);
+    Route::delete('/back/admin/u/notifyList', [AdminController::class,'deleteNotifyFromList']);
+
     Route::get('/back/admin/tipususer', [TipusUsuariController::class,'getAll']);
     Route::post('/back/admin/tipususer', [TipusUsuariController::class,'store']);
     Route::delete('/back/admin/tipususer', [TipusUsuariController::class,'delete']);
 });
 
 Auth::routes();
-// Home
-//Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Explorar
 Route::get('/explorar',[ContingutController::class,'getAll']);

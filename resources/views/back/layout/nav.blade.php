@@ -44,7 +44,7 @@
             <li class="header-menu">
               <span>General</span>
             </li>
-            <li class="sidebar-dropdown">
+            <li class="sidebar-dropdown" id="general">
               <a href="#" id="page_nav_perfil">
                 <i class="fa fa-tachometer-alt"></i>
                 <span>Perfil</span>
@@ -58,7 +58,7 @@
                 </ul>
               </div>
             </li>
-            <li class="sidebar-dropdown">
+            <li class="sidebar-dropdown" id="usuario">
               <a href="#" id="page_nav_usuario">
                 <i class="fa fa-user"></i>
                 <span>Usuarios</span>
@@ -75,10 +75,13 @@
                   <li>
                     <a href={{url('/back/admin/u/block')}} id="bloquear">Bloquear</a>
                   </li>
+                  <li>
+                    <a href={{url('/back/admin/u/notifyList')}} id="lista">Lista de avisos</a>
+                  </li>
                 </ul>
               </div>
             </li>
-            <li class="sidebar-dropdown">
+            <li class="sidebar-dropdown" id="tipoUser">
               <a href="#" id="page_nav_typeUser">
                 <i class="fa fa-users"></i>
                 <span>User type</span>

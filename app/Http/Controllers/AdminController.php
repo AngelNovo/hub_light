@@ -33,8 +33,17 @@ class AdminController extends Controller
             "avis"=>$avis,
             "users"=>$users
         ];
-        // dd($this->data);
         return view('back.notificacion')->with('users',$users)->with('data',$this->data);
+    }
+
+    public function getUsersNotifyList() {
+        $avis = DB::table('avis_usuari')
+        ->select("users.name as name","avis.explicacio as explicacio","avis_usuari.id as id")
+        ->join("users","users.id","=","avis_usuari.id_usuari")
+        ->join("avis","avis.id","=","avis_usuari.id_avis")
+        ->get();
+
+        return view('back.notifyList')->with('avis',$avis);
     }
 
     public function makeAdmin(Request $request) {
@@ -78,5 +87,15 @@ class AdminController extends Controller
             return 1;
         }
         return 0;
+    }
+
+    public function deleteNotifyFromList(Request $request) {
+
+        $id = $request->input('id');
+
+        $tipus =DB::table('avis_usuari')
+        ->where('id',$id)
+        ->delete();
+        return true;
     }
 }

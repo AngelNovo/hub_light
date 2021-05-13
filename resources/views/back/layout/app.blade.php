@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Panel-administrador</title>
     <meta name="csrf-token" content="{{csrf_token()}}" />
     <link rel="stylesheet" href={{asset('css/back/app.css')}}>
     <link rel="stylesheet" href={{asset('css/back/extra.css')}}>
@@ -19,6 +19,7 @@
         crossorigin="anonymous"></script>
         <script src={{asset('js/back/sidebar.js')}}></script>
         <script src={{asset('js/back/admin_info.js')}}></script>
+        <script src={{asset('js/back/functions.js')}}></script>
         {{-- Activa tooltip global --}}
         <script>
             $(document).ready(function() {

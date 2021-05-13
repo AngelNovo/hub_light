@@ -42,14 +42,14 @@
         </thead>
         <tbody>
             @foreach ($types as $type)
-                <tr data-id={{$type->id}}>
-                    <td><input type="number" class="form-control" name="id" value={{$type->id}} disabled></td>
-                    <td><input type="text" class="form-control" name="nombre" value={{$type->tipus}}></td>
-                    <td><input type="text" class="form-control" name="nombre" value={{$type->created_at}} disabled></td>
+                <tr data-id="{{$type->id}}">
+                    <td><input type="number" class="form-control" name="id" value="{{$type->id}}" disabled></td>
+                    <td><input type="text" class="form-control" name="nombre" value="{{$type->tipus}}"></td>
+                    <td><input type="text" class="form-control" name="nombre" value="{{$type->created_at}}" disabled></td>
                     @if ($type->tipus!="usuari" && $type->tipus!="administrador" && $type->tipus!="superadministrador")
-                        <td class="text-center"><span><i class="fas fa-times text-danger" data-toggle="tooltip" data-placement="left" title="Eliminar"></i></span></td>
+                        <td class="text-center"><span><i class="fas fa-times text-danger" data-id="{{$type->id}}" data-toggle="tooltip" data-placement="left" title="Eliminar"></i></span></td>
                         @else
-                        <td class="text-center"><span><i class="fas fa-lock text-success" data-id="{{$type->id}}" data-toggle="tooltip" data-placement="left" title="Tipo de usuario protegido"></i></span></td>
+                        <td class="text-center"><span><i class="fas fa-lock text-success" data-toggle="tooltip" data-placement="left" title="Tipo de usuario protegido"></i></span></td>
                     @endif
                 </tr>
             @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TipusUsuariModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,6 +27,16 @@ class TipusUsuariController extends Controller
 
     public function delete(Request $request) {
         $id = $request->input("id");
-        return $id;
+
+        // Para Evitar problemas de constraint cambiamos todos los
+        // usuarios que tengan asociado el tipo asociado a el que se borra
+        $update =User::where('tipus',$id)
+        ->update([
+            'tipus'=>1
+        ]);
+
+        $tipus =DB::table('tipus_usuari')
+        ->where("id",$id)->delete();
+        return true;
     }
 }

@@ -46,7 +46,7 @@ class UsuariController extends Controller
             unlink(public_path("/images/perfil/usuarios/$nombre"));
         }
 
-        $newImageName=time().'-'.$request->name.'.'.$request->foto->extension();
+        $newImageName=time().'-'.Auth::user()->name.'.'.$request->foto->extension();
 
         $request->foto->move(public_path('/images/perfil/usuarios'),$newImageName);
         $usuari = User::where('id',Auth::user()->id)
@@ -61,15 +61,15 @@ class UsuariController extends Controller
 
         $nombre=Auth::user()->foto;
         $request->validate([
-            'foto'=>'mimes:jpg,png,jpeg,gif|max:1024',
-            'fondo'=>'mimes:jpg,png,jpeg,gif|max:1024'
+            'foto'=>'mimes:jpg,png,jpeg,gif|max:4096',
+            'fondo'=>'mimes:jpg,png,jpeg,gif|max:4096'
         ]);
         // Foto perfil
         if(isset($request->foto)) {
             if($nombre!=="avatar.jpg") {
                 unlink(public_path("/images/perfil/usuarios/$nombre"));
             }
-            $avatar=time().'-'.$request->name.'.'.$request->foto->extension();
+            $avatar=time().'-'.Auth::user()->name.'.'.$request->foto->extension();
             $update["foto"]=$avatar;
             $request->foto->move(public_path('/images/perfil/usuarios'),$avatar);
         }
@@ -84,8 +84,8 @@ class UsuariController extends Controller
         }
         // Alies
         if(isset($request->alias)) {
-            $update["alies"]=$request->alias;
             $alies=$request->alias;
+            $update["alies"]=$alies;
         }
         // Update
         $usuari = User::where('id',Auth::user()->id)

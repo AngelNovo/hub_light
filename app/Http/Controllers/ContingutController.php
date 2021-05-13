@@ -23,4 +23,16 @@ class ContingutController extends Controller
         ->get();
         return $results;
     }
+
+    public function store(Request $request) {
+        $typeContent=$request->input('tipoC');
+        $rights=$request->input('derechoA');
+        $linkCopy=$request->input('linkCopy');
+        $desc=$request->input('desc');
+        $portada=$request->input('portada');
+        $overAge=$request->input('ageRestrict');
+        $pId=$request->input('propietariId');
+        $file=$request->input('arxiu');
+
+    }
 }

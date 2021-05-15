@@ -13,33 +13,62 @@
             @method('POST')
             @csrf
           <div class="row">
+            <div>
             <label for="tipoC">Tipo de contenido</label>
             <select class="form-select" id="tipoC" name="tipoC" aria-label="Default select example">
             </select>
             <label for="ageRestrict">+18</label>
             <input type="checkbox" name="ageRestrict"/>
+            </div>
+            <div>
             <label for="portada" class="form-portada">
                 <div class="upload-icon">
                     <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Portada" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar una portada" class="img-portada">
                 </div>
             </label>
             <input id="portada" name="portada" hidden type="file" form="formModal"/>
-            <label for="arxiu" id="arxiu-img">
+            </div>
+            <div>
+            <label for="arxiu-i" id="arxiu-img">
               <div class="upload-icon">
                   <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar un arxivo" class="img-arxiu image-thumbnail">
               </div>
-          </label>
+            </label>
+            <label for="arxiu" id="arxiu-musica">
+            <div class="upload-icon">
+                <audio controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="music-arxiu"></audio>
+            </div>
+            </label>
+            <label for="arxiu" id="video-musica">
+            <div class="upload-icon">
+              <video controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="video-arxiu embed-responsive"></video>
+            </div>
+            </label>
+            <div>
             <label for="arxiu" id="arxiu-otros">Arxivo</label>
             <input id="arxiu" name="arxiu" type="file" form="formModal"/>
+            <input id="arxiu-i" name="arxiu" hidden type="file" form="formModal"/>
+            <input id="arxiu-m" name="arxiu" type="file" form="formModal"/>
+            <input id="arxiu-v" name="arxiu" type="file" form="formModal"/>
+            </div>
+            </div>
+            <div>
             <label for="titol">Titulo</label>
             <input id="titol" name="titol" type="text" form="formModal"/>
+            </div>
+            <div>
             <label for="desc">Descripción</label>
             <textarea id="desc" name="desc"></textarea>
+            </div>
+            <div>
             <label for="derechoA">Derechos de autor</label>
             <select class="form-select" id="derechoA" name="derechoA" aria-label="Default select example">
             </select>
+            </div>
+            <div id="licencias">
             <label for="linkCopy">Licencia</label>
             <input id="linkCopy" name="linkCopy" type="text" placeholder="url"/>
+            </div>
           </div>
         </div>
       </form>
@@ -69,8 +98,8 @@
                 reader.readAsDataURL(file);
             }
         });
-        $("#arxiu").on("change",function() {
-            let inpFile = $("#arxiu");
+        $("#arxiu-i").on("change",function() {
+            let inpFile = $("#arxiu-i");
             let previewImage = document.querySelector(".img-arxiu");
 
             let file = this.files[0];
@@ -80,6 +109,36 @@
                 const reader = new FileReader();
                 reader.addEventListener("load",function() {
                     previewImage.setAttribute("src", this.result);
+                });
+                reader.readAsDataURL(file);
+            }
+        });
+        $("#arxiu-m").on("change",function() {
+            let inpFile = $("#arxiu-m");
+            let previewImage = document.querySelector(".music-arxiu");
+
+            let file = this.files[0];
+
+            // Si hay un archivo seleccionado, crea un FileReader para poder leerlo, y lo enseña
+            if(file) {
+                const reader = new FileReader();
+                reader.addEventListener("load",function() {
+                    previewImage.setAttribute("src", this.result);
+                });
+                reader.readAsDataURL(file);
+            }
+        });
+        $("#arxiu-v").on("change",function() {
+            let inpFile = $("#arxiu-v");
+            let previewImage = document.querySelector(".video-arxiu");
+
+            let file = this.files[0];
+
+            // Si hay un archivo seleccionado, crea un FileReader para poder leerlo, y lo enseña
+            if(file) {
+                const reader = new FileReader();
+                reader.addEventListener("load",function() {
+                    previewImage.setAttribute("src", this.result);                   
                 });
                 reader.readAsDataURL(file);
             }
@@ -127,6 +186,7 @@
         type: "GET",
         dataType: 'json',
         success: function(data){
+          console.log(data);
           $.each(data, function(index,element){
             var option=$("<option>");
             option.text(element.tipus);
@@ -144,32 +204,51 @@
       $("#arxiu-otros").hide();
       $("#arxiu-img").hide();
       $("#arxiu").hide();
+      $("#arxiu-m").hide();
+      $("#arxiu-v").hide();
+      $("#arxiu").prop( "disabled", true);
+      $("#arxiu-i").prop( "disabled", true);
+      $("#arxiu-m").prop( "disabled", true);
+      $("#arxiu-v").prop( "disabled", true);
+      $("#arxiu-musica").hide();
+      $("#video-musica").hide();
       $("#portada").prop( "disabled", true);
       switch(tipo){
         case  "1":
         $("#arxiu-img").show();
+          $("#arxiu-i").prop( "disabled", false);
         break;
         case "2":
           $(".form-portada").show();
           $("#portada").prop( "disabled", false);
           $("#arxiu").show();
+          $("#arxiu").prop( "disabled", false);
           $("#arxiu-otros").show();
           break;
 
         case "3":
           $(".form-portada").show();
           $("#portada").prop( "disabled", false);
+          $("#arxiu-musica").show();
+          $("#arxiu-m").show();
+          $("#arxiu-m").prop( "disabled", false);
+          $("#arxiu-otros").show();
           break;
 
         case "4":
           $(".form-portada").show();
           $("#portada").prop( "disabled", false);
+          $("#video-musica").show();
+          $("#arxiu-v").show();
+          $("#arxiu-v").prop( "disabled", false);
+          $("#arxiu-otros").show();
           break;
 
         case "5":
           $(".form-portada").show();
           $("#portada").prop( "disabled", false);
           $("#arxiu").show();
+          $("#arxiu").prop( "disabled", false);
           $("#arxiu-otros").show();
           break;
 
@@ -179,10 +258,10 @@
   function selectLicencia(){
     var tipo=$("#derechoA").val();
     if(tipo=="2"){
-      $("#linkCopy").hide();
+      $("#licencias").hide();
       $("#linkCopy").prop( "disabled", true);
     }else{
-      $("#linkCopy").show();
+      $("#licencias").show();
       $("#linkCopy").prop( "disabled", false);
     }
   }

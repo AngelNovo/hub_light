@@ -8,7 +8,7 @@
     overflow-x:hidden;
 }
 
-.img-portada{
+.img-portada, .img-arxiu,.video-arxiu{
     width: 100%;
     object-fit: cover;
     border: 5px solid rgba(255,255,255,0.5);

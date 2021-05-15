@@ -117,17 +117,17 @@ class ContingutController extends Controller
                 'reportat'=>0,
                 'estadistica'=>$statistic->id
             ]);
+            if($subido) {
+                $actius = DB::table('analitiques_generals')->max('id');
+                $analitiques = AnalitiquesGeneralsModel::find($actius);
+                $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
+                ->update([
+                    "contenido_total"=>$analitiques->contenido_total+1
+                ]);
+                return 1;
+            }
         }
 
-        if($subido) {
-            $actius = DB::table('analitiques_generals')->max('id');
-            $analitiques = AnalitiquesGeneralsModel::find($actius);
-            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
-            ->update([
-                "contenido_total"=>$analitiques->contenido_total+1
-            ]);
-            return 1;
-        }
         return "El archivo no es correcto o su peso es superior al límite";
     }
 

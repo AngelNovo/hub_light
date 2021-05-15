@@ -18,29 +18,34 @@
             </select>
             <label for="ageRestrict">+18</label>
             <input type="checkbox" name="ageRestrict"/>
-            <label for="portada">
+            <label for="portada" class="form-portada">
                 <div class="upload-icon">
-                    <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Portada" data-toggle="tooltip" data-placement="right" title="Haz clic para cambiar la foto de perfil" class="img-portada">
+                    <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Portada" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar una portada" class="img-portada">
                 </div>
             </label>
-            <label for="arxiu">Arxivo</label>
-            <input id="arxiu" name="arxiu" type="file" form="formModal"/>
             <input id="portada" name="portada" hidden type="file" form="formModal"/>
+            <label for="arxiu" id="arxiu-img">
+              <div class="upload-icon">
+                  <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar un arxivo" class="img-arxiu image-thumbnail">
+              </div>
+          </label>
+            <label for="arxiu" id="arxiu-otros">Arxivo</label>
+            <input id="arxiu" name="arxiu" type="file" form="formModal"/>
+            <label for="titol">Titulo</label>
+            <input id="titol" name="titol" type="text" form="formModal"/>
             <label for="desc">Descripción</label>
             <textarea id="desc" name="desc"></textarea>
             <label for="derechoA">Derechos de autor</label>
             <select class="form-select" id="derechoA" name="derechoA" aria-label="Default select example">
             </select>
             <label for="linkCopy">Licencia</label>
-            <input id="linkCopy" name="linkCopy" type="text"/>
+            <input id="linkCopy" name="linkCopy" type="text" placeholder="url"/>
           </div>
         </div>
       </form>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" form="formModal">Cancelar</button>
           <button type="submit" class="btn btn-primary" form="formModal">Subir</button>
-
-
         </div>
       </div>
     </div>
@@ -64,8 +69,31 @@
                 reader.readAsDataURL(file);
             }
         });
+        $("#arxiu").on("change",function() {
+            let inpFile = $("#arxiu");
+            let previewImage = document.querySelector(".img-arxiu");
+
+            let file = this.files[0];
+
+            // Si hay un archivo seleccionado, crea un FileReader para poder leerlo, y lo enseña
+            if(file) {
+                const reader = new FileReader();
+                reader.addEventListener("load",function() {
+                    previewImage.setAttribute("src", this.result);
+                });
+                reader.readAsDataURL(file);
+            }
+        });
         getDerechos();
         getTipo();
+        $("#tipoC").change(function(){
+          selectTipo();
+        });
+
+        $("#derechoA").change(function(){
+          selectLicencia();
+        })
+
 
     });
 
@@ -85,11 +113,12 @@
             $("#derechoA").append(option);
           });
           $('#derechoA option[value="2"]').attr("selected",true);
+          selectLicencia();
         }
     });
     }
 
-    function getTipo() {
+  function getTipo() {
     $.ajax({
         url: "/tipocontenido",
         headers: {
@@ -105,8 +134,57 @@
             option.val(element.id);
             $("#tipoC").append(option);
           });
+          selectTipo();
         }
     });
+  }
+  function selectTipo(){
+      var tipo=$("#tipoC").val();
+      $(".form-portada").hide();
+      $("#arxiu-otros").hide();
+      $("#arxiu-img").hide();
+      $("#arxiu").hide();
+      $("#portada").prop( "disabled", true);
+      switch(tipo){
+        case  "1":
+        $("#arxiu-img").show();
+        break;
+        case "2":
+          $(".form-portada").show();
+          $("#portada").prop( "disabled", false);
+          $("#arxiu").show();
+          $("#arxiu-otros").show();
+          break;
+
+        case "3":
+          $(".form-portada").show();
+          $("#portada").prop( "disabled", false);
+          break;
+
+        case "4":
+          $(".form-portada").show();
+          $("#portada").prop( "disabled", false);
+          break;
+
+        case "5":
+          $(".form-portada").show();
+          $("#portada").prop( "disabled", false);
+          $("#arxiu").show();
+          $("#arxiu-otros").show();
+          break;
+
+      }
+  }
+
+  function selectLicencia(){
+    var tipo=$("#derechoA").val();
+    if(tipo=="2"){
+      $("#linkCopy").hide();
+      $("#linkCopy").prop( "disabled", true);
+    }else{
+      $("#linkCopy").show();
+      $("#linkCopy").prop( "disabled", false);
     }
+  }
 
 </script>

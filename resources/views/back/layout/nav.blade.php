@@ -109,6 +109,20 @@
                 </ul>
               </div>
             </li>
+            <li class="sidebar-dropdown" id="tipoUser">
+                <a href="#" id="page_nav_content">
+                  <i class="fa fa-users"></i>
+                  <span>Contenido</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href={{url('/back/admin/adultify')}} id="crud">Adultify
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
 
         </div>
         <!-- sidebar-menu  -->

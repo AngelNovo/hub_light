@@ -38,14 +38,14 @@ class ContingutController extends Controller
 
     public function getAll() {
         $results = DB::table('contingut')
-        ->select('contingut.id','titol','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
+        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
         ->get();
         return view ('front.explorar')->with('results',$results);
     }
     public function get($id) {
         $results = DB::table('contingut')
-        ->select('contingut.id','titol','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
+        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
         ->where('contingut.id',$id)
         ->get();
@@ -55,6 +55,7 @@ class ContingutController extends Controller
     public function store(Request $request) {
 
         $typeContent=$request->input('tipoC');
+        $titulo=$request->input('titol');
         $rights=$request->input('derechoA');
         $linkCopy=$request->input('linkCopy');
         $desc=$request->input('desc');
@@ -71,6 +72,7 @@ class ContingutController extends Controller
         }else if($typeContent==2) {
             $request->validate([
                 'arxiu'=>'required|mimes:pdf,txt|max:4096',
+                'titulo'=>"required",
                 'derechoA'=>"required",
                 'tipoC'=>"required"
             ]);
@@ -107,6 +109,7 @@ class ContingutController extends Controller
 
             $subido=ContingutModel::create([
                 'propietari'=>$pId,
+                'titulo'=>$titulo,
                 'drets_autor'=>$rights,
                 'tipus_contingut'=>$typeContent,
                 'link_copyright'=>$linkCopy,

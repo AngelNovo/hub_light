@@ -102,7 +102,7 @@ class ContingutController extends Controller
 
         $url=public_path('/contenido/'.$typeContent);
 
-        if($portada) {
+        if($request->hasFile('portada')) {
             $portada=time().'-'.Auth::user()->name.'.'.$request->portada->extension();
             $request->portada->move($url,$portada);
         }

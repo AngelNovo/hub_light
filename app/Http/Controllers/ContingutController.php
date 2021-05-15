@@ -77,14 +77,14 @@ class ContingutController extends Controller
         }else if($typeContent==3) {
             $request->validate([
                 'portada'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
-                'arxiu'=>'required|mimes:mp3,ogg|max:4096',
+                'arxiu'=>'required|mimes:mp3,ogg|max:20000',
                 'derechoA'=>"required",
                 'tipoC'=>"required"
             ]);
         }else if ($typeContent==4) {
             $request->validate([
                 'portada'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
-                'arxiu'=>'required|mimes:mp4,ogg|max:4096',
+                'arxiu'=>'required|mimes:mp4,ogg|max:20000',
                 'derechoA'=>"required",
                 'tipoC'=>"required"
             ]);
@@ -128,7 +128,7 @@ class ContingutController extends Controller
             ]);
             return 1;
         }
-        return "El archivo no es correcto o su peso es superior a 4MB";
+        return "El archivo no es correcto o su peso es superior al límite";
     }
 
 }

@@ -7,10 +7,10 @@
 <script src={{asset('js/back/functions.js')}}></script>
 <script>
     $(document).ready(function() {
-        $('.edat').on('change',function() {
+        $('input:checkbox').on('change',function(e) {
             let id=$(this).attr('data-id');
-            let value=$(this).val();
-            adultify(id,value);
+            let aux=(e.target.checked) ? 1 : 0;
+            adultify(id,aux);
         });
     });
 </script>
@@ -27,11 +27,11 @@
         </thead>
         <tbody>
             @foreach ($content as $c)
-                <tr id="{{$c->id}}">ç
+                <tr id="{{$c->id}}">
                     <td><a href="{{url('/contingut/'.$c->id)}}" target="_blank">{{$c->descripcio}}</a></td>
                     <td class="text-center">
                         <label class="switch">
-                            <input type="checkbox" class="edat" name="major" value="{{$c->majoria_edat}}"  data-id="{{$c->id}}" {{($c->majoria_edat) ? 'checked' : ""}}>
+                            <input type="checkbox" class="edat" name="major" value="{{$c->majoria_edat}}" id={{$c->id}} data-id="{{$c->id}}" {{($c->majoria_edat) ? 'checked' : ""}}>
                             <span class="slider round"></span>
                         </label>
                     </td>

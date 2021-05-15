@@ -38,7 +38,6 @@ function aceptarAviso(id) {
 }
 
 function adultify(id,value) {
-    let idN=(id==0) ? 1 : 0;
     $.ajax({
         url: "/back/admin/adultify",
         headers: {
@@ -46,13 +45,14 @@ function adultify(id,value) {
         },
         type: "PUT",
         data: {
-            id: idN,
+            id: id,
             val:value
         },
         dataType: 'json',
 
         success: function(data){
-            // window.location="/back/admin/u/notifyList";
+            // window.location="/back/admin/adultify";
+            document.getElementById(id).value = 0
             console.log(data);
         }
 

@@ -18,5 +18,21 @@ function quitarAvisos(id) {
 }
 
 function aceptarAviso(id) {
-    console.log(id)
+    $.ajax({
+        url: "/back/admin/u/notifyList",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "PUT",
+        data: {
+            id: id
+        },
+        dataType: 'json',
+
+        success: function(data){
+            window.location="/back/admin/u/notifyList";
+            // console.log(data);
+        }
+
+    });
 }

@@ -39,8 +39,8 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" form="formModal">Cancelar</button>
           <button type="submit" class="btn btn-primary" form="formModal">Subir</button>
-          
-        
+
+
         </div>
       </div>
     </div>
@@ -80,7 +80,7 @@
         success: function(data){
           $.each(data, function(index,element){
             var option=$("<option>");
-            option.text(element.tipus);     
+            option.text(element.tipus);
             option.val(element.id_dret);
             $("#derechoA").append(option);
           });

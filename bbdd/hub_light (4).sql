@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 13, 2021 at 03:59 PM
+-- Generation Time: May 15, 2021 at 03:04 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `hub_light`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `analitiques_generals`
+--
+
+CREATE TABLE `analitiques_generals` (
+  `id` int(11) NOT NULL,
+  `usuaris_suspes` int(11) NOT NULL DEFAULT '0',
+  `usuaris_actius` int(11) NOT NULL DEFAULT '0',
+  `usuaris_enperill` int(11) NOT NULL DEFAULT '0',
+  `contenido_total` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Dumping data for table `analitiques_generals`
+--
+
+INSERT INTO `analitiques_generals` (`id`, `usuaris_suspes`, `usuaris_actius`, `usuaris_enperill`, `contenido_total`, `created_at`, `updated_at`) VALUES
+(1, 0, 6, 0, 0, '2021-05-02 09:28:10', '2021-05-14 08:37:26'),
+(8, 5, 1, 0, 5, '2021-05-11 12:01:04', '2021-05-14 12:01:37'),
+(9, 5, 1, 0, 23, '2021-05-13 12:06:20', '2021-05-14 12:06:20'),
+(10, 0, 6, 0, 60, '2021-05-14 12:06:26', '2021-05-14 15:13:06'),
+(11, 2, 6, 0, 64, '2021-05-15 07:20:26', '2021-05-15 13:01:48');
 
 -- --------------------------------------------------------
 
@@ -53,9 +80,103 @@ CREATE TABLE `avis_usuari` (
   `id` int(11) NOT NULL,
   `id_usuari` int(10) UNSIGNED NOT NULL,
   `id_avis` int(10) UNSIGNED NOT NULL,
+  `acceptat` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `avis_usuari`
+--
+
+INSERT INTO `avis_usuari` (`id`, `id_usuari`, `id_avis`, `acceptat`, `created_at`, `updated_at`) VALUES
+(1, 13, 1, '1', '2021-05-14 12:24:40', '2021-05-14 12:26:13'),
+(2, 13, 2, '1', '2021-05-14 12:24:42', '2021-05-14 12:24:45'),
+(3, 13, 1, '1', '2021-05-14 12:26:30', '2021-05-14 12:29:00'),
+(4, 13, 2, '1', '2021-05-14 12:26:32', '2021-05-14 12:28:59'),
+(5, 11, 1, '1', '2021-05-14 12:30:41', '2021-05-14 12:30:45'),
+(6, 11, 2, '1', '2021-05-14 12:30:43', '2021-05-14 12:30:45'),
+(7, 13, 1, '1', '2021-05-14 12:36:43', '2021-05-14 12:36:49'),
+(8, 13, 2, '1', '2021-05-14 12:36:45', '2021-05-14 12:36:47'),
+(9, 13, 1, '1', '2021-05-14 12:38:47', '2021-05-14 12:38:52'),
+(10, 13, 2, '1', '2021-05-14 12:38:49', '2021-05-14 12:38:51'),
+(11, 11, 1, '1', '2021-05-14 12:41:14', '2021-05-14 12:41:19'),
+(12, 11, 2, '1', '2021-05-14 12:41:16', '2021-05-14 12:41:19'),
+(13, 11, 2, '1', '2021-05-14 12:42:32', '2021-05-14 12:42:34'),
+(14, 5, 1, '1', '2021-05-14 12:42:51', '2021-05-14 12:42:56'),
+(15, 13, 1, '1', '2021-05-14 12:43:35', '2021-05-14 12:43:39'),
+(16, 13, 2, '1', '2021-05-14 12:43:55', '2021-05-14 12:43:57'),
+(17, 5, 1, '1', '2021-05-14 12:45:21', '2021-05-14 12:45:26'),
+(18, 5, 2, '1', '2021-05-14 12:45:24', '2021-05-14 12:45:25'),
+(19, 13, 1, '1', '2021-05-14 12:47:32', '2021-05-14 12:47:43'),
+(20, 13, 2, '1', '2021-05-14 12:47:35', '2021-05-14 12:47:50'),
+(21, 13, 1, '1', '2021-05-14 12:55:03', '2021-05-14 12:55:14'),
+(22, 13, 2, '1', '2021-05-14 12:55:06', '2021-05-14 12:55:09'),
+(23, 13, 1, '1', '2021-05-14 12:57:48', '2021-05-14 12:57:53'),
+(24, 13, 2, '1', '2021-05-14 12:57:50', '2021-05-14 12:57:52'),
+(25, 4, 1, '1', '2021-05-14 15:11:38', '2021-05-14 15:11:45'),
+(26, 4, 2, '1', '2021-05-14 15:12:09', '2021-05-14 15:12:12'),
+(27, 4, 1, '1', '2021-05-15 07:30:46', '2021-05-15 07:31:17'),
+(28, 5, 2, '1', '2021-05-15 07:30:49', '2021-05-15 07:31:28'),
+(29, 4, 2, '1', '2021-05-15 07:31:59', '2021-05-15 07:32:02'),
+(30, 4, 1, '1', '2021-05-15 07:36:20', '2021-05-15 07:36:26'),
+(31, 4, 2, '1', '2021-05-15 07:36:22', '2021-05-15 07:36:25'),
+(32, 4, 1, '1', '2021-05-15 07:39:43', '2021-05-15 07:39:49'),
+(33, 4, 2, '1', '2021-05-15 07:39:46', '2021-05-15 07:39:48'),
+(34, 4, 1, '1', '2021-05-15 07:40:44', '2021-05-15 07:40:50'),
+(35, 4, 2, '1', '2021-05-15 07:40:46', '2021-05-15 07:40:49'),
+(36, 4, 1, '1', '2021-05-15 07:41:26', '2021-05-15 07:41:31'),
+(37, 5, 2, '1', '2021-05-15 07:41:28', '2021-05-15 07:41:30'),
+(38, 5, 1, '1', '2021-05-15 07:41:53', '2021-05-15 07:41:55'),
+(39, 4, 1, '1', '2021-05-15 07:43:36', '2021-05-15 07:43:43'),
+(40, 4, 2, '1', '2021-05-15 07:43:39', '2021-05-15 07:43:42'),
+(41, 4, 1, '1', '2021-05-15 07:46:23', '2021-05-15 07:46:30'),
+(42, 4, 2, '1', '2021-05-15 07:46:25', '2021-05-15 07:46:30'),
+(43, 4, 1, '1', '2021-05-15 07:48:04', '2021-05-15 07:48:14'),
+(44, 4, 2, '1', '2021-05-15 07:48:07', '2021-05-15 07:48:12'),
+(45, 4, 1, '1', '2021-05-15 07:49:25', '2021-05-15 07:49:37'),
+(46, 4, 2, '1', '2021-05-15 07:49:28', '2021-05-15 07:49:37'),
+(47, 4, 1, '1', '2021-05-15 07:51:22', '2021-05-15 07:51:28'),
+(48, 4, 2, '1', '2021-05-15 07:51:25', '2021-05-15 07:51:28'),
+(49, 4, 1, '1', '2021-05-15 07:56:12', '2021-05-15 07:56:28'),
+(51, 4, 2, '1', '2021-05-15 07:56:25', '2021-05-15 07:56:27'),
+(52, 11, 1, '1', '2021-05-15 07:57:08', '2021-05-15 07:57:14'),
+(53, 11, 2, '1', '2021-05-15 07:57:11', '2021-05-15 07:57:14'),
+(54, 4, 1, '1', '2021-05-15 07:58:32', '2021-05-15 07:58:38'),
+(55, 4, 2, '1', '2021-05-15 07:58:35', '2021-05-15 07:58:37'),
+(56, 1, 1, '1', '2021-05-15 08:09:12', '2021-05-15 08:09:17'),
+(57, 1, 2, '1', '2021-05-15 08:09:14', '2021-05-15 08:09:17'),
+(58, 4, 1, '1', '2021-05-15 12:35:17', '2021-05-15 12:35:24'),
+(59, 4, 2, '1', '2021-05-15 12:35:20', '2021-05-15 12:35:22'),
+(60, 4, 2, '1', '2021-05-15 12:36:06', '2021-05-15 12:36:09'),
+(61, 4, 1, '1', '2021-05-15 12:40:06', '2021-05-15 12:40:16'),
+(62, 4, 2, '1', '2021-05-15 12:40:08', '2021-05-15 12:40:20'),
+(63, 4, 2, '1', '2021-05-15 12:40:11', '2021-05-15 12:40:14'),
+(64, 10, 1, '1', '2021-05-15 12:41:15', '2021-05-15 12:41:27'),
+(65, 10, 2, '1', '2021-05-15 12:41:18', '2021-05-15 12:41:30'),
+(66, 10, 2, '1', '2021-05-15 12:41:20', '2021-05-15 12:41:26'),
+(67, 4, 1, '1', '2021-05-15 12:42:59', '2021-05-15 12:43:04'),
+(68, 4, 2, '1', '2021-05-15 12:43:01', '2021-05-15 12:43:03'),
+(69, 4, 1, '1', '2021-05-15 12:44:56', '2021-05-15 12:45:11'),
+(70, 4, 2, '1', '2021-05-15 12:44:58', '2021-05-15 12:45:16'),
+(71, 4, 2, '1', '2021-05-15 12:45:01', '2021-05-15 12:45:10'),
+(72, 1, 1, '1', '2021-05-15 12:48:58', '2021-05-15 12:49:07'),
+(73, 1, 2, '1', '2021-05-15 12:49:00', '2021-05-15 12:49:13'),
+(74, 1, 2, '1', '2021-05-15 12:49:02', '2021-05-15 12:49:06'),
+(75, 1, 1, '1', '2021-05-15 12:51:16', '2021-05-15 12:51:56'),
+(76, 1, 1, '1', '2021-05-15 12:51:19', '2021-05-15 12:51:32'),
+(77, 1, 2, '1', '2021-05-15 12:51:22', '2021-05-15 12:51:31'),
+(78, 1, 1, '1', '2021-05-15 12:55:50', '2021-05-15 12:56:17'),
+(79, 1, 1, '1', '2021-05-15 12:55:52', '2021-05-15 12:56:09'),
+(80, 1, 2, '1', '2021-05-15 12:55:54', '2021-05-15 12:56:07'),
+(81, 1, 1, '1', '2021-05-15 12:59:32', '2021-05-15 12:59:42'),
+(82, 1, 2, '1', '2021-05-15 12:59:35', '2021-05-15 12:59:47'),
+(83, 1, 2, '1', '2021-05-15 12:59:37', '2021-05-15 12:59:40'),
+(84, 1, 1, '1', '2021-05-15 13:00:54', '2021-05-15 13:01:03'),
+(85, 1, 2, '1', '2021-05-15 13:00:56', '2021-05-15 13:01:02'),
+(86, 1, 2, '1', '2021-05-15 13:00:58', '2021-05-15 13:01:10'),
+(87, 1, 1, '1', '2021-05-15 13:01:32', '2021-05-15 13:01:37'),
+(88, 1, 2, '1', '2021-05-15 13:01:34', '2021-05-15 13:01:36');
 
 -- --------------------------------------------------------
 
@@ -65,14 +186,13 @@ CREATE TABLE `avis_usuari` (
 
 CREATE TABLE `contingut` (
   `id` int(10) UNSIGNED NOT NULL,
-  `titol` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `portada` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `link_copyright` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcio` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `portada` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link_copyright` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `descripcio` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `majoria_edat` tinyint(1) NOT NULL DEFAULT '0',
   `reportat` tinyint(1) NOT NULL DEFAULT '0',
-  `estadistica` int(10) UNSIGNED NOT NULL,
+  `estadistica` int(10) UNSIGNED DEFAULT NULL,
   `propietari` int(10) UNSIGNED NOT NULL,
   `tipus_contingut` int(10) UNSIGNED NOT NULL,
   `drets_autor` int(10) UNSIGNED NOT NULL,
@@ -140,7 +260,19 @@ INSERT INTO `estadistiques` (`id_estadistica`, `q_comentaris`, `q_likes`, `q_seg
 (10, 0, 0, 0, 0, 0, 0, '2021-05-03 06:56:01', '2021-05-03 06:56:01'),
 (11, 0, 0, 0, 0, 0, 0, '2021-05-05 19:06:19', '2021-05-05 19:06:19'),
 (12, 0, 0, 0, 0, 0, 0, '2021-05-13 13:03:56', '2021-05-13 13:03:56'),
-(13, 0, 0, 0, 0, 0, 0, '2021-05-13 13:04:14', '2021-05-13 13:04:14');
+(13, 0, 0, 0, 0, 0, 0, '2021-05-13 13:04:14', '2021-05-13 13:04:14'),
+(14, 0, 0, 0, 0, 0, 0, '2021-05-14 07:33:00', '2021-05-14 07:33:00'),
+(15, 0, 0, 0, 0, 0, 0, '2021-05-14 07:34:27', '2021-05-14 07:34:27'),
+(16, 0, 0, 0, 0, 0, 0, '2021-05-14 07:34:56', '2021-05-14 07:34:56'),
+(17, 0, 0, 0, 0, 0, 0, '2021-05-14 07:35:27', '2021-05-14 07:35:27'),
+(18, 0, 0, 0, 0, 0, 0, '2021-05-14 07:36:03', '2021-05-14 07:36:03'),
+(19, 0, 0, 0, 0, 0, 0, '2021-05-14 07:37:13', '2021-05-14 07:37:13'),
+(20, 0, 0, 0, 0, 0, 0, '2021-05-14 07:38:17', '2021-05-14 07:38:17'),
+(21, 0, 0, 0, 0, 0, 0, '2021-05-14 07:40:06', '2021-05-14 07:40:06'),
+(22, 0, 0, 0, 0, 0, 0, '2021-05-14 07:57:58', '2021-05-14 07:57:58'),
+(23, 0, 0, 0, 0, 0, 0, '2021-05-14 07:59:24', '2021-05-14 07:59:24'),
+(24, 0, 0, 0, 0, 0, 0, '2021-05-14 11:37:49', '2021-05-14 11:37:49'),
+(25, 0, 0, 0, 0, 0, 0, '2021-05-14 15:07:25', '2021-05-14 15:07:25');
 
 -- --------------------------------------------------------
 
@@ -316,7 +448,7 @@ CREATE TABLE `tipus_contingut` (
 INSERT INTO `tipus_contingut` (`id`, `tipus`, `icona`, `created_at`, `updated_at`, `Descripcio`) VALUES
 (1, 'Imagen', '', NULL, NULL, '.jpg .gif .png .jpeg .svg'),
 (2, 'Documento de texto', '', NULL, NULL, '.pdf .txt'),
-(3, 'Música', '.mp3 .ogg', NULL, NULL, ''),
+(3, 'Música', '', NULL, NULL, '.mp3 .ogg'),
 (4, 'Video', '', NULL, NULL, '.mp4 .ogg'),
 (5, 'Otros', '', NULL, NULL, '.blend .tga .iris .sgi .rar .zip .gz.tar.gz .7z .css .mng .webp');
 
@@ -379,9 +511,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `email_verified_at`, `alies`, `foto`, `link`, `data_naixement`, `data-registre`, `actiu`, `deshabilitat`, `suspes`, `es_admin`, `nivell_gravetat`, `grups_disponibles`, `recomendat`, `estadistica`, `tipus`, `remember_token`, `created_at`, `updated_at`, `fondo`) VALUES
-(1, 'test', '$2y$10$n4EJbYTalgXFW9.kiPo6FeyAk9qApu5OS3UDqWoz3.yPGpMRTfDvW', 'test@test', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 1, 0, 10, 0, NULL, 5, 1, NULL, '2021-05-01 13:51:49', '2021-05-13 13:06:44', 'fondoDefault.jpg'),
-(4, 'AngelAdmin', '$2y$10$1/7Tr4A2lKmXpE1JAbg9t.78HCEuBc1RzSU.5QajN.EpkDI6cQrtS', 'angelnovo15@gmail.com', NULL, 'Angel', '1620910738-AngelAdmin.jpg', NULL, NULL, NULL, 1, 0, 0, 1, 10, 0, NULL, 10, 1, NULL, '2021-05-03 06:56:01', '2021-05-13 13:42:39', '1620910738-AngelAdmin.png'),
-(5, 'Llabreso', '$2y$10$7wlUoNiTN6Dk9sYzGDUWZunTvDlnaZNMEguXynjErf3YYC0A2p.8K', 'joanllabresoliver@gmail.com', '2021-05-08 09:30:50', 'Llabreso', '1620757944-.jpg', NULL, '2001-09-12 08:54:48', NULL, 1, 0, 0, 1, 10, 0, NULL, 11, 1, NULL, '2021-05-05 19:06:19', '2021-05-11 18:50:14', '1620757917-Llabreso.jpg');
+(1, 'test', '$2y$10$n4EJbYTalgXFW9.kiPo6FeyAk9qApu5OS3UDqWoz3.yPGpMRTfDvW', 'test@test', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 5, 1, NULL, '2021-05-01 13:51:49', '2021-05-15 13:01:48', 'fondoDefault.jpg'),
+(4, 'AngelAdmin', 'cec9339cba6eddfc14afc2764e027512', 'angelnovo15@gmail.com', NULL, 'Angel', '1620910738-AngelAdmin.jpg', NULL, NULL, NULL, 1, 0, 1, 1, 0, 0, NULL, 10, 1, NULL, '2021-05-03 06:56:01', '2021-05-15 12:45:16', '1620910738-AngelAdmin.png'),
+(5, 'Llabreso', '$2y$10$7wlUoNiTN6Dk9sYzGDUWZunTvDlnaZNMEguXynjErf3YYC0A2p.8K', 'joanllabresoliver@gmail.com', '2021-05-08 09:30:50', 'Llabreso', '1620757944-.jpg', NULL, '2001-09-12 08:54:48', NULL, 1, 0, 0, 1, 10, 0, NULL, 11, 1, NULL, '2021-05-05 19:06:19', '2021-05-15 08:09:37', '1620757917-Llabreso.jpg'),
+(10, 'asdasda', '$2y$10$fMjp/4HvAjHrptsLmeL3huizotI2B96dMHbCc/NNf8eNewr3hJff.', 'asdasd@sdfbkj', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 21, 1, NULL, '2021-05-14 07:40:06', '2021-05-15 12:48:51', 'fondoDefault.jpg'),
+(11, 'jndbasjkhidbsakj', '$2y$10$sBLApHMMlhvvh0mzKYsi8OYP9ZslU.twnUdwZeIz7.VLGjngQZQZi', 'kjasdfnasf@aseknfbnksf', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 22, 1, NULL, '2021-05-14 07:57:58', '2021-05-15 07:57:27', 'fondoDefault.jpg'),
+(12, 'lkjmasdkjasb', '$2y$10$7wElszXdDGzBHz53jlYz2OQsxFy8QaEb3Ir5B1ygiiO9V5dMoJ0kS', 'kjasbdjk@skjdnfkj', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 23, 1, NULL, '2021-05-14 07:59:24', '2021-05-15 07:56:07', 'fondoDefault.jpg'),
+(13, 'ertrrdfdf', '$2y$10$vxsq2QJpCkvNUHSt5YKer.7sQfDvHVWJmK0tON9Qx733peZwfA6au', 'hhfdhfdfdh@sdfdsfdfs', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 1, 0, 0, 0, NULL, 24, 1, NULL, '2021-05-14 11:37:49', '2021-05-15 12:40:00', 'fondoDefault.jpg'),
+(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 1, 0, 0, 1, 10, 0, NULL, 25, 3, NULL, '2021-05-14 15:07:26', '2021-05-15 12:17:29', 'fondoDefault.jpg');
 
 -- --------------------------------------------------------
 
@@ -428,6 +565,12 @@ CREATE TABLE `xat_usuaris` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `analitiques_generals`
+--
+ALTER TABLE `analitiques_generals`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `avis`
@@ -574,6 +717,12 @@ ALTER TABLE `xat_usuaris`
 --
 
 --
+-- AUTO_INCREMENT for table `analitiques_generals`
+--
+ALTER TABLE `analitiques_generals`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `avis`
 --
 ALTER TABLE `avis`
@@ -583,31 +732,31 @@ ALTER TABLE `avis`
 -- AUTO_INCREMENT for table `avis_usuari`
 --
 ALTER TABLE `avis_usuari`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `contingut`
 --
 ALTER TABLE `contingut`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `dret_autor`
 --
 ALTER TABLE `dret_autor`
-  MODIFY `id_dret` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_dret` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `estadistiques`
 --
 ALTER TABLE `estadistiques`
-  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `estadistiques_contingut`
 --
 ALTER TABLE `estadistiques_contingut`
-  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -649,13 +798,13 @@ ALTER TABLE `tipus_contingut`
 -- AUTO_INCREMENT for table `tipus_usuari`
 --
 ALTER TABLE `tipus_usuari`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `xat`

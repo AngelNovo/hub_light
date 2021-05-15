@@ -2,15 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnalitiquesGeneralsModel;
 use App\Models\AvisModel;
 use App\Models\AvisUsuariModel;
-use App\Models\TipusUsuariModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+
+    public function updateAnalytics($aux){
+        $actius = DB::table('analitiques_generals')->max('id');
+        $analitiques = AnalitiquesGeneralsModel::find($actius);
+        if($aux==0) {
+            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
+            ->update([
+                "usuaris_actius"=>$analitiques->usuaris_actius+1,
+                "usuaris_suspes"=>$analitiques->usuaris_suspes-1
+            ]);
+        }else if($aux==1) {
+            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
+            ->update([
+                "usuaris_actius"=>$analitiques->usuaris_actius-1,
+                "usuaris_suspes"=>$analitiques->usuaris_suspes+1
+            ]);
+        }else if($aux==2) {
+            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
+            ->update([
+                "usuaris_enperill"=>$analitiques->usuaris_enperill+1,
+                "usuaris_actius"=>$analitiques->usuaris_actius-1
+            ]);
+        }else if($aux ==3 ) {
+            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
+            ->update([
+                "usuaris_enperill"=>$analitiques->usuaris_enperill-1,
+                "usuaris_actius"=>$analitiques->usuaris_actius+1
+            ]);
+        }else {
+            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
+            ->update([
+                "usuaris_enperill"=>$analitiques->usuaris_enperill-1,
+                "usuaris_suspes"=>$analitiques->usuaris_suspes+1
+            ]);
+        }
+    }
+
+    public function dashboard() {
+        $content=AnalitiquesGeneralsModel::all();
+        return view('back.dashboard')->with('content',$content);
+    }
+
     public function adminify() {
         $users = DB::table('users')
         ->select('id','name','es_admin')->get();
@@ -28,6 +70,7 @@ class AdminController extends Controller
         $avis = AvisModel::all();
         $users = DB::table('users')
         ->select('users.id','users.name')
+        ->where('suspes',0)
         ->get();
         $this->data = [
             "avis"=>$avis,
@@ -41,6 +84,8 @@ class AdminController extends Controller
         ->select("users.name as name","avis.explicacio as explicacio","avis_usuari.id as id")
         ->join("users","users.id","=","avis_usuari.id_usuari")
         ->join("avis","avis.id","=","avis_usuari.id_avis")
+        ->where('acceptat',0)
+        ->orderBy("avis_usuari.id","desc")
         ->get();
 
         return view('back.notifyList')->with('avis',$avis);
@@ -65,14 +110,25 @@ class AdminController extends Controller
     public function blockUser(Request $request) {
         $id = $request->input('id');
         $aux= $request->input('aux');
+
+        $us =User::find($id);
+
+        $nivell = ($aux==1) ? 0 : 10;
         $user = User::where('id',$id)
         ->update([
-            'suspes'=>$aux
+            'suspes'=>$aux,
+            'nivell_gravetat'=>$nivell
         ]);
-        if($user) {
+        if($us->nivell_gravetat<5 && $us->nivell_gravetat>0) {
+                $this->updateAnalytics(3);
+                $this->updateAnalytics($aux);
             return 1;
         }
-        return 0;
+
+        $this->updateAnalytics($aux);
+
+
+        return 1;
 
     }
 
@@ -87,6 +143,53 @@ class AdminController extends Controller
             return 1;
         }
         return 0;
+    }
+
+    public function acceptNotify(Request $request) {
+        $id = $request->id;
+
+        $update = AvisUsuariModel::where('id',$id)
+        ->update([
+            "acceptat"=>1
+        ]);
+
+        $avisUsuari = AvisUsuariModel::find($id);
+        $gravetat = AvisModel::find($avisUsuari->id_avis);
+        $idUser = $avisUsuari->id_usuari;
+        $gravetat = $gravetat->gravetat;
+
+        $user = User::find($idUser);
+        $userGrav = $user->nivell_gravetat;
+
+       if($userGrav-$gravetat>0 && $userGrav-$gravetat<=10) {
+            $update = User::where('id',$idUser)
+            ->update([
+                "nivell_gravetat"=>$userGrav-$gravetat
+            ]);
+            if($userGrav-$gravetat>0 && $userGrav-$gravetat<5) {
+                if($userGrav-$gravetat<1) {
+                    $this->updateAnalytics(4);
+                    return 1;
+                }
+                $this->updateAnalytics(2);
+            };
+            return 1;
+        }
+        $update = User::where('id',$idUser)
+        ->update([
+            "suspes"=>1,
+            "nivell_gravetat"=>0
+        ]);
+        $user = User::find($idUser);
+        if($userGrav-$gravetat<1) {
+            $this->updateAnalytics(4);
+            return 1;
+        }
+        if($user->suspes===1) {
+            $this->updateAnalytics(1);
+        }
+        return 1;
+
     }
 
     public function deleteNotifyFromList(Request $request) {

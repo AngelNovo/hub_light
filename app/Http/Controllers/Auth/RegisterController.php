@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnalitiquesGeneralsModel;
 use App\Models\EstadisticaModel;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -69,6 +71,13 @@ class RegisterController extends Controller
         EstadisticaModel::create();
 
         $aux=EstadisticaModel::max('id_estadistica');
+
+        $actius = DB::table('analitiques_generals')->max('id');
+        $analitiques = AnalitiquesGeneralsModel::find($actius);
+            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
+            ->update([
+                "usuaris_actius"=>$analitiques->usuaris_actius+1
+            ]);
 
         return User::create([
             'name' => $data['name'],

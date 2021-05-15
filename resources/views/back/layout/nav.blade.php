@@ -44,9 +44,23 @@
             <li class="header-menu">
               <span>General</span>
             </li>
+            <li class="sidebar-dropdown" id="dashboard">
+                <a href="#" id="page_nav_dashboard">
+                    <i class="fa fa-chart-line"></i>
+                    <span>Dashboard</span>
+                  </a>
+                  <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href={{url('/back/admin/dashboard')}} id="dash">Dashboard
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="sidebar-dropdown" id="general">
               <a href="#" id="page_nav_perfil">
-                <i class="fa fa-tachometer-alt"></i>
+                <i class="fa fa-address-card"></i>
                 <span>Perfil</span>
               </a>
               <div class="sidebar-submenu">

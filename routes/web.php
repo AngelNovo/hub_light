@@ -20,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('front.home');
-});
+Route::get('/', [ContingutController::class,'getHome']);
 
 // *Usuari*
 Route::get('/usuaris',[UsuariController::class,'getAll']);
@@ -51,6 +49,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/back/admin/home', function() {
         return view('back.home');
     });
+    Route::get('/back/admin/dashboard', [AdminController::class,'dashboard']);
     Route::get('/back/admin/u/adminify', [AdminController::class,'adminify']);
     Route::put('/back/admin/u/adminify', [AdminController::class,'makeAdmin']);
 
@@ -62,6 +61,7 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::get('/back/admin/u/notifyList', [AdminController::class,'getUsersNotifyList']);
     Route::delete('/back/admin/u/notifyList', [AdminController::class,'deleteNotifyFromList']);
+    Route::put('/back/admin/u/notifyList', [AdminController::class,'acceptNotify']);
 
     Route::get('/back/admin/tipususer', [TipusUsuariController::class,'getAll']);
     Route::post('/back/admin/tipususer', [TipusUsuariController::class,'store']);

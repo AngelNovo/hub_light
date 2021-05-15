@@ -109,7 +109,7 @@
                 </ul>
               </div>
             </li>
-            <li class="sidebar-dropdown" id="tipoUser">
+            <li class="sidebar-dropdown" id="contenido">
                 <a href="#" id="page_nav_content">
                   <i class="fa fa-users"></i>
                   <span>Contenido</span>
@@ -117,7 +117,7 @@
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <a href={{url('/back/admin/adultify')}} id="crud">Adultify
+                      <a href={{url('/back/admin/adultify')}} id="adultify">Adultify
                       </a>
                     </li>
                   </ul>

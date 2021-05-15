@@ -40,6 +40,7 @@ class ContingutController extends Controller
         $results = DB::table('contingut')
         ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
+        ->orderBy('created_at',"desc")
         ->get();
         return view ('front.explorar')->with('results',$results);
     }
@@ -100,6 +101,11 @@ class ContingutController extends Controller
         }
 
         $url=public_path('/contenido/'.$typeContent);
+
+        if($portada) {
+            $portada=time().'-'.Auth::user()->name.'.'.$request->portada->extension();
+            $request->portada->move($url,$portada);
+        }
 
         if($request->hasFile('arxiu')) {
             $archivo=time().'-'.Auth::user()->name.'.'.$request->arxiu->extension();

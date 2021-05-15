@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AnalitiquesGeneralsModel;
 use App\Models\AvisModel;
 use App\Models\AvisUsuariModel;
+use App\Models\ContingutModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -79,9 +80,24 @@ class AdminController extends Controller
         return view('back.notificacion')->with('users',$users)->with('data',$this->data);
     }
 
+    public function getContent() {
+        $content = ContingutModel::all();
+        return view('back.adultify')->with('content',$content);
+    }
+
+    public function adultify(Request $request) {
+        return $request->input('id');
+        $user = ContingutModel::where('id',$id)
+        ->update([
+            'es_admin'=>$aux,
+            'tipus'=>$tipus
+        ]);
+
+    }
+
     public function getUsersNotifyList() {
         $avis = DB::table('avis_usuari')
-        ->select("users.name as name","avis.explicacio as explicacio","avis_usuari.id as id")
+        ->select("users.id as idUser","users.name as name","avis.explicacio as explicacio","avis_usuari.id as id")
         ->join("users","users.id","=","avis_usuari.id_usuari")
         ->join("avis","avis.id","=","avis_usuari.id_avis")
         ->where('acceptat',0)

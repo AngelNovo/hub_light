@@ -36,3 +36,24 @@ function aceptarAviso(id) {
 
     });
 }
+
+function adultify(id,value) {
+    $.ajax({
+        url: "/back/admin/adultify",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "PUT",
+        data: {
+            id: id,
+            val:value
+        },
+        dataType: 'json',
+
+        success: function(data){
+            // window.location="/back/admin/u/notifyList";
+            console.log(data);
+        }
+
+    });
+}

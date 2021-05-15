@@ -66,6 +66,9 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/back/admin/tipususer', [TipusUsuariController::class,'getAll']);
     Route::post('/back/admin/tipususer', [TipusUsuariController::class,'store']);
     Route::delete('/back/admin/tipususer', [TipusUsuariController::class,'delete']);
+
+    Route::get('/back/admin/adultify', [AdminController::class,'getContent']);
+    Route::put('/back/admin/adultify', [AdminController::class,'adultify']);
 });
 
 Auth::routes();

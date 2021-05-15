@@ -57,6 +57,7 @@ class ContingutController extends Controller
 
         $typeContent=$request->input('tipoC');
         $titulo=$request->input('titol');
+
         $rights=$request->input('derechoA');
         $linkCopy=$request->input('linkCopy');
         $desc=$request->input('desc');
@@ -73,27 +74,23 @@ class ContingutController extends Controller
         }else if($typeContent==2) {
             $request->validate([
                 'arxiu'=>'required|mimes:pdf,txt|max:4096',
-                'titol'=>"required",
                 'derechoA'=>"required",
                 'tipoC'=>"required"
             ]);
         }else if($typeContent==3) {
             $request->validate([
-                'portada'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
                 'arxiu'=>'required|mimes:mp3,ogg|max:20000',
                 'derechoA'=>"required",
                 'tipoC'=>"required"
             ]);
         }else if ($typeContent==4) {
             $request->validate([
-                'portada'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
                 'arxiu'=>'required|mimes:mp4,ogg|max:20000',
                 'derechoA'=>"required",
                 'tipoC'=>"required"
             ]);
         }else if($typeContent==5) {
             $request->validate([
-                'portada'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
                 'arxiu'=>'required|mimes:mp4,ogg|max:4096',
                 'derechoA'=>"required",
                 'tipoC'=>"required"
@@ -104,7 +101,7 @@ class ContingutController extends Controller
 
         if($request->hasFile('portada')) {
             $portada=time().'-'.Auth::user()->name.'.'.$request->portada->extension();
-            $request->portada->move('/contenido/1/',$portada);
+            $request->portada->move(public_path('/contenido/1'),$portada);
         }
 
         if($request->hasFile('arxiu')) {

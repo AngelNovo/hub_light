@@ -104,7 +104,7 @@ class ContingutController extends Controller
 
         if($request->hasFile('portada')) {
             $portada=time().'-'.Auth::user()->name.'.'.$request->portada->extension();
-            $request->portada->move('/contenido/1',$portada);
+            $request->portada->move('/contenido/1/',$portada);
         }
 
         if($request->hasFile('arxiu')) {

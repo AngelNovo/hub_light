@@ -90,8 +90,7 @@ class AdminController extends Controller
         $val= $request->input('val');
         $content = ContingutModel::where('id',$id)
         ->update([
-            'es_admin'=>$id,
-            'tipus'=>$val
+            'majoria_edat'=>$val
         ]);
         return 1;
 

@@ -38,6 +38,7 @@ function aceptarAviso(id) {
 }
 
 function adultify(id,value) {
+    let idN=(id==0) ? 1 : 0;
     $.ajax({
         url: "/back/admin/adultify",
         headers: {
@@ -45,7 +46,7 @@ function adultify(id,value) {
         },
         type: "PUT",
         data: {
-            id: id,
+            id: idN,
             val:value
         },
         dataType: 'json',

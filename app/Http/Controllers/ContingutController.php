@@ -133,7 +133,7 @@ class ContingutController extends Controller
                 ->update([
                     "contenido_total"=>$analitiques->contenido_total+1
                 ]);
-                return 1;
+                return redirect('/');
             }
         }
 

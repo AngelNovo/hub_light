@@ -53,15 +53,6 @@ class ContingutController extends Controller
     }
 
     public function store(Request $request) {
-        // return $request;
-        // return $request;
-        // $request->validate([
-        //     'portada'=>'mimes:jpg,png,jpeg,gif|max:4096',
-        //     'arxiu'=>'required|mimes:jpg,png,jpeg,gif|max:10000',
-        //     'file'=>"required",
-        //     'derechoA'=>"required",
-        //     'tipoC'=>"required"
-        // ]);
 
         $typeContent=$request->input('tipoC');
         $rights=$request->input('derechoA');
@@ -71,6 +62,41 @@ class ContingutController extends Controller
         $overAge=($request->input('ageRestrict')=="on") ? 1 : 0;
         $pId=Auth::user()->id;
 
+        if($typeContent==1) {
+            $request->validate([
+                'arxiu'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
+                'derechoA'=>"required",
+                'tipoC'=>"required"
+            ]);
+        }else if($typeContent==2) {
+            $request->validate([
+                'arxiu'=>'required|mimes:pdf,txt|max:4096',
+                'derechoA'=>"required",
+                'tipoC'=>"required"
+            ]);
+        }else if($typeContent==3) {
+            $request->validate([
+                'portada'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
+                'arxiu'=>'required|mimes:mp3,ogg|max:4096',
+                'derechoA'=>"required",
+                'tipoC'=>"required"
+            ]);
+        }else if ($typeContent==4) {
+            $request->validate([
+                'portada'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
+                'arxiu'=>'required|mimes:mp4,ogg|max:4096',
+                'derechoA'=>"required",
+                'tipoC'=>"required"
+            ]);
+        }else if($typeContent==5) {
+            $request->validate([
+                'portada'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
+                'arxiu'=>'required|mimes:mp4,ogg|max:4096',
+                'derechoA'=>"required",
+                'tipoC'=>"required"
+            ]);
+        }
+
         $url=public_path('/contenido/'.$typeContent);
 
         if($request->hasFile('arxiu')) {
@@ -78,9 +104,6 @@ class ContingutController extends Controller
             $request->arxiu->move($url,$archivo);
 
             $statistic=EstadisticaContingutModel::create();
-
-            // $last_statistic=EstadisticaContingutModel::all();
-            // $last_statistic_id=$last_statistic[sizeof($last_statistic)-1];
 
             $subido=ContingutModel::create([
                 'propietari'=>$pId,
@@ -96,13 +119,16 @@ class ContingutController extends Controller
             ]);
         }
 
-        $actius = DB::table('analitiques_generals')->max('id');
-        $analitiques = AnalitiquesGeneralsModel::find($actius);
+        if($subido) {
+            $actius = DB::table('analitiques_generals')->max('id');
+            $analitiques = AnalitiquesGeneralsModel::find($actius);
             $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
             ->update([
                 "contenido_total"=>$analitiques->contenido_total+1
             ]);
-        return redirect('/');
+            return 1;
+        }
+        return "El archivo no es correcto o su peso es superior a 4MB";
     }
 
 }

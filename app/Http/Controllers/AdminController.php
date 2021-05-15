@@ -86,12 +86,14 @@ class AdminController extends Controller
     }
 
     public function adultify(Request $request) {
-        return $request->input('id');
-        $user = ContingutModel::where('id',$id)
+        $id= $request->input('id');
+        $val= $request->input('val');
+        $content = ContingutModel::where('id',$id)
         ->update([
-            'es_admin'=>$aux,
-            'tipus'=>$tipus
+            'es_admin'=>$id,
+            'tipus'=>$val
         ]);
+        return 1;
 
     }
 

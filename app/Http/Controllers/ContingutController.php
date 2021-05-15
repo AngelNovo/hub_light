@@ -73,7 +73,7 @@ class ContingutController extends Controller
         }else if($typeContent==2) {
             $request->validate([
                 'arxiu'=>'required|mimes:pdf,txt|max:4096',
-                'titulo'=>"required",
+                'titol'=>"required",
                 'derechoA'=>"required",
                 'tipoC'=>"required"
             ]);

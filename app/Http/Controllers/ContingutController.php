@@ -104,6 +104,18 @@ class ContingutController extends Controller
                 'derechoA'=>"required",
                 'tipoC'=>"required"
             ]);
+        }else if($typeContent==3) {
+            $request->validate([
+                'arxiu'=>'required|mimes:mp3,ogg|max:20000',
+                'derechoA'=>"required",
+                'tipoC'=>"required"
+            ]);
+        }else if ($typeContent==4) {
+            $request->validate([
+                'arxiu'=>'required|mimes:mp4,ogg|max:20000',
+                'derechoA'=>"required",
+                'tipoC'=>"required"
+            ]);
         }else if($typeContent==5) {
             $request->validate([
                 'arxiu'=>'required|mimes:mp4,ogg|max:4096',

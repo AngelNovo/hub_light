@@ -10,5 +10,5 @@ class TagsModel extends Model
     use HasFactory;
     protected $table = 'tags';
     protected $primaryKey = 'id';
-    protected $fillable = ["nombre"];
+    protected $fillable = ["id","nombre","created_at","updated_at"];
 }

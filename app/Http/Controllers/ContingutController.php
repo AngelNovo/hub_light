@@ -71,25 +71,8 @@ class ContingutController extends Controller
         $portada=$request->input('portada');
         $overAge=($request->input('ageRestrict')=="on") ? 1 : 0;
         $pId=Auth::user()->id;
-        $id_contingut=DB::table('contingut')->max('id');
-
-        if(!empty($tags)) {
-
-            foreach($tags as $t) {
-                $exists=TagsModel::where($t);
-                if(!$exists) {
-                    TagsModel::create([
-                        "nombre"=>$t
-                    ]);
-                    ContingutTagModel::create([
-                        "id_contingut"=>$id_contingut+1,
-                        "id_tag"=>DB::table('contingut_tag')->max('id')+1
-                    ]);
-                }
-            }
-
-        }
-        return $tags;
+        $id_contingut=ContingutModel::all();
+        $id_contingut=$id_contingut[sizeof($id_contingut)-1]->id;
 
         if($typeContent==1) {
             $request->validate([
@@ -149,6 +132,29 @@ class ContingutController extends Controller
                 'reportat'=>0,
                 'estadistica'=>$statistic->id
             ]);
+
+            if(!empty($tags)) {
+
+                foreach($tags as $t) {
+                    $exists=TagsModel::where('nombre',"=",$t)->first();
+                    if(!$exists) {
+                        $tag=TagsModel::create([
+                            "nombre"=>$t
+                        ]);
+                        ContingutTagModel::create([
+                            "id_contingut"=>$id_contingut+1,
+                            "id_tag"=>$tag->id
+                        ]);
+                    }else {
+                        ContingutTagModel::create([
+                            "id_contingut"=>$id_contingut+1,
+                            "id_tag"=>$exists->id
+                        ]);
+                    }
+                }
+
+            }
+
             if($subido) {
                 $actius = DB::table('analitiques_generals')->max('id');
                 $analitiques = AnalitiquesGeneralsModel::find($actius);

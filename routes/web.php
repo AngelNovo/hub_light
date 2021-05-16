@@ -33,12 +33,15 @@ Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
 Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
 // *Contingut*
 Route::get('/explorar/{id}',[ContingutController::class,'get']);
+Route::post('/contingut',[ContingutController::class,'store']);
 // *Drets autor*
 Route::get('/derechosautor',[DerechosAutorController::class,'getAll']);
 // *Tipo contenido*
 Route::get('/tipocontenido',[TipoContenidoController::class,'getAll']);
 // *Xat*
 
+//  *Tags*
+Route::get('/tags',[TagsController::class,'getAll']);
 // *Usuari estadistiques*
 
 //  *Contingut estadistiques*
@@ -76,7 +79,9 @@ Auth::routes();
 Route::get('/explorar',[ContingutController::class,'getAll']);
 
 // Recomendados
-Route::get('/recomendados',[ContingutController::class,'getRecomendados']);
+Route::get('/recomendados',function() {
+    return view('front.recomendados');
+});
 
 // Destacados
 Route::get('/destacados',function() {

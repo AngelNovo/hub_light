@@ -64,6 +64,7 @@ class ContingutController extends Controller
 
         $typeContent=$request->input('tipoC');
         $titulo=$request->input('titol');
+        return $request;
         $tags = explode(",",$request->input('tags'));
         $rights=$request->input('derechoA');
         $linkCopy=$request->input('linkCopy');
@@ -76,17 +77,16 @@ class ContingutController extends Controller
         if(!empty($tags)) {
 
             foreach($tags as $t) {
-                $exists=TagsModel::where($t->name);
-                $newId=$t->id;
+                $exists=TagsModel::where($t);
                 if(!$exists) {
                     TagsModel::create([
-                        "nombre"=>$t->name
+                        "nombre"=>$t
+                    ]);
+                    ContingutTagModel::create([
+                        "id_contingut"=>$id_contingut+1,
+                        "id_tag"=>DB::table('contingut_tag')->max('id')+1
                     ]);
                 }
-                ContingutTagModel::create([
-                    "id_contingut"=>$id_contingut+1,
-                    "id_tag"=>$newId
-                ]);
             }
 
         }

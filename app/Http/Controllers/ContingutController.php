@@ -43,7 +43,7 @@ class ContingutController extends Controller
         ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
         ->orderBy('created_at',"desc")
-        ->limit($offset, 10)
+        ->limit(10,$offset)
         ->get();
         return $results;
         // return view ('front.explorar')->with('results',$results);

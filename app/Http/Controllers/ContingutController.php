@@ -64,14 +64,17 @@ class ContingutController extends Controller
         $recomenatsListRaw=$info[0]->recomenat;
         $recomenatsListArray=explode(';',$recomenatsListRaw);
 
-        $recomendados = ContingutModel::where([
-            [""]
-        ])
+        $whereParams=[];
+        foreach($recomenatsListArray as $r) {
+
+        }
+
+        $recomendados = ContingutModel::where($whereParams)
         ->join("contingut_tag","contingut_tag.id_contingut","=","id")
         ->join("tags","tags.id","=","contingut_tag.id_tag")
         ->get();
 
-        return $recomenatsListArray;
+        return $recomendados;
         // return view('front.recomendados')->with('info',$info);
     }
 

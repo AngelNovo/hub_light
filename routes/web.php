@@ -77,6 +77,9 @@ Route::group(['middleware'=>'auth'], function() {
 Auth::routes();
 
 // Explorar
+Route::get('/explorar',function() {
+    return view('front.explorar');
+});
 Route::get('/explorar/{off}',[ContingutController::class,'getAll']);
 
 // Recomendados

@@ -62,9 +62,11 @@ class ContingutController extends Controller
 
     public function getDestacados() {
         $contingut=DB::table('contingut')
-        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes', 'contingut.created_at')
+        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
         ->join('users','users.id','=','contingut.propietari')
         ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
+        ->orderBy('likes','desc')
+        ->limit(20)
         ->get();
         return $contingut;
     }
@@ -147,7 +149,7 @@ class ContingutController extends Controller
                     $exists=TagsModel::where('nombre',"=",$t)->first();
                     if(!$exists) {
                         $tag=TagsModel::create([
-                            "nombre"=>strtolower($t)
+                            "nombre"=>trim(strtolower($t))
                         ]);
                         ContingutTagModel::create([
                             "id_contingut"=>$id_contingut+1,

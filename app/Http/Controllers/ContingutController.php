@@ -43,7 +43,7 @@ class ContingutController extends Controller
         ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
         ->orderBy('created_at',"desc")
-        ->limit(10,$offset)
+        ->limit(30,$offset)
         ->get();
         return $results;
         // return view ('front.explorar')->with('results',$results);
@@ -63,16 +63,17 @@ class ContingutController extends Controller
         $info=User::where('id',$auth)->get();
         $recomenatsListRaw=$info[0]->recomenat;
         $recomenatsListArray=explode(';',$recomenatsListRaw);
+        // return $recomenatsListArray;
 
-        $whereParams=[];
-        foreach($recomenatsListArray as $r) {
-
-        }
-
-        $recomendados = ContingutModel::where($whereParams)
+        $recomendados = ContingutModel::
+        where("tags.nombre","test")
+        // ->orWhere("tags.nombre","patricio")
         ->join("contingut_tag","contingut_tag.id_contingut","=","id")
         ->join("tags","tags.id","=","contingut_tag.id_tag")
         ->get();
+        foreach($recomenatsListArray as $r) {
+            $recomendados->orWhere("tags.nombre",$r);
+        }
 
         return $recomendados;
         // return view('front.recomendados')->with('info',$info);

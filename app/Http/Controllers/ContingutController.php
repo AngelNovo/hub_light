@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\AnalitiquesGeneralsModel;
 use App\Models\ContingutModel;
 use App\Models\EstadisticaContingutModel;
-use DateTime;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
 class ContingutController extends Controller
@@ -50,7 +49,13 @@ class ContingutController extends Controller
         ->join('users','users.id','=','contingut.propietari')
         ->where('contingut.id',$id)
         ->get();
-        return $results;
+        return view('front.contenido')->with('contingut',$results);
+    }
+
+    public function getRecomendados() {
+        $auth=Auth::user();
+        $info=User::where('id',$auth->);
+        return view('front.recomendados')->with('info',$info);
     }
 
     public function store(Request $request) {

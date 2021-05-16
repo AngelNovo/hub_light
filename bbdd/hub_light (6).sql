@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 15, 2021 at 03:04 PM
+-- Generation Time: May 16, 2021 at 04:27 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -42,11 +42,7 @@ CREATE TABLE `analitiques_generals` (
 --
 
 INSERT INTO `analitiques_generals` (`id`, `usuaris_suspes`, `usuaris_actius`, `usuaris_enperill`, `contenido_total`, `created_at`, `updated_at`) VALUES
-(1, 0, 6, 0, 0, '2021-05-02 09:28:10', '2021-05-14 08:37:26'),
-(8, 5, 1, 0, 5, '2021-05-11 12:01:04', '2021-05-14 12:01:37'),
-(9, 5, 1, 0, 23, '2021-05-13 12:06:20', '2021-05-14 12:06:20'),
-(10, 0, 6, 0, 60, '2021-05-14 12:06:26', '2021-05-14 15:13:06'),
-(11, 2, 6, 0, 64, '2021-05-15 07:20:26', '2021-05-15 13:01:48');
+(1, 2, 6, 0, 1, '2021-05-16 15:24:59', '2021-05-16 15:24:59');
 
 -- --------------------------------------------------------
 
@@ -186,6 +182,7 @@ INSERT INTO `avis_usuari` (`id`, `id_usuari`, `id_avis`, `acceptat`, `created_at
 
 CREATE TABLE `contingut` (
   `id` int(10) UNSIGNED NOT NULL,
+  `titulo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `portada` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `link_copyright` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -198,6 +195,26 @@ CREATE TABLE `contingut` (
   `drets_autor` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contingut`
+--
+
+INSERT INTO `contingut` (`id`, `titulo`, `portada`, `link_copyright`, `url`, `descripcio`, `majoria_edat`, `reportat`, `estadistica`, `propietari`, `tipus_contingut`, `drets_autor`, `created_at`, `updated_at`) VALUES
+(17, NULL, NULL, NULL, '1621099553-AngelNovo2.jpg', NULL, 0, 0, 47, 14, 1, 2, '2021-05-15 15:25:53', '2021-05-15 15:39:04'),
+(18, NULL, NULL, NULL, '1621099615-AngelNovo2.jpg', NULL, 0, 0, 48, 14, 1, 2, '2021-05-15 15:26:55', '2021-05-15 15:26:55'),
+(19, 'asdasddasasd', NULL, NULL, '1621099653-AngelNovo2.jpg', NULL, 0, 0, 49, 14, 1, 2, '2021-05-15 15:27:33', '2021-05-15 15:27:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contingut_tag`
+--
+
+CREATE TABLE `contingut_tag` (
+  `id_contingut` int(10) UNSIGNED NOT NULL,
+  `id_tag` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -288,6 +305,21 @@ CREATE TABLE `estadistiques_contingut` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `estadistiques_contingut`
+--
+
+INSERT INTO `estadistiques_contingut` (`id_estadistica`, `q_comentaris`, `q_likes`, `created_at`, `updated_at`) VALUES
+(41, 0, 0, '2021-05-15 13:54:35', '2021-05-15 13:54:35'),
+(42, 0, 0, '2021-05-15 15:17:05', '2021-05-15 15:17:05'),
+(43, 0, 0, '2021-05-15 15:20:00', '2021-05-15 15:20:00'),
+(44, 0, 0, '2021-05-15 15:21:43', '2021-05-15 15:21:43'),
+(45, 0, 0, '2021-05-15 15:22:31', '2021-05-15 15:22:31'),
+(46, 0, 0, '2021-05-15 15:23:26', '2021-05-15 15:23:26'),
+(47, 0, 0, '2021-05-15 15:25:53', '2021-05-15 15:25:53'),
+(48, 0, 0, '2021-05-15 15:26:55', '2021-05-15 15:26:55'),
+(49, 0, 0, '2021-05-15 15:27:33', '2021-05-15 15:27:33');
+
 -- --------------------------------------------------------
 
 --
@@ -343,9 +375,9 @@ CREATE TABLE `grups_usuaris` (
 --
 
 CREATE TABLE `interaccio` (
-  `id` int(10) NOT NULL,
-  `id_Usuari` int(10) NOT NULL,
-  `id_Contingut` int(10) NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_Usuari` int(10) UNSIGNED NOT NULL,
+  `id_Contingut` int(10) UNSIGNED NOT NULL,
   `Guardat` char(1) COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -424,6 +456,17 @@ CREATE TABLE `seguidors` (
   `id_seguit` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tags`
+--
+
+CREATE TABLE `tags` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -518,7 +561,7 @@ INSERT INTO `users` (`id`, `name`, `password`, `email`, `email_verified_at`, `al
 (11, 'jndbasjkhidbsakj', '$2y$10$sBLApHMMlhvvh0mzKYsi8OYP9ZslU.twnUdwZeIz7.VLGjngQZQZi', 'kjasdfnasf@aseknfbnksf', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 22, 1, NULL, '2021-05-14 07:57:58', '2021-05-15 07:57:27', 'fondoDefault.jpg'),
 (12, 'lkjmasdkjasb', '$2y$10$7wElszXdDGzBHz53jlYz2OQsxFy8QaEb3Ir5B1ygiiO9V5dMoJ0kS', 'kjasbdjk@skjdnfkj', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 23, 1, NULL, '2021-05-14 07:59:24', '2021-05-15 07:56:07', 'fondoDefault.jpg'),
 (13, 'ertrrdfdf', '$2y$10$vxsq2QJpCkvNUHSt5YKer.7sQfDvHVWJmK0tON9Qx733peZwfA6au', 'hhfdhfdfdh@sdfdsfdfs', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 1, 0, 0, 0, NULL, 24, 1, NULL, '2021-05-14 11:37:49', '2021-05-15 12:40:00', 'fondoDefault.jpg'),
-(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 1, 0, 0, 1, 10, 0, NULL, 25, 3, NULL, '2021-05-14 15:07:26', '2021-05-15 12:17:29', 'fondoDefault.jpg');
+(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 1, 0, 0, 1, 10, 0, 'images;video;css;animacion', 25, 3, NULL, '2021-05-14 15:07:26', '2021-05-16 13:23:44', 'fondoDefault.jpg');
 
 -- --------------------------------------------------------
 
@@ -597,6 +640,13 @@ ALTER TABLE `contingut`
   ADD KEY `contingut_propietari_foreign` (`propietari`);
 
 --
+-- Indexes for table `contingut_tag`
+--
+ALTER TABLE `contingut_tag`
+  ADD PRIMARY KEY (`id_contingut`,`id_tag`),
+  ADD KEY `tag_contingut_tag` (`id_tag`);
+
+--
 -- Indexes for table `dret_autor`
 --
 ALTER TABLE `dret_autor`
@@ -641,7 +691,9 @@ ALTER TABLE `grups_usuaris`
 -- Indexes for table `interaccio`
 --
 ALTER TABLE `interaccio`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuari_interaccio` (`id_Usuari`),
+  ADD KEY `contingut_interaccio` (`id_Contingut`);
 
 --
 -- Indexes for table `migrations`
@@ -670,6 +722,12 @@ ALTER TABLE `password_resets`
 ALTER TABLE `seguidors`
   ADD KEY `seguidors_id_usuari_foreign` (`id_usuari`),
   ADD KEY `seguidors_id_seguit_foreign` (`id_seguit`);
+
+--
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tipus_contingut`
@@ -720,7 +778,7 @@ ALTER TABLE `xat_usuaris`
 -- AUTO_INCREMENT for table `analitiques_generals`
 --
 ALTER TABLE `analitiques_generals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `avis`
@@ -738,7 +796,7 @@ ALTER TABLE `avis_usuari`
 -- AUTO_INCREMENT for table `contingut`
 --
 ALTER TABLE `contingut`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `dret_autor`
@@ -756,7 +814,7 @@ ALTER TABLE `estadistiques`
 -- AUTO_INCREMENT for table `estadistiques_contingut`
 --
 ALTER TABLE `estadistiques_contingut`
-  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -774,7 +832,7 @@ ALTER TABLE `grup`
 -- AUTO_INCREMENT for table `interaccio`
 --
 ALTER TABLE `interaccio`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -786,6 +844,12 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `missatge`
 --
 ALTER TABLE `missatge`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -833,6 +897,13 @@ ALTER TABLE `contingut`
   ADD CONSTRAINT `contingut_tipus_contingut_foreign` FOREIGN KEY (`tipus_contingut`) REFERENCES `tipus_contingut` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `contingut_tag`
+--
+ALTER TABLE `contingut_tag`
+  ADD CONSTRAINT `contingut_tag` FOREIGN KEY (`id_contingut`) REFERENCES `contingut` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tag_contingut_tag` FOREIGN KEY (`id_tag`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `grup`
 --
 ALTER TABLE `grup`
@@ -846,6 +917,13 @@ ALTER TABLE `grup`
 ALTER TABLE `grups_usuaris`
   ADD CONSTRAINT `grups_usuaris_id_grup_foreign` FOREIGN KEY (`id_grup`) REFERENCES `grup` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `grups_usuaris_id_usuari_foreign` FOREIGN KEY (`id_usuari`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `interaccio`
+--
+ALTER TABLE `interaccio`
+  ADD CONSTRAINT `contingut_interaccio` FOREIGN KEY (`id_Contingut`) REFERENCES `contingut` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuari_interaccio` FOREIGN KEY (`id_Usuari`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `missatge`

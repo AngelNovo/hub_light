@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContingutController;
 use App\Http\Controllers\DerechosAutorController;
+use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TipoContenidoController;
 use App\Http\Controllers\TipusUsuariController;
 use App\Http\Controllers\UsuariController;

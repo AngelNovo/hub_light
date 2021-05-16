@@ -64,7 +64,6 @@ class ContingutController extends Controller
 
         $typeContent=$request->input('tipoC');
         $titulo=$request->input('titol');
-        return $request;
         $tags = explode(",",$request->input('tags'));
         $rights=$request->input('derechoA');
         $linkCopy=$request->input('linkCopy');
@@ -90,6 +89,7 @@ class ContingutController extends Controller
             }
 
         }
+        return $tags;
 
         if($typeContent==1) {
             $request->validate([

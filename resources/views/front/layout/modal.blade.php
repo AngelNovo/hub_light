@@ -60,15 +60,16 @@
             <label for="desc">Descripción</label>
             <textarea id="desc" name="desc"></textarea>
             </div>
-          </div>
-          <label>Select values (comma-separated):</label>
-          <input type="text" list="Suggestions" multiple="multiple" />
-            <datalist id="Suggestions" name="tags">
-            <option>option 1</option>
-            <option>option 2</option>
-            <option>option 3</option>
-          </datalist>
-        </div>
+            <div>
+              <label>Select values (comma-separated):</label>
+              <input type="text" list="Suggestions" multiple="multiple" />
+
+              <datalist id="Suggestions" name="tags">
+                <option>option 1</option>
+                <option>option 2</option>
+                <option>option 3</option>
+              </datalist>
+            </div>
             <div>
             <label for="derechoA">Derechos de autor</label>
             <select class="form-select" id="derechoA" name="derechoA" aria-label="Default select example">
@@ -378,6 +379,12 @@ function validaExt(arxiu,disp){
   });
   return correctExt;
 }
+
+
+
+
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {

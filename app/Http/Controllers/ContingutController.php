@@ -19,6 +19,7 @@ class ContingutController extends Controller
         $content=AnalitiquesGeneralsModel::all();
         $content = $content[sizeof($content)-1];
         $last_data=$content->created_at;
+        // Cada dia crea unas estadisticas generales nuevas
         $last_data = explode("T",$last_data);
         $last_data = $last_data[0];
         $last_data = explode("-",$last_data);
@@ -39,7 +40,7 @@ class ContingutController extends Controller
 
     public function getAll() {
         $results = DB::table('contingut')
-        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
+        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
         ->orderBy('created_at',"desc")
         ->get();
@@ -47,8 +48,9 @@ class ContingutController extends Controller
     }
     public function get($id) {
         $results = DB::table('contingut')
-        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
+        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
         ->join('users','users.id','=','contingut.propietari')
+        ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
         ->where('contingut.id',$id)
         ->get();
         return view('front.contenido')->with('contingut',$results);
@@ -61,14 +63,19 @@ class ContingutController extends Controller
     }
 
     public function getDestacados() {
+
+        $limit=ContingutModel::all()->count();
+
+        $limit = ceil($limit/10);
+
         $contingut=DB::table('contingut')
-        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
+        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
         ->join('users','users.id','=','contingut.propietari')
         ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
         ->orderBy('likes','desc')
-        ->limit(20)
+        ->limit($limit)
         ->get();
-        return $contingut;
+        return view('front.destacados')->with('contingut',$contingut);
     }
 
     public function store(Request $request) {
@@ -84,6 +91,7 @@ class ContingutController extends Controller
         $pId=Auth::user()->id;
         $id_contingut=DB::table('contingut')->max('id');
 
+        // Validaciones
         if($typeContent==1) {
             $request->validate([
                 'arxiu'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
@@ -96,18 +104,6 @@ class ContingutController extends Controller
                 'derechoA'=>"required",
                 'tipoC'=>"required"
             ]);
-        }else if($typeContent==3) {
-            $request->validate([
-                'arxiu'=>'required|mimes:mp3,ogg|max:20000',
-                'derechoA'=>"required",
-                'tipoC'=>"required"
-            ]);
-        }else if ($typeContent==4) {
-            $request->validate([
-                'arxiu'=>'required|mimes:mp4,ogg|max:20000',
-                'derechoA'=>"required",
-                'tipoC'=>"required"
-            ]);
         }else if($typeContent==5) {
             $request->validate([
                 'arxiu'=>'required|mimes:mp4,ogg|max:4096',
@@ -117,7 +113,7 @@ class ContingutController extends Controller
         }
 
         $url=public_path('/contenido/'.$typeContent);
-
+        // Mueve las imagenes a su directorio conveniente
         if($request->hasFile('portada')) {
             $portada=time().'-'.Auth::user()->name.'.'.$request->portada->extension();
             $request->portada->move(public_path('/contenido/1'),$portada);
@@ -172,8 +168,6 @@ class ContingutController extends Controller
                 ]);
                 return redirect('/');
         }
-
-        return "El archivo no es correcto o su peso es superior al límite";
     }
 
 }

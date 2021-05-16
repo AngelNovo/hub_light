@@ -14,6 +14,7 @@ class AdminController extends Controller
 {
 
     public function updateAnalytics($aux){
+        // Controla tabla "analitiques_generals"
         $actius = DB::table('analitiques_generals')->max('id');
         $analitiques = AnalitiquesGeneralsModel::find($actius);
         if($aux==0) {
@@ -97,6 +98,7 @@ class AdminController extends Controller
     }
 
     public function getUsersNotifyList() {
+        // Devuelve todos los avisos que tengan los usuarios y no esten aceptados
         $avis = DB::table('avis_usuari')
         ->select("users.id as idUser","users.name as name","avis.explicacio as explicacio","avis_usuari.id as id")
         ->join("users","users.id","=","avis_usuari.id_usuari")

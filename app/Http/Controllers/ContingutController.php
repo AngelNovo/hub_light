@@ -60,6 +60,8 @@ class ContingutController extends Controller
         return view('front.recomendados')->with('info',$info);
     }
 
+    // public function get
+
     public function store(Request $request) {
 
         $typeContent=$request->input('tipoC');
@@ -148,7 +150,7 @@ class ContingutController extends Controller
                     }else {
                         ContingutTagModel::create([
                             "id_contingut"=>$id_contingut+1,
-                            "id_tag"=>$exists->id
+                            "id_tag"=>strtolower($exists->id)
                         ]);
                     }
                 }

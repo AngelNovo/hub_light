@@ -28,7 +28,7 @@
         <tbody>
             @foreach ($content as $c)
                 <tr id="{{$c->id}}">
-                    <td><a href="{{url('/contingut/'.$c->id)}}" target="_blank">{{$c->descripcio}}</a></td>
+                    <td><a href="{{url('/explorar/'.$c->id)}}" target="_blank">{{$c->descripcio}}</a></td>
                     <td class="text-center">
                         <label class="switch">
                             <input type="checkbox" class="edat" name="major" value="{{$c->majoria_edat}}" id={{$c->id}} data-id="{{$c->id}}" {{($c->majoria_edat) ? 'checked' : ""}}>

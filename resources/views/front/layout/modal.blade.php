@@ -14,27 +14,27 @@
             @csrf
           <div class="row">
             <div>
-            <label for="tipoC">Tipo de contenido</label>
-            <select class="form-select" id="tipoC" name="tipoC" aria-label="Default select example">
-            </select>
-            <label for="ageRestrict">+18</label>
-            <input type="checkbox" name="ageRestrict"/>
+              <label for="tipoC">Tipo de contenido</label>
+                <select class="form-select" id="tipoC" name="tipoC" aria-label="Default select example">
+                </select>
+              <label for="ageRestrict">+18</label>
+              <input type="checkbox" name="ageRestrict"/>
             </div>
             <div>
-            <label for="portada" class="form-portada">
+              <label for="portada" class="form-portada">
                 <div class="upload-icon">
                     <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Portada" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar una portada" class="img-portada">
                 </div>
-            </label>
-            <input id="portada" name="portada" hidden type="file" form="formModal"/>
+              </label>
+              <input id="portada" name="portada" hidden type="file" form="formModal"/>
             </div>
             <div>
-            <label for="arxiu-i" id="arxiu-img">
+              <label for="arxiu-i" id="arxiu-img">
               <div class="upload-icon">
-                  <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar un arxivo" class="img-arxiu image-thumbnail">
+                  <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar un archivo" class="img-arxiu image-thumbnail">
               </div>
-            </label>
-            <label for="arxiu" id="arxiu-musica">
+              </label>
+              <label for="arxiu" id="arxiu-musica">
             <div class="upload-icon">
                 <audio controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="music-arxiu"></audio>
             </div>
@@ -45,21 +45,30 @@
             </div>
             </label>
             <div>
-            <label for="arxiu" id="arxiu-otros">Arxivo</label>
+            <label for="arxiu" id="arxiu-otros">Archivo</label>
             <input id="arxiu" name="arxiu" type="file" form="formModal"/>
             <input id="arxiu-i" name="arxiu" hidden type="file" form="formModal"/>
             <input id="arxiu-m" name="arxiu" type="file" form="formModal"/>
             <input id="arxiu-v" name="arxiu" type="file" form="formModal"/>
             </div>
             </div>
-            <div>
+            <div class="modal-row">
             <label for="titol">Titulo</label>
             <input id="titol" name="titol" type="text" form="formModal"/>
             </div>
-            <div>
+            <div class="modal-row">
             <label for="desc">Descripción</label>
             <textarea id="desc" name="desc"></textarea>
             </div>
+          </div>
+          <label>Select values (comma-separated):</label>
+          <input type="text" list="Suggestions" multiple="multiple" />
+            <datalist id="Suggestions" name="tags">
+            <option>option 1</option>
+            <option>option 2</option>
+            <option>option 3</option>
+          </datalist>
+        </div>
             <div>
             <label for="derechoA">Derechos de autor</label>
             <select class="form-select" id="derechoA" name="derechoA" aria-label="Default select example">
@@ -74,15 +83,14 @@
       </form>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" form="formModal">Cancelar</button>
-          <button type="submit" class="btn btn-primary" form="formModal">Subir</button>
+          <button type="submit" class="btn btn-primary" id="submitForm" form="formModal">Subir</button>
         </div>
       </div>
     </div>
   </div>
   <script>
+    let tipoC;
     $(document).ready(function(){
-
-
         $("#portada").on("change",function() {
             let inpFile = $("#portada");
             let previewImage = document.querySelector(".img-portada");
@@ -153,6 +161,11 @@
           selectLicencia();
         })
 
+        $("#submitForm").click(function(event){     
+          if(!valida()){
+            event.preventDefault();
+          }
+        });
 
     });
 
@@ -185,15 +198,15 @@
         },
         type: "GET",
         dataType: 'json',
-        success: function(data){
-          console.log(data);
+        success: function(data){         
           $.each(data, function(index,element){
             var option=$("<option>");
             option.text(element.tipus);
             option.attr("title",element.Descripcio);
             option.val(element.id);
             $("#tipoC").append(option);
-          });
+          });        
+          tipoC=data;
           selectTipo();
         }
     });
@@ -215,8 +228,9 @@
       $("#portada").prop( "disabled", true);
       switch(tipo){
         case  "1":
-        $("#arxiu-img").show();
+          $("#arxiu-img").show();
           $("#arxiu-i").prop( "disabled", false);
+          $(".img-arxiu").attr("title","Haz click para añadir un archivo: "+tipoC[0].Descripcio);
         break;
         case "2":
           $(".form-portada").show();
@@ -224,8 +238,8 @@
           $("#arxiu").show();
           $("#arxiu").prop( "disabled", false);
           $("#arxiu-otros").show();
+          $("#arxiu").attr("title","Haz click para añadir un archivo: "+tipoC[1].Descripcio);
           break;
-
         case "3":
           $(".form-portada").show();
           $("#portada").prop( "disabled", false);
@@ -233,6 +247,7 @@
           $("#arxiu-m").show();
           $("#arxiu-m").prop( "disabled", false);
           $("#arxiu-otros").show();
+          $("#arxiu-m").attr("title","Haz click para añadir un archivo: "+tipoC[2].Descripcio);
           break;
 
         case "4":
@@ -242,6 +257,7 @@
           $("#arxiu-v").show();
           $("#arxiu-v").prop( "disabled", false);
           $("#arxiu-otros").show();
+          $("#arxiu-v").attr("title","Haz click para añadir un archivo: "+tipoC[3].Descripcio);
           break;
 
         case "5":
@@ -250,8 +266,8 @@
           $("#arxiu").show();
           $("#arxiu").prop( "disabled", false);
           $("#arxiu-otros").show();
+          $("#arxiu").attr("title","Haz click para añadir un archivo: "+tipoC[4].Descripcio);
           break;
-
       }
   }
 
@@ -266,4 +282,141 @@
     }
   }
 
+  function valida(){
+      let validacion=true;
+      let error="";
+      var tipo=$("#tipoC").val();
+      switch(tipo){
+        case  "1":
+          if($("#arxiu-i").val()==null||$("#arxiu-i").val()==""||$("#arxiu-i").val()==undefined){
+            error=error+"¡No se encuentra el archivo!";
+            validacion=false;
+          }else{
+            filename= $("#arxiu-i").val().split('.').pop();
+            if(!validaExt(filename,tipoC[0].Descripcio)){
+              error=error+"¡Extension incorrecta!";
+              validacion=false;
+            }
+          }       
+        break;
+        case "2":
+          if($("#arxiu").val()==null||$("#arxiu").val()==""||$("#arxiu").val()==undefined){
+            error=error+"¡No se encuentra el archivo!";
+            validacion=false;
+          }else{
+            filename= $("#arxiu").val().split('.').pop();
+            if(!validaExt(filename,tipoC[1].Descripcio)){
+              error=error+"¡Extension incorrecta!";
+              validacion=false;
+            }
+          }
+          if($("#titol").val()==null||$("#titol").val()==""||$("#titol").val()==undefined){
+            error=error+"¡No se encuentra el titulo!";
+            validacion=false;
+          }
+          break;
+        case "3":
+          if($("#arxiu-m").val()==null||$("#arxiu-m").val()==""||$("#arxiu-m").val()==undefined){
+            error=error+"¡No se encuentra el archivo!";
+            validacion=false;
+          }else{
+            filename= $("#arxiu-m").val().split('.').pop();
+            if(!validaExt(filename,tipoC[2].Descripcio)){
+              error=error+"¡Extension incorrecta!";
+              validacion=false;
+            }
+          }
+          break;
+        case "4":
+          if($("#arxiu-v").val()==null||$("#arxiu-v").val()==""||$("#arxiu-v").val()==undefined){
+            error=error+"¡No se encuentra el archivo!";
+            validacion=false;
+          }else{
+            filename= $("#arxiu-v").val().split('.').pop();
+            if(!validaExt(filename,tipoC[3].Descripcio)){
+              error=error+"¡Extension incorrecta!";
+              validacion=false;
+            }
+          }
+          break;
+        case "5":
+        if($("#arxiu").val()==null||$("#arxiu").val()==""||$("#arxiu").val()==undefined){
+            error=error+"¡No se encuentra el archivo!";
+            validacion=false;
+          }else{
+            filename= $("#arxiu").val().split('.').pop();
+            if(!validaExt(filename,tipoC[4].Descripcio)){
+              error=error+"¡Extension incorrecta!";
+              validacion=false;
+            }
+          }
+          break;
+      }
+      var tipo=$("#derechoA").val();
+      if(tipo!="2"){
+        if($("#linkCopy").val()==null||$("#linkCopy").val()==""||$("#linkCopy").val()==undefined){
+          error=error+"¡Porfavor inserte su licencia!";
+          validacion=false;
+        }
+      }
+      
+      if(!validacion){
+        alert(error);
+        console.log(error+"/"+validacion);
+      }
+      return validacion;
+}
+
+function validaExt(arxiu,disp){
+  var ext=disp.split(" ");  
+  let correctExt=false;
+  $.each(ext, function(index,element){
+    if(element=="."+arxiu){
+      correctExt=true;
+      return true;
+    }
+  });
+  return correctExt;
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const separator = ',';
+    for (const input of document.getElementsByTagName("input")) {
+        if (!input.multiple) {
+            continue;
+        }
+        if (input.list instanceof HTMLDataListElement) {
+            const optionsValues = Array.from(input.list.options).map(opt => opt.value);
+            let valueCount = input.value.split(separator).length;
+            input.addEventListener("input", () => {
+                const currentValueCount = input.value.split(separator).length;
+                // Do not update list if the user doesn't add/remove a separator
+                // Current value: "a, b, c"; New value: "a, b, cd" => Do not change the list
+                // Current value: "a, b, c"; New value: "a, b, c," => Update the list
+                // Current value: "a, b, c"; New value: "a, b" => Update the list
+                if (valueCount !== currentValueCount) {
+                    const lsIndex = input.value.lastIndexOf(separator);
+                    const str = lsIndex !== -1 ? input.value.substr(0, lsIndex) + separator : "";
+                    filldatalist(input, optionsValues, str);
+                    valueCount = currentValueCount;
+                }
+            });
+        }
+    }
+    function filldatalist(input, optionValues, optionPrefix) {
+        const list = input.list;
+        if (list && optionValues.length > 0) {
+            list.innerHTML = "";
+            const usedOptions = optionPrefix.split(separator).map(value => value.trim());
+            for (const optionsValue of optionValues) {
+                if (usedOptions.indexOf(optionsValue) < 0) {
+                    const option = document.createElement("option");
+                    option.value = optionPrefix + optionsValue;
+                    list.append(option);
+                }
+            }
+        }
+    }
+});
 </script>

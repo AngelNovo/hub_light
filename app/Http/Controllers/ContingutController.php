@@ -147,7 +147,7 @@ class ContingutController extends Controller
                     $exists=TagsModel::where('nombre',"=",$t)->first();
                     if(!$exists) {
                         $tag=TagsModel::create([
-                            "nombre"=>$t
+                            "nombre"=>strtolower($t)
                         ]);
                         ContingutTagModel::create([
                             "id_contingut"=>$id_contingut+1,
@@ -156,14 +156,12 @@ class ContingutController extends Controller
                     }else {
                         ContingutTagModel::create([
                             "id_contingut"=>$id_contingut+1,
-                            "id_tag"=>strtolower($exists->id)
+                            "id_tag"=>$exists->id
                         ]);
                     }
                 }
 
             }
-
-            if($subido) {
                 $actius = DB::table('analitiques_generals')->max('id');
                 $analitiques = AnalitiquesGeneralsModel::find($actius);
                 $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
@@ -171,7 +169,6 @@ class ContingutController extends Controller
                     "contenido_total"=>$analitiques->contenido_total+1
                 ]);
                 return redirect('/');
-            }
         }
 
         return "El archivo no es correcto o su peso es superior al límite";

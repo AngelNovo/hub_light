@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\AnalitiquesGeneralsModel;
 use App\Models\ContingutModel;
+use App\Models\ContingutTagModel;
 use App\Models\EstadisticaContingutModel;
+use App\Models\TagsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +56,7 @@ class ContingutController extends Controller
 
     public function getRecomendados() {
         $auth=Auth::user();
-        $info=User::where('id',$auth->);
+        $info=User::where('id',$auth->id);
         return view('front.recomendados')->with('info',$info);
     }
 
@@ -62,13 +64,32 @@ class ContingutController extends Controller
 
         $typeContent=$request->input('tipoC');
         $titulo=$request->input('titol');
-
+        $tags = explode(",",$request->input('tags'));
         $rights=$request->input('derechoA');
         $linkCopy=$request->input('linkCopy');
         $desc=$request->input('desc');
         $portada=$request->input('portada');
         $overAge=($request->input('ageRestrict')=="on") ? 1 : 0;
         $pId=Auth::user()->id;
+        $id_contingut=DB::table('contingut')->max('id');
+
+        if(!empty($tags)) {
+
+            foreach($tags as $t) {
+                $exists=TagsModel::where($t->name);
+                $newId=$t->id;
+                if(!$exists) {
+                    TagsModel::create([
+                        "nombre"=>$t->name
+                    ]);
+                }
+                ContingutTagModel::create([
+                    "id_contingut"=>$id_contingut+1,
+                    "id_tag"=>$newId
+                ]);
+            }
+
+        }
 
         if($typeContent==1) {
             $request->validate([

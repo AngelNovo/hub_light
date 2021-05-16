@@ -85,7 +85,7 @@ Route::get('/recomendados',function() {
 });
 
 // Destacados
-// Route::get('/destacados',ContingutController::class,'getDestacados');
+Route::get('/destacados',[ContingutController::class,'getDestacados']);
 
 // Opciones
 Route::get('/opciones/{id}',[UsuariController::class,'opciones']);

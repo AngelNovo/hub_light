@@ -60,7 +60,14 @@ class ContingutController extends Controller
         return view('front.recomendados')->with('info',$info);
     }
 
-    // public function get
+    public function getDestacados() {
+        $contingut=DB::table('contingut')
+        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'contingut.estadistica', 'users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes', 'contingut.created_at')
+        ->join('users','users.id','=','contingut.propietari')
+        ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
+        ->get();
+        return $contingut;
+    }
 
     public function store(Request $request) {
 
@@ -73,8 +80,7 @@ class ContingutController extends Controller
         $portada=$request->input('portada');
         $overAge=($request->input('ageRestrict')=="on") ? 1 : 0;
         $pId=Auth::user()->id;
-        $id_contingut=ContingutModel::all();
-        $id_contingut=$id_contingut[sizeof($id_contingut)-1]->id;
+        $id_contingut=DB::table('contingut')->latest('id')->first();
 
         if($typeContent==1) {
             $request->validate([

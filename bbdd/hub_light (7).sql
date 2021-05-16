@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 16, 2021 at 04:27 PM
+-- Generation Time: May 16, 2021 at 05:38 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -42,7 +42,7 @@ CREATE TABLE `analitiques_generals` (
 --
 
 INSERT INTO `analitiques_generals` (`id`, `usuaris_suspes`, `usuaris_actius`, `usuaris_enperill`, `contenido_total`, `created_at`, `updated_at`) VALUES
-(1, 2, 6, 0, 1, '2021-05-16 15:24:59', '2021-05-16 15:24:59');
+(1, 2, 6, 0, 5, '2021-05-16 15:24:59', '2021-05-16 15:35:38');
 
 -- --------------------------------------------------------
 
@@ -204,7 +204,28 @@ CREATE TABLE `contingut` (
 INSERT INTO `contingut` (`id`, `titulo`, `portada`, `link_copyright`, `url`, `descripcio`, `majoria_edat`, `reportat`, `estadistica`, `propietari`, `tipus_contingut`, `drets_autor`, `created_at`, `updated_at`) VALUES
 (17, NULL, NULL, NULL, '1621099553-AngelNovo2.jpg', NULL, 0, 0, 47, 14, 1, 2, '2021-05-15 15:25:53', '2021-05-15 15:39:04'),
 (18, NULL, NULL, NULL, '1621099615-AngelNovo2.jpg', NULL, 0, 0, 48, 14, 1, 2, '2021-05-15 15:26:55', '2021-05-15 15:26:55'),
-(19, 'asdasddasasd', NULL, NULL, '1621099653-AngelNovo2.jpg', NULL, 0, 0, 49, 14, 1, 2, '2021-05-15 15:27:33', '2021-05-15 15:27:33');
+(19, 'asdasddasasd', NULL, NULL, '1621099653-AngelNovo2.jpg', NULL, 0, 0, 49, 14, 1, 2, '2021-05-15 15:27:33', '2021-05-15 15:27:33'),
+(20, NULL, NULL, NULL, '1621185337-AngelNovo2.jpg', NULL, 0, 0, 50, 14, 1, 2, '2021-05-16 15:15:37', '2021-05-16 15:15:37'),
+(21, 'test', NULL, NULL, '1621185514-AngelNovo2.jpg', 'test', 0, 0, 51, 14, 1, 2, '2021-05-16 15:18:34', '2021-05-16 15:18:34'),
+(22, NULL, NULL, NULL, '1621185870-AngelNovo2.jpg', NULL, 0, 0, 52, 14, 1, 2, '2021-05-16 15:24:30', '2021-05-16 15:24:30'),
+(23, NULL, NULL, NULL, '1621185924-AngelNovo2.jpg', NULL, 0, 0, 53, 14, 1, 2, '2021-05-16 15:25:24', '2021-05-16 15:25:24'),
+(24, NULL, NULL, NULL, '1621185928-AngelNovo2.jpg', NULL, 0, 0, 54, 14, 1, 2, '2021-05-16 15:25:28', '2021-05-16 15:25:28'),
+(25, NULL, NULL, NULL, '1621185940-AngelNovo2.jpg', NULL, 0, 0, 55, 14, 1, 2, '2021-05-16 15:25:40', '2021-05-16 15:25:40'),
+(26, NULL, NULL, NULL, '1621186116-AngelNovo2.jpg', NULL, 0, 0, 56, 14, 1, 2, '2021-05-16 15:28:36', '2021-05-16 15:28:36'),
+(27, NULL, NULL, NULL, '1621186119-AngelNovo2.jpg', NULL, 0, 0, 57, 14, 1, 2, '2021-05-16 15:28:39', '2021-05-16 15:28:39'),
+(28, NULL, NULL, NULL, '1621186135-AngelNovo2.jpg', NULL, 0, 0, 58, 14, 1, 2, '2021-05-16 15:28:55', '2021-05-16 15:28:55'),
+(29, NULL, NULL, NULL, '1621186142-AngelNovo2.jpg', NULL, 0, 0, 59, 14, 1, 2, '2021-05-16 15:29:02', '2021-05-16 15:29:02'),
+(30, NULL, NULL, NULL, '1621186185-AngelNovo2.jpg', NULL, 0, 0, 60, 14, 1, 2, '2021-05-16 15:29:45', '2021-05-16 15:29:45'),
+(31, NULL, NULL, NULL, '1621186204-AngelNovo2.jpg', NULL, 0, 0, 61, 14, 1, 2, '2021-05-16 15:30:04', '2021-05-16 15:30:04'),
+(32, NULL, NULL, NULL, '1621186226-AngelNovo2.jpg', NULL, 0, 0, 62, 14, 1, 2, '2021-05-16 15:30:26', '2021-05-16 15:30:26'),
+(33, NULL, NULL, NULL, '1621186292-AngelNovo2.jpg', NULL, 0, 0, 63, 14, 1, 2, '2021-05-16 15:31:32', '2021-05-16 15:31:32'),
+(34, NULL, NULL, NULL, '1621186317-AngelNovo2.jpg', NULL, 0, 0, 64, 14, 1, 2, '2021-05-16 15:31:57', '2021-05-16 15:31:57'),
+(35, NULL, NULL, NULL, '1621186321-AngelNovo2.jpg', NULL, 0, 0, 65, 14, 1, 2, '2021-05-16 15:32:01', '2021-05-16 15:32:01'),
+(36, NULL, NULL, NULL, '1621186351-AngelNovo2.jpg', NULL, 0, 0, 66, 14, 1, 2, '2021-05-16 15:32:31', '2021-05-16 15:32:31'),
+(37, NULL, NULL, NULL, '1621186374-AngelNovo2.jpg', NULL, 0, 0, 67, 14, 1, 2, '2021-05-16 15:32:54', '2021-05-16 15:32:54'),
+(38, NULL, NULL, NULL, '1621186382-AngelNovo2.jpg', NULL, 0, 0, 68, 14, 1, 2, '2021-05-16 15:33:02', '2021-05-16 15:33:02'),
+(39, NULL, NULL, NULL, '1621186490-AngelNovo2.jpg', NULL, 0, 0, 69, 14, 1, 2, '2021-05-16 15:34:50', '2021-05-16 15:34:50'),
+(40, 'test', NULL, NULL, '1621186537-AngelNovo2.jpg', 'test', 0, 0, 70, 14, 1, 2, '2021-05-16 15:35:37', '2021-05-16 15:35:37');
 
 -- --------------------------------------------------------
 
@@ -214,8 +235,18 @@ INSERT INTO `contingut` (`id`, `titulo`, `portada`, `link_copyright`, `url`, `de
 
 CREATE TABLE `contingut_tag` (
   `id_contingut` int(10) UNSIGNED NOT NULL,
-  `id_tag` int(10) UNSIGNED NOT NULL
+  `id_tag` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contingut_tag`
+--
+
+INSERT INTO `contingut_tag` (`id_contingut`, `id_tag`, `created_at`, `updated_at`) VALUES
+(39, 1, '2021-05-16 15:34:50', '2021-05-16 15:34:50'),
+(40, 38, '2021-05-16 15:35:37', '2021-05-16 15:35:37');
 
 -- --------------------------------------------------------
 
@@ -318,7 +349,28 @@ INSERT INTO `estadistiques_contingut` (`id_estadistica`, `q_comentaris`, `q_like
 (46, 0, 0, '2021-05-15 15:23:26', '2021-05-15 15:23:26'),
 (47, 0, 0, '2021-05-15 15:25:53', '2021-05-15 15:25:53'),
 (48, 0, 0, '2021-05-15 15:26:55', '2021-05-15 15:26:55'),
-(49, 0, 0, '2021-05-15 15:27:33', '2021-05-15 15:27:33');
+(49, 0, 0, '2021-05-15 15:27:33', '2021-05-15 15:27:33'),
+(50, 0, 0, '2021-05-16 15:15:37', '2021-05-16 15:15:37'),
+(51, 0, 0, '2021-05-16 15:18:34', '2021-05-16 15:18:34'),
+(52, 0, 0, '2021-05-16 15:24:30', '2021-05-16 15:24:30'),
+(53, 0, 0, '2021-05-16 15:25:24', '2021-05-16 15:25:24'),
+(54, 0, 0, '2021-05-16 15:25:28', '2021-05-16 15:25:28'),
+(55, 0, 0, '2021-05-16 15:25:40', '2021-05-16 15:25:40'),
+(56, 0, 0, '2021-05-16 15:28:36', '2021-05-16 15:28:36'),
+(57, 0, 0, '2021-05-16 15:28:39', '2021-05-16 15:28:39'),
+(58, 0, 0, '2021-05-16 15:28:55', '2021-05-16 15:28:55'),
+(59, 0, 0, '2021-05-16 15:29:02', '2021-05-16 15:29:02'),
+(60, 0, 0, '2021-05-16 15:29:45', '2021-05-16 15:29:45'),
+(61, 0, 0, '2021-05-16 15:30:04', '2021-05-16 15:30:04'),
+(62, 0, 0, '2021-05-16 15:30:26', '2021-05-16 15:30:26'),
+(63, 0, 0, '2021-05-16 15:31:32', '2021-05-16 15:31:32'),
+(64, 0, 0, '2021-05-16 15:31:57', '2021-05-16 15:31:57'),
+(65, 0, 0, '2021-05-16 15:32:01', '2021-05-16 15:32:01'),
+(66, 0, 0, '2021-05-16 15:32:31', '2021-05-16 15:32:31'),
+(67, 0, 0, '2021-05-16 15:32:54', '2021-05-16 15:32:54'),
+(68, 0, 0, '2021-05-16 15:33:02', '2021-05-16 15:33:02'),
+(69, 0, 0, '2021-05-16 15:34:50', '2021-05-16 15:34:50'),
+(70, 0, 0, '2021-05-16 15:35:37', '2021-05-16 15:35:37');
 
 -- --------------------------------------------------------
 
@@ -466,8 +518,19 @@ CREATE TABLE `seguidors` (
 
 CREATE TABLE `tags` (
   `id` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci NOT NULL
+  `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+(1, 'paisaje', '2021-05-16 17:13:06', '2021-05-16 17:13:06'),
+(37, 'colorido', '2021-05-16 17:34:35', '2021-05-16 17:34:35'),
+(38, 'test', '2021-05-16 15:35:37', '2021-05-16 15:35:37');
 
 -- --------------------------------------------------------
 
@@ -561,7 +624,7 @@ INSERT INTO `users` (`id`, `name`, `password`, `email`, `email_verified_at`, `al
 (11, 'jndbasjkhidbsakj', '$2y$10$sBLApHMMlhvvh0mzKYsi8OYP9ZslU.twnUdwZeIz7.VLGjngQZQZi', 'kjasdfnasf@aseknfbnksf', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 22, 1, NULL, '2021-05-14 07:57:58', '2021-05-15 07:57:27', 'fondoDefault.jpg'),
 (12, 'lkjmasdkjasb', '$2y$10$7wElszXdDGzBHz53jlYz2OQsxFy8QaEb3Ir5B1ygiiO9V5dMoJ0kS', 'kjasbdjk@skjdnfkj', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 23, 1, NULL, '2021-05-14 07:59:24', '2021-05-15 07:56:07', 'fondoDefault.jpg'),
 (13, 'ertrrdfdf', '$2y$10$vxsq2QJpCkvNUHSt5YKer.7sQfDvHVWJmK0tON9Qx733peZwfA6au', 'hhfdhfdfdh@sdfdsfdfs', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 1, 0, 0, 0, NULL, 24, 1, NULL, '2021-05-14 11:37:49', '2021-05-15 12:40:00', 'fondoDefault.jpg'),
-(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 1, 0, 0, 1, 10, 0, 'images;video;css;animacion', 25, 3, NULL, '2021-05-14 15:07:26', '2021-05-16 13:23:44', 'fondoDefault.jpg');
+(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 1, 0, 0, 1, 10, 0, 'images;video;css;animacion', 25, 3, NULL, '2021-05-14 15:07:26', '2021-05-16 15:37:17', 'fondoDefault.jpg');
 
 -- --------------------------------------------------------
 
@@ -796,7 +859,7 @@ ALTER TABLE `avis_usuari`
 -- AUTO_INCREMENT for table `contingut`
 --
 ALTER TABLE `contingut`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `dret_autor`
@@ -814,7 +877,7 @@ ALTER TABLE `estadistiques`
 -- AUTO_INCREMENT for table `estadistiques_contingut`
 --
 ALTER TABLE `estadistiques_contingut`
-  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -850,7 +913,7 @@ ALTER TABLE `missatge`
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tipus_contingut`

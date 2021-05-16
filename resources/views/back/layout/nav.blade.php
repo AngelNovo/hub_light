@@ -80,7 +80,7 @@
               <div class="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href={{url('/back/admin/u/adminify')}} id="adminify">Adminify
+                    <a href={{url('/back/admin/u/adminify')}} id="adminify">Hacer admin
                     </a>
                   </li>
                   <li>
@@ -98,12 +98,12 @@
             <li class="sidebar-dropdown" id="tipoUser">
               <a href="#" id="page_nav_typeUser">
                 <i class="fa fa-users"></i>
-                <span>User type</span>
+                <span>Tipo usuario</span>
               </a>
               <div class="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href={{url('/back/admin/tipususer')}} id="crud">CRUD
+                    <a href={{url('/back/admin/tipususer')}} id="crud">Crear tipos de usuario
                     </a>
                   </li>
                 </ul>
@@ -117,7 +117,7 @@
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <a href={{url('/back/admin/adultify')}} id="adultify">Adultify
+                      <a href={{url('/back/admin/adultify')}} id="adultify">+18
                       </a>
                     </li>
                   </ul>

@@ -62,9 +62,9 @@
             </div>
             <div>
               <label>Select values (comma-separated):</label>
-              <input type="text" list="Suggestions" multiple="multiple" />
+              <input type="text" list="Suggestions" multiple="multiple" name="tags" form="formModal"/>
 
-              <datalist id="Suggestions" name="tags">
+              <datalist id="Suggestions">
                 <option>option 1</option>
                 <option>option 2</option>
                 <option>option 3</option>
@@ -212,6 +212,28 @@
         }
     });
   }
+
+  function getTags() {
+    $.ajax({
+        url: "/tags",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "GET",
+        dataType: 'json',
+        success: function(data){         
+          $.each(data, function(index,element){
+            var option=$("<option>");
+            option.text(element.tipus);
+            option.val(element.id);
+            $("#tipoC").append(option);
+          });        
+          tipoC=data;
+          selectTipo();
+        }
+    });
+  }
+
   function selectTipo(){
       var tipo=$("#tipoC").val();
       $(".form-portada").hide();

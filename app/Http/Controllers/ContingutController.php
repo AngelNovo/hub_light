@@ -44,7 +44,8 @@ class ContingutController extends Controller
         ->join('users','users.id','=','contingut.propietari')
         ->orderBy('created_at',"desc")
         ->get();
-        return view ('front.explorar')->with('results',$results);
+        return $select;
+        // return view ('front.explorar')->with('results',$results);
     }
     public function get($id) {
         $results = DB::table('contingut')
@@ -57,9 +58,12 @@ class ContingutController extends Controller
     }
 
     public function getRecomendados() {
-        $auth=Auth::user();
-        $info=User::where('id',$auth->id);
-        return view('front.recomendados')->with('info',$info);
+        $auth=Auth::user()->id;
+        $info=User::where('id',$auth)->get();
+        $recomenatsListRaw=$info[0]->recomenat;
+        $recomenatsListArray=explode(';',$recomenatsListRaw);
+        return $recomenatsListArray;
+        // return view('front.recomendados')->with('info',$info);
     }
 
     public function getDestacados() {

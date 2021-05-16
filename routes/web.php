@@ -80,9 +80,7 @@ Auth::routes();
 Route::get('/explorar',[ContingutController::class,'getAll']);
 
 // Recomendados
-Route::get('/recomendados',function() {
-    return view('front.recomendados');
-});
+Route::get('/recomendados',[ContingutController::class,'getRecomendados']);
 
 // Destacados
 Route::get('/destacados',[ContingutController::class,'getDestacados']);

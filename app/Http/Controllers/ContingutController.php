@@ -44,7 +44,7 @@ class ContingutController extends Controller
         ->join('users','users.id','=','contingut.propietari')
         ->orderBy('created_at',"desc")
         ->get();
-        return $select;
+        return $results;
         // return view ('front.explorar')->with('results',$results);
     }
     public function get($id) {

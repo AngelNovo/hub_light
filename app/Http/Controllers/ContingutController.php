@@ -80,7 +80,7 @@ class ContingutController extends Controller
         $portada=$request->input('portada');
         $overAge=($request->input('ageRestrict')=="on") ? 1 : 0;
         $pId=Auth::user()->id;
-        $id_contingut=DB::table('contingut')->latest('id')->first();
+        $id_contingut=DB::table('contingut')->max('id');
 
         if($typeContent==1) {
             $request->validate([

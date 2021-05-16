@@ -33,7 +33,7 @@ Route::put('/usuaris/update/foto',[UsuariController::class,'updateFoto']);
 Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
 Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
 // *Contingut*
-Route::get('/explorar/{id}',[ContingutController::class,'get']);
+Route::get('/explorar/1/{id}',[ContingutController::class,'get']);
 Route::post('/contingut',[ContingutController::class,'store']);
 // *Drets autor*
 Route::get('/derechosautor',[DerechosAutorController::class,'getAll']);
@@ -77,7 +77,7 @@ Route::group(['middleware'=>'auth'], function() {
 Auth::routes();
 
 // Explorar
-Route::get('/explorar',[ContingutController::class,'getAll']);
+Route::get('/explorar/{off}',[ContingutController::class,'getAll']);
 
 // Recomendados
 Route::get('/recomendados',[ContingutController::class,'getRecomendados']);

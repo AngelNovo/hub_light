@@ -38,11 +38,12 @@ class ContingutController extends Controller
         return view('front.home');
     }
 
-    public function getAll() {
+    public function getAll($offset) {
         $results = DB::table('contingut')
         ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
         ->orderBy('created_at',"desc")
+        ->limit($offset, 10)
         ->get();
         return $results;
         // return view ('front.explorar')->with('results',$results);
@@ -62,6 +63,14 @@ class ContingutController extends Controller
         $info=User::where('id',$auth)->get();
         $recomenatsListRaw=$info[0]->recomenat;
         $recomenatsListArray=explode(';',$recomenatsListRaw);
+
+        $recomendados = ContingutModel::where([
+            [""]
+        ])
+        ->join("contingut_tag","contingut_tag.id_contingut","=","id")
+        ->join("tags","tags.id","=","contingut_tag.id_tag")
+        ->get();
+
         return $recomenatsListArray;
         // return view('front.recomendados')->with('info',$info);
     }

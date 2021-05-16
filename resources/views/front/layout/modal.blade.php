@@ -60,17 +60,14 @@
             <label for="desc">Descripción</label>
             <textarea id="desc" name="desc"></textarea>
             </div>
-            <div>
-              <label>Select values (comma-separated):</label>
+            <div title="Selecciona las etiquetas que quiera, si no existen puede escribiras manualmente y se crearan" class="modal-row">
+              <label>Selecciona las etiquetas (Separalas por comas):</label>
               <input type="text" list="Suggestions" multiple="multiple" name="tags" form="formModal"/>
-
               <datalist id="Suggestions">
-                <option>option 1</option>
-                <option>option 2</option>
-                <option>option 3</option>
               </datalist>
             </div>
-            <div>
+            <div class="modal-row">
+              <div>
             <label for="derechoA">Derechos de autor</label>
             <select class="form-select" id="derechoA" name="derechoA" aria-label="Default select example">
             </select>
@@ -79,6 +76,7 @@
             <label for="linkCopy">Licencia</label>
             <input id="linkCopy" name="linkCopy" type="text" placeholder="url"/>
             </div>
+          </div>
           </div>
         </div>
       </form>
@@ -154,6 +152,7 @@
         });
         getDerechos();
         getTipo();
+        getTags();
         $("#tipoC").change(function(){
           selectTipo();
         });
@@ -167,7 +166,6 @@
             event.preventDefault();
           }
         });
-
     });
 
     function getDerechos() {
@@ -224,12 +222,10 @@
         success: function(data){         
           $.each(data, function(index,element){
             var option=$("<option>");
-            option.text(element.tipus);
-            option.val(element.id);
-            $("#tipoC").append(option);
-          });        
-          tipoC=data;
-          selectTipo();
+            option.text(element.nombre);
+            $("#Suggestions").append(option);
+          });
+          multipleData();        
         }
     });
   }
@@ -409,7 +405,7 @@ function validaExt(arxiu,disp){
 
 
 
-document.addEventListener("DOMContentLoaded", function () {
+function multipleData(){
     const separator = ',';
     for (const input of document.getElementsByTagName("input")) {
         if (!input.multiple) {
@@ -447,5 +443,5 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-});
+}
 </script>

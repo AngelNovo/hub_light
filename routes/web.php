@@ -83,7 +83,7 @@ Route::get('/explorar',function() {
 Route::get('/explorar/{off}',[ContingutController::class,'getAll']);
 
 // Recomendados
-Route::get('/recomendados/all',[ContingutController::class,'getRecomendados']);
+Route::get('/recomendados/{offset}',[ContingutController::class,'getRecomendados']);
 Route::get('/recomendados',function() {
     return view('front.recomendados');
 });

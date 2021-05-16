@@ -58,7 +58,7 @@ class ContingutController extends Controller
         return view('front.contenido')->with('contingut',$results);
     }
 
-    public function getRecomendados() {
+    public function getRecomendados($offset) {
         $auth=Auth::user()->id;
         $info=User::where('id',$auth)->get();
         $recomenatsListRaw=$info[0]->recomenat;
@@ -69,6 +69,7 @@ class ContingutController extends Controller
         whereIn("tags.nombre",$recomenatsListArray)
         ->join("contingut_tag","contingut_tag.id_contingut","=","id")
         ->join("tags","tags.id","=","contingut_tag.id_tag")
+        ->limit(30,$offset)
         ->get();
         return $recomendados;
         // return view('front.recomendados')->with('info',$info);

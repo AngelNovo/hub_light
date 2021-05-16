@@ -40,8 +40,9 @@ class ContingutController extends Controller
 
     public function getAll($offset) {
         $results = DB::table('contingut')
-        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at', 'contingut.updated_at')
+        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
+        ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
         ->orderBy('created_at',"desc")
         ->limit(30,$offset)
         ->get();
@@ -69,6 +70,7 @@ class ContingutController extends Controller
         whereIn("tags.nombre",$recomenatsListArray)
         ->join("contingut_tag","contingut_tag.id_contingut","=","id")
         ->join("tags","tags.id","=","contingut_tag.id_tag")
+        ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
         ->limit(30,$offset)
         ->get();
         return $recomendados;

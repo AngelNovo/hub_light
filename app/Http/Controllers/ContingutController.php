@@ -66,15 +66,10 @@ class ContingutController extends Controller
         // return $recomenatsListArray;
 
         $recomendados = ContingutModel::
-        where("tags.nombre","test")
-        // ->orWhere("tags.nombre","patricio")
+        whereIn("tags.nombre",$recomenatsListArray)
         ->join("contingut_tag","contingut_tag.id_contingut","=","id")
         ->join("tags","tags.id","=","contingut_tag.id_tag")
         ->get();
-        foreach($recomenatsListArray as $r) {
-            $recomendados->orWhere("tags.nombre",$r);
-        }
-
         return $recomendados;
         // return view('front.recomendados')->with('info',$info);
     }

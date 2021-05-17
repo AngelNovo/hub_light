@@ -1,0 +1,31 @@
+.header-contingut{
+    width: 100%;
+    background-color: #cccccc99;
+    border-radius: 10px 10px 0 0;
+    padding: 5px;
+}
+.header-contingut>a>div{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+    background-color: white;
+    object-fit: cover;
+}
+
+.contingut-principal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border:solid 10px #3d3d3d;
+    box-shadow: 2px 2px 2px #3d3d3d;
+    background-color: #cccccc33;
+}
+.contingut-principal>img,.contingut-principal>video{
+    min-height: 200px;
+    max-height: 500px;
+}

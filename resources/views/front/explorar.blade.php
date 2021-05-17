@@ -23,9 +23,10 @@
         dataType: 'json',
         success: function(data){    
           $.each(data, function(index,element){
-            let object=$("<div>");
+            let object=$("<a>");
             object.addClass("publicacio");
             object.addClass("col-*-*");
+            object.attr("href","/contingut/"+element.id);
             let img=$("<img>");
             img.addClass("image-thumbnail");
             let icon=$("<i>");

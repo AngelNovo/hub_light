@@ -121,8 +121,9 @@ class ContingutController extends Controller
 
         // Validaciones
         $info=TipoContenidoModel::find($typeContent);
-        $info->Descripcio= $info->Descripcio;
-        // return $info;
+        $info->Descripcio=explode(' ',$info->Descripcio);
+        $info->Descripcio=implode(',',$info->Descripcio);
+        // return $info->espai;
 
         $request->validate([
             'arxiu'=>"required|mimes:$info->Descripcio|max:$info->espai",

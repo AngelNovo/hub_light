@@ -2,10 +2,10 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Temps de generació: 17-05-2021 a les 16:45:35
--- Versió del servidor: 5.7.24
--- Versió de PHP: 7.4.18
+-- Host: localhost:3306
+-- Generation Time: May 17, 2021 at 05:26 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de dades: `hub_light`
+-- Database: `hub_light`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `analitiques_generals`
+-- Table structure for table `analitiques_generals`
 --
 
 CREATE TABLE `analitiques_generals` (
@@ -38,17 +38,17 @@ CREATE TABLE `analitiques_generals` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Bolcament de dades per a la taula `analitiques_generals`
+-- Dumping data for table `analitiques_generals`
 --
 
 INSERT INTO `analitiques_generals` (`id`, `usuaris_suspes`, `usuaris_actius`, `usuaris_enperill`, `contenido_total`, `created_at`, `updated_at`) VALUES
 (1, 2, 6, 0, 20, '2021-05-16 15:24:59', '2021-05-16 19:55:25'),
-(2, 2, 6, 0, 23, '2021-05-17 10:01:48', '2021-05-17 14:05:19');
+(2, 2, 6, 0, 26, '2021-05-17 10:01:48', '2021-05-17 15:25:25');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `avis`
+-- Table structure for table `avis`
 --
 
 CREATE TABLE `avis` (
@@ -60,7 +60,7 @@ CREATE TABLE `avis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `avis`
+-- Dumping data for table `avis`
 --
 
 INSERT INTO `avis` (`id`, `explicacio`, `gravetat`, `created_at`, `updated_at`) VALUES
@@ -70,7 +70,7 @@ INSERT INTO `avis` (`id`, `explicacio`, `gravetat`, `created_at`, `updated_at`) 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `avis_usuari`
+-- Table structure for table `avis_usuari`
 --
 
 CREATE TABLE `avis_usuari` (
@@ -83,7 +83,7 @@ CREATE TABLE `avis_usuari` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `avis_usuari`
+-- Dumping data for table `avis_usuari`
 --
 
 INSERT INTO `avis_usuari` (`id`, `id_usuari`, `id_avis`, `acceptat`, `created_at`, `updated_at`) VALUES
@@ -178,7 +178,7 @@ INSERT INTO `avis_usuari` (`id`, `id_usuari`, `id_avis`, `acceptat`, `created_at
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `contingut`
+-- Table structure for table `contingut`
 --
 
 CREATE TABLE `contingut` (
@@ -199,7 +199,7 @@ CREATE TABLE `contingut` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `contingut`
+-- Dumping data for table `contingut`
 --
 
 INSERT INTO `contingut` (`id`, `titulo`, `portada`, `link_copyright`, `url`, `descripcio`, `majoria_edat`, `reportat`, `estadistica`, `propietari`, `tipus_contingut`, `drets_autor`, `created_at`, `updated_at`) VALUES
@@ -218,12 +218,15 @@ INSERT INTO `contingut` (`id`, `titulo`, `portada`, `link_copyright`, `url`, `de
 (57, 'Zips', '1621202125-Llabreso.png', NULL, '1621202125-Llabreso.zip', NULL, 0, 0, 87, 5, 5, 2, '2021-05-16 19:55:25', '2021-05-16 19:55:25'),
 (58, NULL, NULL, NULL, '1621266209-Llabreso.jpg', NULL, 0, 0, 88, 5, 1, 2, '2021-05-17 13:43:29', '2021-05-17 13:43:29'),
 (59, 'Monkey Flip', '1621266876-Llabreso.jpg', NULL, '1621266876-Llabreso.mp4', NULL, 0, 0, 89, 5, 4, 2, '2021-05-17 13:54:36', '2021-05-17 13:54:36'),
-(60, 'Cute Guardiana', NULL, NULL, '1621267519-Llabreso.png', NULL, 0, 0, 90, 5, 1, 2, '2021-05-17 14:05:19', '2021-05-17 14:05:19');
+(60, 'Cute Guardiana', NULL, NULL, '1621267519-Llabreso.png', NULL, 0, 0, 90, 5, 1, 2, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
+(61, NULL, NULL, NULL, '1621272042-AngelNovo2.jpg', NULL, 0, 0, 91, 14, 1, 2, '2021-05-17 15:20:42', '2021-05-17 15:20:42'),
+(63, 'Igor', NULL, NULL, '1621272207-AngelNovo2.jpg', 'Just igor', 1, 0, 93, 14, 1, 2, '2021-05-17 15:23:27', '2021-05-17 15:23:27'),
+(64, 'thor', NULL, NULL, '1621272325-AngelNovo2.jpg', 'Just thor', 1, 0, 94, 14, 1, 2, '2021-05-17 15:25:25', '2021-05-17 15:25:25');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `contingut_tag`
+-- Table structure for table `contingut_tag`
 --
 
 CREATE TABLE `contingut_tag` (
@@ -234,7 +237,7 @@ CREATE TABLE `contingut_tag` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `contingut_tag`
+-- Dumping data for table `contingut_tag`
 --
 
 INSERT INTO `contingut_tag` (`id_contingut`, `id_tag`, `created_at`, `updated_at`) VALUES
@@ -250,25 +253,19 @@ INSERT INTO `contingut_tag` (`id_contingut`, `id_tag`, `created_at`, `updated_at
 (47, 50, '2021-05-16 16:26:11', '2021-05-16 16:26:11'),
 (48, 51, '2021-05-16 16:36:22', '2021-05-16 16:36:22'),
 (49, 52, '2021-05-16 19:23:13', '2021-05-16 19:23:13'),
-(50, 53, '2021-05-16 19:23:25', '2021-05-16 19:23:25'),
-(51, 53, '2021-05-16 19:23:33', '2021-05-16 19:23:33'),
-(52, 53, '2021-05-16 19:23:41', '2021-05-16 19:23:41'),
-(53, 53, '2021-05-16 19:24:14', '2021-05-16 19:24:14'),
-(54, 53, '2021-05-16 19:24:29', '2021-05-16 19:24:29'),
-(55, 53, '2021-05-16 19:24:39', '2021-05-16 19:24:39'),
 (56, 54, '2021-05-16 19:49:42', '2021-05-16 19:49:42'),
-(57, 53, '2021-05-16 19:55:25', '2021-05-16 19:55:25'),
-(58, 53, '2021-05-17 13:43:29', '2021-05-17 13:43:29'),
 (59, 55, '2021-05-17 13:54:36', '2021-05-17 13:54:36'),
 (60, 56, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
 (60, 57, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
 (60, 58, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
-(60, 59, '2021-05-17 14:05:19', '2021-05-17 14:05:19');
+(60, 59, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
+(64, 61, '2021-05-17 15:25:25', '2021-05-17 15:25:25'),
+(64, 62, '2021-05-17 15:25:25', '2021-05-17 15:25:25');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `dret_autor`
+-- Table structure for table `dret_autor`
 --
 
 CREATE TABLE `dret_autor` (
@@ -280,7 +277,7 @@ CREATE TABLE `dret_autor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `dret_autor`
+-- Dumping data for table `dret_autor`
 --
 
 INSERT INTO `dret_autor` (`id_dret`, `tipus`, `icona`, `created_at`, `updated_at`) VALUES
@@ -296,7 +293,7 @@ INSERT INTO `dret_autor` (`id_dret`, `tipus`, `icona`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `estadistiques`
+-- Table structure for table `estadistiques`
 --
 
 CREATE TABLE `estadistiques` (
@@ -312,7 +309,7 @@ CREATE TABLE `estadistiques` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `estadistiques`
+-- Dumping data for table `estadistiques`
 --
 
 INSERT INTO `estadistiques` (`id_estadistica`, `q_comentaris`, `q_likes`, `q_seguidors`, `q_seguits`, `q_likes_mensuals`, `q_comentaris_mensuals`, `created_at`, `updated_at`) VALUES
@@ -342,7 +339,7 @@ INSERT INTO `estadistiques` (`id_estadistica`, `q_comentaris`, `q_likes`, `q_seg
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `estadistiques_contingut`
+-- Table structure for table `estadistiques_contingut`
 --
 
 CREATE TABLE `estadistiques_contingut` (
@@ -354,7 +351,7 @@ CREATE TABLE `estadistiques_contingut` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `estadistiques_contingut`
+-- Dumping data for table `estadistiques_contingut`
 --
 
 INSERT INTO `estadistiques_contingut` (`id_estadistica`, `q_comentaris`, `q_likes`, `created_at`, `updated_at`) VALUES
@@ -375,12 +372,16 @@ INSERT INTO `estadistiques_contingut` (`id_estadistica`, `q_comentaris`, `q_like
 (87, 0, 0, '2021-05-16 19:55:25', '2021-05-16 19:55:25'),
 (88, 0, 0, '2021-05-17 13:43:29', '2021-05-17 13:43:29'),
 (89, 0, 0, '2021-05-17 13:54:36', '2021-05-17 13:54:36'),
-(90, 0, 0, '2021-05-17 14:05:19', '2021-05-17 14:05:19');
+(90, 0, 0, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
+(91, 0, 0, '2021-05-17 15:20:42', '2021-05-17 15:20:42'),
+(92, 0, 0, '2021-05-17 15:22:11', '2021-05-17 15:22:11'),
+(93, 0, 0, '2021-05-17 15:23:27', '2021-05-17 15:23:27'),
+(94, 0, 0, '2021-05-17 15:25:25', '2021-05-17 15:25:25');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -396,7 +397,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `grup`
+-- Table structure for table `grup`
 --
 
 CREATE TABLE `grup` (
@@ -414,7 +415,7 @@ CREATE TABLE `grup` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `grups_usuaris`
+-- Table structure for table `grups_usuaris`
 --
 
 CREATE TABLE `grups_usuaris` (
@@ -428,7 +429,7 @@ CREATE TABLE `grups_usuaris` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `interaccio`
+-- Table structure for table `interaccio`
 --
 
 CREATE TABLE `interaccio` (
@@ -441,7 +442,7 @@ CREATE TABLE `interaccio` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -451,7 +452,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -469,7 +470,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `missatge`
+-- Table structure for table `missatge`
 --
 
 CREATE TABLE `missatge` (
@@ -486,7 +487,7 @@ CREATE TABLE `missatge` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -496,7 +497,7 @@ CREATE TABLE `password_resets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `password_resets`
+-- Dumping data for table `password_resets`
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
@@ -505,7 +506,7 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `seguidors`
+-- Table structure for table `seguidors`
 --
 
 CREATE TABLE `seguidors` (
@@ -518,7 +519,7 @@ CREATE TABLE `seguidors` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `tags`
+-- Table structure for table `tags`
 --
 
 CREATE TABLE `tags` (
@@ -529,7 +530,7 @@ CREATE TABLE `tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `tags`
+-- Dumping data for table `tags`
 --
 
 INSERT INTO `tags` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
@@ -547,18 +548,20 @@ INSERT INTO `tags` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
 (50, 'diw', '2021-05-16 16:26:11', '2021-05-16 16:26:11'),
 (51, 'soundtrack', '2021-05-16 16:36:22', '2021-05-16 16:36:22'),
 (52, 'berserku', '2021-05-16 19:23:13', '2021-05-16 19:23:13'),
-(53, '', '2021-05-16 19:23:25', '2021-05-16 19:23:25'),
 (54, 'ibai', '2021-05-16 19:49:42', '2021-05-16 19:49:42'),
 (55, 'divertido', '2021-05-17 13:54:36', '2021-05-17 13:54:36'),
 (56, 'dark souls', '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
 (57, 'cute', '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
 (58, 'mono', '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
-(59, 'kawai', '2021-05-17 14:05:19', '2021-05-17 14:05:19');
+(59, 'kawai', '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
+(60, 'igor', '2021-05-17 15:23:27', '2021-05-17 15:23:27'),
+(61, 'thor', '2021-05-17 15:25:25', '2021-05-17 15:25:25'),
+(62, 'rosa', '2021-05-17 15:25:25', '2021-05-17 15:25:25');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `tipus_contingut`
+-- Table structure for table `tipus_contingut`
 --
 
 CREATE TABLE `tipus_contingut` (
@@ -567,24 +570,25 @@ CREATE TABLE `tipus_contingut` (
   `icona` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `Descripcio` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `Descripcio` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `espai` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `tipus_contingut`
+-- Dumping data for table `tipus_contingut`
 --
 
-INSERT INTO `tipus_contingut` (`id`, `tipus`, `icona`, `created_at`, `updated_at`, `Descripcio`) VALUES
-(1, 'Imagen', '', NULL, NULL, 'jpg gif png jpeg svg'),
-(2, 'Documento de texto', '', NULL, NULL, 'pdf txt'),
-(3, 'Música', '', NULL, NULL, 'mp3 ogg'),
-(4, 'Video', '', NULL, NULL, 'mp4 ogg'),
-(5, 'Otros', '', NULL, NULL, 'blend tga iris sgi rar zip gz tar.gz 7z css mng webp');
+INSERT INTO `tipus_contingut` (`id`, `tipus`, `icona`, `created_at`, `updated_at`, `Descripcio`, `espai`) VALUES
+(1, 'Imagen', '', NULL, '2021-05-17 15:00:07', 'jpg gif png jpeg svg', '4096'),
+(2, 'Documento de texto', '', NULL, '2021-05-17 15:00:12', 'pdf txt', '4096'),
+(3, 'Música', '', NULL, '2021-05-17 15:00:16', 'mp3 ogg', '10000'),
+(4, 'Video', '', NULL, '2021-05-17 15:00:18', 'mp4 ogg', '10000'),
+(5, 'Otros', '', NULL, '2021-05-17 15:00:21', 'blend tga iris sgi rar zip gz tar.gz 7z css mng webp', '10000');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `tipus_usuari`
+-- Table structure for table `tipus_usuari`
 --
 
 CREATE TABLE `tipus_usuari` (
@@ -595,7 +599,7 @@ CREATE TABLE `tipus_usuari` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `tipus_usuari`
+-- Dumping data for table `tipus_usuari`
 --
 
 INSERT INTO `tipus_usuari` (`id`, `tipus`, `created_at`, `updated_at`) VALUES
@@ -606,7 +610,7 @@ INSERT INTO `tipus_usuari` (`id`, `tipus`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -636,7 +640,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Bolcament de dades per a la taula `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `email_verified_at`, `alies`, `foto`, `link`, `data_naixement`, `data-registre`, `actiu`, `deshabilitat`, `suspes`, `es_admin`, `nivell_gravetat`, `grups_disponibles`, `recomendat`, `estadistica`, `tipus`, `remember_token`, `created_at`, `updated_at`, `fondo`) VALUES
@@ -652,7 +656,7 @@ INSERT INTO `users` (`id`, `name`, `password`, `email`, `email_verified_at`, `al
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `xat`
+-- Table structure for table `xat`
 --
 
 CREATE TABLE `xat` (
@@ -666,7 +670,7 @@ CREATE TABLE `xat` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `xat_grup`
+-- Table structure for table `xat_grup`
 --
 
 CREATE TABLE `xat_grup` (
@@ -680,7 +684,7 @@ CREATE TABLE `xat_grup` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `xat_usuaris`
+-- Table structure for table `xat_usuaris`
 --
 
 CREATE TABLE `xat_usuaris` (
@@ -692,23 +696,23 @@ CREATE TABLE `xat_usuaris` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Índexs per a les taules bolcades
+-- Indexes for dumped tables
 --
 
 --
--- Índexs per a la taula `analitiques_generals`
+-- Indexes for table `analitiques_generals`
 --
 ALTER TABLE `analitiques_generals`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índexs per a la taula `avis`
+-- Indexes for table `avis`
 --
 ALTER TABLE `avis`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índexs per a la taula `avis_usuari`
+-- Indexes for table `avis_usuari`
 --
 ALTER TABLE `avis_usuari`
   ADD PRIMARY KEY (`id`),
@@ -716,7 +720,7 @@ ALTER TABLE `avis_usuari`
   ADD KEY `avis_usuari_id_avis_foreign` (`id_avis`);
 
 --
--- Índexs per a la taula `contingut`
+-- Indexes for table `contingut`
 --
 ALTER TABLE `contingut`
   ADD PRIMARY KEY (`id`),
@@ -726,39 +730,39 @@ ALTER TABLE `contingut`
   ADD KEY `contingut_propietari_foreign` (`propietari`);
 
 --
--- Índexs per a la taula `contingut_tag`
+-- Indexes for table `contingut_tag`
 --
 ALTER TABLE `contingut_tag`
   ADD PRIMARY KEY (`id_contingut`,`id_tag`),
   ADD KEY `tag_contingut_tag` (`id_tag`);
 
 --
--- Índexs per a la taula `dret_autor`
+-- Indexes for table `dret_autor`
 --
 ALTER TABLE `dret_autor`
   ADD PRIMARY KEY (`id_dret`);
 
 --
--- Índexs per a la taula `estadistiques`
+-- Indexes for table `estadistiques`
 --
 ALTER TABLE `estadistiques`
   ADD PRIMARY KEY (`id_estadistica`);
 
 --
--- Índexs per a la taula `estadistiques_contingut`
+-- Indexes for table `estadistiques_contingut`
 --
 ALTER TABLE `estadistiques_contingut`
   ADD PRIMARY KEY (`id_estadistica`);
 
 --
--- Índexs per a la taula `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Índexs per a la taula `grup`
+-- Indexes for table `grup`
 --
 ALTER TABLE `grup`
   ADD PRIMARY KEY (`id`),
@@ -767,14 +771,14 @@ ALTER TABLE `grup`
   ADD KEY `grup_xat_foreign` (`xat`);
 
 --
--- Índexs per a la taula `grups_usuaris`
+-- Indexes for table `grups_usuaris`
 --
 ALTER TABLE `grups_usuaris`
   ADD KEY `grups_usuaris_id_usuari_foreign` (`id_usuari`),
   ADD KEY `grups_usuaris_id_grup_foreign` (`id_grup`);
 
 --
--- Índexs per a la taula `interaccio`
+-- Indexes for table `interaccio`
 --
 ALTER TABLE `interaccio`
   ADD PRIMARY KEY (`id`),
@@ -782,13 +786,13 @@ ALTER TABLE `interaccio`
   ADD KEY `contingut_interaccio` (`id_Contingut`);
 
 --
--- Índexs per a la taula `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índexs per a la taula `missatge`
+-- Indexes for table `missatge`
 --
 ALTER TABLE `missatge`
   ADD PRIMARY KEY (`id`),
@@ -797,38 +801,38 @@ ALTER TABLE `missatge`
   ADD KEY `missatge_id_contingut_foreign` (`id_contingut`);
 
 --
--- Índexs per a la taula `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Índexs per a la taula `seguidors`
+-- Indexes for table `seguidors`
 --
 ALTER TABLE `seguidors`
   ADD KEY `seguidors_id_usuari_foreign` (`id_usuari`),
   ADD KEY `seguidors_id_seguit_foreign` (`id_seguit`);
 
 --
--- Índexs per a la taula `tags`
+-- Indexes for table `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índexs per a la taula `tipus_contingut`
+-- Indexes for table `tipus_contingut`
 --
 ALTER TABLE `tipus_contingut`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índexs per a la taula `tipus_usuari`
+-- Indexes for table `tipus_usuari`
 --
 ALTER TABLE `tipus_usuari`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índexs per a la taula `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -837,144 +841,144 @@ ALTER TABLE `users`
   ADD KEY `users_tipus_foreign` (`tipus`);
 
 --
--- Índexs per a la taula `xat`
+-- Indexes for table `xat`
 --
 ALTER TABLE `xat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índexs per a la taula `xat_grup`
+-- Indexes for table `xat_grup`
 --
 ALTER TABLE `xat_grup`
   ADD KEY `xat_grup_id_xat_foreign` (`id_xat`),
   ADD KEY `xat_grup_id_grup_foreign` (`id_grup`);
 
 --
--- Índexs per a la taula `xat_usuaris`
+-- Indexes for table `xat_usuaris`
 --
 ALTER TABLE `xat_usuaris`
   ADD KEY `xat_usuaris_id_usuari_foreign` (`id_usuari`),
   ADD KEY `xat_usuaris_id_xat_foreign` (`id_xat`);
 
 --
--- AUTO_INCREMENT per les taules bolcades
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT per la taula `analitiques_generals`
+-- AUTO_INCREMENT for table `analitiques_generals`
 --
 ALTER TABLE `analitiques_generals`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT per la taula `avis`
+-- AUTO_INCREMENT for table `avis`
 --
 ALTER TABLE `avis`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT per la taula `avis_usuari`
+-- AUTO_INCREMENT for table `avis_usuari`
 --
 ALTER TABLE `avis_usuari`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
--- AUTO_INCREMENT per la taula `contingut`
+-- AUTO_INCREMENT for table `contingut`
 --
 ALTER TABLE `contingut`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
--- AUTO_INCREMENT per la taula `dret_autor`
+-- AUTO_INCREMENT for table `dret_autor`
 --
 ALTER TABLE `dret_autor`
   MODIFY `id_dret` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT per la taula `estadistiques`
+-- AUTO_INCREMENT for table `estadistiques`
 --
 ALTER TABLE `estadistiques`
   MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT per la taula `estadistiques_contingut`
+-- AUTO_INCREMENT for table `estadistiques_contingut`
 --
 ALTER TABLE `estadistiques_contingut`
-  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
--- AUTO_INCREMENT per la taula `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la taula `grup`
+-- AUTO_INCREMENT for table `grup`
 --
 ALTER TABLE `grup`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la taula `interaccio`
+-- AUTO_INCREMENT for table `interaccio`
 --
 ALTER TABLE `interaccio`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la taula `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT per la taula `missatge`
+-- AUTO_INCREMENT for table `missatge`
 --
 ALTER TABLE `missatge`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la taula `tags`
+-- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
--- AUTO_INCREMENT per la taula `tipus_contingut`
+-- AUTO_INCREMENT for table `tipus_contingut`
 --
 ALTER TABLE `tipus_contingut`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT per la taula `tipus_usuari`
+-- AUTO_INCREMENT for table `tipus_usuari`
 --
 ALTER TABLE `tipus_usuari`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT per la taula `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT per la taula `xat`
+-- AUTO_INCREMENT for table `xat`
 --
 ALTER TABLE `xat`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Restriccions per a les taules bolcades
+-- Constraints for dumped tables
 --
 
 --
--- Restriccions per a la taula `avis_usuari`
+-- Constraints for table `avis_usuari`
 --
 ALTER TABLE `avis_usuari`
   ADD CONSTRAINT `avis_usuari_id_avis_foreign` FOREIGN KEY (`id_avis`) REFERENCES `avis` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `avis_usuari_id_usuari_foreign` FOREIGN KEY (`id_usuari`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Restriccions per a la taula `contingut`
+-- Constraints for table `contingut`
 --
 ALTER TABLE `contingut`
   ADD CONSTRAINT `contingut_drets_autor_foreign` FOREIGN KEY (`drets_autor`) REFERENCES `dret_autor` (`id_dret`) ON DELETE CASCADE,
@@ -983,14 +987,14 @@ ALTER TABLE `contingut`
   ADD CONSTRAINT `contingut_tipus_contingut_foreign` FOREIGN KEY (`tipus_contingut`) REFERENCES `tipus_contingut` (`id`) ON DELETE CASCADE;
 
 --
--- Restriccions per a la taula `contingut_tag`
+-- Constraints for table `contingut_tag`
 --
 ALTER TABLE `contingut_tag`
   ADD CONSTRAINT `contingut_tag` FOREIGN KEY (`id_contingut`) REFERENCES `contingut` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tag_contingut_tag` FOREIGN KEY (`id_tag`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restriccions per a la taula `grup`
+-- Constraints for table `grup`
 --
 ALTER TABLE `grup`
   ADD CONSTRAINT `grup_estadistica_foreign` FOREIGN KEY (`estadistica`) REFERENCES `estadistiques` (`id_estadistica`) ON DELETE CASCADE,
@@ -998,21 +1002,21 @@ ALTER TABLE `grup`
   ADD CONSTRAINT `grup_xat_foreign` FOREIGN KEY (`xat`) REFERENCES `xat` (`id`) ON DELETE CASCADE;
 
 --
--- Restriccions per a la taula `grups_usuaris`
+-- Constraints for table `grups_usuaris`
 --
 ALTER TABLE `grups_usuaris`
   ADD CONSTRAINT `grups_usuaris_id_grup_foreign` FOREIGN KEY (`id_grup`) REFERENCES `grup` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `grups_usuaris_id_usuari_foreign` FOREIGN KEY (`id_usuari`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Restriccions per a la taula `interaccio`
+-- Constraints for table `interaccio`
 --
 ALTER TABLE `interaccio`
   ADD CONSTRAINT `contingut_interaccio` FOREIGN KEY (`id_Contingut`) REFERENCES `contingut` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usuari_interaccio` FOREIGN KEY (`id_Usuari`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Restriccions per a la taula `missatge`
+-- Constraints for table `missatge`
 --
 ALTER TABLE `missatge`
   ADD CONSTRAINT `missatge_id_contingut_foreign` FOREIGN KEY (`id_contingut`) REFERENCES `contingut` (`id`) ON DELETE CASCADE,
@@ -1020,28 +1024,28 @@ ALTER TABLE `missatge`
   ADD CONSTRAINT `missatge_id_xat_foreign` FOREIGN KEY (`id_xat`) REFERENCES `xat` (`id`) ON DELETE CASCADE;
 
 --
--- Restriccions per a la taula `seguidors`
+-- Constraints for table `seguidors`
 --
 ALTER TABLE `seguidors`
   ADD CONSTRAINT `seguidors_id_seguit_foreign` FOREIGN KEY (`id_seguit`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `seguidors_id_usuari_foreign` FOREIGN KEY (`id_usuari`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Restriccions per a la taula `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_estadistica_foreign` FOREIGN KEY (`estadistica`) REFERENCES `estadistiques` (`id_estadistica`) ON DELETE CASCADE,
   ADD CONSTRAINT `users_tipus_foreign` FOREIGN KEY (`tipus`) REFERENCES `tipus_usuari` (`id`) ON DELETE CASCADE;
 
 --
--- Restriccions per a la taula `xat_grup`
+-- Constraints for table `xat_grup`
 --
 ALTER TABLE `xat_grup`
   ADD CONSTRAINT `xat_grup_id_grup_foreign` FOREIGN KEY (`id_grup`) REFERENCES `grup` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `xat_grup_id_xat_foreign` FOREIGN KEY (`id_xat`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Restriccions per a la taula `xat_usuaris`
+-- Constraints for table `xat_usuaris`
 --
 ALTER TABLE `xat_usuaris`
   ADD CONSTRAINT `xat_usuaris_id_usuari_foreign` FOREIGN KEY (`id_usuari`) REFERENCES `users` (`id`) ON DELETE CASCADE,

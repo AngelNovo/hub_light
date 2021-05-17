@@ -1,103 +1,85 @@
-{{-- CSS --}}
 <link rel="stylesheet" href={{asset("/css/front/modal.css")}}>
-{{-- Contingut Modal--}}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        {{-- Header Modal --}}
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Subir Contenido</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        {{-- Body Modal --}}
         <div class="modal-body">
-          {{-- Form Modal --}}
           <form id="formModal" action="/contingut" method="POST" enctype="multipart/form-data">
             @method('POST')
             @csrf
-            <div class="row">
-              {{-- Select del Contenido --}}
-              <div>
-                <label for="tipoC">Tipo de contenido</label>
-                  <select class="form-select" id="tipoC" name="tipoC" aria-label="Default select example">
-                  </select>
-                  {{-- Majoria de edad --}}
-                <label for="ageRestrict">+18</label>
-                <input type="checkbox" name="ageRestrict"/>
-              </div>
-              {{-- Portada --}}
-              <div>
-                <label for="portada" class="form-portada">
-                  <div class="upload-icon">
-                      <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Portada" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar una portada" class="img-portada">
-                  </div>
-                </label>
-                <input id="portada" name="portada" hidden type="file" form="formModal"/>
-              </div>
-              {{-- Labels Arxius --}}
-              <div>
-                {{-- Arxiu Imatge --}}
-                <label for="arxiu-i" id="arxiu-img">
-                  <div class="upload-icon">
-                      <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar un archivo" class="img-arxiu image-thumbnail">
-                  </div>
-                </label>
-                {{-- Arxiu Musica --}}
-                <label for="arxiu" id="arxiu-musica">
-                  <div class="upload-icon">
-                      <audio controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="music-arxiu"></audio>
-                  </div>
-                </label>
-                {{-- Arxiu Video --}}
-                <label for="arxiu" id="arxiu-video">
-                  <div class="upload-icon">
-                    <video controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="video-arxiu embed-responsive"></video>
-                  </div>
-                </label>
-                {{-- Input arxius --}}
-                <div>
-                  <label for="arxiu" id="arxiu-otros">Archivo</label>
-                  <input id="arxiu" name="arxiu" type="file" form="formModal"/>
-                  <input id="arxiu-i" name="arxiu" hidden type="file" form="formModal"/>
-                  <input id="arxiu-m" name="arxiu" type="file" form="formModal"/>
-                  <input id="arxiu-v" name="arxiu" type="file" form="formModal"/>
+          <div class="row">
+            <div>
+              <label for="tipoC">Tipo de contenido</label>
+                <select class="form-select" id="tipoC" name="tipoC" aria-label="Default select example">
+                </select>
+              <label for="ageRestrict">+18</label>
+              <input type="checkbox" name="ageRestrict"/>
+            </div>
+            <div>
+              <label for="portada" class="form-portada">
+                <div class="upload-icon">
+                    <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Portada" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar una portada" class="img-portada">
                 </div>
+              </label>
+              <input id="portada" name="portada" hidden type="file" form="formModal"/>
+            </div>
+            <div>
+              <label for="arxiu-i" id="arxiu-img">
+              <div class="upload-icon">
+                  <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar un archivo" class="img-arxiu image-thumbnail">
               </div>
-              {{-- Titol --}}
-              <div class="modal-row">
-                <label for="titol">Titulo</label>
-                <input id="titol" name="titol" type="text" form="formModal"/>
-              </div>
-              {{-- Descripcio --}}
-              <div class="modal-row">
-                <label for="desc">Descripción</label>
-                <textarea id="desc" name="desc"></textarea>
-              </div>
-              {{-- Etiquetes Multiselect --}}
-              <div title="Selecciona las etiquetas que quiera, si no existen puede escribiras manualmente y se crearan" class="modal-row">
-                <label>Selecciona las etiquetas (Separalas por comas):</label>
-                <input type="text" list="Suggestions" multiple="multiple" name="tags" form="formModal"/>
-                <datalist id="Suggestions"> </datalist>
-              </div>
-              {{-- Drets de autor --}}
-              <div class="modal-row">
-                {{-- Tipo de dret --}}
-                <div>
-                  <label for="derechoA">Derechos de autor</label>
-                  <select class="form-select" id="derechoA" name="derechoA" aria-label="Default select example"> </select>
-                </div>
-                {{-- Llicencia --}}
-                <div id="licencias">
-                  <label for="linkCopy">Licencia</label>
-                  <input id="linkCopy" name="linkCopy" type="text" placeholder="url"/>
-                </div>
-              </div>
-            </div>          
-          </form>
+              </label>
+              <label for="arxiu" id="arxiu-musica">
+            <div class="upload-icon">
+                <audio controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="music-arxiu"></audio>
+            </div>
+            </label>
+            <label for="arxiu" id="video-musica">
+            <div class="upload-icon">
+              <video controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="video-arxiu embed-responsive"></video>
+            </div>
+            </label>
+            <div>
+            <label for="arxiu" id="arxiu-otros">Archivo</label>
+            <input id="arxiu" name="arxiu" type="file" form="formModal"/>
+            <input id="arxiu-i" name="arxiu" hidden type="file" form="formModal"/>
+            <input id="arxiu-m" name="arxiu" type="file" form="formModal"/>
+            <input id="arxiu-v" name="arxiu" type="file" form="formModal"/>
+            </div>
+            </div>
+            <div class="modal-row">
+            <label for="titol">Titulo</label>
+            <input id="titol" name="titol" type="text" form="formModal"/>
+            </div>
+            <div class="modal-row">
+            <label for="desc">Descripción</label>
+            <textarea id="desc" name="desc"></textarea>
+            </div>
+            <div title="Selecciona las etiquetas que quiera, si no existen puede escribiras manualmente y se crearan" class="modal-row">
+              <label>Selecciona las etiquetas (Separalas por comas):</label>
+              <input type="text" list="Suggestions" multiple="multiple" name="tags" form="formModal"/>
+              <datalist id="Suggestions">
+              </datalist>
+            </div>
+            <div class="modal-row">
+              <div>
+            <label for="derechoA">Derechos de autor</label>
+            <select class="form-select" id="derechoA" name="derechoA" aria-label="Default select example">
+            </select>
+            </div>
+            <div id="licencias">
+            <label for="linkCopy">Licencia</label>
+            <input id="linkCopy" name="linkCopy" type="text" placeholder="url"/>
+            </div>
+          </div>
+          </div>
         </div>
-        {{-- Botones de Enviar y Submit --}}
+      </form>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" form="formModal">Cancelar</button>
           <button type="submit" class="btn btn-primary" id="submitForm" form="formModal">Subir</button>
@@ -163,7 +145,7 @@
             if(file) {
                 const reader = new FileReader();
                 reader.addEventListener("load",function() {
-                    previewImage.setAttribute("src", this.result);                   
+                    previewImage.setAttribute("src", this.result);
                 });
                 reader.readAsDataURL(file);
             }
@@ -179,7 +161,7 @@
           selectLicencia();
         })
 
-        $("#submitForm").click(function(event){     
+        $("#submitForm").click(function(event){
           if(!valida()){
             event.preventDefault();
           }
@@ -215,14 +197,14 @@
         },
         type: "GET",
         dataType: 'json',
-        success: function(data){         
+        success: function(data){
           $.each(data, function(index,element){
             var option=$("<option>");
             option.text(element.tipus);
             option.attr("title",element.Descripcio);
             option.val(element.id);
             $("#tipoC").append(option);
-          });        
+          });
           tipoC=data;
           selectTipo();
         }
@@ -237,13 +219,13 @@
         },
         type: "GET",
         dataType: 'json',
-        success: function(data){         
+        success: function(data){
           $.each(data, function(index,element){
             var option=$("<option>");
             option.text(element.nombre);
             $("#Suggestions").append(option);
           });
-          multipleData();        
+          multipleData();
         }
     });
   }
@@ -261,7 +243,7 @@
       $("#arxiu-m").prop( "disabled", true);
       $("#arxiu-v").prop( "disabled", true);
       $("#arxiu-musica").hide();
-      $("#arxiu-video").hide();
+      $("#video-musica").hide();
       $("#portada").prop( "disabled", true);
       switch(tipo){
         case  "1":
@@ -290,7 +272,7 @@
         case "4":
           $(".form-portada").show();
           $("#portada").prop( "disabled", false);
-          $("#arxiu-video").show();
+          $("#video-musica").show();
           $("#arxiu-v").show();
           $("#arxiu-v").prop( "disabled", false);
           $("#arxiu-otros").show();
@@ -329,19 +311,19 @@
             error=error+"¡No se encuentra el archivo!";
             validacion=false;
           }else{
-            filename= $("#arxiu-i").val().split('.').pop();
+            filename= $("#arxiu-i").val().split(' ').pop();
             if(!validaExt(filename,tipoC[0].Descripcio)){
               error=error+"¡Extension incorrecta!";
               validacion=false;
             }
-          }       
+          }
         break;
         case "2":
           if($("#arxiu").val()==null||$("#arxiu").val()==""||$("#arxiu").val()==undefined){
             error=error+"¡No se encuentra el archivo!";
             validacion=false;
           }else{
-            filename= $("#arxiu").val().split('.').pop();
+            filename= $("#arxiu").val().split(' ').pop();
             if(!validaExt(filename,tipoC[1].Descripcio)){
               error=error+"¡Extension incorrecta!";
               validacion=false;
@@ -357,7 +339,7 @@
             error=error+"¡No se encuentra el archivo!";
             validacion=false;
           }else{
-            filename= $("#arxiu-m").val().split('.').pop();
+            filename= $("#arxiu-m").val().split(' ').pop();
             if(!validaExt(filename,tipoC[2].Descripcio)){
               error=error+"¡Extension incorrecta!";
               validacion=false;
@@ -369,7 +351,7 @@
             error=error+"¡No se encuentra el archivo!";
             validacion=false;
           }else{
-            filename= $("#arxiu-v").val().split('.').pop();
+            filename= $("#arxiu-v").val().split(' ').pop();
             if(!validaExt(filename,tipoC[3].Descripcio)){
               error=error+"¡Extension incorrecta!";
               validacion=false;
@@ -381,7 +363,7 @@
             error=error+"¡No se encuentra el archivo!";
             validacion=false;
           }else{
-            filename= $("#arxiu").val().split('.').pop();
+            filename= $("#arxiu").val().split(' ').pop();
             if(!validaExt(filename,tipoC[4].Descripcio)){
               error=error+"¡Extension incorrecta!";
               validacion=false;
@@ -396,7 +378,7 @@
           validacion=false;
         }
       }
-      
+
       if(!validacion){
         alert(error);
         console.log(error+"/"+validacion);
@@ -405,10 +387,10 @@
 }
 
 function validaExt(arxiu,disp){
-  var ext=disp.split(" ");  
+  var ext=disp.split(" ");
   let correctExt=false;
   $.each(ext, function(index,element){
-    if(element==arxiu){
+    if(element==" "+arxiu){
       correctExt=true;
       return true;
     }
@@ -434,6 +416,10 @@ function multipleData(){
             let valueCount = input.value.split(separator).length;
             input.addEventListener("input", () => {
                 const currentValueCount = input.value.split(separator).length;
+                // Do not update list if the user doesn't add/remove a separator
+                // Current value: "a, b, c"; New value: "a, b, cd" => Do not change the list
+                // Current value: "a, b, c"; New value: "a, b, c," => Update the list
+                // Current value: "a, b, c"; New value: "a, b" => Update the list
                 if (valueCount !== currentValueCount) {
                     const lsIndex = input.value.lastIndexOf(separator);
                     const str = lsIndex !== -1 ? input.value.substr(0, lsIndex) + separator : "";

@@ -98,8 +98,11 @@ class ContingutController extends Controller
         $users=User::get(['id','name']);
         $cont=ContingutModel::whereNotNull('titulo')->get(['id','titulo']);
 
+        $tags=TagsModel::get(['id',"nombre"]);
+
         array_push($resultados,$users);
         array_push($resultados,$cont);
+        array_push($resultados,$tags);
         return $resultados;
     }
 

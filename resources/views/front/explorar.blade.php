@@ -23,7 +23,6 @@
         dataType: 'json',
         success: function(data){    
           $.each(data, function(index,element){
-            console.log(element);
             let object=$("<div>");
             object.addClass("publicacio");
             object.addClass("col-*-*");

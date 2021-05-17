@@ -62,7 +62,7 @@
     <form class="form-inline my-2 my-lg-0">
         <div>          
           <input type="text" name="buscador" id="buscador" list="cercador">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <button class="btn btn-outline-success my-2 my-sm-0" id="submit-buscador" type="submit">Search</button>
         </div>
         <datalist id="cercador"> </datalist>
     </form>
@@ -71,6 +71,28 @@
 <script>
   $(document).ready(function(){
     buscador();
+    $("#submit-buscador").on("click",function(e){
+      e.preventDefault();
+      var inputvalue=$("#buscador").val();
+      console.log();
+      var type=inputvalue[0];
+      var id=$('option[value="'+inputvalue+'"]').attr("data-id");
+      console.log(type);
+      switch(type){
+        case  "@":
+        if(id!=undefined){
+          window.location= "/usuaris/"+$('option[value="'+inputvalue+'"]').attr("data-id");
+        }
+        break;
+        case "-":
+
+          break;
+        case "#":
+
+          break;
+
+      }
+    });
   });
   function buscador() {
     $.ajax({
@@ -83,20 +105,20 @@
         success: function(data){                   
           $.each(data[0], function(index,element){
             var option=$("<option>");
-            option.text("@"+element.name);
-            option.attr("id",element.id)
+            option.val("@"+element.name);
+            option.attr("data-id",element.id);
             $("#cercador").append(option);
           });   
           $.each(data[1], function(index,element){
             var option=$("<option>");
-            option.text("-"+element.titulo);
-            option.attr("id",element.id)
+            option.val("-"+element.titulo);
+            option.attr("data-id",element.id);
             $("#cercador").append(option);
           });    
           $.each(data[2], function(index,element){
             var option=$("<option>");
-            option.text("#"+element.nombre);
-            option.attr("id",element.id)
+            option.val("#"+element.nombre);
+            option.attr("data-id",element.id);
             $("#cercador").append(option);
           });  
         }

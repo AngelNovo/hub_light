@@ -60,8 +60,46 @@
     </ul>
     {{-- Cercador --}}
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <div>          
+          <input type="text" name="buscador" id="buscador" list="cercador">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </div>
+        <datalist id="cercador"> </datalist>
     </form>
   </div>
 </nav>
+<script>
+  $(document).ready(function(){
+    buscador();
+  });
+  function buscador() {
+    $.ajax({
+        url: "/buscador",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "GET",
+        dataType: 'json',
+        success: function(data){                   
+          $.each(data[0], function(index,element){
+            var option=$("<option>");
+            option.text("@"+element.name);
+            option.attr("id",element.id)
+            $("#cercador").append(option);
+          });   
+          $.each(data[1], function(index,element){
+            var option=$("<option>");
+            option.text("-"+element.titulo);
+            option.attr("id",element.id)
+            $("#cercador").append(option);
+          });    
+          $.each(data[2], function(index,element){
+            var option=$("<option>");
+            option.text("#"+element.nombre);
+            option.attr("id",element.id)
+            $("#cercador").append(option);
+          });  
+        }
+    });
+  }
+</script>

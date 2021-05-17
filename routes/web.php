@@ -84,6 +84,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/back/admin/rights', [DerechosAutorController::class,'getRights']);
     Route::post('/back/admin/rights',[DerechosAutorController::class,'store']);
     Route::delete('/back/admin/rights',[DerechosAutorController::class,'deleteRight']);
+    Route::put('/back/admin/rights',[DerechosAutorController::class,'edit']);
 
     // Opciones
     Route::get('/opciones/{id}',[UsuariController::class,'opciones']);

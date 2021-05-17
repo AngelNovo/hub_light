@@ -132,32 +132,6 @@ class ContingutController extends Controller
             'tipoC'=>"required"
         ]);
 
-        // }else if($typeContent==2) {
-        //     $request->validate([
-        //         'arxiu'=>'required|mimes:pdf,txt|max:4096',
-        //         'derechoA'=>"required",
-        //         'tipoC'=>"required"
-        //     ]);
-        // }else if($typeContent==3) {
-        //     $request->validate([
-        //         'arxiu'=>'required|mimes:mp3,ogg|max:20000',
-        //         'derechoA'=>"required",
-        //         'tipoC'=>"required"
-        //     ]);
-        // }else if ($typeContent==4) {
-        //     $request->validate([
-        //         'arxiu'=>'required|mimes:mp4,ogg|max:20000',
-        //         'derechoA'=>"required",
-        //         'tipoC'=>"required"
-        //     ]);
-        // }else if($typeContent==5) {
-        //     $request->validate([
-        //         'arxiu'=>'required|mimes:zip,rar,css,blend,tar.gz,tar,7z,css,mng,webp,iris,sgi|max:10000',
-        //         'derechoA'=>"required",
-        //         'tipoC'=>"required"
-        //     ]);
-        // }
-
         $url=public_path('/contenido/'.$typeContent);
         // Mueve las imagenes a su directorio conveniente
         if($request->hasFile('portada')) {

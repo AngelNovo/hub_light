@@ -30,4 +30,12 @@ class DerechosAutorController extends Controller
         ->delete();
         return true;
     }
+
+    public function edit(Request $request) {
+        $edit=DerechosAutorModel::where('id_dret',$request->input('id'))
+        ->update([
+            "tipus"=>$request->input('value')
+        ]);
+        return 1;
+    }
 }

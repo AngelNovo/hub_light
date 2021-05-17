@@ -17,7 +17,7 @@
             let valor=element.val();
             let id=element.closest('tr');
             id=id.data('id');
-            newRight(valor);
+            editRight(id,valor);
         });
     });
 </script>
@@ -54,12 +54,12 @@
     <table id="tableContent" class="table table-fluid">
         <thead>
             <th>Id</th>
-            <th>Nombre</th>
+            <th>Tipo</th>
             <th>Acción</th>
         </thead>
         <tbody>
             @foreach ($rights as $r)
-                <tr data-id="{{$r->id}}">
+                <tr data-id="{{$r->id_dret}}">
                     <td><input type="number" class="form-control" name="id" value="{{$r->id_dret}}" disabled></td>
                     <td><input type="text" class="form-control" name="tipus" value="{{$r->tipus}}"></td>
                     <td class="text-center"><span><i class="fas fa-times text-danger" data-id="{{$r->id_dret}}" data-toggle="tooltip" data-placement="left" title="Eliminar"></i></span></td>

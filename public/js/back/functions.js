@@ -118,3 +118,24 @@ function deleteRight(id){
 
     });
 }
+
+function editRight(id,valor) {
+    $.ajax({
+        url: "/back/admin/rights",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "PUT",
+        data: {
+            id: id,
+            value:valor
+        },
+        dataType: 'json',
+
+        success: function(data){
+            // window.location="/back/admin/rights";
+            console.log(data);
+        }
+
+    });
+}

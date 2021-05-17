@@ -29,7 +29,7 @@
             @foreach ($content as $c)
                 <tr id="{{$c->id}}">
                     <td>
-                        <a href="{{url('/explorar/'.$c->id)}}" target="_blank">
+                        <a href="{{url('/contingut/'.$c->id)}}" target="_blank">
                             @if ($c->descripcio)
                                 {{$c->descripcio}}
                             @else

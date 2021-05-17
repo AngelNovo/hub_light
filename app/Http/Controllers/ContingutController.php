@@ -51,7 +51,7 @@ class ContingutController extends Controller
     }
     public function get($id) {
         $results = DB::table('contingut')
-        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
+        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
         ->join('users','users.id','=','contingut.propietari')
         ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
         ->where('contingut.id',$id)

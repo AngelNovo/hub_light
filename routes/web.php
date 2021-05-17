@@ -33,7 +33,7 @@ Route::put('/usuaris/update/foto',[UsuariController::class,'updateFoto']);
 Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
 Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
 // *Contingut*
-Route::get('/explorar/1/{id}',[ContingutController::class,'get']);
+Route::get('/contingut/{id}',[ContingutController::class,'get']);
 Route::post('/contingut',[ContingutController::class,'store']);
 // *Drets autor*
 Route::get('/derechosautor',[DerechosAutorController::class,'getAll']);
@@ -80,6 +80,10 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/back/admin/tipuscontent',[TipoContenidoController::class,'store']);
     Route::delete('/back/admin/tipuscontent',[TipoContenidoController::class,'delete']);
     Route::put('/back/admin/tipuscontent',[TipoContenidoController::class,'edit']);
+
+    Route::get('/back/admin/rights', [DerechosAutorController::class,'getRights']);
+    Route::post('/back/admin/rights',[DerechosAutorController::class,'store']);
+    Route::delete('/back/admin/rights',[DerechosAutorController::class,'deleteRight']);
 
     // Opciones
     Route::get('/opciones/{id}',[UsuariController::class,'opciones']);

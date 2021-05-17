@@ -99,3 +99,23 @@ function editTypeContent(id,campo,valor) {
 
     });
 }
+
+function deleteRight(id){
+    $.ajax({
+        url: "/back/admin/tipuscontent",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "DELETE",
+        data: {
+            id: id
+        },
+        dataType: 'json',
+
+        success: function(data){
+            // window.location="/back/admin/rights";
+            console.log(data);
+        }
+
+    });
+}

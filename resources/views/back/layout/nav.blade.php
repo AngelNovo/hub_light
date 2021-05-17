@@ -109,7 +109,11 @@
                     <li>
                         <a href={{url('/back/admin/tipocontent')}} id="typeContent">Tipo contenido
                         </a>
-                      </li>
+                    </li>
+                    <li>
+                        <a href={{url('/back/admin/rights')}} id="rights">Derechos de autor
+                        </a>
+                    </li>
                   </ul>
                 </div>
               </li>

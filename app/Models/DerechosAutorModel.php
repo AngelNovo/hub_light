@@ -10,6 +10,6 @@ class DerechosAutorModel extends Model
     use HasFactory;
     protected $table = 'dret_autor';
     protected $primaryKey = 'id';
-    protected $fillable = [];
+    protected $fillable = ["tipus","created_at","updated_at"];
     protected $hidden = ['created_at','updated_at'];
 }

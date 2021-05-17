@@ -33,7 +33,7 @@
                             @if ($c->descripcio)
                                 {{$c->descripcio}}
                             @else
-                                "test"
+                                Contenido sin descripción
                             @endif
                         </a>
                     </td>

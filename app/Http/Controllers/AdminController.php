@@ -51,8 +51,10 @@ class AdminController extends Controller
     }
 
     public function dashboard() {
+        $conectados=User::where('actiu',1)->count();
+        $desconectados=User::where('actiu',0)->count();
         $content=AnalitiquesGeneralsModel::all();
-        return view('back.dashboard')->with('content',$content);
+        return view('back.dashboard')->with('content',$content)->with('connected',$conectados)->with('disconnected',$desconectados);
     }
 
     public function adminify() {

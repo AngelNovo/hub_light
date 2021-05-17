@@ -47,10 +47,13 @@ Route::get('/tags',[TagsController::class,'getAll']);
 
 //  *Contingut estadistiques*
 
+// Buscador
+Route::get('/buscador',[ContingutController::class,'buscador']);
+
 // *ADMIN*
 Route::group(['middleware'=>'auth'], function() {
     Route::get('/back/admin/home', function() {
-        return view('back.home');
+        return redirect('/back/admin/dashboard');
     });
     Route::get('/back/admin/dashboard', [AdminController::class,'dashboard']);
     Route::get('/back/admin/u/adminify', [AdminController::class,'adminify']);
@@ -72,6 +75,15 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::get('/back/admin/adultify', [AdminController::class,'getContent']);
     Route::put('/back/admin/adultify', [AdminController::class,'adultify']);
+
+    Route::get('/back/admin/tipocontent', [TipoContenidoController::class,'getTypeContent']);
+    Route::post('/back/admin/tipuscontent',[TipoContenidoController::class,'store']);
+    Route::delete('/back/admin/tipuscontent',[TipoContenidoController::class,'delete']);
+    Route::put('/back/admin/tipuscontent',[TipoContenidoController::class,'edit']);
+
+    // Opciones
+    Route::get('/opciones/{id}',[UsuariController::class,'opciones']);
+    Route::put('/opciones/perfil',[UsuariController::class,'updatePerfil']);
 });
 
 Auth::routes();
@@ -90,7 +102,3 @@ Route::get('/recomendados',function() {
 
 // Destacados
 Route::get('/destacados',[ContingutController::class,'getDestacados']);
-
-// Opciones
-Route::get('/opciones/{id}',[UsuariController::class,'opciones']);
-Route::put('/opciones/perfil',[UsuariController::class,'updatePerfil']);

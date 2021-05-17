@@ -58,20 +58,6 @@
                 </ul>
               </div>
             </li>
-            <li class="sidebar-dropdown" id="general">
-              <a href="#" id="page_nav_perfil">
-                <i class="fa fa-address-card"></i>
-                <span>Perfil</span>
-              </a>
-              <div class="sidebar-submenu">
-                <ul>
-                  <li>
-                    <a href={{url('/back/admin/home')}} id="gestion">Gestión
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
             <li class="sidebar-dropdown" id="usuario">
               <a href="#" id="page_nav_usuario">
                 <i class="fa fa-user"></i>
@@ -120,6 +106,10 @@
                       <a href={{url('/back/admin/adultify')}} id="adultify">+18
                       </a>
                     </li>
+                    <li>
+                        <a href={{url('/back/admin/tipocontent')}} id="typeContent">Tipo contenido
+                        </a>
+                      </li>
                   </ul>
                 </div>
               </li>

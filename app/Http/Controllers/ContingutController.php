@@ -7,6 +7,7 @@ use App\Models\ContingutModel;
 use App\Models\ContingutTagModel;
 use App\Models\EstadisticaContingutModel;
 use App\Models\TagsModel;
+use App\Models\TipoContenidoModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -91,6 +92,17 @@ class ContingutController extends Controller
         return view('front.destacados')->with('contingut',$contingut);
     }
 
+    public function buscador() {
+
+        $resultados=[];
+        $users=User::get(['id','name']);
+        $cont=ContingutModel::whereNotNull('titulo')->get(['id','titulo']);
+
+        array_push($resultados,$users);
+        array_push($resultados,$cont);
+        return $resultados;
+    }
+
     public function store(Request $request) {
 
         $typeContent=$request->input('tipoC');
@@ -105,37 +117,41 @@ class ContingutController extends Controller
         $id_contingut=DB::table('contingut')->max('id');
 
         // Validaciones
-        if($typeContent==1) {
-            $request->validate([
-                'arxiu'=>'required|mimes:jpg,png,jpeg,gif,svg|max:4096',
-                'derechoA'=>"required",
-                'tipoC'=>"required"
-            ]);
-        }else if($typeContent==2) {
-            $request->validate([
-                'arxiu'=>'required|mimes:pdf,txt|max:4096',
-                'derechoA'=>"required",
-                'tipoC'=>"required"
-            ]);
-        }else if($typeContent==3) {
-            $request->validate([
-                'arxiu'=>'required|mimes:mp3,ogg|max:20000',
-                'derechoA'=>"required",
-                'tipoC'=>"required"
-            ]);
-        }else if ($typeContent==4) {
-            $request->validate([
-                'arxiu'=>'required|mimes:mp4,ogg|max:20000',
-                'derechoA'=>"required",
-                'tipoC'=>"required"
-            ]);
-        }else if($typeContent==5) {
-            $request->validate([
-                'arxiu'=>'required|mimes:zip,rar,css,blend,tar.gz,tar,7z,css,mng,webp,iris,sgi|max:10000',
-                'derechoA'=>"required",
-                'tipoC'=>"required"
-            ]);
-        }
+        $info=TipoContenidoModel::find($typeContent);
+        $info->Descripcio= $info->Descripcio;
+        // return $info;
+
+        $request->validate([
+            'arxiu'=>"required|mimes:$info->Descripcio|max:$info->espai",
+            'derechoA'=>"required",
+            'tipoC'=>"required"
+        ]);
+
+        // }else if($typeContent==2) {
+        //     $request->validate([
+        //         'arxiu'=>'required|mimes:pdf,txt|max:4096',
+        //         'derechoA'=>"required",
+        //         'tipoC'=>"required"
+        //     ]);
+        // }else if($typeContent==3) {
+        //     $request->validate([
+        //         'arxiu'=>'required|mimes:mp3,ogg|max:20000',
+        //         'derechoA'=>"required",
+        //         'tipoC'=>"required"
+        //     ]);
+        // }else if ($typeContent==4) {
+        //     $request->validate([
+        //         'arxiu'=>'required|mimes:mp4,ogg|max:20000',
+        //         'derechoA'=>"required",
+        //         'tipoC'=>"required"
+        //     ]);
+        // }else if($typeContent==5) {
+        //     $request->validate([
+        //         'arxiu'=>'required|mimes:zip,rar,css,blend,tar.gz,tar,7z,css,mng,webp,iris,sgi|max:10000',
+        //         'derechoA'=>"required",
+        //         'tipoC'=>"required"
+        //     ]);
+        // }
 
         $url=public_path('/contenido/'.$typeContent);
         // Mueve las imagenes a su directorio conveniente

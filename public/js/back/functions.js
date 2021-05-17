@@ -58,3 +58,44 @@ function adultify(id,value) {
 
     });
 }
+
+function deleteTypeContent(id) {
+    $.ajax({
+        url: "/back/admin/tipuscontent",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "DELETE",
+        data: {
+            id: id
+        },
+        dataType: 'json',
+
+        success: function(data){
+            window.location="/back/admin/tipocontent";
+        }
+
+    });
+}
+
+function editTypeContent(id,campo,valor) {
+    $.ajax({
+        url: "/back/admin/tipuscontent",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "PUT",
+        data: {
+            id:id,
+            campo:campo,
+            valor:valor
+        },
+        dataType: 'json',
+
+        success: function(data){
+            // window.location="/back/admin/adultify";
+            console.log(data);
+        }
+
+    });
+}

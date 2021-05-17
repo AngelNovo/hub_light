@@ -26,6 +26,8 @@ class DerechosAutorController extends Controller
     }
 
     public function deleteRight(Request $request) {
-        return $request->input('id');
+        $tipus =DerechosAutorModel::where('id_dret',$request->input('id'))
+        ->delete();
+        return true;
     }
 }

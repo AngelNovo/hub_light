@@ -8,7 +8,6 @@
     $(document).ready(function() {
         $('i').on('click',function() {
             let id=$(this).data("id");
-            console.log(id);
             deleteRight(id);
         });
 

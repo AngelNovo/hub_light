@@ -56,7 +56,8 @@ class ContingutController extends Controller
         ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
         ->where('contingut.id',$id)
         ->get();
-        return view('front.contenido')->with('contingut',$results);
+        return view('front.contenido')->with('results',$results[0]);
+
     }
 
     public function getRecomendados($offset) {

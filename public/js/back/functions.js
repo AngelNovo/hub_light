@@ -102,7 +102,7 @@ function editTypeContent(id,campo,valor) {
 
 function deleteRight(id){
     $.ajax({
-        url: "/back/admin/tipuscontent",
+        url: "/back/admin/rights",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
@@ -113,8 +113,7 @@ function deleteRight(id){
         dataType: 'json',
 
         success: function(data){
-            // window.location="/back/admin/rights";
-            console.log(data);
+            window.location="/back/admin/rights";
         }
 
     });

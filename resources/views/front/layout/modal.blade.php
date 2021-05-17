@@ -1,85 +1,103 @@
+{{-- CSS --}}
 <link rel="stylesheet" href={{asset("/css/front/modal.css")}}>
+{{-- Contingut Modal--}}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
+        {{-- Header Modal --}}
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Subir Contenido</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        {{-- Body Modal --}}
         <div class="modal-body">
+          {{-- Form Modal --}}
           <form id="formModal" action="/contingut" method="POST" enctype="multipart/form-data">
             @method('POST')
             @csrf
-          <div class="row">
-            <div>
-              <label for="tipoC">Tipo de contenido</label>
-                <select class="form-select" id="tipoC" name="tipoC" aria-label="Default select example">
-                </select>
-              <label for="ageRestrict">+18</label>
-              <input type="checkbox" name="ageRestrict"/>
-            </div>
-            <div>
-              <label for="portada" class="form-portada">
-                <div class="upload-icon">
-                    <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Portada" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar una portada" class="img-portada">
-                </div>
-              </label>
-              <input id="portada" name="portada" hidden type="file" form="formModal"/>
-            </div>
-            <div>
-              <label for="arxiu-i" id="arxiu-img">
-              <div class="upload-icon">
-                  <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar un archivo" class="img-arxiu image-thumbnail">
-              </div>
-              </label>
-              <label for="arxiu" id="arxiu-musica">
-            <div class="upload-icon">
-                <audio controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="music-arxiu"></audio>
-            </div>
-            </label>
-            <label for="arxiu" id="video-musica">
-            <div class="upload-icon">
-              <video controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="video-arxiu embed-responsive"></video>
-            </div>
-            </label>
-            <div>
-            <label for="arxiu" id="arxiu-otros">Archivo</label>
-            <input id="arxiu" name="arxiu" type="file" form="formModal"/>
-            <input id="arxiu-i" name="arxiu" hidden type="file" form="formModal"/>
-            <input id="arxiu-m" name="arxiu" type="file" form="formModal"/>
-            <input id="arxiu-v" name="arxiu" type="file" form="formModal"/>
-            </div>
-            </div>
-            <div class="modal-row">
-            <label for="titol">Titulo</label>
-            <input id="titol" name="titol" type="text" form="formModal"/>
-            </div>
-            <div class="modal-row">
-            <label for="desc">Descripción</label>
-            <textarea id="desc" name="desc"></textarea>
-            </div>
-            <div title="Selecciona las etiquetas que quiera, si no existen puede escribiras manualmente y se crearan" class="modal-row">
-              <label>Selecciona las etiquetas (Separalas por comas):</label>
-              <input type="text" list="Suggestions" multiple="multiple" name="tags" form="formModal"/>
-              <datalist id="Suggestions">
-              </datalist>
-            </div>
-            <div class="modal-row">
+            <div class="row">
+              {{-- Select del Contenido --}}
               <div>
-            <label for="derechoA">Derechos de autor</label>
-            <select class="form-select" id="derechoA" name="derechoA" aria-label="Default select example">
-            </select>
-            </div>
-            <div id="licencias">
-            <label for="linkCopy">Licencia</label>
-            <input id="linkCopy" name="linkCopy" type="text" placeholder="url"/>
-            </div>
-          </div>
-          </div>
+                <label for="tipoC">Tipo de contenido</label>
+                  <select class="form-select" id="tipoC" name="tipoC" aria-label="Default select example">
+                  </select>
+                  {{-- Majoria de edad --}}
+                <label for="ageRestrict">+18</label>
+                <input type="checkbox" name="ageRestrict"/>
+              </div>
+              {{-- Portada --}}
+              <div>
+                <label for="portada" class="form-portada">
+                  <div class="upload-icon">
+                      <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Portada" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar una portada" class="img-portada">
+                  </div>
+                </label>
+                <input id="portada" name="portada" hidden type="file" form="formModal"/>
+              </div>
+              {{-- Labels Arxius --}}
+              <div>
+                {{-- Arxiu Imatge --}}
+                <label for="arxiu-i" id="arxiu-img">
+                  <div class="upload-icon">
+                      <img style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" title="Haz clic para insertar un archivo" class="img-arxiu image-thumbnail">
+                  </div>
+                </label>
+                {{-- Arxiu Musica --}}
+                <label for="arxiu" id="arxiu-musica">
+                  <div class="upload-icon">
+                      <audio controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="music-arxiu"></audio>
+                  </div>
+                </label>
+                {{-- Arxiu Video --}}
+                <label for="arxiu" id="arxiu-video">
+                  <div class="upload-icon">
+                    <video controls="controls" style="cursor: pointer;" src={{asset('images/No-Image.png')}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="video-arxiu embed-responsive"></video>
+                  </div>
+                </label>
+                {{-- Input arxius --}}
+                <div>
+                  <label for="arxiu" id="arxiu-otros">Archivo</label>
+                  <input id="arxiu" name="arxiu" type="file" form="formModal"/>
+                  <input id="arxiu-i" name="arxiu" hidden type="file" form="formModal"/>
+                  <input id="arxiu-m" name="arxiu" type="file" form="formModal"/>
+                  <input id="arxiu-v" name="arxiu" type="file" form="formModal"/>
+                </div>
+              </div>
+              {{-- Titol --}}
+              <div class="modal-row">
+                <label for="titol">Titulo</label>
+                <input id="titol" name="titol" type="text" form="formModal"/>
+              </div>
+              {{-- Descripcio --}}
+              <div class="modal-row">
+                <label for="desc">Descripción</label>
+                <textarea id="desc" name="desc"></textarea>
+              </div>
+              {{-- Etiquetes Multiselect --}}
+              <div title="Selecciona las etiquetas que quiera, si no existen puede escribiras manualmente y se crearan" class="modal-row">
+                <label>Selecciona las etiquetas (Separalas por comas):</label>
+                <input type="text" list="Suggestions" multiple="multiple" name="tags" form="formModal"/>
+                <datalist id="Suggestions"> </datalist>
+              </div>
+              {{-- Drets de autor --}}
+              <div class="modal-row">
+                {{-- Tipo de dret --}}
+                <div>
+                  <label for="derechoA">Derechos de autor</label>
+                  <select class="form-select" id="derechoA" name="derechoA" aria-label="Default select example"> </select>
+                </div>
+                {{-- Llicencia --}}
+                <div id="licencias">
+                  <label for="linkCopy">Licencia</label>
+                  <input id="linkCopy" name="linkCopy" type="text" placeholder="url"/>
+                </div>
+              </div>
+            </div>          
+          </form>
         </div>
-      </form>
+        {{-- Botones de Enviar y Submit --}}
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" form="formModal">Cancelar</button>
           <button type="submit" class="btn btn-primary" id="submitForm" form="formModal">Subir</button>
@@ -243,7 +261,7 @@
       $("#arxiu-m").prop( "disabled", true);
       $("#arxiu-v").prop( "disabled", true);
       $("#arxiu-musica").hide();
-      $("#video-musica").hide();
+      $("#arxiu-video").hide();
       $("#portada").prop( "disabled", true);
       switch(tipo){
         case  "1":
@@ -272,7 +290,7 @@
         case "4":
           $(".form-portada").show();
           $("#portada").prop( "disabled", false);
-          $("#video-musica").show();
+          $("#arxiu-video").show();
           $("#arxiu-v").show();
           $("#arxiu-v").prop( "disabled", false);
           $("#arxiu-otros").show();
@@ -390,7 +408,7 @@ function validaExt(arxiu,disp){
   var ext=disp.split(" ");  
   let correctExt=false;
   $.each(ext, function(index,element){
-    if(element=="."+arxiu){
+    if(element==arxiu){
       correctExt=true;
       return true;
     }
@@ -416,10 +434,6 @@ function multipleData(){
             let valueCount = input.value.split(separator).length;
             input.addEventListener("input", () => {
                 const currentValueCount = input.value.split(separator).length;
-                // Do not update list if the user doesn't add/remove a separator
-                // Current value: "a, b, c"; New value: "a, b, cd" => Do not change the list
-                // Current value: "a, b, c"; New value: "a, b, c," => Update the list
-                // Current value: "a, b, c"; New value: "a, b" => Update the list
                 if (valueCount !== currentValueCount) {
                     const lsIndex = input.value.lastIndexOf(separator);
                     const str = lsIndex !== -1 ? input.value.substr(0, lsIndex) + separator : "";

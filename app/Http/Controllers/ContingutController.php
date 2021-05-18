@@ -58,22 +58,22 @@ class ContingutController extends Controller
         ->where('contingut.id',$id)
         ->get();
 
-        // $id_user=DB::table('users')
-        // ->select('users.id')
-        // ->join('contingut','contingut.propietari','=','users.id')
-        // ->where(['contingut.id'=>$id])
-        // ->get();
-        // $id_user=$id_user[0]->id;
+        $id_user=DB::table('users')
+        ->select('users.id')
+        ->join('contingut','contingut.propietari','=','users.id')
+        ->where(['contingut.id'=>$id])
+        ->get();
+        $id_user=$id_user[0]->id;
         // return $id_user;
 
-        // $resultAmistad=SeguidorsModel::where('id_usuari',Auth::user()->id);
-        // ->orWhere('id_usuari',$id_user)
-        // ->orWhere('id_seguit',$id_user)
-        // ->orWhere('id_seguit',Auth::user()->id);
+        $resultAmistad=SeguidorsModel::where('id_usuari',Auth::user()->id)
+        ->orWhere('id_usuari',$id_user)
+        ->orWhere('id_seguit',$id_user)
+        ->orWhere('id_seguit',Auth::user()->id);
 
         // return $resultAmistad;
 
-        return view('front.contenido')->with('results',$results[0]);
+        return view('front.contenido')->with('results',$results[0])->with('amistad',($resultAmistad) ? 1 : 0);
 
     }
 

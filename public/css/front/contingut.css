@@ -44,6 +44,8 @@
     width: 100%;
     background-color: #cccccc99;
     box-shadow: 2px 2px 2px #3d3d3d;
+    border-radius: 0 0 10px 10px;
+    padding-bottom: 5px;
 }
 
 .header-footer-contingut{
@@ -60,4 +62,28 @@
 
 .header-footer-contingut i:hover{
     background-color: #72727299;
+}
+.foto-coment{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+    background-color: white;
+    object-fit: cover;
+    margin-bottom: -30px;
+    margin-left: 5px;
+    z-index: 2;
+    position: relative;   
+}
+.border-bot{
+    border-bottom: solid 1px black;
+}
+textarea{
+    min-height: 50px;
+    z-index: 0;
+}
+
+textarea:focus{
+    margin-top: 25px;
 }

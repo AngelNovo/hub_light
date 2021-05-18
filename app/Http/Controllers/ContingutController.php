@@ -72,13 +72,14 @@ class ContingutController extends Controller
         ->orWhere('id_seguit',Auth::user()->id)
         ->get();
 
-        // return $resultAmistad[0];
+        $tags=ContingutModel::where('id_contingut',$id)
+        ->join('contingut_tag','contingut_tag.id_contingut','=','contingut.id')
+        ->join('tags','tags.id','=','contingut_tag.id_tag')->get('nombre');
 
-        if(isset($resultAmistad[0]->id_usuari)) {
-            return view('front.contenido')->with('results',$results[0])->with('amistad', 1 );
-        }
-        return view('front.contenido')->with('results',$results[0])->with('amistad', 0 );
-
+        return view('front.contenido')
+            ->with('results',$results[0])
+            ->with('amistad', (isset($resultAmistad[0]->id_usuari))?1:0)
+            ->with('tags',$tags);
     }
 
     public function getRecomendados($offset) {

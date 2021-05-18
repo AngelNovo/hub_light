@@ -3,11 +3,11 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContingutController;
 use App\Http\Controllers\DerechosAutorController;
+use App\Http\Controllers\InteraccioController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TipoContenidoController;
 use App\Http\Controllers\TipusUsuariController;
 use App\Http\Controllers\UsuariController;
-use App\Models\InteraccioModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -92,7 +92,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::put('/opciones/perfil',[UsuariController::class,'updatePerfil']);
 
     // Comentarios y likes
-    Route::post('/comment', [InteraccioModel::class,'store']);
+    Route::post('/comment', [InteraccioController::class,'store']);
 });
 
 Auth::routes();

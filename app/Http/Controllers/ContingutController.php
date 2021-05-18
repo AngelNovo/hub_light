@@ -6,6 +6,7 @@ use App\Models\AnalitiquesGeneralsModel;
 use App\Models\ContingutModel;
 use App\Models\ContingutTagModel;
 use App\Models\EstadisticaContingutModel;
+use App\Models\SeguidorsModel;
 use App\Models\TagsModel;
 use App\Models\TipoContenidoModel;
 use App\Models\User;
@@ -51,11 +52,27 @@ class ContingutController extends Controller
     }
     public function get($id) {
         $results = DB::table('contingut')
-        ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'users.id as id_user','users.foto as foto_perfil','users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
+        ->select('contingut.id','portada','contingut.titulo', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'users.id as id_user','users.foto as foto_perfil','users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
         ->join('users','users.id','=','contingut.propietari')
         ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
         ->where('contingut.id',$id)
         ->get();
+
+        // $id_user=DB::table('users')
+        // ->select('users.id')
+        // ->join('contingut','contingut.propietari','=','users.id')
+        // ->where(['contingut.id'=>$id])
+        // ->get();
+        // $id_user=$id_user[0]->id;
+        // return $id_user;
+
+        // $resultAmistad=SeguidorsModel::where('id_usuari',Auth::user()->id);
+        // ->orWhere('id_usuari',$id_user)
+        // ->orWhere('id_seguit',$id_user)
+        // ->orWhere('id_seguit',Auth::user()->id);
+
+        // return $resultAmistad;
+
         return view('front.contenido')->with('results',$results[0]);
 
     }

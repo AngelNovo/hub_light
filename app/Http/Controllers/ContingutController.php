@@ -69,11 +69,15 @@ class ContingutController extends Controller
         $resultAmistad=SeguidorsModel::where('id_usuari',Auth::user()->id)
         ->orWhere('id_usuari',$id_user)
         ->orWhere('id_seguit',$id_user)
-        ->orWhere('id_seguit',Auth::user()->id);
+        ->orWhere('id_seguit',Auth::user()->id)
+        ->get();
 
-        // return $resultAmistad;
+        // return $resultAmistad[0];
 
-        return view('front.contenido')->with('results',$results[0])->with('amistad',($resultAmistad) ? 1 : 0);
+        if(isset($resultAmistad[0]->id_usuari)) {
+            return view('front.contenido')->with('results',$results[0])->with('amistad', 1 );
+        }
+        return view('front.contenido')->with('results',$results[0])->with('amistad', 0 );
 
     }
 

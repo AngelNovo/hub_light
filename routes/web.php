@@ -7,6 +7,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TipoContenidoController;
 use App\Http\Controllers\TipusUsuariController;
 use App\Http\Controllers\UsuariController;
+use App\Models\InteraccioModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -89,6 +90,9 @@ Route::group(['middleware'=>'auth'], function() {
     // Opciones
     Route::get('/opciones/{id}',[UsuariController::class,'opciones']);
     Route::put('/opciones/perfil',[UsuariController::class,'updatePerfil']);
+
+    // Comentarios y likes
+    Route::post('/comment', [InteraccioModel::class,'store']);
 });
 
 Auth::routes();

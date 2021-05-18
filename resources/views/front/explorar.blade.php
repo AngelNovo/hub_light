@@ -1,19 +1,24 @@
 @extends("front.layout.app")
-
 @section("content")
+{{-- Css --}}
 <link rel="stylesheet" href={{asset("/css/front/explorar.css")}}>
 <div class="content">
     {{-- Contingut --}}
     <div class="contingut row container-fluid  img-responsive"> </div>
 </div>
+{{-- Scripts --}}
 <script>
+    // Document Ready
     $(document).ready(function(){
+        // Marcar Navbar
         $(".isSelected").removeClass("isSelected");
         $("#Nav-Explorar").addClass("isSelected");
+        // Carregar contingut
         cargarContenido(0);
     });  
-    
+    // Funcio carregar contingut
     function cargarContenido(index){
+        // Ajax
         $.ajax({
         url: "/explorar/"+index,
         headers: {
@@ -21,8 +26,11 @@
         },
         type: "GET",
         dataType: 'json',
-        success: function(data){    
+        success: function(data){
+            // Ajax correcte
+            //Start Foreach    
           $.each(data, function(index,element){
+            // Creacio de objecte i classes
             let object=$("<a>");
             object.addClass("publicacio");
             object.addClass("col-*-*");
@@ -31,11 +39,13 @@
             img.addClass("image-thumbnail");
             let icon=$("<i>");
             icon.addClass("fas");
+            // Asignacio imatge
             if(element.tipus_contingut==1){
                 img.attr("src",'{{asset("contenido/1")}}/'+element.url);
             }else{
                 img.attr("src",'{{asset("contenido/1")}}/'+element.portada);
             }
+            // Icona del contingut
             switch(element.tipus_contingut){
                 case  1:
                 icon.append($("<img>").attr("src",'{{asset("iconos/img.svg")}}'));
@@ -56,7 +66,8 @@
             object.append(icon);
             object.append(img);
             $(".contingut").append(object);
-          });        
+          }); 
+          // End Foreach       
 
         }
         });

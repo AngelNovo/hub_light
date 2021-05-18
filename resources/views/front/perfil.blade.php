@@ -50,8 +50,11 @@
         </div>
     </div>
 </div>
+{{-- Scripts --}}
 <script>
+    // Document Ready
     $(document).ready(function(){
+        // Marcar Navbar
         $(".isSelected").removeClass("isSelected");
         $("#Nav-Perfil").addClass("isSelected");
     });   

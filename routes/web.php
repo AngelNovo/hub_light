@@ -95,7 +95,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/comment', [InteraccioController::class,'store']);
 
     // Tags
-    // Route::get();
+    Route::get('/back/admin/tags',[TagsController::class,'getAll']);
 });
 
 Auth::routes();

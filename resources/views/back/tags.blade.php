@@ -1,8 +1,8 @@
 @extends('back.layout.app')
 
 @section('content')
-<input type="hidden" id="page" value="usuario" />
-<input type="hidden" id="sub" value="lista" />
+<input type="hidden" id="page" value="tags" />
+<input type="hidden" id="sub" value="crud" />
 <script>
     $(document).ready(function() {
         $('.delete > i').on('click',function() {

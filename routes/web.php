@@ -93,6 +93,9 @@ Route::group(['middleware'=>'auth'], function() {
 
     // Comentarios y likes
     Route::post('/comment', [InteraccioController::class,'store']);
+
+    // Tags
+    // Route::get();
 });
 
 Auth::routes();

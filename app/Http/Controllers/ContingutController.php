@@ -73,7 +73,7 @@ class ContingutController extends Controller
         $comment=InteraccioModel::where('id_contingut',$id)
         ->join("contingut","contingut.id","id_contingut")
         ->join("users","users.id","propietari")
-        ->get("interaccio.id_usuari as id_usuari_comentari","interaccio.comentario as comentario","contingut.created_at","users.foto as foto_perfil","users.name as propietario");
+        ->get();
         // Comprueba si los usuarios son amigos
         if(isset(Auth::user()->id)){
             $resultAmistad=SeguidorsModel::where('id_Usuari',)

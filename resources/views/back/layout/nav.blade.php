@@ -116,7 +116,21 @@
                     </li>
                   </ul>
                 </div>
-              </li>
+            </li>
+            <li class="sidebar-dropdown" id="tags">
+                <a href="#" id="page_nav_tags">
+                  <i class="fa fa-users"></i>
+                  <span>Tags</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href={{url('/back/admin/tags')}} id="crud">Controlar tags
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </li>
 
         </div>
         <!-- sidebar-menu  -->

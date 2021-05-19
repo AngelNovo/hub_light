@@ -6,6 +6,7 @@ use App\Models\AnalitiquesGeneralsModel;
 use App\Models\ContingutModel;
 use App\Models\ContingutTagModel;
 use App\Models\EstadisticaContingutModel;
+use App\Models\InteraccioModel;
 use App\Models\SeguidorsModel;
 use App\Models\TagsModel;
 use App\Models\TipoContenidoModel;
@@ -65,8 +66,12 @@ class ContingutController extends Controller
         ->where(['contingut.id'=>$id])
         ->get();
         $id_user=$id_user[0]->id;
-        // return $id_user;
 
+        // Comprueba si el usuario logueado le ha dado megusta
+        $like=InteraccioModel::where(['id_contingut'=>$id,"id_usuari"=>Auth::user()->id])->get('megusta')->first();
+        // Devuelve los comentarios de la publicación
+        $comment=InteraccioModel::where('id_contingut',$id)->get();
+        // Comprueba si los usuarios son amigos
         if(isset(Auth::user()->id)){
             $resultAmistad=SeguidorsModel::where('id_Usuari',)
             ->orWhere('id_usuari',$id_user)
@@ -74,7 +79,7 @@ class ContingutController extends Controller
             ->orWhere('id_seguit',Auth::user()->id)
             ->get();
         }
-
+        // Devuelve los tags del contenido
         $tags=ContingutModel::where('id_contingut',$id)
         ->join('contingut_tag','contingut_tag.id_contingut','=','contingut.id')
         ->join('tags','tags.id','=','contingut_tag.id_tag')->get('nombre');
@@ -82,7 +87,9 @@ class ContingutController extends Controller
         return view('front.contenido')
             ->with('results',$results[0])
             ->with('amistad', (sizeof($resultAmistad)>0)?1:0)
-            ->with('tags',$tags);
+            ->with('tags',$tags)
+            ->with('comentarios',$comment)
+            ->with('like',$like);
     }
 
     public function getRecomendados($offset) {

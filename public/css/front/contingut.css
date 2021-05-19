@@ -87,3 +87,17 @@ textarea{
 textarea:focus{
     margin-top: 25px;
 }
+
+.meGusta{
+    font-size: 40px;
+    color: rgb(172, 1, 1);
+}
+
+.comentario{
+    border-bottom: dashed 1px black;
+    margin-bottom: 4px;
+}
+
+.text-comment{
+    margin-left: 60px;    
+}

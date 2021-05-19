@@ -9,8 +9,8 @@
         <a href="{{asset('/usuaris/'.$results->id_user)}}">
             <div>
                 <img src={{asset("images/perfil/usuarios/".$results->foto_perfil)}} class="header-perfil-img" title="Perfil">
-            </div>
-        </a>
+            </div> 
+        </a>  
         <h2>{{$results->titulo}}</h2>
         <p>{{$amistad}}</p>
     </div>
@@ -37,14 +37,23 @@
     <div class="footer-contingut">
         <div class="header-footer-contingut">
             <div>
-                <i class="fa pe-7s-like" data-toggle="Me gusta"> </i>
+                <i class="fa pe-7s-like" id="like" data-toggle="Me gusta"> </i>
                 <i class="fa pe-7s-paper-plane" title="Enviar"> </i>
-            </div>
+            </div>            
         </div>
         <div class="border-bot">
+            @foreach ($comentarios as $item)
+                <div class="comentario">
+                    <a href="{{asset('/usuaris/'.$item->id_usuari)}}">
+                        <img class="foto-coment" src={{asset("images/perfil/usuarios/".$item->foto)}}>
+                    </a>
+                   <p class="text-comment">{{$item->comentario}}</p>
+                </div>
+            @endforeach
         </div>
         <div >
-            @if (isset(Auth::user()->id)&&Auth::user()->id!=$results->id_user)
+            @if (isset(Auth::user()->id))
+                @if (Auth::user()->id!=$results->id_user)
                 <form id="comentari">
                     <div class="form-group">
                         <img src={{asset("images/perfil/usuarios/".Auth::user()->foto)}} class="foto-coment">
@@ -53,21 +62,33 @@
                     </div>
                     <button type="submit" class="btn btn-primary" id="submit-comment">Envia</button>
                 </form>
-            @endif
+                @endif               
+            @endif 
         </div>
-    </div>
+    </div>        
 
 </div>
 {{-- Scripts --}}
-<script>
+<script>    
     // Document Ready
     $(document).ready(function(){
         // Marcar Navbar
         $(".isSelected").removeClass("isSelected");
         var megusta=$("#megusta").val();
         $(document).on("submit",function(e){
-            e.preventDefault();
             enviaComent();
+        });
+        $("#like").on("click",function(e){
+
+            if($("#megusta").prop("checked")){
+                $("#megusta").prop("checked",false);
+                $("#like").removeClass("meGusta");
+            }else{
+                $("#megusta").prop("checked",true);
+                $("#like").addClass("meGusta");
+            }
+            enviaLike();
+            
         });
     });
 
@@ -84,30 +105,36 @@
             "id_contingut":{{$results->id}},
             "comentario":comentario
         },
-        success: function(data){
-            console.log(data);
-        //   $.each(data[0], function(index,element){
-        //     var option=$("<option>");
-        //     option.val("@"+element.name);
-        //     option.attr("data-id",element.id);
-        //     $("#cercador").append(option);
-        //   });
-        //   $.each(data[1], function(index,element){
-        //     var option=$("<option>");
-        //     option.val("-"+element.titulo);
-        //     option.attr("data-id",element.id);
-        //     $("#cercador").append(option);
-        //   });
-        //   $.each(data[2], function(index,element){
-        //     var option=$("<option>");
-        //     option.val("#"+element.nombre);
-        //     option.attr("data-id",element.id);
-        //     $("#cercador").append(option);
-        //   });
+        success: function(data){                   
+           console.log("correcte");
         }
         });
     }
 
+    function enviaLike(){
+        var megusta;
+        if($("#megusta").prop("checked")){
+            megusta=1;
+        }else{
+            megusta=0;
+        }
+        $.ajax({
+        url: "/comment",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        dataType: 'json',
+        data: {
+            "id_contingut":{{$results->id}},
+            "megusta":megusta
+        },
+        success: function(data){                   
+           console.log("correcte");
+        }
+        });
+    }
+    
     //id_contenido
     //megusta
     //comentario

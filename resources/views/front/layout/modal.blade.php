@@ -364,7 +364,7 @@
           validacion=false;
         }else{
           // Extensio Arxiu
-          filename= $("#arxiu-i").val().split(' ').pop();
+          filename= $("#arxiu-i").val().split('.').pop();
           if(!validaExt(filename,tipoC[0].Descripcio)){
             error=error+"¡Extension incorrecta!";
             validacion=false;
@@ -379,7 +379,7 @@
           validacion=false;
         }else{
           // Extensio Incorrecte
-          filename= $("#arxiu").val().split(' ').pop();
+          filename= $("#arxiu").val().split('.').pop();
           if(!validaExt(filename,tipoC[1].Descripcio)){
             error=error+"¡Extension incorrecta!";
             validacion=false;
@@ -399,7 +399,7 @@
           validacion=false;
         }else{
           // Extensio correcte
-          filename= $("#arxiu-m").val().split(' ').pop();
+          filename= $("#arxiu-m").val().split('.').pop();
           if(!validaExt(filename,tipoC[2].Descripcio)){
             error=error+"¡Extension incorrecta!";
             validacion=false;
@@ -414,7 +414,7 @@
           validacion=false;
         }else{
           // Extensio incorrecte
-          filename= $("#arxiu-v").val().split(' ').pop();
+          filename= $("#arxiu-v").val().split('.').pop();
           if(!validaExt(filename,tipoC[3].Descripcio)){
             error=error+"¡Extension incorrecta!";
             validacion=false;
@@ -429,7 +429,7 @@
           validacion=false;
         }else{
           // Extensio incorrecte
-          filename= $("#arxiu").val().split(' ').pop();
+          filename= $("#arxiu").val().split('.').pop();
           if(!validaExt(filename,tipoC[4].Descripcio)){
             error=error+"¡Extension incorrecta!";
             validacion=false;
@@ -458,7 +458,8 @@
     var ext=disp.split(" ");
     let correctExt=false;
     $.each(ext, function(index,element){
-      if(element==" "+arxiu){
+      console.log(element+"/"+arxiu);
+      if(element==arxiu){
         correctExt=true;
         return true;
       }

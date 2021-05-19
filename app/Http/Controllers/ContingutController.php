@@ -51,6 +51,7 @@ class ContingutController extends Controller
         // return view ('front.explorar')->with('results',$results);
     }
     public function get($id) {
+        $resultAmistad=[];
         $results = DB::table('contingut')
         ->select('contingut.id','portada','contingut.titulo', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'users.id as id_user','users.foto as foto_perfil','users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
         ->join('users','users.id','=','contingut.propietari')
@@ -66,11 +67,13 @@ class ContingutController extends Controller
         $id_user=$id_user[0]->id;
         // return $id_user;
 
-        $resultAmistad=SeguidorsModel::where('id_usuari',Auth::user()->id)
-        ->orWhere('id_usuari',$id_user)
-        ->orWhere('id_seguit',$id_user)
-        ->orWhere('id_seguit',Auth::user()->id)
-        ->get();
+        if(isset(Auth::user()->id)){
+            $resultAmistad=SeguidorsModel::where('id_Usuari',)
+            ->orWhere('id_usuari',$id_user)
+            ->orWhere('id_seguit',$id_user)
+            ->orWhere('id_seguit',Auth::user()->id)
+            ->get();
+        }
 
         $tags=ContingutModel::where('id_contingut',$id)
         ->join('contingut_tag','contingut_tag.id_contingut','=','contingut.id')
@@ -78,7 +81,7 @@ class ContingutController extends Controller
 
         return view('front.contenido')
             ->with('results',$results[0])
-            ->with('amistad', (isset($resultAmistad[0]->id_usuari))?1:0)
+            ->with('amistad', (sizeof($resultAmistad)>0)?1:0)
             ->with('tags',$tags);
     }
 

@@ -9,21 +9,24 @@ use Illuminate\Support\Facades\Auth;
 class InteraccioController extends Controller
 {
     public function store(Request $request) {
-        if(isset($request->input('like'))) {
-            InteraccioModel::firstOrNew([
-                'megusta'=>$request->input('like'),
-                'id_Usuari'=>Auth::user()->id,
-                'id_Contingut'=>$request->input('id_contingut')
-            ])
-            ->where('id_Contingut',$request->input('propietari'));
-        }
-        if(isset($request->input('comentario'))) {
-            InteraccioModel::firstOrNew([
-                'comentario'=>$request->input('comentario'),
-                'id_Usuari'=>Auth::user()->id,
-                'id_Contingut'=>$request->input('id_contingut')
-            ])
-            ->where('id_Contingut',$request->input('propietari'));
-        }
+        // return $request->all();
+
+        $id_activo=Auth::user()->id;
+
+        //1: recogemos el registro, si no existe lo crea y devuelve
+        $interaccio=InteraccioModel::firstOrCreate([
+            "id_usuari" => $id_activo,
+            "id_contingut" => $request->input("id_contingut")
+        ]);
+
+        //2: rellenamos el objeto con los valores del request
+        $interaccio->fill($request->all());
+
+        //3: guardamos (update) el objeto
+        $interaccio->save();
+
+        //4: devolvemos una respuesta response() con el valor que queramos
+
+        return $interaccio;
     }
 }

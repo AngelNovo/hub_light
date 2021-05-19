@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 17, 2021 at 05:26 PM
+-- Generation Time: May 19, 2021 at 05:19 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -43,7 +43,9 @@ CREATE TABLE `analitiques_generals` (
 
 INSERT INTO `analitiques_generals` (`id`, `usuaris_suspes`, `usuaris_actius`, `usuaris_enperill`, `contenido_total`, `created_at`, `updated_at`) VALUES
 (1, 2, 6, 0, 20, '2021-05-16 15:24:59', '2021-05-16 19:55:25'),
-(2, 2, 6, 0, 26, '2021-05-17 10:01:48', '2021-05-17 15:25:25');
+(2, 2, 6, 0, 26, '2021-05-17 10:01:48', '2021-05-17 15:25:25'),
+(3, 2, 6, 0, 26, '2021-05-18 04:09:43', '2021-05-18 04:09:43'),
+(4, 2, 5, 1, 27, '2021-05-19 04:07:42', '2021-05-19 06:12:58');
 
 -- --------------------------------------------------------
 
@@ -173,7 +175,9 @@ INSERT INTO `avis_usuari` (`id`, `id_usuari`, `id_avis`, `acceptat`, `created_at
 (85, 1, 2, '1', '2021-05-15 13:00:56', '2021-05-15 13:01:02'),
 (86, 1, 2, '1', '2021-05-15 13:00:58', '2021-05-15 13:01:10'),
 (87, 1, 1, '1', '2021-05-15 13:01:32', '2021-05-15 13:01:37'),
-(88, 1, 2, '1', '2021-05-15 13:01:34', '2021-05-15 13:01:36');
+(88, 1, 2, '1', '2021-05-15 13:01:34', '2021-05-15 13:01:36'),
+(89, 1, 1, '1', '2021-05-19 05:55:18', '2021-05-19 05:55:23'),
+(90, 1, 2, '1', '2021-05-19 05:55:20', '2021-05-19 05:55:22');
 
 -- --------------------------------------------------------
 
@@ -221,7 +225,8 @@ INSERT INTO `contingut` (`id`, `titulo`, `portada`, `link_copyright`, `url`, `de
 (60, 'Cute Guardiana', NULL, NULL, '1621267519-Llabreso.png', NULL, 0, 0, 90, 5, 1, 2, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
 (61, NULL, NULL, NULL, '1621272042-AngelNovo2.jpg', NULL, 0, 0, 91, 14, 1, 2, '2021-05-17 15:20:42', '2021-05-17 15:20:42'),
 (63, 'Igor', NULL, NULL, '1621272207-AngelNovo2.jpg', 'Just igor', 1, 0, 93, 14, 1, 2, '2021-05-17 15:23:27', '2021-05-17 15:23:27'),
-(64, 'thor', NULL, NULL, '1621272325-AngelNovo2.jpg', 'Just thor', 1, 0, 94, 14, 1, 2, '2021-05-17 15:25:25', '2021-05-17 15:25:25');
+(64, 'thor', NULL, NULL, '1621272325-AngelNovo2.jpg', 'Just thor', 1, 0, 94, 14, 1, 2, '2021-05-17 15:25:25', '2021-05-17 15:25:25'),
+(65, 'Golden skull', NULL, NULL, '1621411977-AngelNovo2.jpg', 'Just a skull', 0, 0, 95, 14, 1, 2, '2021-05-19 06:12:58', '2021-05-19 06:12:58');
 
 -- --------------------------------------------------------
 
@@ -260,7 +265,9 @@ INSERT INTO `contingut_tag` (`id_contingut`, `id_tag`, `created_at`, `updated_at
 (60, 58, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
 (60, 59, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
 (64, 61, '2021-05-17 15:25:25', '2021-05-17 15:25:25'),
-(64, 62, '2021-05-17 15:25:25', '2021-05-17 15:25:25');
+(64, 62, '2021-05-17 15:25:25', '2021-05-17 15:25:25'),
+(65, 63, '2021-05-19 06:12:58', '2021-05-19 06:12:58'),
+(65, 64, '2021-05-19 06:12:58', '2021-05-19 06:12:58');
 
 -- --------------------------------------------------------
 
@@ -271,7 +278,7 @@ INSERT INTO `contingut_tag` (`id_contingut`, `id_tag`, `created_at`, `updated_at
 CREATE TABLE `dret_autor` (
   `id_dret` int(10) UNSIGNED NOT NULL,
   `tipus` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icona` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icona` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -376,7 +383,8 @@ INSERT INTO `estadistiques_contingut` (`id_estadistica`, `q_comentaris`, `q_like
 (91, 0, 0, '2021-05-17 15:20:42', '2021-05-17 15:20:42'),
 (92, 0, 0, '2021-05-17 15:22:11', '2021-05-17 15:22:11'),
 (93, 0, 0, '2021-05-17 15:23:27', '2021-05-17 15:23:27'),
-(94, 0, 0, '2021-05-17 15:25:25', '2021-05-17 15:25:25');
+(94, 0, 0, '2021-05-17 15:25:25', '2021-05-17 15:25:25'),
+(95, 0, 0, '2021-05-19 06:12:57', '2021-05-19 06:12:57');
 
 -- --------------------------------------------------------
 
@@ -433,11 +441,21 @@ CREATE TABLE `grups_usuaris` (
 --
 
 CREATE TABLE `interaccio` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `id_Usuari` int(10) UNSIGNED NOT NULL,
-  `id_Contingut` int(10) UNSIGNED NOT NULL,
-  `Guardat` char(1) COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT '0'
+  `id_usuari` int(10) UNSIGNED NOT NULL,
+  `id_contingut` int(10) UNSIGNED NOT NULL,
+  `guardat` char(1) COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT '0',
+  `megusta` char(1) COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT '0',
+  `comentario` varchar(255) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Dumping data for table `interaccio`
+--
+
+INSERT INTO `interaccio` (`id_usuari`, `id_contingut`, `guardat`, `megusta`, `comentario`, `created_at`, `updated_at`) VALUES
+(14, 46, '0', '0', 'test', '2021-05-19 05:33:07', '2021-05-19 05:35:34');
 
 -- --------------------------------------------------------
 
@@ -516,6 +534,13 @@ CREATE TABLE `seguidors` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `seguidors`
+--
+
+INSERT INTO `seguidors` (`id_usuari`, `id_seguit`, `created_at`, `updated_at`) VALUES
+(5, 14, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -556,7 +581,9 @@ INSERT INTO `tags` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
 (59, 'kawai', '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
 (60, 'igor', '2021-05-17 15:23:27', '2021-05-17 15:23:27'),
 (61, 'thor', '2021-05-17 15:25:25', '2021-05-17 15:25:25'),
-(62, 'rosa', '2021-05-17 15:25:25', '2021-05-17 15:25:25');
+(62, 'rosa', '2021-05-17 15:25:25', '2021-05-17 15:25:25'),
+(63, 'skull', '2021-05-19 06:12:58', '2021-05-19 06:12:58'),
+(64, 'statue', '2021-05-19 06:12:58', '2021-05-19 06:12:58');
 
 -- --------------------------------------------------------
 
@@ -644,14 +671,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `email_verified_at`, `alies`, `foto`, `link`, `data_naixement`, `data-registre`, `actiu`, `deshabilitat`, `suspes`, `es_admin`, `nivell_gravetat`, `grups_disponibles`, `recomendat`, `estadistica`, `tipus`, `remember_token`, `created_at`, `updated_at`, `fondo`) VALUES
-(1, 'test', '$2y$10$n4EJbYTalgXFW9.kiPo6FeyAk9qApu5OS3UDqWoz3.yPGpMRTfDvW', 'test@test', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 5, 1, NULL, '2021-05-01 13:51:49', '2021-05-15 13:01:48', 'fondoDefault.jpg'),
-(4, 'AngelAdmin', 'cec9339cba6eddfc14afc2764e027512', 'angelnovo15@gmail.com', NULL, 'Angel', '1620910738-AngelAdmin.jpg', NULL, NULL, NULL, 1, 0, 1, 1, 0, 0, NULL, 10, 1, NULL, '2021-05-03 06:56:01', '2021-05-15 12:45:16', '1620910738-AngelAdmin.png'),
-(5, 'Llabreso', '$2y$10$7wlUoNiTN6Dk9sYzGDUWZunTvDlnaZNMEguXynjErf3YYC0A2p.8K', 'joanllabresoliver@gmail.com', '2021-05-08 09:30:50', 'Llabreso', '1620757944-.jpg', NULL, '2001-09-12 08:54:48', NULL, 1, 0, 0, 1, 10, 0, NULL, 11, 1, NULL, '2021-05-05 19:06:19', '2021-05-17 13:40:52', '1620757917-Llabreso.jpg'),
-(10, 'asdasda', '$2y$10$fMjp/4HvAjHrptsLmeL3huizotI2B96dMHbCc/NNf8eNewr3hJff.', 'asdasd@sdfbkj', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 21, 1, NULL, '2021-05-14 07:40:06', '2021-05-15 12:48:51', 'fondoDefault.jpg'),
-(11, 'jndbasjkhidbsakj', '$2y$10$sBLApHMMlhvvh0mzKYsi8OYP9ZslU.twnUdwZeIz7.VLGjngQZQZi', 'kjasdfnasf@aseknfbnksf', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 22, 1, NULL, '2021-05-14 07:57:58', '2021-05-15 07:57:27', 'fondoDefault.jpg'),
-(12, 'lkjmasdkjasb', '$2y$10$7wElszXdDGzBHz53jlYz2OQsxFy8QaEb3Ir5B1ygiiO9V5dMoJ0kS', 'kjasbdjk@skjdnfkj', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 23, 1, NULL, '2021-05-14 07:59:24', '2021-05-15 07:56:07', 'fondoDefault.jpg'),
-(13, 'ertrrdfdf', '$2y$10$vxsq2QJpCkvNUHSt5YKer.7sQfDvHVWJmK0tON9Qx733peZwfA6au', 'hhfdhfdfdh@sdfdsfdfs', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 1, 0, 0, 0, NULL, 24, 1, NULL, '2021-05-14 11:37:49', '2021-05-15 12:40:00', 'fondoDefault.jpg'),
-(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, NULL, 'avatar.jpg', NULL, NULL, NULL, 1, 0, 0, 1, 10, 0, 'images;video;css;animacion', 25, 3, NULL, '2021-05-14 15:07:26', '2021-05-16 15:37:17', 'fondoDefault.jpg');
+(1, 'test', '$2y$10$n4EJbYTalgXFW9.kiPo6FeyAk9qApu5OS3UDqWoz3.yPGpMRTfDvW', 'test@test', NULL, 'test', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 3, 0, NULL, 5, 1, NULL, '2021-05-01 13:51:49', '2021-05-19 05:55:23', 'fondoDefault.jpg'),
+(4, 'AngelAdmin', 'cec9339cba6eddfc14afc2764e027512', 'angelnovo15@gmail.com', NULL, 'Angel', '1620910738-AngelAdmin.jpg', NULL, NULL, NULL, 0, 0, 1, 1, 0, 0, NULL, 10, 1, NULL, '2021-05-03 06:56:01', '2021-05-15 12:45:16', '1620910738-AngelAdmin.png'),
+(5, 'Llabreso', '$2y$10$7wlUoNiTN6Dk9sYzGDUWZunTvDlnaZNMEguXynjErf3YYC0A2p.8K', 'joanllabresoliver@gmail.com', '2021-05-08 09:30:50', 'Llabreso', '1620757944-.jpg', NULL, '2001-09-12 08:54:48', NULL, 0, 0, 0, 1, 10, 0, NULL, 11, 1, NULL, '2021-05-05 19:06:19', '2021-05-17 13:40:52', '1620757917-Llabreso.jpg'),
+(10, 'asdasda', '$2y$10$fMjp/4HvAjHrptsLmeL3huizotI2B96dMHbCc/NNf8eNewr3hJff.', 'asdasd@sdfbkj', NULL, 'asdasda', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 21, 1, NULL, '2021-05-14 07:40:06', '2021-05-15 12:48:51', 'fondoDefault.jpg'),
+(11, 'jndbasjkhidbsakj', '$2y$10$sBLApHMMlhvvh0mzKYsi8OYP9ZslU.twnUdwZeIz7.VLGjngQZQZi', 'kjasdfnasf@aseknfbnksf', NULL, 'jndbasjkhidbsakj', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 22, 1, NULL, '2021-05-14 07:57:58', '2021-05-15 07:57:27', 'fondoDefault.jpg'),
+(12, 'lkjmasdkjasb', '$2y$10$7wElszXdDGzBHz53jlYz2OQsxFy8QaEb3Ir5B1ygiiO9V5dMoJ0kS', 'kjasbdjk@skjdnfkj', NULL, 'lkjmasdkjasb', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 23, 1, NULL, '2021-05-14 07:59:24', '2021-05-15 07:56:07', 'fondoDefault.jpg'),
+(13, 'ertrrdfdf', '$2y$10$vxsq2QJpCkvNUHSt5YKer.7sQfDvHVWJmK0tON9Qx733peZwfA6au', 'hhfdhfdfdh@sdfdsfdfs', NULL, 'ertrrdfdf', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 1, 0, 0, 0, NULL, 24, 1, NULL, '2021-05-14 11:37:49', '2021-05-15 12:40:00', 'fondoDefault.jpg'),
+(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, 'AngelNovo2', '1621278389-AngelNovo2.jpg', NULL, NULL, NULL, 1, 0, 0, 1, 10, 0, 'images;video;css;animacion', 25, 3, NULL, '2021-05-14 15:07:26', '2021-05-19 04:35:39', '1621278389-AngelNovo2.png');
 
 -- --------------------------------------------------------
 
@@ -781,9 +808,10 @@ ALTER TABLE `grups_usuaris`
 -- Indexes for table `interaccio`
 --
 ALTER TABLE `interaccio`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `usuari_interaccio` (`id_Usuari`),
-  ADD KEY `contingut_interaccio` (`id_Contingut`);
+  ADD PRIMARY KEY (`id_usuari`,`id_contingut`),
+  ADD UNIQUE KEY `id_usuari` (`id_usuari`,`id_contingut`),
+  ADD KEY `usuari_interaccio` (`id_usuari`),
+  ADD KEY `contingut_interaccio` (`id_contingut`);
 
 --
 -- Indexes for table `migrations`
@@ -868,7 +896,7 @@ ALTER TABLE `xat_usuaris`
 -- AUTO_INCREMENT for table `analitiques_generals`
 --
 ALTER TABLE `analitiques_generals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `avis`
@@ -880,13 +908,13 @@ ALTER TABLE `avis`
 -- AUTO_INCREMENT for table `avis_usuari`
 --
 ALTER TABLE `avis_usuari`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `contingut`
 --
 ALTER TABLE `contingut`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `dret_autor`
@@ -904,7 +932,7 @@ ALTER TABLE `estadistiques`
 -- AUTO_INCREMENT for table `estadistiques_contingut`
 --
 ALTER TABLE `estadistiques_contingut`
-  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id_estadistica` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -916,12 +944,6 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `grup`
 --
 ALTER TABLE `grup`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `interaccio`
---
-ALTER TABLE `interaccio`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -940,7 +962,7 @@ ALTER TABLE `missatge`
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `tipus_contingut`
@@ -1012,8 +1034,8 @@ ALTER TABLE `grups_usuaris`
 -- Constraints for table `interaccio`
 --
 ALTER TABLE `interaccio`
-  ADD CONSTRAINT `contingut_interaccio` FOREIGN KEY (`id_Contingut`) REFERENCES `contingut` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `usuari_interaccio` FOREIGN KEY (`id_Usuari`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `contingut_interaccio` FOREIGN KEY (`id_contingut`) REFERENCES `contingut` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuari_interaccio` FOREIGN KEY (`id_usuari`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `missatge`

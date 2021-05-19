@@ -10,5 +10,5 @@ class InteraccioModel extends Model
     use HasFactory;
     protected $table = 'interaccio';
     protected $primaryKey = 'id';
-    protected $fillable = ['id_Usuari','id_Contingut','comentario','megusta','created_at','updated_at'];
+    protected $fillable = ['id_usuari','id_contingut','comentario','megusta','created_at','updated_at'];
 }

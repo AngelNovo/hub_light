@@ -122,3 +122,4 @@ Route::get('/recomendados',function() {
 
 // Destacados
 Route::get('/destacados',[ContingutController::class,'getDestacados']);
+Route::get('/destacados/vista',[ContingutController::class,'getDestacadosVista']);

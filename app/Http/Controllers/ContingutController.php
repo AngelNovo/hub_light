@@ -145,7 +145,11 @@ class ContingutController extends Controller
         ->orderBy('likes','desc')
         ->limit($limit)
         ->get();
-        return view('front.destacados')->with('contingut',$contingut);
+        return $contingut;
+    }
+
+    public function getDestacadosVista() {
+        return view('front.destacados');
     }
 
     public function buscador() {

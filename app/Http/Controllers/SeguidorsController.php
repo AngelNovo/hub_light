@@ -25,6 +25,7 @@ class SeguidorsController extends Controller
     }
 
     public function getNotificaciones($id_user) {
-
+        $seguidors=SeguidorsModel::where;
+        $interaccions=;
     }
 }

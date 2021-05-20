@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 20, 2021 at 05:30 PM
+-- Generation Time: May 20, 2021 at 06:25 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -444,7 +444,10 @@ CREATE TABLE `interaccio` (
 --
 
 INSERT INTO `interaccio` (`id`, `id_usuari`, `id_contingut`, `guardat`, `megusta`, `comentario`, `visto`, `created_at`, `updated_at`) VALUES
-(7, 14, 53, '0', '0', 'asdasdasd', '0', '2021-05-20 05:18:22', '2021-05-20 05:18:22');
+(7, 14, 53, '0', '0', 'asdasdasd', '0', '2021-05-20 05:18:22', '2021-05-20 05:18:22'),
+(9, 14, 57, '0', '1', NULL, '0', '2021-05-20 17:42:36', '2021-05-20 17:42:36'),
+(10, 14, 64, '0', '0', 'asdsadf', '1', '2021-05-20 17:57:07', '2021-05-20 16:13:25'),
+(11, 10, 64, '0', '0', 'asdasdasdasd', '1', '2021-05-20 18:07:58', '2021-05-20 16:13:25');
 
 -- --------------------------------------------------------
 
@@ -517,6 +520,7 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 --
 
 CREATE TABLE `seguidors` (
+  `id` int(11) NOT NULL,
   `id_usuari` int(10) UNSIGNED NOT NULL,
   `id_seguit` int(10) UNSIGNED NOT NULL,
   `acceptat` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
@@ -528,8 +532,8 @@ CREATE TABLE `seguidors` (
 -- Dumping data for table `seguidors`
 --
 
-INSERT INTO `seguidors` (`id_usuari`, `id_seguit`, `acceptat`, `created_at`, `updated_at`) VALUES
-(5, 14, '0', NULL, NULL);
+INSERT INTO `seguidors` (`id`, `id_usuari`, `id_seguit`, `acceptat`, `created_at`, `updated_at`) VALUES
+(1, 5, 14, '0', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -815,6 +819,7 @@ ALTER TABLE `password_resets`
 -- Indexes for table `seguidors`
 --
 ALTER TABLE `seguidors`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `seguidors_id_usuari_foreign` (`id_usuari`),
   ADD KEY `seguidors_id_seguit_foreign` (`id_seguit`);
 
@@ -927,7 +932,7 @@ ALTER TABLE `grup`
 -- AUTO_INCREMENT for table `interaccio`
 --
 ALTER TABLE `interaccio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -940,6 +945,12 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `missatge`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `seguidors`
+--
+ALTER TABLE `seguidors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tags`

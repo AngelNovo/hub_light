@@ -12,7 +12,15 @@ class SeguidorsController extends Controller
         $request=$request->all();
         $seguidors=SeguidorsModel::create([
             "id_usuari"=>Auth::user()->id,
-            "id_seguit"
+            "id_seguit"=>$request["seguit"]
+        ]);
+    }
+
+    public function edit(Request $request) {
+        $request=$request->all();
+        $seguidors=SeguidorsModel::where('id',$request["id"])
+        ->update([
+            "acceptat"=>1
         ]);
     }
 }

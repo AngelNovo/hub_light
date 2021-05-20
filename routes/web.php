@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContingutController;
 use App\Http\Controllers\DerechosAutorController;
 use App\Http\Controllers\InteraccioController;
+use App\Http\Controllers\SeguidorsController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TipoContenidoController;
 use App\Http\Controllers\TipusUsuariController;
@@ -30,6 +31,9 @@ Route::get('/usuaris/{id}',[UsuariController::class,'get']);
 Route::get('/logout',[UsuariController::class,'logout']);
 Route::put('/usuaris/update',[UsuariController::class,'update']);
 Route::put('/usuaris/update/foto',[UsuariController::class,'updateFoto']);
+//
+Route::post('usuaris/add/friend',[SeguidorsController::class,'store']);
+Route::put('usuaris/add/friend',[SeguidorsController::class,'edit']);
 // *Tipus usuari*
 Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
 Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);

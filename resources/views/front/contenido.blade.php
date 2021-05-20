@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <img src={{asset("images/perfil/usuarios/".Auth::user()->foto)}} class="foto-coment">
                         <input type="checkbox" hidden name="megusta" id="megusta">
-                        <textarea class="form-control" rows="4" name="mensaje" id="mensaje"></textarea>
+                        <textarea class="form-control" rows="4" name="comentario" id="mensaje"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" id="submit-comment">Envia</button>
                 </form>
@@ -76,6 +76,7 @@
         $(".isSelected").removeClass("isSelected");
         var megusta=$("#megusta").val();
         $(document).on("submit",function(e){
+            e.preventDefault();
             enviaComent();
         });
         $("#like").on("click",function(e){
@@ -94,6 +95,7 @@
 
     function enviaComent(){
         var comentario=$("#mensaje").val();
+        console.log(comentario);
         $.ajax({
         url: "/comment",
         headers: {

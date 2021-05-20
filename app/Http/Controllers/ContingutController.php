@@ -78,7 +78,6 @@ class ContingutController extends Controller
         ->join("contingut","contingut.id","=","id_contingut")
         ->join("users","users.id","=","id_usuari")
         ->get();
-        // return $comment;
         // Comprueba si los usuarios son amigos
         if(isset(Auth::user()->id)){
             $resultAmistad=SeguidorsModel::where('id_Usuari',Auth::user()->id)

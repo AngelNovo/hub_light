@@ -2,6 +2,7 @@
 //Pdsnfskdfkd
 namespace App\Http\Controllers;
 
+use App\Models\SeguidorsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,8 +15,21 @@ class UsuariController extends Controller
         return $results;
     }
     public function get($id) {
+        // Info de usuario
         $result = User::find($id);
-        return view('front.perfil')->with('user',$result);
+        $resultAmistad=0;
+
+        if(isset(Auth::user()->id)){
+            $resultAmistad=SeguidorsModel::where('id_Usuari',Auth::user()->id)
+            ->orWhere('id_usuari',$id)
+            ->orWhere('id_seguit',$id)
+            ->orWhere('id_seguit',Auth::user()->id)
+            ->get();
+        }
+
+        return view('front.perfil')
+            ->with('user',$result)
+            ->with('amistad', (sizeof($resultAmistad)>0)?1:0);
     }
 
     public function opciones($id) {

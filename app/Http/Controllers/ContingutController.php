@@ -64,12 +64,14 @@ class ContingutController extends Controller
             }
         }
 
+        $q_likes=InteraccioModel::where(['id_contingut'=>$id,'megusta'=>1])
+        ->count() ;
+
         $resultAmistad=[];
         $like=0;
         $results = DB::table('contingut')
-        ->select('contingut.id','portada','contingut.titulo', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'users.id as id_user','users.foto as foto_perfil','users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
+        ->select('contingut.id','portada','contingut.titulo', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'users.id as id_user','users.foto as foto_perfil','users.name as propietario', 'tipus_contingut', 'drets_autor', 'contingut.created_at')
         ->join('users','users.id','=','contingut.propietari')
-        ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
         ->where('contingut.id',$id)
         ->get();
 
@@ -109,7 +111,8 @@ class ContingutController extends Controller
             ->with('amistad', (sizeof($resultAmistad)>0)?1:0)
             ->with('tags',$tags)
             ->with('comentarios',$comment)
-            ->with('like',$like);
+            ->with('like',$like)
+            ->with('q_likes',$q_likes);
     }
 
     public function getRecomendados($offset) {

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContingutModel;
+use App\Models\EstadisticaContingutModel;
 use App\Models\InteraccioModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,9 +29,9 @@ class InteraccioController extends Controller
         //3: guardamos (update) el objeto
         $interaccio->save();
 
-        if(isset($request->input('megusta'))) {
-
-        }
+        // if(isset($request->input('megusta'))) {
+        //     $recomenat=;
+        // }
 
         //4: devolvemos una respuesta response() con el valor que queramos
     }

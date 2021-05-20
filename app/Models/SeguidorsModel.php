@@ -10,5 +10,5 @@ class SeguidorsModel extends Model
     use HasFactory;
     use HasFactory;
     protected $table = 'seguidors';
-    protected $fillable = ['id_usuari','id_seguit','created_at','updated_at'];
+    protected $fillable = ['id_usuari','id_seguit','acceptat','created_at','updated_at'];
 }

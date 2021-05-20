@@ -24,8 +24,9 @@ class SeguidorsController extends Controller
         ]);
     }
 
-    // public function getNotificaciones($id_user) {
-    //     $seguidors=SeguidorsModel::where;
-    //     $interaccions=;
-    // }
+    public function getNotificaciones() {
+        $seguidors=SeguidorsModel::where('id_seguit',Auth::user()->id)->get();
+        return $seguidors;
+        // $interaccions=;
+    }
 }

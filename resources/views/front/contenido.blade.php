@@ -9,8 +9,8 @@
         <a href="{{asset('/usuaris/'.$results->id_user)}}">
             <div>
                 <img src={{asset("images/perfil/usuarios/".$results->foto_perfil)}} class="header-perfil-img" title="Perfil">
-            </div> 
-        </a>  
+            </div>
+        </a>
         <h2>{{$results->titulo}}</h2>
         <p>{{$amistad}}</p>
     </div>
@@ -39,7 +39,7 @@
             <div>
                 <i class="fa pe-7s-like" id="like" data-toggle="Me gusta"> </i>
                 <i class="fa pe-7s-paper-plane" title="Enviar"> </i>
-            </div>            
+            </div>
         </div>
         <div class="border-bot">
             @foreach ($comentarios as $item)
@@ -54,22 +54,24 @@
         <div >
             @if (isset(Auth::user()->id))
                 @if (Auth::user()->id!=$results->id_user)
-                <form id="comentari">
+                <form id="comentari" action="/comment" method="POST">
+                    @csrf
                     <div class="form-group">
                         <img src={{asset("images/perfil/usuarios/".Auth::user()->foto)}} class="foto-coment">
                         <input type="checkbox" hidden name="megusta" id="megusta">
+                        <input type="hidden" name="id_contingut" value="{{$results->id}}" />
                         <textarea class="form-control" rows="4" name="comentario" id="mensaje"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" id="submit-comment">Envia</button>
                 </form>
-                @endif               
-            @endif 
+                @endif
+            @endif
         </div>
-    </div>        
+    </div>
 
 </div>
 {{-- Scripts --}}
-<script>    
+<script>
     // Document Ready
     $(document).ready(function(){
         // Marcar Navbar
@@ -88,7 +90,7 @@
                 $("#like").addClass("meGusta");
             }
             enviaLike();
-            
+
         });
     });
 
@@ -106,7 +108,7 @@
             "id_contingut":{{$results->id}},
             "comentario":comentario
         },
-        success: function(data){                   
+        success: function(data){
            console.log("correcte");
         }
         });
@@ -130,12 +132,12 @@
             "id_contingut":{{$results->id}},
             "megusta":megusta
         },
-        success: function(data){                   
+        success: function(data){
            console.log("correcte");
         }
         });
     }
-    
+
     //id_contenido
     //megusta
     //comentario

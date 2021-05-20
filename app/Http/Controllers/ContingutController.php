@@ -53,6 +53,7 @@ class ContingutController extends Controller
     }
     public function get($id) {
         $resultAmistad=[];
+        $like=0;
         $results = DB::table('contingut')
         ->select('contingut.id','portada','contingut.titulo', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'users.id as id_user','users.foto as foto_perfil','users.name as propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
         ->join('users','users.id','=','contingut.propietari')
@@ -68,7 +69,9 @@ class ContingutController extends Controller
         $id_user=$id_user[0]->id;
 
         // Comprueba si el usuario logueado le ha dado megusta
-        $like=InteraccioModel::where(['id_contingut'=>$id,"id_usuari"=>Auth::user()->id])->get('megusta')->first();
+        if(isset(Auth::user()->id)) {
+            $like=InteraccioModel::where(['id_contingut'=>$id,"id_usuari"=>Auth::user()->id])->get('megusta')->first();
+        }
         // Devuelve los comentarios de la publicación
         $comment=InteraccioModel::where('id_contingut',$id)
         ->join("contingut","contingut.id","=","id_contingut")
@@ -77,7 +80,7 @@ class ContingutController extends Controller
         // return $comment;
         // Comprueba si los usuarios son amigos
         if(isset(Auth::user()->id)){
-            $resultAmistad=SeguidorsModel::where('id_Usuari',)
+            $resultAmistad=SeguidorsModel::where('id_Usuari',Auth::user()->id)
             ->orWhere('id_usuari',$id_user)
             ->orWhere('id_seguit',$id_user)
             ->orWhere('id_seguit',Auth::user()->id)

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class InteraccioController extends Controller
 {
     public function store(Request $request) {
+        // dd($request);
         // return $request->all();
 
         $id_activo=Auth::user()->id;
@@ -21,12 +22,13 @@ class InteraccioController extends Controller
 
         //2: rellenamos el objeto con los valores del request
         $interaccio->fill($request->all());
+        // return $interaccio;
 
         //3: guardamos (update) el objeto
         $interaccio->save();
 
         //4: devolvemos una respuesta response() con el valor que queramos
 
-        return $interaccio;
+        return redirect('/contingut/'.$request->input('id_contingut'));
     }
 }

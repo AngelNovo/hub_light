@@ -76,7 +76,6 @@
         $(".isSelected").removeClass("isSelected");
         var megusta=$("#megusta").val();
         $(document).on("submit",function(e){
-            e.preventDefault();
             enviaComent();
         });
         $("#like").on("click",function(e){

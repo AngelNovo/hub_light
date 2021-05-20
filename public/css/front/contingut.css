@@ -32,10 +32,15 @@
     background-repeat: no-repeat;
     border:solid 10px #3d3d3d;
     box-shadow: 2px 2px 2px #3d3d3d;
-    background-color: #cccccc33;
+    background-color: #ffffffAA;
     z-index: 2;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .contingut-principal>img,.contingut-principal>video{
+    max-width: 100%;
     min-height: 200px;
     max-height: 500px;
 }
@@ -94,10 +99,26 @@ textarea:focus{
 }
 
 .comentario{
-    border-bottom: dashed 1px black;
-    margin-bottom: 4px;
+    border-top: dashed 1px black;
+    margin: 4px;
+    padding-top: 4px;
 }
 
 .text-comment{
     margin-left: 60px;    
+}
+
+.fecha-contingut{
+    position: relative;
+    float: right;
+}
+
+.descripcio{
+    width: 100%;
+    padding: 10px;
+}
+
+span{
+    margin-left: 10px;
+    margin-right: 10px;
 }

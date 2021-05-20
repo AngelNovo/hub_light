@@ -19,7 +19,7 @@
                 </div>
                 {{-- Seguir --}}
                 @if (Auth::user()->id != $user->id)
-                    <button class="button-seguir" id="seguir_boton">Seguir</button>
+                    <button class="button-seguir btn btn-primary" id="seguir_boton">Seguir</button>
                 @endif
                 {{-- Activitat Usuari --}}
                 @if ($user->actiu==1)

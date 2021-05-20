@@ -60,7 +60,7 @@
     </ul>
     {{-- Cercador --}}
     <form class="form-inline my-2 my-lg-0">
-        <div>          
+        <div title="Busca el conteido que desees: @usuario, -contenido, #etiqueta">          
           <input type="text" name="buscador" id="buscador" list="cercador">
           <button class="btn btn-outline-success my-2 my-sm-0" id="submit-buscador" type="submit">Search</button>
         </div>
@@ -85,7 +85,7 @@
         }
         break;
         case "-":
-
+          window.location= "/contingut/"+$('option[value="'+inputvalue+'"]').attr("data-id");
           break;
         case "#":
 

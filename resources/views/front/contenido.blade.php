@@ -17,7 +17,7 @@
     {{-- Contingut --}}
     @if ($results->tipus_contingut==1)
         {{-- Contingut Imatge --}}
-        <div class="contingut-principal" style="background-image:url({{asset('/contenido/1/'.$results->url)}});">
+        <div class="contingut-principal bg-image" style="background-image:url({{asset('/contenido/1/'.$results->url)}});">
             <img class="img-fluid" src="{{asset('/contenido/1/'.$results->url)}}">
         </div>
     @else
@@ -41,18 +41,17 @@
                 @if ($like=="1")
                     <i class="fa pe-7s-like megusta" id="like" data-toggle="Me gusta"> </i>
                 @else
-                    <i class="fa pe-7s-like" id="like" data-toggle="Me gusta"> </i>
-                @endif
-                
+                    <i class="fa pe-7s-like" id="like" data-toggle="Me gusta"></i>
+                @endif               
                 <i class="fa pe-7s-paper-plane" title="Enviar"> </i>
             </div>
         </div>
         @endif
         <div class="border-bot">            
             <div>
-                <p class="descripcio">{{$results->descripcio}}</p>
-                <span>{{date("d/m/Y",strtotime($results->created_at))}}</span>
-                <span>{{$results->likes}}</span>
+                <span>{{$q_likes}} me gustas</span> 
+                <span class="fecha-contingut">{{date("d/m/Y",strtotime($results->created_at))}}</span>
+                <p class="descripcio">{{$results->descripcio}} </p>                              
             </div>           
             @foreach ($comentarios as $item)
                 <div class="comentario">
@@ -97,10 +96,10 @@
 
             if($("#megusta").prop("checked")){
                 $("#megusta").prop("checked",false);
-                $("#like").removeClass("meGusta");
+                $("#like").removeClass("megusta");
             }else{
                 $("#megusta").prop("checked",true);
-                $("#like").addClass("meGusta");
+                $("#like").addClass("megusta");
             }
             enviaLike();
             
@@ -122,7 +121,7 @@
             "idProp":idProp
         },
         success: function(data){
-           console.log("data");
+           console.log(data);
         }
         });
     }
@@ -147,7 +146,7 @@
             "idProp":idProp
         },
         success: function(data){
-           console.log("data");
+           console.log(data);
         },error: function(data){
            console.log(data);
         }

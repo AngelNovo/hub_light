@@ -45,7 +45,7 @@ Route::get('/derechosautor',[DerechosAutorController::class,'getAll']);
 // *Tipo contenido*
 Route::get('/tipocontenido',[TipoContenidoController::class,'getAll']);
 // Notificaciones
-Route::get('/notificaciones/{id}',[SeguidorsController::class,'getNotificaciones']);
+// Route::get('/notificaciones/{id}',[SeguidorsController::class,'getNotificaciones']);
 // *Xat*
 
 //  *Tags*

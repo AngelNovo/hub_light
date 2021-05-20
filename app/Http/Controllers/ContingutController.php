@@ -55,11 +55,13 @@ class ContingutController extends Controller
 
         $propietari=ContingutModel::where('id',$id)->get()->first();
 
-        if(Auth::user()->id==$propietari->propietari) {
-            $interaccio=InteraccioModel::where('id_contingut',$id)
-            ->update([
-                "visto" => 1
-            ]);
+        if(isset(Auth::user()->id)) {
+            if(Auth::user()->id==$propietari->propietari) {
+                $interaccio=InteraccioModel::where('id_contingut',$id)
+                ->update([
+                    "visto" => 1
+                ]);
+            }
         }
 
         $resultAmistad=[];

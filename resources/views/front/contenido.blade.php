@@ -35,6 +35,7 @@
         @endif
     @endif
     <div class="footer-contingut">
+        @if (isset(Auth::user()->id))
         <div class="header-footer-contingut">
             <div>
                 @if ($like=="1")
@@ -46,12 +47,13 @@
                 <i class="fa pe-7s-paper-plane" title="Enviar"> </i>
             </div>
         </div>
-        <div class="border-bot">
+        @endif
+        <div class="border-bot">            
             <div>
                 <p class="descripcio">{{$results->descripcio}}</p>
                 <span>{{date("d/m/Y",strtotime($results->created_at))}}</span>
                 <span>{{$results->likes}}</span>
-            </div>
+            </div>           
             @foreach ($comentarios as $item)
                 <div class="comentario">
                     <a href="{{asset('/usuaris/'.$item->id_usuari)}}">
@@ -87,6 +89,7 @@
         $(".isSelected").removeClass("isSelected");
         var megusta=$("#megusta").val();
         $(document).on("submit",function(e){
+            e.preventDefault();
             enviaComent();
         });
         console.log("{{$like}}");
@@ -120,7 +123,7 @@
             "idProp":idProp
         },
         success: function(data){
-           console.log("correcte");
+           console.log("data");
         }
         });
     }
@@ -146,7 +149,7 @@
             "idProp":idProp
         },
         success: function(data){
-           console.log("correcte");
+           console.log("data");
         },error: function(data){
            console.log(data);
         }

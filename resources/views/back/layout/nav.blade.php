@@ -125,7 +125,7 @@
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <a href={{url('/back/admin/tags')}} id="crud">Controlar tags
+                      <a href={{url('/back/admin/tags')}} id="tag">Controlar tags
                       </a>
                     </li>
                   </ul>

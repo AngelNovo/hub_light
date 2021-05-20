@@ -96,6 +96,8 @@ Route::group(['middleware'=>'auth'], function() {
 
     // Tags
     Route::get('/back/admin/tags',[TagsController::class,'getTags']);
+    Route::delete('/back/admin/tags',[TagsController::class,'deleteTag']);
+    Route::post('/back/admin/tags',[TagsController::class,'storeTag']);
 });
 
 Auth::routes();

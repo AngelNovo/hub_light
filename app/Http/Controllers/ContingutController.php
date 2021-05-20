@@ -71,6 +71,7 @@ class ContingutController extends Controller
         // Comprueba si el usuario logueado le ha dado megusta
         if(isset(Auth::user()->id)) {
             $like=InteraccioModel::where(['id_contingut'=>$id,"id_usuari"=>Auth::user()->id])->get('megusta')->first();
+            $like=(empty($like)) ? 0 : 1;
         }
         // Devuelve los comentarios de la publicación
         $comment=InteraccioModel::where('id_contingut',$id)

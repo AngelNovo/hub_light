@@ -138,14 +138,14 @@ class ContingutController extends Controller
 
         $limit = ceil($limit/10);
 
-        $contingut=DB::table('contingut')
-        ->select('contingut.id','portada','contingut.titulo', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.id as id_propietario','users.name as propietario','users.foto as foto_propietario', 'tipus_contingut', 'drets_autor','estadistiques_contingut.q_likes as likes', 'contingut.created_at')
-        ->join('users','users.id','=','contingut.propietari')
-        ->join('estadistiques_contingut','contingut.estadistica',"=",'estadistiques_contingut.id_estadistica')
-        ->orderBy('likes','desc')
+        $destacados=InteraccioModel::where("interaccio.megusta",1)
+        ->groupBy("interaccio.id_contingut")
         ->limit($limit)
-        ->get();
-        return $contingut;
+        ->get("interaccio.id_contingut","count(interaccio.id_contingut) as counter");
+
+        $destacadosContenido=ContingutModel::whereIn("id",$destacados)->get();
+        return $destacadosContenido;
+
     }
 
     public function getDestacadosVista() {

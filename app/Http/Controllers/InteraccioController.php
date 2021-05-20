@@ -45,7 +45,6 @@ class InteraccioController extends Controller
                 }else {
                     array_unshift($recomenatsRaw,$r->nombre);
                 }
-                //  array_unshift($recomenatsRaw,$r->nombre);
 
             }
             $recomenatsFinal=implode(';',$recomenatsRaw);

@@ -10,7 +10,7 @@ class SeguidorsController extends Controller
     public function store(Request $request) {
         $request=$request->all();
         $seguidors=SeguidorsModel::create([
-
+            "id_usuari"=>Auth::
         ]);
     }
 }

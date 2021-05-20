@@ -32,8 +32,8 @@ Route::get('/logout',[UsuariController::class,'logout']);
 Route::put('/usuaris/update',[UsuariController::class,'update']);
 Route::put('/usuaris/update/foto',[UsuariController::class,'updateFoto']);
 //
-Route::post('usuaris/add/friend',[SeguidorsController::class,'store']);
-Route::put('usuaris/add/friend',[SeguidorsController::class,'edit']);
+Route::post('/usuaris/add/friend',[SeguidorsController::class,'store']);
+Route::put('/usuaris/add/friend',[SeguidorsController::class,'edit']);
 // *Tipus usuari*
 Route::get('/tipusUsuari', [TipusUsuariController::class,'getAll']);
 Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
@@ -44,6 +44,8 @@ Route::post('/contingut',[ContingutController::class,'store']);
 Route::get('/derechosautor',[DerechosAutorController::class,'getAll']);
 // *Tipo contenido*
 Route::get('/tipocontenido',[TipoContenidoController::class,'getAll']);
+// Notificaciones
+Route::get('/notificaciones/{id}',[SeguidorsController::class,'getNotificaciones']);
 // *Xat*
 
 //  *Tags*

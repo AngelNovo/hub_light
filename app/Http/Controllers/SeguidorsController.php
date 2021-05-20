@@ -23,4 +23,8 @@ class SeguidorsController extends Controller
             "acceptat"=>1
         ]);
     }
+
+    public function getNotificaciones($id_user) {
+
+    }
 }

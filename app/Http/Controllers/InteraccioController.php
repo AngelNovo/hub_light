@@ -37,6 +37,7 @@ class InteraccioController extends Controller
             ->get('tags.nombre');
             $usuario = User::where('id',Auth::user()->id)->get()->first();
             $recomenatsRaw=explode(";",$usuario->recomenat);
+            // return $recomenats;
             foreach($recomenats as $r){
                 if(sizeof($recomenatsRaw)>30) {
                     array_pop($recomenatsRaw);
@@ -44,7 +45,6 @@ class InteraccioController extends Controller
                 }else {
                     array_unshift($recomenatsRaw,$r->nombre);
                 }
-                return $recomenatsRaw;
                 $recomenatsRaw=implode(';',$recomenatsRaw);
                 return $recomenatsRaw;
 

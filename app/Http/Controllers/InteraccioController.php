@@ -27,12 +27,6 @@ class InteraccioController extends Controller
         //3: guardamos (update) el objeto
         $interaccio->save();
 
-        if(Auth::user()->id==$request->input('idProp')) {
-            $interaccio=InteraccioModel::where('id',$interaccio->id)([
-                "visto" => 1
-            ]);
-        }
-
         //4: devolvemos una respuesta response() con el valor que queramos
     }
 }

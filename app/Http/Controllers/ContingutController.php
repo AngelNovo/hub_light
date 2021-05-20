@@ -52,6 +52,16 @@ class ContingutController extends Controller
         // return view ('front.explorar')->with('results',$results);
     }
     public function get($id) {
+
+        $propietari=ContingutModel::where('id',$id)->get()->first();
+
+        if(Auth::user()->id==$propietari->propietari) {
+            $interaccio=InteraccioModel::where('id_contingut',$id)
+            ->update([
+                "visto" => 1
+            ]);
+        }
+
         $resultAmistad=[];
         $like=0;
         $results = DB::table('contingut')

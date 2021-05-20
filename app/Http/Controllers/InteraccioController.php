@@ -27,6 +27,10 @@ class InteraccioController extends Controller
         //3: guardamos (update) el objeto
         $interaccio->save();
 
+        if(isset($request->input('megusta'))) {
+
+        }
+
         //4: devolvemos una respuesta response() con el valor que queramos
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 19, 2021 at 05:19 PM
+-- Generation Time: May 20, 2021 at 07:22 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -45,7 +45,8 @@ INSERT INTO `analitiques_generals` (`id`, `usuaris_suspes`, `usuaris_actius`, `u
 (1, 2, 6, 0, 20, '2021-05-16 15:24:59', '2021-05-16 19:55:25'),
 (2, 2, 6, 0, 26, '2021-05-17 10:01:48', '2021-05-17 15:25:25'),
 (3, 2, 6, 0, 26, '2021-05-18 04:09:43', '2021-05-18 04:09:43'),
-(4, 2, 5, 1, 27, '2021-05-19 04:07:42', '2021-05-19 06:12:58');
+(4, 2, 5, 1, 27, '2021-05-19 04:07:42', '2021-05-19 06:12:58'),
+(5, 2, 5, 1, 27, '2021-05-20 04:45:13', '2021-05-20 04:45:13');
 
 -- --------------------------------------------------------
 
@@ -441,6 +442,7 @@ CREATE TABLE `grups_usuaris` (
 --
 
 CREATE TABLE `interaccio` (
+  `id` int(11) NOT NULL,
   `id_usuari` int(10) UNSIGNED NOT NULL,
   `id_contingut` int(10) UNSIGNED NOT NULL,
   `guardat` char(1) COLLATE utf8mb4_spanish_ci NOT NULL DEFAULT '0',
@@ -454,8 +456,8 @@ CREATE TABLE `interaccio` (
 -- Dumping data for table `interaccio`
 --
 
-INSERT INTO `interaccio` (`id_usuari`, `id_contingut`, `guardat`, `megusta`, `comentario`, `created_at`, `updated_at`) VALUES
-(14, 46, '0', '0', 'test', '2021-05-19 05:33:07', '2021-05-19 05:35:34');
+INSERT INTO `interaccio` (`id`, `id_usuari`, `id_contingut`, `guardat`, `megusta`, `comentario`, `created_at`, `updated_at`) VALUES
+(7, 14, 53, '0', '0', 'asdasdasd', '2021-05-20 05:18:22', '2021-05-20 05:18:22');
 
 -- --------------------------------------------------------
 
@@ -678,7 +680,7 @@ INSERT INTO `users` (`id`, `name`, `password`, `email`, `email_verified_at`, `al
 (11, 'jndbasjkhidbsakj', '$2y$10$sBLApHMMlhvvh0mzKYsi8OYP9ZslU.twnUdwZeIz7.VLGjngQZQZi', 'kjasdfnasf@aseknfbnksf', NULL, 'jndbasjkhidbsakj', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 22, 1, NULL, '2021-05-14 07:57:58', '2021-05-15 07:57:27', 'fondoDefault.jpg'),
 (12, 'lkjmasdkjasb', '$2y$10$7wElszXdDGzBHz53jlYz2OQsxFy8QaEb3Ir5B1ygiiO9V5dMoJ0kS', 'kjasbdjk@skjdnfkj', NULL, 'lkjmasdkjasb', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 23, 1, NULL, '2021-05-14 07:59:24', '2021-05-15 07:56:07', 'fondoDefault.jpg'),
 (13, 'ertrrdfdf', '$2y$10$vxsq2QJpCkvNUHSt5YKer.7sQfDvHVWJmK0tON9Qx733peZwfA6au', 'hhfdhfdfdh@sdfdsfdfs', NULL, 'ertrrdfdf', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 1, 0, 0, 0, NULL, 24, 1, NULL, '2021-05-14 11:37:49', '2021-05-15 12:40:00', 'fondoDefault.jpg'),
-(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, 'AngelNovo2', '1621278389-AngelNovo2.jpg', NULL, NULL, NULL, 1, 0, 0, 1, 10, 0, 'images;video;css;animacion', 25, 3, NULL, '2021-05-14 15:07:26', '2021-05-19 04:35:39', '1621278389-AngelNovo2.png');
+(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, 'AngelNovo2', '1621278389-AngelNovo2.jpg', NULL, NULL, NULL, 1, 0, 0, 1, 10, 0, 'images;video;css;animacion', 25, 3, NULL, '2021-05-14 15:07:26', '2021-05-20 04:46:46', '1621278389-AngelNovo2.png');
 
 -- --------------------------------------------------------
 
@@ -808,7 +810,7 @@ ALTER TABLE `grups_usuaris`
 -- Indexes for table `interaccio`
 --
 ALTER TABLE `interaccio`
-  ADD PRIMARY KEY (`id_usuari`,`id_contingut`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_usuari` (`id_usuari`,`id_contingut`),
   ADD KEY `usuari_interaccio` (`id_usuari`),
   ADD KEY `contingut_interaccio` (`id_contingut`);
@@ -896,7 +898,7 @@ ALTER TABLE `xat_usuaris`
 -- AUTO_INCREMENT for table `analitiques_generals`
 --
 ALTER TABLE `analitiques_generals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `avis`
@@ -945,6 +947,12 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `grup`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `interaccio`
+--
+ALTER TABLE `interaccio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `migrations`

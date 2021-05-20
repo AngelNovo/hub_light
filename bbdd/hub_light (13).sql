@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 20, 2021 at 06:25 PM
+-- Generation Time: May 20, 2021 at 08:59 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -445,9 +445,11 @@ CREATE TABLE `interaccio` (
 
 INSERT INTO `interaccio` (`id`, `id_usuari`, `id_contingut`, `guardat`, `megusta`, `comentario`, `visto`, `created_at`, `updated_at`) VALUES
 (7, 14, 53, '0', '0', 'asdasdasd', '0', '2021-05-20 05:18:22', '2021-05-20 05:18:22'),
-(9, 14, 57, '0', '1', NULL, '0', '2021-05-20 17:42:36', '2021-05-20 17:42:36'),
-(10, 14, 64, '0', '0', 'asdsadf', '1', '2021-05-20 17:57:07', '2021-05-20 16:13:25'),
-(11, 10, 64, '0', '0', 'asdasdasdasd', '1', '2021-05-20 18:07:58', '2021-05-20 16:13:25');
+(9, 14, 57, '0', '1', 'asdasd', '0', '2021-05-20 17:42:36', '2021-05-20 16:59:48'),
+(10, 14, 64, '0', '0', 'asdsadf', '1', '2021-05-20 17:57:07', '2021-05-20 18:44:39'),
+(11, 10, 64, '0', '0', 'asdasdasdasd', '1', '2021-05-20 18:07:58', '2021-05-20 18:44:39'),
+(12, 10, 57, '0', '1', NULL, '0', '2021-05-20 20:23:18', '2021-05-20 20:23:18'),
+(13, 14, 60, '0', '0', 'test', '0', '2021-05-20 18:41:23', '2021-05-20 18:58:34');
 
 -- --------------------------------------------------------
 
@@ -533,7 +535,8 @@ CREATE TABLE `seguidors` (
 --
 
 INSERT INTO `seguidors` (`id`, `id_usuari`, `id_seguit`, `acceptat`, `created_at`, `updated_at`) VALUES
-(1, 5, 14, '0', NULL, NULL);
+(1, 5, 14, '0', NULL, NULL),
+(2, 10, 14, '0', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -638,7 +641,7 @@ CREATE TABLE `users` (
   `es_admin` tinyint(1) NOT NULL DEFAULT '0',
   `nivell_gravetat` int(11) NOT NULL DEFAULT '10',
   `grups_disponibles` int(11) NOT NULL DEFAULT '0',
-  `recomendat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `recomenat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `estadistica` int(10) UNSIGNED NOT NULL,
   `tipus` int(10) UNSIGNED NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -651,7 +654,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `password`, `email`, `email_verified_at`, `alies`, `foto`, `link`, `data_naixement`, `data-registre`, `actiu`, `deshabilitat`, `suspes`, `es_admin`, `nivell_gravetat`, `grups_disponibles`, `recomendat`, `estadistica`, `tipus`, `remember_token`, `created_at`, `updated_at`, `fondo`) VALUES
+INSERT INTO `users` (`id`, `name`, `password`, `email`, `email_verified_at`, `alies`, `foto`, `link`, `data_naixement`, `data-registre`, `actiu`, `deshabilitat`, `suspes`, `es_admin`, `nivell_gravetat`, `grups_disponibles`, `recomenat`, `estadistica`, `tipus`, `remember_token`, `created_at`, `updated_at`, `fondo`) VALUES
 (1, 'test', '$2y$10$n4EJbYTalgXFW9.kiPo6FeyAk9qApu5OS3UDqWoz3.yPGpMRTfDvW', 'test@test', NULL, 'test', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 3, 0, NULL, 5, 1, NULL, '2021-05-01 13:51:49', '2021-05-19 05:55:23', 'fondoDefault.jpg'),
 (4, 'AngelAdmin', 'cec9339cba6eddfc14afc2764e027512', 'angelnovo15@gmail.com', NULL, 'Angel', '1620910738-AngelAdmin.jpg', NULL, NULL, NULL, 0, 0, 1, 1, 0, 0, NULL, 10, 1, NULL, '2021-05-03 06:56:01', '2021-05-15 12:45:16', '1620910738-AngelAdmin.png'),
 (5, 'Llabreso', '$2y$10$7wlUoNiTN6Dk9sYzGDUWZunTvDlnaZNMEguXynjErf3YYC0A2p.8K', 'joanllabresoliver@gmail.com', '2021-05-08 09:30:50', 'Llabreso', '1620757944-.jpg', NULL, '2001-09-12 08:54:48', NULL, 0, 0, 0, 1, 10, 0, NULL, 11, 1, NULL, '2021-05-05 19:06:19', '2021-05-17 13:40:52', '1620757917-Llabreso.jpg'),
@@ -932,7 +935,7 @@ ALTER TABLE `grup`
 -- AUTO_INCREMENT for table `interaccio`
 --
 ALTER TABLE `interaccio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -950,7 +953,7 @@ ALTER TABLE `missatge`
 -- AUTO_INCREMENT for table `seguidors`
 --
 ALTER TABLE `seguidors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tags`

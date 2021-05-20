@@ -109,7 +109,6 @@
 
     function enviaComent(){
         var comentario=$("#mensaje").val();
-        console.log(comentario);
         var idProp={{$results->id_user}};
         $.ajax({
         url: "/comment",
@@ -134,7 +133,6 @@
         if($("#megusta").prop("checked")){
             megusta="1";
         }
-        console.log("{{$results->id}}/"+megusta);
         var idcont={{$results->id}};
         var idProp={{$results->id_user}};
         $.ajax({

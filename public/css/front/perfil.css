@@ -304,3 +304,15 @@
     position: relative;
     z-index: 50;
 }
+
+.button-seguir{
+    position: absolute;
+    right: 0px;
+    top: 170px;
+}
+
+@media (max-width: 991px) {
+    .button-seguir{
+        top: 100px;
+    }
+}

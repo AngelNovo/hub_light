@@ -17,7 +17,7 @@
     {{-- Contingut --}}
     @if ($results->tipus_contingut==1)
         {{-- Contingut Imatge --}}
-        <div class="contingut-principal">
+        <div class="contingut-principal" style="background-image:url({{asset('/contenido/1/'.$results->url)}});">
             <img class="img-fluid" src="{{asset('/contenido/1/'.$results->url)}}">
         </div>
     @else
@@ -37,11 +37,21 @@
     <div class="footer-contingut">
         <div class="header-footer-contingut">
             <div>
-                <i class="fa pe-7s-like" id="like" data-toggle="Me gusta"> </i>
+                @if ($like=="1")
+                    <i class="fa pe-7s-like megusta" id="like" data-toggle="Me gusta"> </i>
+                @else
+                    <i class="fa pe-7s-like" id="like" data-toggle="Me gusta"> </i>
+                @endif
+                
                 <i class="fa pe-7s-paper-plane" title="Enviar"> </i>
             </div>
         </div>
         <div class="border-bot">
+            <div>
+                <p class="descripcio">{{$results->descripcio}}</p>
+                <span>{{date("d/m/Y",strtotime($results->created_at))}}</span>
+                <span>{{$results->likes}}</span>
+            </div>
             @foreach ($comentarios as $item)
                 <div class="comentario">
                     <a href="{{asset('/usuaris/'.$item->id_usuari)}}">
@@ -54,11 +64,10 @@
         <div >
             @if (isset(Auth::user()->id))
                 @if (Auth::user()->id!=$results->id_user)
-                <form id="comentari" action="/comment" method="POST">
-                    @csrf
+                <form id="comentari">
                     <div class="form-group">
                         <img src={{asset("images/perfil/usuarios/".Auth::user()->foto)}} class="foto-coment">
-                        <input type="checkbox" hidden name="megusta" id="megusta">
+                        <input type="checkbox" value="{{$like}}" {{($like==1) ? 'checked' : ""}} hidden name="megusta" id="megusta">
                         <input type="hidden" name="id_contingut" value="{{$results->id}}" />
                         <textarea class="form-control" rows="4" name="comentario" id="mensaje"></textarea>
                     </div>
@@ -80,6 +89,7 @@
         $(document).on("submit",function(e){
             enviaComent();
         });
+        console.log("{{$like}}");
         $("#like").on("click",function(e){
 
             if($("#megusta").prop("checked")){
@@ -90,23 +100,24 @@
                 $("#like").addClass("meGusta");
             }
             enviaLike();
-
+            
         });
     });
 
     function enviaComent(){
         var comentario=$("#mensaje").val();
         console.log(comentario);
+        var idProp={{$results->id_user}};
         $.ajax({
         url: "/comment",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "POST",
-        dataType: 'json',
         data: {
             "id_contingut":{{$results->id}},
-            "comentario":comentario
+            "comentario":comentario,
+            "idProp":idProp
         },
         success: function(data){
            console.log("correcte");
@@ -115,25 +126,29 @@
     }
 
     function enviaLike(){
-        var megusta;
+        var megusta="0";
+        
         if($("#megusta").prop("checked")){
-            megusta=1;
-        }else{
-            megusta=0;
+            megusta="1";
         }
+        console.log("{{$results->id}}/"+megusta);
+        var idcont={{$results->id}};
+        var idProp={{$results->id_user}};
         $.ajax({
         url: "/comment",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "POST",
-        dataType: 'json',
         data: {
             "id_contingut":{{$results->id}},
-            "megusta":megusta
+            "megusta":megusta,
+            "idProp":idProp
         },
         success: function(data){
            console.log("correcte");
+        },error: function(data){
+           console.log(data);
         }
         });
     }

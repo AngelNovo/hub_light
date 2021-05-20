@@ -17,6 +17,10 @@
                         </div>
                     </label>
                 </div>
+                {{-- Seguir --}}
+                @if (Auth::user()->id != $user->id)
+                    <button class="button-seguir" id="seguir_boton">Seguir</button>
+                @endif
                 {{-- Activitat Usuari --}}
                 @if ($user->actiu==1)
                     <div class="conectado active"></div>
@@ -57,6 +61,42 @@
         // Marcar Navbar
         $(".isSelected").removeClass("isSelected");
         $("#Nav-Perfil").addClass("isSelected");
+        $("#seguir_boton").on("click",function(){
+            seguir();
+        });
     });   
+
+    function seguir(){
+        $.ajax({
+        url: "/usuaris/add/friend",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        data: {
+            "seguit":{{$user->id}}
+        },
+        success: function(data){
+           console.log("correcte");
+        }
+        });
+    }
+
+    function aceptar(){
+        $.ajax({
+        url: "/usuaris/add/friend",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "PUT",
+        data: {
+            id:1,
+            "acceptat":1
+        },
+        success: function(data){
+           console.log("correcte");
+        }
+        });
+    }
 </script>
 @endsection

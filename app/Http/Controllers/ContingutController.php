@@ -143,7 +143,9 @@ class ContingutController extends Controller
         ->limit($limit)
         ->get("interaccio.id_contingut","count(interaccio.id_contingut) as counter");
 
-        $destacadosContenido=ContingutModel::whereIn("id",$destacados)->get();
+        $destacadosContenido=ContingutModel::whereIn("contingut.id",$destacados)
+        ->join('users','users.id','=','propietari')
+        ->get();
         return $destacadosContenido;
 
     }

@@ -22,7 +22,7 @@
       </li>
       {{-- Destacats --}}
       <li class="nav-item">
-        <a class="nav-link" href={{url('/destacados')}} id="Nav-Destacados"><i class="fa pe-7s-medal" title="Destacados"> </i></a>
+        <a class="nav-link" href={{url('/destacados/vista')}} id="Nav-Destacados"><i class="fa pe-7s-medal" title="Destacados"> </i></a>
       </li>
       {{-- Perfil --}}     
       @if (isset(Auth::user()->id))

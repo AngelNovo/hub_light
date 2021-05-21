@@ -38,6 +38,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    width: 100%;
 }
 .contingut-principal>img,.contingut-principal>video{
     max-width: 100%;
@@ -51,6 +52,7 @@
     box-shadow: 2px 2px 2px #3d3d3d;
     border-radius: 0 0 10px 10px;
     padding-bottom: 5px;
+    margin-bottom: 100px;
 }
 
 .header-footer-contingut{

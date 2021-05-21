@@ -24,44 +24,52 @@
         {{-- Contingut Video --}}
         @if ($results->tipus_contingut==4)
             <div class="contingut-principal" style="background-image:url({{asset('/contenido/1/'.$results->portada)}});">
-                <video controls="controls" style="cursor: pointer;" src={{asset('/contenido/4/'.$results->url)}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="embed-responsive-item"></video>
+                <video controls="controls" style="cursor: pointer;" src={{asset('/contenido/4/'.$results->url)}} data-toggle="tooltip" data-placement="right" class="embed-responsive-item"></video>
             </div>
         @endif
         {{-- Contingut Musica --}}
         @if ($results->tipus_contingut==3)
             <div class="contingut-principal" style="background-image:url({{asset('/contenido/1/'.$results->portada)}});">
-                <audio controls="controls" style="cursor: pointer;" src={{asset('/contenido/3/'.$results->url)}} alt="Arxiu" data-toggle="tooltip" data-placement="right" class="music-arxiu"></audio>
+                <audio controls="controls" style="cursor: pointer;" src={{asset('/contenido/3/'.$results->url)}} data-toggle="tooltip" data-placement="right" class="music-arxiu"></audio>
             </div>
         @endif
     @endif
+    {{-- Footer --}}
     <div class="footer-contingut">
+        {{-- Header-Footer --}}
         @if (isset(Auth::user()->id))
         <div class="header-footer-contingut">
             <div>
-                @if ($like=="1")
-                    <i class="fa pe-7s-like megusta" id="like" data-toggle="Me gusta"> </i>
-                @else
-                    <i class="fa pe-7s-like" id="like" data-toggle="Me gusta"></i>
-                @endif               
-                <i class="fa pe-7s-paper-plane" title="Enviar"> </i>
+                @if (Auth::user()->id!=$results->id_user)
+                    @if ($like=="1")
+                        <i class="fa pe-7s-like megusta" id="like" data-toggle="Me gusta"> </i>
+                    @else
+                        <i class="fa pe-7s-like" id="like" data-toggle="Me gusta"></i>
+                    @endif  
+                @endif              
+                <i class="fa pe-7s-paper-plane" id="enviar" data-toggle="Enviar"> </i>
             </div>
         </div>
         @endif
+        {{-- Content-Footer --}}
         <div class="border-bot">            
             <div>
-                <span>{{$q_likes}} me gustas</span> 
+                <span>{{$q_likes}} likes</span> 
                 <span class="fecha-contingut">{{date("d/m/Y",strtotime($results->created_at))}}</span>
                 <p class="descripcio">{{$results->descripcio}} </p>                              
             </div>           
             @foreach ($comentarios as $item)
-                <div class="comentario">
-                    <a href="{{asset('/usuaris/'.$item->id_usuari)}}">
-                        <img class="foto-coment" src={{asset("images/perfil/usuarios/".$item->foto)}}>
-                    </a>
-                   <p class="text-comment">{{$item->comentario}}</p>
-                </div>
+                @if ($item->comentario!=null||$item->comentario!="")
+                    <div class="comentario">
+                        <a href="{{asset('/usuaris/'.$item->id_usuari)}}">
+                            <img class="foto-coment" src={{asset("images/perfil/usuarios/".$item->foto)}}>
+                        </a>
+                    <p class="text-comment">{{$item->comentario}}</p>
+                    </div>
+                @endif            
             @endforeach
         </div>
+        {{-- Footer-Footer --}}
         <div >
             @if (isset(Auth::user()->id))
                 @if (Auth::user()->id!=$results->id_user)

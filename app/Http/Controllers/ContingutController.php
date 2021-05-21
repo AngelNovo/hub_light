@@ -138,6 +138,8 @@ class ContingutController extends Controller
 
         $limit = ceil($limit/10);
 
+        $array=[];
+
         $destacados=InteraccioModel::where("interaccio.megusta",1)
         ->groupBy("interaccio.id_contingut")
         ->limit($limit)
@@ -146,6 +148,19 @@ class ContingutController extends Controller
         $destacadosContenido=ContingutModel::whereIn("contingut.id",$destacados)
         ->join('users','users.id','=','propietari')
         ->get();
+
+        $likes=InteraccioModel::whereIn('id_contingut',$destacados)
+        ->where('megusta',1)
+        ->limit($limit)
+        ->selectRaw('count(megusta) as likes')
+        ->groupBy("id_contingut")
+        ->orderBy("likes","desc")
+        ->get();
+
+        for($i=0;$i<sizeof($destacadosContenido);$i++) {
+            $destacadosContenido[$i]->q_likes=$likes[$i]->likes;
+        }
+
         return $destacadosContenido;
 
     }

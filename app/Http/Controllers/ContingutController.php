@@ -157,8 +157,14 @@ class ContingutController extends Controller
         ->orderBy("likes","desc")
         ->get();
 
+        $ifLike=InteraccioModel::where([
+            "id_usuari"=>Auth::user()->id,
+        ])->get('megusta');
+
         for($i=0;$i<sizeof($destacadosContenido);$i++) {
             $destacadosContenido[$i]->q_likes=$likes[$i]->likes;
+            $destacadosContenido[$i]->like_bool=$ifLike[$i]->megusta;
+
         }
 
         return $destacadosContenido;

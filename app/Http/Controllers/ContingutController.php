@@ -202,8 +202,6 @@ class ContingutController extends Controller
             $archivo=time().'-'.Auth::user()->name.'.'.$request->arxiu->extension();
             $request->arxiu->move($url,$archivo);
 
-            $statistic=EstadisticaContingutModel::create();
-
             $subido=ContingutModel::create([
                 'propietari'=>$pId,
                 'titulo'=>$titulo,
@@ -214,8 +212,7 @@ class ContingutController extends Controller
                 'majoria_edat'=>$overAge,
                 'portada'=>$portada,
                 'url'=>$archivo,
-                'reportat'=>0,
-                'estadistica'=>$statistic->id
+                'reportat'=>0
             ]);
 
             if(!empty($tags)) {

@@ -147,29 +147,50 @@ class ContingutController extends Controller
 
         $destacadosContenido=ContingutModel::whereIn("contingut.id",$destacados)
         ->join('users','users.id','=','propietari')
+        ->select(
+            "contingut.id as contingut_id",
+            "titulo",
+            "portada",
+            "link_copyright",
+            "url",
+            "descripcio",
+            "majoria_edat",
+            "reportat",
+            "propietari",
+            "tipus_contingut",
+            "drets_autor",
+            "name",
+            "password",
+            "email",
+            "foto",
+            "link",
+        )
         ->get();
 
-        $likes=InteraccioModel::whereIn('id_contingut',$destacados)
-        ->where('megusta',1)
+        $aux0=[];
+        foreach($destacados as $d) {
+            $aux0[]=$d->id_contingut;
+        }
+
+        $likes=InteraccioModel::whereIn('id_contingut',$aux0)
         ->limit($limit)
-        ->selectRaw('count(megusta) as likes')
+        ->selectRaw('count(megusta) as likes ,id_contingut')
         ->groupBy("id_contingut")
         ->orderBy("likes","desc")
         ->get();
+        // return $aux0;
 
-        $ifLike=InteraccioModel::where(
-            "id_usuari",Auth::user()->id
-        )
+        // $ifLike=InteraccioModel::where(
+        //     "id_usuari",Auth::user()->id
+
+        // )->whereIn("id_contingut",$aux0)
         // ->limit($limit)
-        ->get();
-        return $ifLike;
+        // ->get();
+        // return $ifLike;
+        // return $ifLike;
 
         for($i=0;$i<sizeof($destacadosContenido);$i++) {
-
             $destacadosContenido[$i]->q_likes=$likes[$i]->likes;
-            if($destacados[$i]->id_contingut==$ifLike[$i]->id_contingut) {
-                $destacadosContenido[$i]->like_bool=$ifLike[$i]->megusta;
-            }
 
         }
 

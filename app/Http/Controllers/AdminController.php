@@ -7,54 +7,43 @@ use App\Models\AvisModel;
 use App\Models\AvisUsuariModel;
 use App\Models\ContingutModel;
 use App\Models\User;
+use App\Mail\blockUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
 
-    public function updateAnalytics($aux){
-        // Controla tabla "analitiques_generals"
-        $actius = DB::table('analitiques_generals')->max('id');
-        $analitiques = AnalitiquesGeneralsModel::find($actius);
-        if($aux==0) {
-            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
-            ->update([
-                "usuaris_actius"=>$analitiques->usuaris_actius+1,
-                "usuaris_suspes"=>$analitiques->usuaris_suspes-1
-            ]);
-        }else if($aux==1) {
-            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
-            ->update([
-                "usuaris_actius"=>$analitiques->usuaris_actius-1,
-                "usuaris_suspes"=>$analitiques->usuaris_suspes+1
-            ]);
-        }else if($aux==2) {
-            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
-            ->update([
-                "usuaris_enperill"=>$analitiques->usuaris_enperill+1,
-                "usuaris_actius"=>$analitiques->usuaris_actius-1
-            ]);
-        }else if($aux ==3 ) {
-            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
-            ->update([
-                "usuaris_enperill"=>$analitiques->usuaris_enperill-1,
-                "usuaris_actius"=>$analitiques->usuaris_actius+1
-            ]);
-        }else {
-            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
-            ->update([
-                "usuaris_enperill"=>$analitiques->usuaris_enperill-1,
-                "usuaris_suspes"=>$analitiques->usuaris_suspes+1
-            ]);
-        }
+    public function bloqueoCorreo($user) {
+        $mail=$user->email;
+        // return $user;
+        $details = [
+            'title'=>"Aviso de bloqueo de usuario",
+            "body"=>"La cuenta '$user->name' ha sido bloqueada permanentemente",
+            "motivos"=>"Exceso de contenido o comentarios inapropiados"
+        ];
+        Mail::to($mail)->send(new blockUser($details));
     }
 
     public function dashboard() {
         $conectados=User::where('actiu',1)->count();
         $desconectados=User::where('actiu',0)->count();
         $content=AnalitiquesGeneralsModel::all();
-        return view('back.dashboard')->with('content',$content)->with('connected',$conectados)->with('disconnected',$desconectados);
+        $enperill=User::where('nivell_gravetat',"<",5)
+            ->where("nivell_gravetat",">",0)
+            ->count();
+        $suspes=User::where('suspes',1)
+            ->count();
+        $sanos=User::where('nivell_gravetat',">=",5)
+            ->count();
+        return view('back.dashboard')
+        ->with('content',$content)
+        ->with('connected',$conectados)
+        ->with('disconnected',$desconectados)
+        ->with('sanos',$sanos)
+        ->with('suspes',$suspes)
+        ->with('enperill',$enperill);
     }
 
     public function adminify() {
@@ -140,15 +129,10 @@ class AdminController extends Controller
             'suspes'=>$aux,
             'nivell_gravetat'=>$nivell
         ]);
-        if($us->nivell_gravetat<5 && $us->nivell_gravetat>0) {
-                $this->updateAnalytics(3);
-                $this->updateAnalytics($aux);
-            return 1;
+
+        if($aux==1) {
+            $this->bloqueoCorreo(User::where('id',$id)->get()->first());
         }
-
-        $this->updateAnalytics($aux);
-
-
         return 1;
 
     }
@@ -182,33 +166,22 @@ class AdminController extends Controller
         $user = User::find($idUser);
         $userGrav = $user->nivell_gravetat;
 
-       if($userGrav-$gravetat>0 && $userGrav-$gravetat<=10) {
+        // return $userGrav-$gravetat;
+
+       if($userGrav-$gravetat>0) {
             $update = User::where('id',$idUser)
             ->update([
                 "nivell_gravetat"=>$userGrav-$gravetat
             ]);
-            if($userGrav-$gravetat>0 && $userGrav-$gravetat<5) {
-                if($userGrav-$gravetat<1) {
-                    $this->updateAnalytics(4);
-                    return 1;
-                }
-                $this->updateAnalytics(2);
-            };
             return 1;
-        }
+       }
         $update = User::where('id',$idUser)
         ->update([
             "suspes"=>1,
             "nivell_gravetat"=>0
         ]);
-        $user = User::find($idUser);
-        if($userGrav-$gravetat<1) {
-            $this->updateAnalytics(4);
-            return 1;
-        }
-        if($user->suspes===1) {
-            $this->updateAnalytics(1);
-        }
+
+        $this->bloqueoCorreo($user);
         return 1;
 
     }

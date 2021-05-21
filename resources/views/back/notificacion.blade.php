@@ -18,7 +18,7 @@
             @foreach ($data["users"] as $user)
                 <tr data-id="{{$user->id}}">
                     <td><input type="number" class="form-control" name="id" value="{{$user->id}}" disabled></td>
-                    <td><input type="text" class="form-control" name="nombre" value={{$user->name}} disabled></td>
+                    <td><input type="text" class="form-control" name="nombre" value="{{$user->name}}" disabled></td>
                     <td class="text-center">
                         <select name="avis" aria-label="Elige un aviso a enviar" class="form-select">
                             <option value="0" selected>Elige un aviso a enviar</option>

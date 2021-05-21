@@ -51,13 +51,8 @@
         data:line,
     });
     // Principio segundo chart
-    let data_users=[];
+    let data_users=[{{$sanos}},{{$suspes}},{{$enperill}}];
     let labels_users=["Usuarios sanos","Usuaros bloqueados","Usuarios en peligro"];
-    let data_users_raw=data_raw[data_raw.length-1];
-
-    data_users.push(data_users_raw.usuaris_actius);
-    data_users.push(data_users_raw.usuaris_suspes);
-    data_users.push(data_users_raw.usuaris_enperill);
 
     const pie = {
         labels: labels_users,

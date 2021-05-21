@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SeguidorsModel;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -106,5 +107,13 @@ class UsuariController extends Controller
         ->update($update);
         return redirect("/opciones/".Auth::user()->id);
 
+    }
+    public function verifica($id) {
+        $mytime = Carbon::now();
+        $user=User::where('id',$id)
+        ->update([
+            "email_verified_at"=>$mytime
+        ]);
+        return redirect('/');
     }
 }

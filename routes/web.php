@@ -123,3 +123,6 @@ Route::get('/recomendados',function() {
 // Destacados
 Route::get('/destacados',[ContingutController::class,'getDestacados']);
 Route::get('/destacados/vista',[ContingutController::class,'getDestacadosVista']);
+
+// Verificar correo
+Route::get('/verifica/{id}',[UsuariController::class,'verifica']);

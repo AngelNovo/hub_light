@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\EmailTest;
 use App\Models\AnalitiquesGeneralsModel;
 use App\Models\EstadisticaModel;
 use App\Providers\RouteServiceProvider;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -68,26 +70,22 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        EstadisticaModel::create();
-
-        $aux=EstadisticaModel::max('id_estadistica');
-
-        $actius = DB::table('analitiques_generals')->max('id');
-        $analitiques = AnalitiquesGeneralsModel::find($actius);
-            $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
-            ->update([
-                "usuaris_actius"=>$analitiques->usuaris_actius+1
-            ]);
-
-        return User::create([
+        $user= User::create([
             'name' => $data['name'],
             'alies'=>$data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'estadistica'=>$aux,
             'tipus'=>1,
             'alies'=>$data["alias"],
             'data_naixement'=>$data["data_naixement"]
         ]);
+        $details = [
+            'title'=>"La cuenta '$user->name' ha sido creada con este correo electrónico",
+            "body"=>"Porfavor verifique su cuenta",
+            "id"=>$user->id
+        ];
+        Mail::to($data['email'])->send(new EmailTest($details));
+        return $user;
+
     }
 }

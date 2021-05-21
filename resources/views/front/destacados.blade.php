@@ -92,7 +92,7 @@ function cargarContenido(){
               like.addClass("pe-7s-like");
               like.addClass("like");
               like.attr("data-toggle","Me gusta");
-              if(element.like_bool="1"){
+              if(element.like_bool=="1"){
                 like.addClass("megusta");
               }
               let enviar=$("<i>");

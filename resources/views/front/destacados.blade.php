@@ -31,7 +31,6 @@ function cargarContenido(){
           return (b.q_likes - a.q_likes)
         });
         let AUTH=JSON.parse($("#Auth").val());
-        console.log(AUTH);
         let contingut=$(".content");
         $.each(data, function(index,element){
           console.log(element);
@@ -42,7 +41,7 @@ function cargarContenido(){
           header.addClass("header-contingut");
           //Foto Perfil
           let enlaceProp=$("<a>");
-          enlaceProp.attr("href","{{asset('usuaris/')}}"+"/"+element.id);
+          enlaceProp.attr("href","{{asset('usuaris/')}}"+"/"+element.propietari);
           let divImg=$("<div>");
           let imgPropPerfil=$("<img>");
           imgPropPerfil.attr("src","{{asset('images/perfil/usuarios/')}}"+"/"+element.foto);
@@ -128,11 +127,22 @@ function cargarContenido(){
           divCont.append(spanFecha);
           divCont.append(descripcio);
           contentFooter.append(divCont);
-          let mostComent=$("<p>");
+          let mostComent=$("<span>");
           mostComent.addClass("most-coment");
           mostComent.text("--- Mostrar Comentarios ---");
+          mostComent.attr("val","0")
           footer.append(contentFooter);
             //Footer-Footer
+            let inIdCont=$("<input>");
+              inIdCont.attr("type","hidden");
+              inIdCont.val(element.contingut_id);
+              inIdCont.attr("name","id_contingut");
+              inIdCont.addClass("id_contingut");
+              let inIdProp=$("<input>");
+              inIdProp.attr("type","hidden");
+              inIdProp.val(element.propietari);
+              inIdProp.attr("name","id_propitari");
+              inIdProp.addClass("id_propitari");
           if(AUTH!=0){
             if(AUTH.id!=element.propietari && AUTH!=0){
               let form=$("<form>");
@@ -150,17 +160,7 @@ function cargarContenido(){
               if(element.like_bool=="1"){
                 checklike.prop("checked",true);
               }
-              checklike.hide();
-              let inIdCont=$("<input>");
-              inIdCont.attr("type","hidden");
-              inIdCont.val(element.contingut_id);
-              inIdCont.attr("name","id_contingut");
-              inIdCont.addClass("id_contingut");
-              let inIdProp=$("<input>");
-              inIdProp.attr("type","hidden");
-              inIdProp.val(element.propietari);
-              inIdProp.attr("name","id_propitari");
-              inIdProp.addClass("id_propitari");
+              checklike.hide();             
               let textArea=$("<textarea>");
               textArea.addClass("form-control");
               textArea.addClass("MSG");
@@ -181,7 +181,13 @@ function cargarContenido(){
               form.append(buttonComent);
               form.hide();
               footer.append(form);
+            }else{
+              footer.append(inIdCont);
+              footer.append(inIdProp);
             }
+          }else{
+            footer.append(inIdCont);
+            footer.append(inIdProp);
           }
           footer.append(mostComent);
           row.append(footer);
@@ -191,16 +197,31 @@ function cargarContenido(){
         $(".most-coment").on("click",function(){
           let form=$(this);
           form=form.parent().find(".formComentaris");
+          var comentaris=$(this).parent();
+          comentaris=comentaris.find(".border-bot").find("div");
+          let input=$(this).parent();
+          let id= input.find(".formComentaris").find(".form-group").find(".id_contingut").val();          
           if(form.is(':hidden')){
             form.slideDown();
             $(this).text("--- Ocultar Comentarios ---");
-            var comentaris=$(this).parent();
-            console.log(comentaris.attr("class"));
-            // mostraComents();
+            mostraComents(comentaris,id);
           }else{
             form.slideUp();
             $(this).text("--- Mostrar Comentarios ---");
-          }       
+            eliminaComents(comentaris);
+          } 
+          if(form.attr("class")==undefined){
+            if( $(this).attr("val")=="0"){
+              $(this).text("--- Ocultar Comentarios ---");
+              $(this).attr("val","1");
+              id=$(this).parent().find(".id_contingut").val();
+              mostraComents(comentaris,id);
+            }else{
+              $(this).text("--- Mostrar Comentarios ---");
+              $(this).attr("val","0");
+              eliminaComents(comentaris);
+            }
+          }   
         });
         $(".like").on("click",function(){
           let input=$(this).parent().parent().parent();
@@ -226,10 +247,10 @@ function cargarContenido(){
           let msg= input.find(".MSG").val();
           let idCont=input.find(".id_contingut").val();
           let idProp=input.find(".id_propitari").val();
-          console.log(idCont+"/"+msg+"/"+idProp);
-          enviaComent(idCont,msg,idProp);
-        });
-        
+          var comentaris=$(this).parent().parent();
+          comentaris=comentaris.find(".border-bot").find("div");
+          enviaComent(idCont,msg,idProp,comentaris);    
+        });       
       }
     });
 
@@ -252,12 +273,56 @@ function cargarContenido(){
         }
       });
   }
-
+  //Mostrar Comentarios
   function mostraComents(contingut,id){
-
+    $.ajax({
+      url: "/comment/"+id,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      type: "GET",
+      dataType: 'json',
+      success: function(data){
+        let contador=0;
+        $.each(data, function(index,element){
+          if(element.comentario!=null&&element.comentario!=""&&element.comentario!=undefined){
+            let comentario=$("<div>");
+            comentario.addClass("comentario");
+            let fotoUser=$("<a>");
+            fotoUser.attr("href","{{asset('/usuaris/')}}/"+element.id_usuari);
+            let img=$("<img>");
+            img.addClass("foto-coment");
+            img.attr("src","{{asset('images/perfil/usuarios/')}}/"+element.foto);
+            fotoUser.append(img);
+            let coment=$("<p>");
+            coment.addClass("text-comment");
+            coment.text(element.comentario);
+            comentario.append(fotoUser);
+            comentario.append(coment);
+            comentario.hide();
+            contingut.append(comentario);
+            contador=contador++;
+          }
+        });
+        if(contador==0){
+          let comentario=$("<div>");
+          comentario.addClass("comentario");
+          comentario.text("No hay comentarios");
+          comentario.css("text-align","center");
+          comentario.css("width","100%");
+        }
+        contingut.find(".comentario").slideDown();
+      }
+    });
   }
 
-  function enviaComent(idCont,msg,idProp){
+  function eliminaComents(contingut){
+    contingut.find(".comentario").slideUp(function(){
+      contingut.find(".comentario").remove();
+    });
+  }
+
+  function enviaComent(idCont,msg,idProp,contingut){
         $.ajax({
         url: "/comment",
         headers: {
@@ -270,7 +335,8 @@ function cargarContenido(){
             "idProp":idProp
         },
         success: function(data){
-           console.log(data);
+          contingut.find(".comentario").remove();
+          mostraComents(contingut,idCont);
         }
         });
     }

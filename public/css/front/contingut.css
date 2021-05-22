@@ -130,4 +130,6 @@ span{
     width: 100%;
     text-align: center;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 }

@@ -199,8 +199,9 @@ class ContingutController extends Controller
         ->orderBy("likes","desc")
         ->get();
 
+        $user=(isset(Auth::user()->id)) ? Auth::user()->id : 1;
         $ifLike=InteraccioModel::where(
-            "id_usuari",Auth::user()->id
+            "id_usuari",$user
 
         )
         ->select("id_contingut","megusta")

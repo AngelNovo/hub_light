@@ -51,7 +51,9 @@ class ContingutController extends Controller
         }
         $arrayAux=[];
 
-        $contenidoInicio=ContingutModel::whereIn('propietari',$aux)->skip($offset)->take(5)->get();
+        $contenidoInicio=ContingutModel::whereIn('propietari',$aux)->skip($offset)->take(5)
+        ->join("users","users.id","=","propietari")
+        ->get();
 
         for($i=0;$i<sizeof($contenidoInicio);$i++) {
             $arrayAux[]=$contenidoInicio[$i]->id;

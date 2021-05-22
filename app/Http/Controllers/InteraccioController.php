@@ -61,7 +61,7 @@ class InteraccioController extends Controller
     public function getComments($id) {
         $comments = InteraccioModel::where('interaccio.id_contingut',$id)
         ->join("contingut","contingut.id","=","interaccio.id_contingut")
-        ->join("users","users.id","=","contingut.propietari")
+        ->join("users","users.id","=","interaccio.id_usuari")
         ->orderBy("interaccio.created_at","desc")
         ->get();
         return $comments;

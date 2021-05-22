@@ -37,7 +37,21 @@ class ContingutController extends Controller
                 "contenido_total"=>$content->contenido_total
             ]);
         }
-
+        $seguits=SeguidorsModel::whereRaw('acceptat=1 and (id_seguit='.Auth::user()->id.' or id_usuari='.Auth::user()->id.')')
+            ->select("id_seguit","id_usuari")
+        ->get();
+        $aux=[];
+        foreach($seguits as $s) {
+            if($s->id_seguit!=Auth::user()->id) {
+                $aux[]=$s->id_seguit;
+            }
+            if($s->id_usuari!=Auth::user()->id) {
+                $aux[]=$s->id_usuari;
+            }
+        }
+        // return $aux;
+        $contenidoInicio=DB::table('contingut')->whereIn('propietari',[$aux])->get();
+        // return $contenidoInicio;
         return view('front.home');
     }
 
@@ -140,11 +154,20 @@ class ContingutController extends Controller
 
         $array=[];
 
-        $destacados=InteraccioModel::where("interaccio.megusta",1)
-        ->groupBy("interaccio.id_contingut")
+        // $destacados=InteraccioModel::where("interaccio.megusta",1)
+        // ->groupBy("interaccio.id_contingut")
+        // ->limit($limit)
+        // ->get("interaccio.id_contingut","count(interaccio.id_contingut) as counter");
+        // select id_contingut, count(megusta) as q_likes from interaccio
+        // where megusta=1
+        // group by id_contingut
+        $destacados=InteraccioModel::selectRaw(
+            "id_contingut, count(megusta) as q_likes"
+        )
+        ->where("megusta","1")
+        ->groupBy("id_contingut")
         ->limit($limit)
-        ->get("interaccio.id_contingut","count(interaccio.id_contingut) as counter");
-
+        ->get();
         $destacadosContenido=ContingutModel::whereIn("contingut.id",$destacados)
         ->join('users','users.id','=','propietari')
         ->select(
@@ -188,6 +211,7 @@ class ContingutController extends Controller
         ->get();
 
         $bool="0";
+        $qL=0;
 
         for($i=0;$i<sizeof($destacadosContenido);$i++) {
             $id_contingut=$destacadosContenido[$i]->contingut_id;
@@ -197,7 +221,16 @@ class ContingutController extends Controller
                     $bool=$ifLike[$j]->megusta;
                 }
             }
-            $destacadosContenido[$i]->q_likes=$likes[$i]->likes;
+
+            for($j=0;$j<sizeof($destacados);$j++) {
+                $id_cont_child=$destacados[$j]->id_contingut;
+                if($id_contingut===$id_cont_child) {
+                    $qL=$destacados[$j]->q_likes;
+                }
+            }
+
+            $destacadosContenido[$i]->q_likes=$qL;
+
             $destacadosContenido[$i]->like_bool=$bool;
             $bool="0";
         }

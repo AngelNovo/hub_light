@@ -30,11 +30,13 @@ class InteraccioController extends Controller
 
         //3: guardamos (update) el objeto
         $interaccio->save();
+        // return $interaccio->id_contingut;
 
         if(null!==($request->input('megusta'))) {
             $recomenats=ContingutTagModel::where('id_contingut',$interaccio->id_contingut)
-            ->join('tags','tags.id',"=",'id_tag')
-            ->get('tags.nombre');
+            ->join('tags','tags.id',"=",'.id_tag')
+            ->select("tags.nombre")
+            ->get();
             $usuario = User::where('id',Auth::user()->id)->get()->first();
             $recomenatsRaw=explode(";",$usuario->recomenat);
             // return $recomenatsRaw;
@@ -55,5 +57,9 @@ class InteraccioController extends Controller
         }
 
         //4: devolvemos una respuesta response() con el valor que queramos
+    }
+    public function getComments($id) {
+        $comments = InteraccioModel::where();
+        return $comments;
     }
 }

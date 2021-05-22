@@ -23,15 +23,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ContingutController::class,'getHome']);
-
 // *Usuari*
 Route::get('/usuaris',[UsuariController::class,'getAll']);
 Route::get('/usuaris/{id}',[UsuariController::class,'get']);
 Route::get('/logout',[UsuariController::class,'logout']);
 Route::put('/usuaris/update',[UsuariController::class,'update']);
 Route::put('/usuaris/update/foto',[UsuariController::class,'updateFoto']);
-//
+// Seguidors
 Route::post('/usuaris/add/friend',[SeguidorsController::class,'store']);
 Route::put('/usuaris/add/friend',[SeguidorsController::class,'edit']);
 // *Tipus usuari*
@@ -40,6 +38,7 @@ Route::post('/tipusUsuari',[TipusUsuariController::class,'store']);
 // *Contingut*
 Route::get('/contingut/{id}',[ContingutController::class,'get']);
 Route::post('/contingut',[ContingutController::class,'store']);
+Route::get('/comment/{id}',[InteraccioController::class,'getComments']);
 // *Drets autor*
 Route::get('/derechosautor',[DerechosAutorController::class,'getAll']);
 // *Tipo contenido*
@@ -59,6 +58,7 @@ Route::get('/buscador',[ContingutController::class,'buscador']);
 
 // *ADMIN*
 Route::group(['middleware'=>'auth'], function() {
+    Route::get('/', [ContingutController::class,'getHome']);
     Route::get('/back/admin/home', function() {
         return redirect('/back/admin/dashboard');
     });

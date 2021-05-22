@@ -32,14 +32,15 @@
     background-repeat: no-repeat;
     border:solid 10px #3d3d3d;
     box-shadow: 2px 2px 2px #3d3d3d;
-    background-color: #ffffffAA;
+    background-color: rgb(0, 0, 0);   
     z-index: 2;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     width: 100%;
+    background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
 .contingut-principal>img,.contingut-principal>video{
     max-width: 100%;
     min-height: 200px;
@@ -123,4 +124,10 @@ textarea:focus{
 span{
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.most-coment{
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
 }

@@ -56,7 +56,7 @@
             <div>
                 <span>{{$q_likes}} likes</span> 
                 <span class="fecha-contingut">{{date("d/m/Y",strtotime($results->created_at))}}</span>
-                <p class="descripcio">{{$results->descripcio}} </p>                              
+                <p class="descripcio">{{$results->descripcio}}</p>                              
             </div>           
             @foreach ($comentarios as $item)
                 @if ($item->comentario!=null||$item->comentario!="")
@@ -76,7 +76,7 @@
                 <form id="comentari">
                     <div class="form-group">
                         <img src={{asset("images/perfil/usuarios/".Auth::user()->foto)}} class="foto-coment">
-                        <input type="checkbox" value="{{$like}}" {{($like==1) ? 'checked' : ""}} hidden name="megusta" id="megusta">
+                        <input type="checkbox" value="{{$like}}" {{($like=="1") ? 'checked' : ""}} hidden name="megusta" id="megusta">
                         <input type="hidden" name="id_contingut" value="{{$results->id}}" />
                         <textarea class="form-control" rows="4" name="comentario" id="mensaje"></textarea>
                     </div>

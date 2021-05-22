@@ -53,6 +53,25 @@ class ContingutController extends Controller
 
         $contenidoInicio=ContingutModel::whereIn('propietari',$aux)->skip($offset)->take(5)
         ->join("users","users.id","=","propietari")
+        ->select(
+            "contingut.id as contingut_id",
+            "titulo",
+            "portada",
+            "link_copyright",
+            "url",
+            "descripcio",
+            "majoria_edat",
+            "reportat",
+            "propietari",
+            "tipus_contingut",
+            "drets_autor",
+            "name",
+            "password",
+            "email",
+            "foto",
+            "link",
+            "contingut.created_at"
+        )
         ->get();
 
         for($i=0;$i<sizeof($contenidoInicio);$i++) {

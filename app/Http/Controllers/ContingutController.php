@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 class ContingutController extends Controller
 {
 
-    public function getHome() {
+    public function getHome($offset) {
         $content=AnalitiquesGeneralsModel::all();
         $content = $content[sizeof($content)-1];
         $last_data=$content->created_at;
@@ -39,6 +39,7 @@ class ContingutController extends Controller
         $seguits=SeguidorsModel::whereRaw('acceptat=1 and (id_seguit='.Auth::user()->id.' or id_usuari='.Auth::user()->id.')')
             ->select("id_seguit","id_usuari")
         ->get();
+        // q_likes y si usuario ya le ha dado like
         $aux=[];
         foreach($seguits as $s) {
             if($s->id_seguit!=Auth::user()->id) {
@@ -48,8 +49,67 @@ class ContingutController extends Controller
                 $aux[]=$s->id_usuari;
             }
         }
-        // return $aux;
-        $contenidoInicio=ContingutModel::whereIn('propietari',$aux)->get();
+        $arrayAux=[];
+
+        $contenidoInicio=ContingutModel::whereIn('propietari',$aux)->skip($offset)->take(5)->get();
+
+        for($i=0;$i<sizeof($contenidoInicio);$i++) {
+            $arrayAux[]=$contenidoInicio[$i]->id;
+        }
+
+        $destacados=InteraccioModel::selectRaw(
+            "id_contingut, count(megusta) as q_likes"
+        )
+        ->where("megusta","1")
+        // ->whereIn("id_contingut",$arrayAux)
+        ->groupBy("id_contingut")
+        ->get();
+
+        // return $destacados;
+        $aux0=[];
+        foreach($destacados as $d) {
+            $aux0[]=$d->id_contingut;
+        }
+
+        $likes=InteraccioModel::whereIn('id_contingut',$aux0)
+        ->selectRaw('count(megusta) as likes ,id_contingut')
+        ->groupBy("id_contingut")
+        ->orderBy("likes","desc")
+        ->get();
+
+        $user=(isset(Auth::user()->id)) ? Auth::user()->id : 1;
+        $ifLike=InteraccioModel::where(
+            "id_usuari",$user
+
+        )
+        ->select("id_contingut","megusta")
+        ->get();
+
+        $bool="0";
+        $qL=0;
+
+        for($i=0;$i<sizeof($contenidoInicio);$i++) {
+            $id_contingut=$contenidoInicio[$i]->id;
+            // Comprueba si usuario ha dado like o no
+            for($j=0;$j<sizeof($ifLike);$j++) {
+                $id_cont_child=$ifLike[$j]->id_contingut;
+                if($id_contingut==$id_cont_child) {
+                    $bool=$ifLike[$j]->megusta;
+                }
+            }
+            // Muestra la cantidad de likes
+            for($j=0;$j<sizeof($destacados);$j++) {
+                $id_cont_child=$destacados[$j]->id_contingut;
+                if($id_contingut===$id_cont_child) {
+                    $qL=$destacados[$j]->q_likes;
+                }
+            }
+
+            $contenidoInicio[$i]->q_likes=$qL;
+
+            $contenidoInicio[$i]->like_bool=$bool;
+            $bool="0";
+        }
         return $contenidoInicio;
     }
 
@@ -58,7 +118,7 @@ class ContingutController extends Controller
         ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor','contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
         ->orderBy('created_at',"desc")
-        ->limit(30,$offset)
+        ->skip($offset)->take(30)
         ->get();
         return $results;
         // return view ('front.explorar')->with('results',$results);
@@ -103,7 +163,7 @@ class ContingutController extends Controller
         $comment=InteraccioModel::where('id_contingut',$id)
         ->join("contingut","contingut.id","=","id_contingut")
         ->join("users","users.id","=","id_usuari")
-        ->orderBy('interaccio.Angelcreated_at','desc')
+        ->orderBy('interaccio.created_at','desc')
         ->get();
         // Comprueba si los usuarios son amigos
         if(isset(Auth::user()->id)){
@@ -138,7 +198,7 @@ class ContingutController extends Controller
         whereIn("tags.nombre",$recomenatsListArray)
         ->join("contingut_tag","contingut_tag.id_contingut","=","id")
         ->join("tags","tags.id","=","contingut_tag.id_tag")
-        ->limit(30,$offset)
+        ->skip($offset)->take(30)
         ->get();
         return $recomendados;
         // return view('front.recomendados')->with('info',$info);

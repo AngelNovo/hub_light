@@ -62,7 +62,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/', function() {
         return view('front.home');
     });
-    Route::get('/home/getall',[ContingutController::class,'getHome']);
+    Route::get('/home/getall/{offset}',[ContingutController::class,'getHome']);
     // Backend
     Route::get('/back/admin/home', function() {
         return redirect('/back/admin/dashboard');

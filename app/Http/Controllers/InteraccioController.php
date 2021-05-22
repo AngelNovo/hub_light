@@ -59,8 +59,10 @@ class InteraccioController extends Controller
         //4: devolvemos una respuesta response() con el valor que queramos
     }
     public function getComments($id) {
-        $comments = InteraccioModel::where('id_contingut',$id)
-        ->orderBy("created_at","desc")
+        $comments = InteraccioModel::where('interaccio.id_contingut',$id)
+        ->join("contingut","contingut.id","=","interaccio.id_contingut")
+        ->join("users","users.id","=","contingut.propietari")
+        ->orderBy("interaccio.created_at","desc")
         ->get();
         return $comments;
     }

@@ -103,7 +103,7 @@ class ContingutController extends Controller
         $comment=InteraccioModel::where('id_contingut',$id)
         ->join("contingut","contingut.id","=","id_contingut")
         ->join("users","users.id","=","id_usuari")
-        ->orderBy('interaccio.created_at','desc')
+        ->orderBy('interaccio.Angelcreated_at','desc')
         ->get();
         // Comprueba si los usuarios son amigos
         if(isset(Auth::user()->id)){

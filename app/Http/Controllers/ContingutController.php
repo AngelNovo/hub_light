@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\AnalitiquesGeneralsModel;
 use App\Models\ContingutModel;
 use App\Models\ContingutTagModel;
-use App\Models\EstadisticaContingutModel;
 use App\Models\InteraccioModel;
 use App\Models\SeguidorsModel;
 use App\Models\TagsModel;
@@ -51,8 +50,8 @@ class ContingutController extends Controller
         }
         // return $aux;
         $contenidoInicio=DB::table('contingut')->whereIn('propietari',[$aux])->get();
-        // return $contenidoInicio;
-        return view('front.home');
+        return $seguits;
+        // return view('front.home');
     }
 
     public function getAll($offset) {

@@ -59,7 +59,7 @@ class InteraccioController extends Controller
         //4: devolvemos una respuesta response() con el valor que queramos
     }
     public function getComments($id) {
-        $comments = InteraccioModel::where();
+        $comments = InteraccioModel::where('id_contingut',$id);
         return $comments;
     }
 }

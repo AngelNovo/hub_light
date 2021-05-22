@@ -164,8 +164,10 @@ class ContingutController extends Controller
             "email",
             "foto",
             "link",
+            "contingut.created_at"
         )
         ->get();
+        return $destacadosContenido;
 
         $aux0=[];
         foreach($destacados as $d) {
@@ -180,18 +182,37 @@ class ContingutController extends Controller
         ->get();
         // return $aux0;
 
-        // $ifLike=InteraccioModel::where(
-        //     "id_usuari",Auth::user()->id
+        $ifLike=InteraccioModel::where(
+            "id_usuari",Auth::user()->id
 
-        // )->whereIn("id_contingut",$aux0)
-        // ->limit($limit)
-        // ->get();
-        // return $ifLike;
-        // return $ifLike;
+        )->whereIn("id_contingut",$aux0)
+        ->select("id_contingut","megusta")
+        ->get();
+
+        for($i=0;$i<sizeof($aux0);$i++) {
+            for($j=0;$j<sizeof($ifLike);$j++) {
+                if($aux0[0]!=$ifLike[$j]->id_contingut) {
+                    $ifLike[$j++]->id_contingut=$aux0[$i];
+                    $ifLike[$j++]->megusta="0";
+                }
+            }
+        }
+        return $ifLike;
 
         for($i=0;$i<sizeof($destacadosContenido);$i++) {
             $destacadosContenido[$i]->q_likes=$likes[$i]->likes;
+            for($j=0;$j<sizeof($aux0);$j++) {
+                if(isset($ifLike[$i])) {
+                    if($aux0[$j]==$ifLike[$i]->id_contingut) {
+                        $destacadosContenido[$i]->like_bool=$ifLike[$i]->megusta;
+                    }else {
+                        $destacadosContenido[$i]->like_bool="0";
+                    }
 
+                }else {
+                    $destacadosContenido[$i]->like_bool="0";
+                }
+            }
         }
 
         return $destacadosContenido;

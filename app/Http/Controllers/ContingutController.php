@@ -167,7 +167,6 @@ class ContingutController extends Controller
             "contingut.created_at"
         )
         ->get();
-        return $destacadosContenido;
 
         $aux0=[];
         foreach($destacados as $d) {
@@ -197,22 +196,10 @@ class ContingutController extends Controller
                 }
             }
         }
-        return $ifLike;
+        // return $ifLike;
 
         for($i=0;$i<sizeof($destacadosContenido);$i++) {
             $destacadosContenido[$i]->q_likes=$likes[$i]->likes;
-            for($j=0;$j<sizeof($aux0);$j++) {
-                if(isset($ifLike[$i])) {
-                    if($aux0[$j]==$ifLike[$i]->id_contingut) {
-                        $destacadosContenido[$i]->like_bool=$ifLike[$i]->megusta;
-                    }else {
-                        $destacadosContenido[$i]->like_bool="0";
-                    }
-
-                }else {
-                    $destacadosContenido[$i]->like_bool="0";
-                }
-            }
         }
 
         return $destacadosContenido;

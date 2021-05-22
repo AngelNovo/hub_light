@@ -4,7 +4,7 @@
 @section("content")
 <div class="content">
 {{-- Header --}}
-   
+   <input type="hidden" id="Auth" value="{{(isset(Auth::user()->id)) ? Auth::user() : 0}}">
 </div>
 {{-- Scripts --}}
 <script>
@@ -13,7 +13,7 @@ $(document).ready(function(){
     // Marcar Navbar
     $(".isSelected").removeClass("isSelected");
     $("#Nav-Destacados").addClass("isSelected");
-    cargarContenido(); 
+    cargarContenido();
 });
 
 function cargarContenido(){
@@ -30,6 +30,8 @@ function cargarContenido(){
         data=data.sort(function (a, b) {
           return (b.q_likes - a.q_likes)
         });
+        let AUTH=JSON.parse($("#Auth").val());
+        console.log(AUTH);
         let contingut=$(".content");
         $.each(data, function(index,element){
           console.log(element);
@@ -84,13 +86,12 @@ function cargarContenido(){
           //Footer
           let footer=$("<div>");
           footer.addClass("footer-contingut");
-          console.log({{Auth::user()->id}});
-          if({{isset(Auth::user()->id)}}){
+          if(AUTH!=0){
             //Header-Footer
             let headerFooter=$("<div>");
             headerFooter.addClass("header-footer-contingut");
             let divI=$("<div>");
-            if({{Auth::user()->id}}!=element.propietari){
+            if(AUTH.id!=element.propietari && AUTH!=0){
               let like=$("<i>");
               like.addClass("fa");
               like.addClass("pe-7s-like");
@@ -132,14 +133,14 @@ function cargarContenido(){
           mostComent.text("--- Mostrar Comentarios ---");
           footer.append(contentFooter);
             //Footer-Footer
-          if({{isset(Auth::user()->id)}}){
-            if({{Auth::user()->id}}!=element.propietari){
+          if(AUTH!=0){
+            if(AUTH.id!=element.propietari && AUTH!=0){
               let form=$("<form>");
               form.addClass("formComentaris");
               let formGrup=$("<div>");
               formGrup.addClass("form-group");
               let fotoMiUser=$("<img>");
-              fotoMiUser.attr("src","{{asset('images/perfil/usuarios/'.Auth::user()->foto)}}");
+              fotoMiUser.attr("src","{{asset('images/perfil/usuarios/')}}/"+AUTH.foto);
               fotoMiUser.addClass("foto-coment");
               let checklike=$("<input>");
               checklike.attr("type","checkbox");
@@ -193,6 +194,9 @@ function cargarContenido(){
           if(form.is(':hidden')){
             form.slideDown();
             $(this).text("--- Ocultar Comentarios ---");
+            var comentaris=$(this).parent();
+            console.log(comentaris.attr("class"));
+            // mostraComents();
           }else{
             form.slideUp();
             $(this).text("--- Mostrar Comentarios ---");
@@ -247,6 +251,10 @@ function cargarContenido(){
            console.log(data);
         }
       });
+  }
+
+  function mostraComents(contingut,id){
+
   }
 
   function enviaComent(idCont,msg,idProp){

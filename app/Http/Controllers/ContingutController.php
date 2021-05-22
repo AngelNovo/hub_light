@@ -168,7 +168,10 @@ class ContingutController extends Controller
         ->groupBy("id_contingut")
         ->limit($limit)
         ->get();
-        $destacadosContenido=ContingutModel::whereIn("contingut.id",$destacados)
+        foreach($destacados as $d) {
+            $array[]=$d->id_contingut;
+        }
+        $destacadosContenido=ContingutModel::whereIn("contingut.id",$array)
         ->join('users','users.id','=','propietari')
         ->select(
             "contingut.id as contingut_id",

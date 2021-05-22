@@ -234,6 +234,7 @@ class ContingutController extends Controller
         ->where("megusta","1")
         ->groupBy("id_contingut")
         ->limit($limit)
+        ->orderBy("q_likes","desc")
         ->get();
         foreach($destacados as $d) {
             $array[]=$d->id_contingut;

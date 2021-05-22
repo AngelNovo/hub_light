@@ -104,6 +104,12 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/back/admin/tags',[TagsController::class,'getTags']);
     Route::delete('/back/admin/tags',[TagsController::class,'deleteTag']);
     Route::post('/back/admin/tags',[TagsController::class,'storeTag']);
+
+    // Recomendados
+    Route::get('/recomendados/{offset}',[ContingutController::class,'getRecomendados']);
+    Route::get('/recomendados',function() {
+        return view('front.recomendados');
+    });
 });
 
 Auth::routes();
@@ -113,12 +119,6 @@ Route::get('/explorar',function() {
     return view('front.explorar');
 });
 Route::get('/explorar/{off}',[ContingutController::class,'getAll']);
-
-// Recomendados
-Route::get('/recomendados/{offset}',[ContingutController::class,'getRecomendados']);
-Route::get('/recomendados',function() {
-    return view('front.recomendados');
-});
 
 // Destacados
 Route::get('/destacados',[ContingutController::class,'getDestacados']);

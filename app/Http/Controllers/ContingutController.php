@@ -154,13 +154,6 @@ class ContingutController extends Controller
 
         $array=[];
 
-        // $destacados=InteraccioModel::where("interaccio.megusta",1)
-        // ->groupBy("interaccio.id_contingut")
-        // ->limit($limit)
-        // ->get("interaccio.id_contingut","count(interaccio.id_contingut) as counter");
-        // select id_contingut, count(megusta) as q_likes from interaccio
-        // where megusta=1
-        // group by id_contingut
         $destacados=InteraccioModel::selectRaw(
             "id_contingut, count(megusta) as q_likes"
         )
@@ -237,7 +230,6 @@ class ContingutController extends Controller
             $destacadosContenido[$i]->like_bool=$bool;
             $bool="0";
         }
-
         return $destacadosContenido;
 
     }

@@ -188,14 +188,6 @@ class ContingutController extends Controller
         ->select("id_contingut","megusta")
         ->get();
 
-        for($i=0;$i<sizeof($aux0);$i++) {
-            for($j=0;$j<sizeof($ifLike);$j++) {
-                if($aux0[0]!=$ifLike[$j]->id_contingut) {
-                    $ifLike[$j++]->id_contingut=$aux0[$i];
-                    $ifLike[$j++]->megusta="0";
-                }
-            }
-        }
         // return $ifLike;
 
         for($i=0;$i<sizeof($destacadosContenido);$i++) {

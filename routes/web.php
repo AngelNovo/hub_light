@@ -9,6 +9,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TipoContenidoController;
 use App\Http\Controllers\TipusUsuariController;
 use App\Http\Controllers\UsuariController;
+use App\Http\Controllers\XatController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,8 +46,6 @@ Route::get('/derechosautor',[DerechosAutorController::class,'getAll']);
 Route::get('/tipocontenido',[TipoContenidoController::class,'getAll']);
 // Notificaciones
 Route::get('/notificaciones/{id}',[SeguidorsController::class,'getNotificaciones']);
-// *Xat*
-
 //  *Tags*
 Route::get('/tags',[TagsController::class,'getAll']);
 // *Usuari estadistiques*
@@ -115,6 +114,10 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/recomendados',function() {
         return view('front.recomendados');
     });
+
+    // Chat
+    Route::get('/chats/{idUser}',[XatController::class,'getChatsUser']);
+    Route::get('/chats/missatges/{idChat}',[XatController::class,'getMissatges']);
 });
 
 Auth::routes();

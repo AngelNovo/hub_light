@@ -80,6 +80,7 @@ class ContingutController extends Controller
             "link",
             "contingut.created_at"
         )
+        ->orderBy("contingut.created_at","desc")
         ->get();
 
         // $aux0=[];

@@ -58,7 +58,12 @@ Route::get('/buscador',[ContingutController::class,'buscador']);
 
 // *ADMIN*
 Route::group(['middleware'=>'auth'], function() {
-    Route::get('/', [ContingutController::class,'getHome']);
+    // Home
+    Route::get('/', function() {
+        return view('front.home');
+    });
+    Route::get('/home/getall',[ContingutController::class,'getHome']);
+    // Backend
     Route::get('/back/admin/home', function() {
         return redirect('/back/admin/dashboard');
     });

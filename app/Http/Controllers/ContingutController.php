@@ -49,9 +49,8 @@ class ContingutController extends Controller
             }
         }
         // return $aux;
-        $contenidoInicio=DB::table('contingut')->whereIn('propietari',[$aux])->get();
-        return $seguits;
-        // return view('front.home');
+        $contenidoInicio=ContingutModel::whereIn('propietari',$aux)->get();
+        return $contenidoInicio;
     }
 
     public function getAll($offset) {
@@ -104,7 +103,7 @@ class ContingutController extends Controller
         $comment=InteraccioModel::where('id_contingut',$id)
         ->join("contingut","contingut.id","=","id_contingut")
         ->join("users","users.id","=","id_usuari")
-        ->orderBy('contingut.id','desc')
+        ->orderBy('created_at','desc')
         ->get();
         // Comprueba si los usuarios son amigos
         if(isset(Auth::user()->id)){

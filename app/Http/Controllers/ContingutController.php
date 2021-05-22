@@ -40,19 +40,27 @@ class ContingutController extends Controller
             ->select("id_seguit","id_usuari")
         ->get();
         // q_likes y si usuario ya le ha dado like
-        $aux=[];
+        $array=[];
+
         foreach($seguits as $s) {
-            if($s->id_seguit!=Auth::user()->id) {
-                $aux[]=$s->id_seguit;
-            }
             if($s->id_usuari!=Auth::user()->id) {
-                $aux[]=$s->id_usuari;
+                $array[]=$s->id_usuari;
+            }else  {
+                $array[]=$s->id_seguit;
             }
         }
-        $arrayAux=[];
 
-        $contenidoInicio=ContingutModel::whereIn('propietari',$aux)->skip($offset)->take(5)
-        ->join("users","users.id","=","propietari")
+        $destacados=InteraccioModel::selectRaw(
+            "id_contingut, count(megusta) as q_likes"
+        )
+        ->where("megusta","1")
+        ->groupBy("id_contingut")
+        ->get();
+        foreach($destacados as $d) {
+            $array[]=$d->id_contingut;
+        }
+        $destacadosContenido=ContingutModel::whereIn("contingut.propietari",$array)
+        ->join('users','users.id','=','propietari')
         ->select(
             "contingut.id as contingut_id",
             "titulo",
@@ -74,29 +82,16 @@ class ContingutController extends Controller
         )
         ->get();
 
-        for($i=0;$i<sizeof($contenidoInicio);$i++) {
-            $arrayAux[]=$contenidoInicio[$i]->id;
-        }
+        // $aux0=[];
+        // foreach($destacados as $d) {
+        //     $aux0[]=$d->id_contingut;
+        // }
 
-        $destacados=InteraccioModel::selectRaw(
-            "id_contingut, count(megusta) as q_likes"
-        )
-        ->where("megusta","1")
-        // ->whereIn("id_contingut",$arrayAux)
-        ->groupBy("id_contingut")
-        ->get();
-
-        // return $destacados;
-        $aux0=[];
-        foreach($destacados as $d) {
-            $aux0[]=$d->id_contingut;
-        }
-
-        $likes=InteraccioModel::whereIn('id_contingut',$aux0)
-        ->selectRaw('count(megusta) as likes ,id_contingut')
-        ->groupBy("id_contingut")
-        ->orderBy("likes","desc")
-        ->get();
+        // $likes=InteraccioModel::whereIn('id_contingut',$aux0)
+        // ->selectRaw('count(megusta) as likes ,id_contingut')
+        // ->groupBy("id_contingut")
+        // ->orderBy("likes","desc")
+        // ->get();
 
         $user=(isset(Auth::user()->id)) ? Auth::user()->id : 1;
         $ifLike=InteraccioModel::where(
@@ -109,16 +104,15 @@ class ContingutController extends Controller
         $bool="0";
         $qL=0;
 
-        for($i=0;$i<sizeof($contenidoInicio);$i++) {
-            $id_contingut=$contenidoInicio[$i]->id;
-            // Comprueba si usuario ha dado like o no
+        for($i=0;$i<sizeof($destacadosContenido);$i++) {
+            $id_contingut=$destacadosContenido[$i]->contingut_id;
             for($j=0;$j<sizeof($ifLike);$j++) {
                 $id_cont_child=$ifLike[$j]->id_contingut;
                 if($id_contingut==$id_cont_child) {
                     $bool=$ifLike[$j]->megusta;
                 }
             }
-            // Muestra la cantidad de likes
+
             for($j=0;$j<sizeof($destacados);$j++) {
                 $id_cont_child=$destacados[$j]->id_contingut;
                 if($id_contingut===$id_cont_child) {
@@ -126,12 +120,13 @@ class ContingutController extends Controller
                 }
             }
 
-            $contenidoInicio[$i]->q_likes=$qL;
+            $destacadosContenido[$i]->q_likes=$qL;
 
-            $contenidoInicio[$i]->like_bool=$bool;
+            $destacadosContenido[$i]->like_bool=$bool;
             $bool="0";
+            $qL=0;
         }
-        return $contenidoInicio;
+        return $destacadosContenido;
     }
 
     public function getAll($offset) {
@@ -309,6 +304,7 @@ class ContingutController extends Controller
 
             $destacadosContenido[$i]->like_bool=$bool;
             $bool="0";
+            $qL=0;
         }
         return $destacadosContenido;
 

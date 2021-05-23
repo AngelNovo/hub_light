@@ -2,16 +2,58 @@ body{
     background:#eee;    
 }
 
+.row{
+    max-width: 100%;
+    margin: 0;
+}
+
+.xats-disp{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(246, 248, 232);
+    position: absolute;
+    z-index: 100;
+}
+
+.card-header i{
+    color: white;
+    font-size: 30px;
+}
+
 .closeButon{
     width: 30px;
     height: 30px;
     padding: 1px;
     border-radius: 50%;
     float: right;
+    background-color: rgb(49, 49, 49,0.3);
+}
+
+.Agrega{
+    font-size: 25px;
+    padding: 0;
+    display: flex;
+    align-items: center;
 }
 
 .closeButon .fa{
     font-size: 27px;
+}
+
+.foto-Chats{
+    width: 40px;
+    height: 40px;
+}
+
+.foto-Chats img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.chat-msg{
+    margin-left: 10px;
+    padding: 5px;
 }
 
 .chat-list {
@@ -38,13 +80,14 @@ body{
 }
 
 .chat-list .chat-message {
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    border-radius: 50px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
     background: #5a99ee;
     display: inline-block;
     padding: 10px 20px;
     position: relative;
+    max-width: 100%;
 }
 
 .chat-list .chat-message:before {

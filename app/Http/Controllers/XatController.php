@@ -27,7 +27,6 @@ class XatController extends Controller
     }
 
     public function storeMissatge(Request $request) {
-        return "hola";
         $missatge=MissatgeModel::create([
             "missatge"=>$request->input("missatge"),
             "id_xat"=>$request->input("id_xat"),

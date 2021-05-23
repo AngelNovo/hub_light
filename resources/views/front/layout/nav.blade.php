@@ -30,6 +30,9 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal"><i class="fa pe-7s-upload" title="Subir contenido"> </i></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#ChatModal"><i class="fa pe-7s-mail" title="Mis mensages"> </i></a>
+        </li>
         {{-- Desplegable Perfil --}}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="Nav-Perfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

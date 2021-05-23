@@ -12,7 +12,7 @@
     $(document).ready(function(){
         // Marcar Navbar
         $(".isSelected").removeClass("isSelected");
-        $("#Nav-Destacados").addClass("isSelected");
+        $("#Nav-Inicio").addClass("isSelected");
         cargarContenido();
     });
     
@@ -27,9 +27,6 @@
           success: function(data){
             // Success
             // Start Foreach   
-            data=data.sort(function (a, b) {
-              return (b.q_likes - a.q_likes)
-            });
             let AUTH=JSON.parse($("#Auth").val());
             let contingut=$(".content");
             $.each(data, function(index,element){

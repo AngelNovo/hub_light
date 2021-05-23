@@ -4,7 +4,7 @@
 @section("content")
 <div class="content">
 {{-- Header --}}
-   <input type="hidden" id="Auth" value="{{(isset(Auth::user()->id)) ? Auth::user() : 0}}">
+   
 </div>
 {{-- Scripts --}}
 <script>

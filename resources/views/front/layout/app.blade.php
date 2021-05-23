@@ -25,9 +25,11 @@
     <script src="{{asset("/js/front/layout.js")}}"></script>   
 </head>
 <body>
+  <input type="hidden" id="Auth" value="{{(isset(Auth::user()->id)) ? Auth::user() : 0}}">
     @include("front.layout.nav")
     @yield("content")
     @include("front.layout.modal")
+    @include("front.layout.chat")
     @include("front.layout.footer")
 </body>
 </html>

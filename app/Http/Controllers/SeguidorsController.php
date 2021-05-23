@@ -28,18 +28,38 @@ class SeguidorsController extends Controller
 
     public function getNotificaciones() {
         $notificaciones=[];
-        if(isset(Auth::user()->id)) {
-            $seguidors=SeguidorsModel::where(['id_seguit'=>Auth::user()->id,"acceptat"=>0])->get();
-            $interaccions=InteraccioModel::where(['visto'=>0,'contingut.propietari'=>Auth::user()->id])
-            ->join("contingut","contingut.id","=","id_contingut")
-            ->get();
-            $avis_usuari=AvisUsuariModel::where(['id_usuari'=>Auth::user()->id,"acceptat"=>1])
-            ->join("avis","avis.id","=","id_avis")
-            ->get();
-            array_push($notificaciones,$seguidors);
-            array_push($notificaciones,$interaccions);
-            array_push($notificaciones,$avis_usuari);
-            return $notificaciones;
+        $seguidors=SeguidorsModel::where(['id_seguit'=>Auth::user()->id,"acceptat"=>0])->get();
+        foreach($seguidors as $s) {
+            $s->tipo="amistad";
         }
+        $interaccions=InteraccioModel::where(['visto'=>0,'contingut.propietari'=>Auth::user()->id])
+        ->join("contingut","contingut.id","=","id_contingut")
+        ->get();
+        foreach($interaccions as $i) {
+            $i->tipo="interaccion";
+        }
+        $avis_usuari=AvisUsuariModel::where(['id_usuari'=>Auth::user()->id,"acceptat"=>1])
+        ->join("avis","avis.id","=","id_avis")
+        ->get();
+        foreach($avis_usuari as $a) {
+            $a->tipo="aviso";
+        }
+        array_push($notificaciones,$seguidors);
+        array_push($notificaciones,$interaccions);
+        array_push($notificaciones,$avis_usuari);
+        return $notificaciones;
+
+    }
+
+    public function acceptNotificacion($id,Request $request) {
+        $req=$request->all();
+        // if($req->tipo=="") {
+
+        // }
+
+    }
+
+    public function deleteNotificacion($id,Request $request) {
+
     }
 }

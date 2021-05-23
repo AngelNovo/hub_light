@@ -45,8 +45,6 @@ Route::get('/comment/{id}',[InteraccioController::class,'getComments']);
 Route::get('/derechosautor',[DerechosAutorController::class,'getAll']);
 // *Tipo contenido*
 Route::get('/tipocontenido',[TipoContenidoController::class,'getAll']);
-// Notificaciones
-Route::get('/notificaciones/{id}',[SeguidorsController::class,'getNotificaciones']);
 //  *Tags*
 Route::get('/tags',[TagsController::class,'getAll']);
 // *Usuari estadistiques*
@@ -124,6 +122,12 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/chats/missatges/content',[XatController::class,'sendContent']);
 
     Route::get('/chats/users/amigos',[XatController::class,'getAmigos']);
+    Route::post('/chats/users/amigos',[XatController::class,'createChat']);
+
+    // Notificaciones
+    Route::get('/notificaciones',[SeguidorsController::class,'getNotificaciones']);
+    Route::put('/notificacion/{id}',[SeguidorsController::class,'acceptNotificacion']);
+    Route::put('/notificaciones/delete/{id}',[SeguidorsController::class,'deleteNotificacion']);
     });
 });
 

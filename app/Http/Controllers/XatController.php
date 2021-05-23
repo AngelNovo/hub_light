@@ -33,7 +33,11 @@ class XatController extends Controller
 
     public function getAmigos() {
         $usuarioActivo=Auth::user()->id;
-        $amigos=SeguidorsModel::whereRaw("id_usuari = $usuarioActivo or id_seguit = $usuarioActivo")->get();
+        $amigos=SeguidorsModel::whereRaw("id_usuari = $usuarioActivo or id_seguit = $usuarioActivo ")
+        ->join('users as u1','u1.id','=','seguidors.id_usuari')
+        ->join('users as u2','u2.id','=','seguidors.id_seguit')
+        ->select()
+        ->get();
         return $amigos;
     }
 
@@ -71,5 +75,17 @@ class XatController extends Controller
             "id_xat"=>$request->input("id_xat")
         ]);
         return $missatge;
+    }
+
+    public function createChat(Request $request) {
+        $req=$request->input('users');
+        $create=0;
+        foreach($req as $r) {
+            $create=XatUsuarisModel::create([
+                "id_xat"=>$request->input('id_xat'),
+                "id_usuari"=>$r->id_usuari,
+                "lastseen"=>0
+            ]);
+        }
     }
 }

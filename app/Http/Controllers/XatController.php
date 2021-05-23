@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MissatgeModel;
+use App\Models\SeguidorsModel;
 use App\Models\XatUsuarisModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +22,19 @@ class XatController extends Controller
             ->join('users','users.id','=','xat_usuaris.id_usuari')
             ->select("xat_usuaris.id_usuari","users.foto","users.name")
             ->get();
+
+            $lastMessage=MissatgeModel::where('id_xat',$x->id_xat)->latest()->first("missatge");
+            // $lastMessage=$lastMessage[sizeof($lastMessage)-1];
+            $x->last_message=$lastMessage;
         }
 
         return $xatUsers;
+    }
+
+    public function getAmigos() {
+        $usuarioActivo=Auth::user()->id;
+        $amigos=SeguidorsModel::whereRaw("id_usuari = $usuarioActivo or id_seguit = $usuarioActivo")->get();
+        return $amigos;
     }
 
     public function getMissatges($idChat) {

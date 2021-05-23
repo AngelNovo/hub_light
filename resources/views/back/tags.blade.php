@@ -6,7 +6,7 @@
 <script src={{asset('js/back/functions.js')}}></script>
 <script>
     $(document).ready(function() {
-        $('i').on('click',function() {
+        $('span i').on('click',function() {
             let id=$(this).attr('data-id');
             deleteTag(id)
         });

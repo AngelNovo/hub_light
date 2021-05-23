@@ -16,6 +16,7 @@ class checkSession
      */
     public function handle(Request $request, Closure $next)
     {
+        // Controlar inactividad
         if(!auth()->check()) {
             return redirect('/login');
         }

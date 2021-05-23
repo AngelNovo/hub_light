@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('i').on('click',function() {
+    $('span i').on('click',function() {
         let id=$(this).data('id');
         $.ajax({
             url: "/back/admin/tipususer",

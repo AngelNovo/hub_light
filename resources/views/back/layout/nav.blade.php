@@ -5,7 +5,7 @@
     <nav id="sidebar" class="sidebar-wrapper">
       <div class="sidebar-content">
         <div class="sidebar-brand">
-          <a href="#">Control panel</a>
+          <a href="#">Panel de control</a>
           <div id="close-sidebar">
             <i class="fas fa-times"></i>
           </div>

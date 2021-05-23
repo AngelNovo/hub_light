@@ -6,7 +6,7 @@
 <script src={{asset('js/back/functions.js')}}></script>
 <script>
     $(document).ready(function() {
-        $('i').on('click',function() {
+        $('.delete i').on('click',function() {
             let id=$(this).data("id");
             deleteTypeContent(id);
         });
@@ -70,7 +70,7 @@
                     <td><input type="text" class="form-control" name="tipus" value="{{$type->tipus}}"></td>
                     <td><input type="text" class="form-control" name="espai" value="{{$type->espai}}"></td>
                     <td><input type="text" class="form-control" name="Descripcio" value="{{$type->Descripcio}}"></td>
-                    <td class="text-center"><span><i class="fas fa-times text-danger" data-id="{{$type->id}}" data-toggle="tooltip" data-placement="left" title="Eliminar"></i></span></td>
+                    <td class="text-center"><span class="delete"><i class="fas fa-times text-danger" data-id="{{$type->id}}" data-toggle="tooltip" data-placement="left" title="Eliminar"></i></span></td>
                 </tr>
             @endforeach
         </tbody>

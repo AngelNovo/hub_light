@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MissatgeModel;
 use App\Models\XatUsuarisModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class XatController extends Controller
 {
@@ -26,6 +27,7 @@ class XatController extends Controller
         $missatge=MissatgeModel::create([
             "missatge"=>$request->input("missatge"),
             "id_xat"=>$request->input("id_xat"),
+            "id_usuari"=>Auth::user()->id,
             "id_contingut"=>null,
         ]);
         return $missatge;
@@ -34,6 +36,7 @@ class XatController extends Controller
     public function sendContent(Request $request) {
         $missatge=MissatgeModel::create([
             "missatge"=>null,
+            "id_usuari"=>Auth::user()->id,
             "id_contingut"=>$request->input('id_contingut'),
             "id_xat"=>$request->input("id_xat")
         ]);

@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class XatController extends Controller
 {
-    public function getChatsUser($idUser) {
-        $xatUsers=XatUsuarisModel::where('id_usuari',$idUser)->get();
+    public function getChatsUser() {
+        $xatUsers=XatUsuarisModel::where('id_usuari',Auth::user()->id)->get();
         return $xatUsers;
     }
 
@@ -24,6 +24,8 @@ class XatController extends Controller
         ->limit(10)
         ->groupBy("missatge.id")
         ->get();
+
+        // $update=XatUsuarisModel
         return $missatges;
     }
 

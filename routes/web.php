@@ -120,7 +120,7 @@ Route::group(['middleware'=>'auth'], function() {
     // Chat
     Route::get('/chats/{idUser}',[XatController::class,'getChatsUser']);
     Route::get('/chats/missatges/{idChat}',[XatController::class,'getMissatges']);
-    Route::post('/chats/missatges/',[XatController::class,'storeMissatge']);
+    Route::post('/chats/enviamissatges/',[XatController::class,'storeMissatge']);
     Route::post('/chats/missatges/content',[XatController::class,'sendContent']);
     });
 });

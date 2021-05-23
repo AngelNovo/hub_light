@@ -20,7 +20,7 @@ class XatController extends Controller
         ->join("xat","xat.id","=","missatge.id_xat")
         ->join("xat_usuaris","xat_usuaris.id_xat","=","xat.id")
         ->select('missatge.*','users.name','users.foto')
-        ->orderBy("created_at","desc")
+        ->orderBy("id","desc")
         ->limit(10)
         ->get();
         return $missatges;

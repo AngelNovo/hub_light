@@ -17,4 +17,11 @@ class XatController extends Controller
         $missatges=MissatgeModel::where('id_xat',$idChat)->get();
         return $missatges;
     }
+
+    public function storeMissatge(Request $request) {
+        $missatge=MissatgeModel::create([
+            "missatge"=>$request->input("missatge"),
+            "id_xat"=>$request->input("missatge"),
+        ]);
+    }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 21, 2021 at 05:21 PM
+-- Generation Time: May 23, 2021 at 02:56 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -47,7 +47,9 @@ INSERT INTO `analitiques_generals` (`id`, `usuaris_suspes`, `usuaris_actius`, `u
 (3, 2, 6, 0, 26, '2021-05-18 04:09:43', '2021-05-18 04:09:43'),
 (4, 2, 5, 1, 27, '2021-05-19 04:07:42', '2021-05-19 06:12:58'),
 (5, 2, 5, 1, 27, '2021-05-20 04:45:13', '2021-05-20 04:45:13'),
-(6, 6, 2, 0, 28, '2021-05-21 04:54:14', '2021-05-21 10:47:44');
+(6, 6, 2, 0, 28, '2021-05-21 04:54:14', '2021-05-21 10:47:44'),
+(7, 6, 2, 0, 28, '2021-05-22 07:16:27', '2021-05-22 07:16:27'),
+(8, 6, 2, 0, 28, '2021-05-23 12:49:52', '2021-05-23 12:49:52');
 
 -- --------------------------------------------------------
 
@@ -245,7 +247,9 @@ INSERT INTO `avis_usuari` (`id`, `id_usuari`, `id_avis`, `acceptat`, `created_at
 (268, 1, 1, '1', '2021-05-21 10:51:49', '2021-05-21 10:51:50'),
 (269, 31, 1, '1', '2021-05-21 10:54:03', '2021-05-21 10:54:20'),
 (270, 31, 2, '1', '2021-05-21 10:54:05', '2021-05-21 10:54:25'),
-(271, 31, 2, '1', '2021-05-21 10:54:07', '2021-05-21 10:54:19');
+(271, 31, 2, '1', '2021-05-21 10:54:07', '2021-05-21 10:54:19'),
+(272, 5, 2, '1', '2021-05-21 15:32:23', '2021-05-21 15:32:28'),
+(273, 5, 2, '1', '2021-05-21 15:32:25', '2021-05-21 15:32:27');
 
 -- --------------------------------------------------------
 
@@ -317,9 +321,11 @@ INSERT INTO `contingut_tag` (`id_contingut`, `id_tag`, `created_at`, `updated_at
 (45, 45, '2021-05-16 16:14:24', '2021-05-16 16:14:24'),
 (45, 46, '2021-05-16 16:14:24', '2021-05-16 16:14:24'),
 (45, 47, '2021-05-16 16:14:24', '2021-05-16 16:14:24'),
+(60, 56, '2021-05-22 10:05:37', '2021-05-22 10:05:37'),
 (60, 57, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
 (60, 58, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
 (60, 59, '2021-05-17 14:05:19', '2021-05-17 14:05:19'),
+(60, 68, '2021-05-22 10:05:37', '2021-05-22 10:05:37'),
 (65, 63, '2021-05-19 06:12:58', '2021-05-19 06:12:58'),
 (65, 64, '2021-05-19 06:12:58', '2021-05-19 06:12:58'),
 (66, 67, '2021-05-21 04:54:39', '2021-05-21 04:54:39'),
@@ -467,12 +473,18 @@ CREATE TABLE `interaccio` (
 
 INSERT INTO `interaccio` (`id`, `id_usuari`, `id_contingut`, `guardat`, `megusta`, `comentario`, `visto`, `created_at`, `updated_at`) VALUES
 (7, 14, 53, '0', '0', 'asdasdasd', '0', '2021-05-20 05:18:22', '2021-05-20 05:18:22'),
-(9, 14, 57, '0', '1', 'asdasd', '0', '2021-05-20 17:42:36', '2021-05-20 16:59:48'),
+(9, 14, 57, '0', '1', 'asdasd', '0', '2021-05-20 17:42:36', '2021-05-22 07:37:18'),
 (10, 14, 64, '0', '0', 'asdsadf', '1', '2021-05-20 17:57:07', '2021-05-20 18:44:39'),
 (11, 10, 64, '0', '0', 'asdasdasdasd', '1', '2021-05-20 18:07:58', '2021-05-20 18:44:39'),
 (12, 10, 57, '0', '1', NULL, '0', '2021-05-20 20:23:18', '2021-05-20 20:23:18'),
-(13, 14, 60, '0', '0', 'test', '0', '2021-05-20 18:41:23', '2021-05-20 18:58:34'),
-(14, 10, 66, '0', '1', 'sdfsdfsdf', '1', '2021-05-21 06:55:14', '2021-05-21 04:57:57');
+(13, 14, 60, '0', '0', 'test', '0', '2021-05-20 18:41:23', '2021-05-22 08:09:44'),
+(14, 10, 66, '0', '1', 'sdfsdfsdf', '1', '2021-05-21 06:55:14', '2021-05-22 07:37:28'),
+(15, 14, 58, '0', '1', NULL, '0', '2021-05-22 07:37:34', '2021-05-22 08:09:25'),
+(16, 1, 66, '0', '1', NULL, '0', '2021-05-22 14:09:54', '2021-05-22 14:09:54'),
+(17, 14, 54, '0', '0', NULL, '0', '2021-05-22 14:02:01', '2021-05-22 14:55:27'),
+(18, 31, 58, '0', '1', NULL, '0', '2021-05-22 16:16:58', '2021-05-22 16:16:58'),
+(19, 31, 54, '0', '1', NULL, '0', '2021-05-22 16:17:24', '2021-05-22 16:17:24'),
+(20, 31, 56, '0', '1', NULL, '0', '2021-05-22 16:17:27', '2021-05-22 16:17:27');
 
 -- --------------------------------------------------------
 
@@ -511,13 +523,21 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `missatge` (
   `id` int(10) UNSIGNED NOT NULL,
   `missatge` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `data_enviat` timestamp NOT NULL,
+  `data_enviat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_xat` int(10) UNSIGNED NOT NULL,
   `id_usuari` int(10) UNSIGNED NOT NULL,
-  `id_contingut` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `id_contingut` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `missatge`
+--
+
+INSERT INTO `missatge` (`id`, `missatge`, `data_enviat`, `id_xat`, `id_usuari`, `id_contingut`, `created_at`, `updated_at`) VALUES
+(3, 'Hello world!', '2021-05-22 18:37:26', 1, 14, 49, '2021-05-22 18:36:58', '2021-05-22 18:36:58'),
+(4, 'dfgdfg', '2021-05-23 14:52:09', 1, 14, NULL, '2021-05-23 14:52:09', '2021-05-23 14:52:09');
 
 -- --------------------------------------------------------
 
@@ -558,8 +578,10 @@ CREATE TABLE `seguidors` (
 --
 
 INSERT INTO `seguidors` (`id`, `id_usuari`, `id_seguit`, `acceptat`, `created_at`, `updated_at`) VALUES
-(1, 5, 14, '0', NULL, NULL),
-(2, 10, 14, '0', NULL, NULL);
+(2, 10, 14, '1', NULL, NULL),
+(3, 14, 5, '1', NULL, NULL),
+(4, 13, 14, '1', NULL, NULL),
+(5, 14, 1, '0', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -680,13 +702,13 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `email_verified_at`, `alies`, `foto`, `link`, `data_naixement`, `data-registre`, `actiu`, `deshabilitat`, `suspes`, `es_admin`, `nivell_gravetat`, `grups_disponibles`, `recomenat`, `tipus`, `remember_token`, `created_at`, `updated_at`, `fondo`) VALUES
 (1, 'test', '$2y$10$n4EJbYTalgXFW9.kiPo6FeyAk9qApu5OS3UDqWoz3.yPGpMRTfDvW', 'test@test', NULL, 'test', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 1, NULL, '2021-05-01 13:51:49', '2021-05-21 10:52:00', 'fondoDefault.jpg'),
-(5, 'Llabreso', '$2y$10$7wlUoNiTN6Dk9sYzGDUWZunTvDlnaZNMEguXynjErf3YYC0A2p.8K', 'joanllabresoliver@gmail.com', '2021-05-08 09:30:50', 'Llabreso', '1620757944-.jpg', NULL, '2001-09-12 08:54:48', NULL, 0, 0, 0, 1, 10, 0, NULL, 1, NULL, '2021-05-05 19:06:19', '2021-05-21 10:45:49', '1620757917-Llabreso.jpg'),
+(5, 'Llabreso', '$2y$10$7wlUoNiTN6Dk9sYzGDUWZunTvDlnaZNMEguXynjErf3YYC0A2p.8K', 'joanllabresoliver@gmail.com', '2021-05-08 09:30:50', 'Llabreso', '1620757944-.jpg', NULL, '2001-09-12 08:54:48', NULL, 0, 0, 0, 1, 10, 0, NULL, 1, NULL, '2021-05-05 19:06:19', '2021-05-21 15:32:38', '1620757917-Llabreso.jpg'),
 (10, 'asdasda', '$2y$10$fMjp/4HvAjHrptsLmeL3huizotI2B96dMHbCc/NNf8eNewr3hJff.', 'asdasd@sdfbkj', NULL, 'asdasda', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 1, NULL, '2021-05-14 07:40:06', '2021-05-15 12:48:51', 'fondoDefault.jpg'),
 (11, 'jndbasjkhidbsakj', '$2y$10$sBLApHMMlhvvh0mzKYsi8OYP9ZslU.twnUdwZeIz7.VLGjngQZQZi', 'kjasdfnasf@aseknfbnksf', NULL, 'jndbasjkhidbsakj', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 1, NULL, '2021-05-14 07:57:58', '2021-05-15 07:57:27', 'fondoDefault.jpg'),
 (12, 'lkjmasdkjasb', '$2y$10$7wElszXdDGzBHz53jlYz2OQsxFy8QaEb3Ir5B1ygiiO9V5dMoJ0kS', 'kjasbdjk@skjdnfkj', NULL, 'lkjmasdkjasb', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 1, NULL, '2021-05-14 07:59:24', '2021-05-15 07:56:07', 'fondoDefault.jpg'),
 (13, 'ertrrdfdf', '$2y$10$vxsq2QJpCkvNUHSt5YKer.7sQfDvHVWJmK0tON9Qx733peZwfA6au', 'hhfdhfdfdh@sdfdsfdfs', NULL, 'ertrrdfdf', 'avatar.jpg', NULL, NULL, NULL, 0, 0, 1, 0, 0, 0, NULL, 1, NULL, '2021-05-14 11:37:49', '2021-05-15 12:40:00', 'fondoDefault.jpg'),
-(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, 'AngelNovo2', '1621278389-AngelNovo2.jpg', NULL, NULL, NULL, 1, 0, 1, 1, 0, 0, 'images;video;css;animacion', 3, NULL, '2021-05-14 15:07:26', '2021-05-21 10:53:42', '1621278389-AngelNovo2.png'),
-(31, 'Luis Novo Fernando', '$2y$10$gTIltGFykr8X03br3WiaIe9SazhaZo5t8uyDc3KfzvQe0qs6w1bhq', 'angelnovo15@gmail.com', '2021-05-21 10:53:17', NULL, 'avatar.jpg', NULL, NULL, NULL, 0, 0, 0, 0, 10, 0, NULL, 1, NULL, '2021-05-21 10:53:04', '2021-05-21 10:54:50', 'fondoDefault.jpg');
+(14, 'AngelNovo2', '$2y$10$qATldsDOxR90RKnlQjprreqZN4d9CJoDpjH1WPHMjlM2ccngDsFwe', 'angelnovo@gmail.com', NULL, 'AngelNovo2', '1621278389-AngelNovo2.jpg', NULL, NULL, NULL, 1, 0, 1, 1, 0, 0, 'dark souls;images;video;css;animacion', 3, NULL, '2021-05-14 15:07:26', '2021-05-23 12:49:52', '1621278389-AngelNovo2.png'),
+(31, 'Luis Novo Fernando', '$2y$10$gTIltGFykr8X03br3WiaIe9SazhaZo5t8uyDc3KfzvQe0qs6w1bhq', 'angelnovo15@gmail.com', '2021-05-21 10:53:17', NULL, 'avatar.jpg', NULL, NULL, NULL, 1, 0, 0, 0, 10, 0, '', 1, NULL, '2021-05-21 10:53:04', '2021-05-22 16:27:45', 'fondoDefault.jpg');
 
 -- --------------------------------------------------------
 
@@ -698,9 +720,17 @@ CREATE TABLE `xat` (
   `id` int(10) UNSIGNED NOT NULL,
   `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `url_foto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `xat`
+--
+
+INSERT INTO `xat` (`id`, `nom`, `url_foto`, `created_at`, `updated_at`) VALUES
+(1, 'el pepe', '', '2021-05-22 18:29:27', '2021-05-22 18:29:27'),
+(2, 'el paco', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -725,10 +755,18 @@ CREATE TABLE `xat_grup` (
 CREATE TABLE `xat_usuaris` (
   `id_xat` int(10) UNSIGNED NOT NULL,
   `id_usuari` int(10) UNSIGNED NOT NULL,
-  `es_admin` tinyint(1) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `lastseen` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `xat_usuaris`
+--
+
+INSERT INTO `xat_usuaris` (`id_xat`, `id_usuari`, `lastseen`, `created_at`, `updated_at`) VALUES
+(1, 14, '', '2021-05-22 18:29:53', '2021-05-22 18:29:53'),
+(2, 14, '', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -903,7 +941,7 @@ ALTER TABLE `xat_usuaris`
 -- AUTO_INCREMENT for table `analitiques_generals`
 --
 ALTER TABLE `analitiques_generals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `avis`
@@ -915,7 +953,7 @@ ALTER TABLE `avis`
 -- AUTO_INCREMENT for table `avis_usuari`
 --
 ALTER TABLE `avis_usuari`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=274;
 
 --
 -- AUTO_INCREMENT for table `contingut`
@@ -957,7 +995,7 @@ ALTER TABLE `grup`
 -- AUTO_INCREMENT for table `interaccio`
 --
 ALTER TABLE `interaccio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -969,13 +1007,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `missatge`
 --
 ALTER TABLE `missatge`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `seguidors`
 --
 ALTER TABLE `seguidors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tags`
@@ -1005,7 +1043,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `xat`
 --
 ALTER TABLE `xat`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

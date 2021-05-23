@@ -22,6 +22,7 @@ class XatController extends Controller
         ->select('missatge.*','users.name','users.foto')
         ->orderBy("id","desc")
         ->limit(10)
+        ->groupBy("missatge.id")
         ->get();
         return $missatges;
     }

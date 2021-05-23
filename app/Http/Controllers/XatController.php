@@ -15,11 +15,13 @@ class XatController extends Controller
     }
 
     public function getMissatges($idChat) {
-        $missatges=MissatgeModel::whereRaw("missatge.id_xat = $idChat AND  missatge.id > xat_usuaris.lastseen")
+        $missatges=MissatgeModel::where("missatge.id_xat", $idChat)
         ->join("users","users.id","=","missatge.id_usuari")
         ->join("xat","xat.id","=","missatge.id_xat")
         ->join("xat_usuaris","xat_usuaris.id_xat","=","xat.id")
         ->select('missatge.*','users.name','users.foto')
+        ->orderBy("created_at","desc")
+        ->limit(10)
         ->get();
         return $missatges;
     }

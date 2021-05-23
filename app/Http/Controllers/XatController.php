@@ -10,9 +10,19 @@ use Illuminate\Support\Facades\Auth;
 class XatController extends Controller
 {
     public function getChatsUser() {
-        $xatUsers=XatUsuarisModel::where('id_usuari',Auth::user()->id)
+        $xatUsers=XatUsuarisModel::where('xat_usuaris.id_usuari',Auth::user()->id)
         ->join('users','users.id',"=","xat_usuaris.id_usuari")
+        ->join('xat','xat.id',"=","xat_usuaris.id_xat")
+        ->select("users.foto","xat_usuaris.id_usuari","xat_usuaris.id_xat",'xat.nom as nom_xat')
         ->get();
+
+        foreach($xatUsers as $x) {
+            $x->integrantes=XatUsuarisModel::where('xat_usuaris.id_xat',$x->id_xat)
+            ->join('users','users.id','=','xat_usuaris.id_usuari')
+            ->select("xat_usuaris.id_usuari","users.foto","users.name")
+            ->get();
+        }
+
         return $xatUsers;
     }
 

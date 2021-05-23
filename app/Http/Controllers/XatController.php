@@ -15,9 +15,9 @@ class XatController extends Controller
     }
 
     public function getMissatges($idChat) {
-        $missatges=MissatgeModel::where(['missatge.id_xat',$idChat])
+        $missatges=MissatgeModel::where('missatge.id_xat',$idChat)
         ->join("users","users.id","=","missatge.id_usuari")
-        ->join("xat_usuaris")
+        // ->join("xat_usuaris","")
         ->select('missatge.*','users.name','users.foto')
         ->get();
         return $missatges;

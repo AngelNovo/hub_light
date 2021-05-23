@@ -14,14 +14,28 @@ class XatController extends Controller
     }
 
     public function getMissatges($idChat) {
-        $missatges=MissatgeModel::where('id_xat',$idChat)->get();
+        $missatges=MissatgeModel::where('missatge.id_xat',$idChat)
+        ->join("users","users.id","=","missatge.id_usuari")
+        ->select('missatge.*','users.name','users.foto')
+        ->get();
         return $missatges;
     }
 
     public function storeMissatge(Request $request) {
         $missatge=MissatgeModel::create([
             "missatge"=>$request->input("missatge"),
-            "id_xat"=>$request->input("missatge"),
+            "id_contingut"=>$request->input("id_xat"),
+            "missatge"=>null,
         ]);
+        return $missatge;
+    }
+
+    public function sendContent(Request $request) {
+        $missatge=MissatgeModel::create([
+            "missatge"=>null,
+            "id_contingut"=>$request->input('id_contingut'),
+            "id_xat"=>$request->input("id_xat")
+        ]);
+        return $missatge;
     }
 }

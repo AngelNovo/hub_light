@@ -10,6 +10,7 @@ use App\Http\Controllers\TipoContenidoController;
 use App\Http\Controllers\TipusUsuariController;
 use App\Http\Controllers\UsuariController;
 use App\Http\Controllers\XatController;
+use App\Http\Middleware\checkSession;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -57,7 +58,8 @@ Route::get('/buscador',[ContingutController::class,'buscador']);
 
 // *ADMIN*
 Route::group(['middleware'=>'auth'], function() {
-    // Home
+    Route::middleware([checkSession::class])->group(function() {
+        // Home
     Route::get('/', function() {
         return view('front.home');
     });
@@ -119,6 +121,8 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/chats/{idUser}',[XatController::class,'getChatsUser']);
     Route::get('/chats/missatges/{idChat}',[XatController::class,'getMissatges']);
     Route::post('/chats/missatges/',[XatController::class,'storeMissatge']);
+    Route::post('/chats/missatges/content',[XatController::class,'sendContent']);
+    });
 });
 
 Auth::routes();

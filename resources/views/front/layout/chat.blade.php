@@ -76,7 +76,7 @@
             chatBody.append(chatMessage);
             li.append(chatImg);
             li.append(chatBody);
-            $(".chat-list").append(li);
+            $(".chat-list").prepend(li);
           }); 
         }
     });
@@ -84,9 +84,10 @@
 
   function enviaMSG(){
     let missatge=$("#newMsg").val();
+    console.log(idChat);
     console.log(missatge);
     $.ajax({
-        url: "/chats/missatges/",
+        url: "/chats/missatges",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },

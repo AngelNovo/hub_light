@@ -52,13 +52,14 @@ class XatController extends Controller
         ->groupBy("missatge.id")
         ->get();
 
+
+        if(sizeof($missatges)==0) {
+            return [];
+        }
         $update=XatUsuarisModel::where(['id_usuari'=>Auth::user()->id,'id_xat'=>$idChat])
         ->update([
             "lastseen"=>$missatges[sizeof($missatges)-1]->id
         ]);
-        if(sizeof($missatges)==0) {
-            return [];
-        }
         return $missatges;
     }
 

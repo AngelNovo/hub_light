@@ -33,12 +33,24 @@ class XatController extends Controller
 
     public function getAmigos() {
         $usuarioActivo=Auth::user()->id;
-        $amigos=SeguidorsModel::whereRaw("id_usuari = $usuarioActivo or id_seguit = $usuarioActivo ")
+        $amigos=SeguidorsModel::whereRaw("(id_usuari = $usuarioActivo or id_seguit = $usuarioActivo) and  acceptat=1")
         ->join('users as u1','u1.id','=','seguidors.id_usuari')
-        ->join('users as u2','u2.id','=','seguidors.id_seguit')
-        ->select()
+        // ->join('users as u2','u2.id','=','seguidors.id_seguit')
+        // ->select("u1.id","u1.name")
         ->get();
-        return $amigos;
+        $aux=[];
+        foreach($amigos as $a) {
+            if($a->id_usuari != $usuarioActivo) {
+                $auxObj["id_user"]=$a->id_usuari;
+                $auxObj["name"]=$a->name;
+                $aux[]=$auxObj;
+            }else {
+                $auxObj["id_user"]=$a->id_seguit;
+                $auxObj["name"]=$a->name;
+                $aux[]=$auxObj;
+            }
+        }
+        return $aux;
     }
 
     public function getMissatges($idChat) {

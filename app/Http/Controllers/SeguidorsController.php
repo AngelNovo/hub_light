@@ -52,14 +52,31 @@ class SeguidorsController extends Controller
     }
 
     public function acceptNotificacion($id,Request $request) {
-        $req=$request->all();
-        // if($req->tipo=="") {
-
-        // }
+        if($request->input('tipo')=="amistad") {
+            $amistad=SeguidorsModel::where('id',$request->input('id'))
+            ->update([
+                "acceptat"=>1
+            ]);
+        }else if($request->input('tipo')=="interaccion"){
+            $interaccion=SeguidorsModel::where('id',$request->input('id'))
+            ->update([
+                "visto"=>1
+            ]);
+        }
+        return 1;
 
     }
 
     public function deleteNotificacion($id,Request $request) {
-
+        if($request->input('tipo')=="amistad") {
+            $amistad=SeguidorsModel::where('id',$request->input('id'))
+            ->delete();
+        }else if($request->input('tipo')=="aviso"){
+            $interaccion=InteraccioModel::where('id',$request->input('id'))
+            ->update([
+                "removed"=>1
+            ]);
+        }
+        return 1;
     }
 }

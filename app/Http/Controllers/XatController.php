@@ -56,6 +56,9 @@ class XatController extends Controller
         ->update([
             "lastseen"=>$missatges[sizeof($missatges)-1]->id
         ]);
+        if(sizeof($missatges)==0) {
+            return [];
+        }
         return $missatges;
     }
 

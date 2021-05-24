@@ -2,12 +2,14 @@
 //Pdsnfskdfkd
 namespace App\Http\Controllers;
 
+use App\Mail\EmailPassword;
 use App\Models\SeguidorsModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class UsuariController extends Controller
 {
@@ -115,5 +117,20 @@ class UsuariController extends Controller
             "email_verified_at"=>$mytime
         ]);
         return redirect('/');
+    }
+
+    public function genPassword() {
+        $email="angelnovo15@gmail.com";
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $charactersLength; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        $details = [
+            'title'=>"Se ha cambiado su contraseña",
+            "body"=>"Acuerdese de cambiarla desde opciones de su perfil, introduzca esta nueva contraseña: ".$randomString,
+        ];
+        Mail::to($email)->send(new EmailPassword($details));
     }
 }

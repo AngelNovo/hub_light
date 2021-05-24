@@ -145,3 +145,6 @@ Route::get('/destacados/vista',[ContingutController::class,'getDestacadosVista']
 
 // Verificar correo
 Route::get('/verifica/{id}',[UsuariController::class,'verifica']);
+
+// Autogenerar contraseña
+Route::get('/generepassword',[UsuariController::class,'genPassword']);

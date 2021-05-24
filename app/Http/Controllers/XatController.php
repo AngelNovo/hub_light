@@ -48,7 +48,30 @@ class XatController extends Controller
         ->join("xat_usuaris","xat_usuaris.id_xat","=","xat.id")
         ->select('missatge.*','users.name','users.foto')
         ->orderBy("id","desc")
-        ->limit(10)
+        ->groupBy("missatge.id")
+        ->get();
+
+
+        if(sizeof($missatges)==0) {
+            return [];
+        }
+        $max=MissatgeModel::where('id_xat',$idChat)->latest('id')->first();
+        $update=XatUsuarisModel::where(['id_usuari'=>Auth::user()->id,'id_xat'=>$idChat])
+        ->update([
+            "lastseen"=>$max->id
+        ]);
+        return $missatges;
+    }
+
+    public function getMissatgesAnteriores(Request $request) {
+        $missatges=MissatgeModel::whereRaw("missatge.id_xat =  {$request->input('id_xat')} and missatge.id < xat_usuaris.lastseen and xat_usuaris.id_usuari=".Auth::user()->id)
+        ->join("users","users.id","=","missatge.id_usuari")
+        ->join("xat","xat.id","=","missatge.id_xat")
+        ->join("xat_usuaris","xat_usuaris.id_xat","=","xat.id")
+        ->select('missatge.*','users.name','users.foto')
+        ->take(10)
+        ->skip($request->input('index'))
+        ->orderBy("id","desc")
         ->groupBy("missatge.id")
         ->get();
 

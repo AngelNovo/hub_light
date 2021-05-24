@@ -96,10 +96,17 @@ function cargarContenido(){
               like.addClass("pe-7s-like");
               like.addClass("like");
               like.attr("data-toggle","Me gusta");
+              let report=$("<i>");
+              report.addClass("fa");
+              report.addClass("pe-7s-attention");
+              report.addClass("report");
+              report.attr("data-toggle","Reportar Contenido");
+              report.css("float","right");
               if(element.like_bool=="1"){
                 like.addClass("megusta");
               }
               divI.append(like);
+              divI.append(report);
             }
             let enviar=$("<i>");
               enviar.addClass("fa");
@@ -284,10 +291,16 @@ function cargarContenido(){
       dataType: 'json',
       success: function(data){
         let contador=0;
+        console.log(data);
         $.each(data, function(index,element){
           if(element.comentario!=null&&element.comentario!=""&&element.comentario!=undefined){
             let comentario=$("<div>");
             comentario.addClass("comentario");
+            let fecha=new Date(element.created_at);
+            let spanFecha=$("<span>");
+            spanFecha.addClass("fecha-contingut");
+            spanFecha.attr("float","right");
+            spanFecha.text(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear());
             let fotoUser=$("<a>");
             fotoUser.attr("href","{{asset('/usuaris/')}}/"+element.id_usuari);
             let img=$("<img>");
@@ -297,6 +310,7 @@ function cargarContenido(){
             let coment=$("<p>");
             coment.addClass("text-comment");
             coment.text(element.comentario);
+            comentario.append(spanFecha);
             comentario.append(fotoUser);
             comentario.append(coment);
             comentario.hide();

@@ -218,3 +218,18 @@ body{
 .showChat{
     cursor: pointer;
 }
+
+.modal-content .row{
+    padding: 0;
+}
+
+.msgContingut{
+    background-color: rgb(255, 255, 255,0.2);
+    border-radius: 15px;
+}
+
+.msgContingut img{
+    border-radius: 15px;
+    max-width: 200px;
+    max-height: 200px;
+}

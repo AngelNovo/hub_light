@@ -58,6 +58,7 @@
 <script>
   // Document Ready
   let idChat;
+  multipleData();
   $(document).ready(function(){
     $("#iconDown").hide();
     rebreChats();
@@ -128,23 +129,25 @@
             $(".xats-disp").append(contenidor);
           });
           $(".selectChat").on("click",function(){
-            console.log(":)");
             idChat=$(this).attr("chat-val");
-            console.log(idChat);
-            rebreMissatges(idChat);
+            rebreMissatges(idChat,0);
           });
         }
     });
   }
 
-  function rebreMissatges(idChat){
+  function rebreMissatges(idChat,index){
     let AUTH=JSON.parse($("#Auth").val());
     $.ajax({
-        url: "/chats/missatges/"+idChat,
+        url: "/chats/missatges/anterior",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        type: "GET",
+        type: "POST",
+        data: {
+            "id_xat":idChat,
+            "index":index
+        },
         dataType: 'json',
         success: function(data){   
           data=data.sort(function (a, b) {
@@ -201,10 +204,23 @@
             name.text(element.name);
             let msg=$("<p>");
             msg.text(element.missatge);
-            let hora=$("<span>");
-            hora.text(fecha.getHours()+":"+fecha.getMinutes());
+            let hora=$("<p>");
+            let minuto=fecha.getMinutes();
+            if(minuto<10){
+              minuto="0"+minuto;
+            }
+            hora.text(fecha.getHours()+":"+minuto);
             chatMessage.append(name);
             chatMessage.append(msg);
+            if(element.id_contingut!=null){
+              let aCont=$("<a>");
+              aCont.attr("href","{{asset('contingut/')}}"+"/"+element.id_contingut);
+              aCont.addClass("msgContingut");
+              let imgCon=$("<img>");
+              imgCon.attr("src","{{asset('images/perfil/usuarios/')}}/"+element.foto);
+              aCont.append(imgCon);
+              chatMessage.append(aCont);
+            }
             chatMessage.append(hora);  
             chatBody.append(chatMessage); 
             li.append(chatImg);
@@ -216,6 +232,60 @@
         }
     });
   }
+
+
+  function rebreLast(idChat){
+    let AUTH=JSON.parse($("#Auth").val());
+    $.ajax({
+        url: "/chats/missatges/"+idChat,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "GET",
+        dataType: 'json',
+        success: function(data){   
+          data=data.sort(function (a, b) {
+          return (a.id - b.id)
+        });                
+          console.log(data);
+          //Mensages
+          $.each(data, function(index,element){
+            let fecha=new Date(element.created_at);
+            let li=$("<li>");
+            if(element.id_usuari==AUTH.id){
+              li.addClass("out");
+            }else{
+              li.addClass("in");
+            }
+            let chatImg=$("<div>");
+            chatImg.addClass("chat-img");
+            let imgPerf=$("<img>");
+            imgPerf.attr("alt","Avtar");
+            imgPerf.attr("src","{{asset('images/perfil/usuarios/')}}/"+element.foto);
+            chatImg.append(imgPerf);
+            let chatBody=$("<div>");
+            chatBody.addClass("chat-body");
+            let chatMessage=$("<div>");
+            chatMessage.addClass("chat-message");
+            let name=$("<h5>");
+            name.text(element.name);
+            let msg=$("<p>");
+            msg.text(element.missatge);
+            let hora=$("<span>");
+            hora.text(fecha.getHours()+":"+fecha.getMinutes());
+            chatMessage.append(name);
+            chatMessage.append(msg);
+            chatMessage.append(hora);  
+            chatBody.append(chatMessage); 
+            li.append(chatImg);
+            li.append(chatBody);            
+            $(".chat-list").append(li);
+          });
+        }
+    });
+  }
+
+
 
   function enviaMSG(){
     let missatge=$("#newMsg").val();
@@ -233,6 +303,8 @@
         },
         success: function(data){
            console.log(data);
+           missatge=$("#newMsg").val("");
+           rebreLast(idChat);
         },error: function(data){
            console.log(data);
         }
@@ -261,5 +333,44 @@
       });
   }
 
+  function multipleData(){
+    const separator = ',';
+    for (const input of document.getElementsByTagName("input")) {
+      if (!input.multiple) {
+        continue;
+      }
+      if (input.list instanceof HTMLDataListElement) {
+        const optionsValues = Array.from(input.list.options).map(opt => opt.value);
+        let valueCount = input.value.split(separator).length;
+        input.addEventListener("input", () => {
+          const currentValueCount = input.value.split(separator).length;
+          // Do not update list if the user doesn't add/remove a separator
+          // Current value: "a, b, c"; New value: "a, b, cd" => Do not change the list
+          // Current value: "a, b, c"; New value: "a, b, c," => Update the list
+          // Current value: "a, b, c"; New value: "a, b" => Update the list
+          if (valueCount !== currentValueCount) {
+            const lsIndex = input.value.lastIndexOf(separator);
+            const str = lsIndex !== -1 ? input.value.substr(0, lsIndex) + separator : "";
+            filldatalist(input, optionsValues, str);
+            valueCount = currentValueCount;
+          }
+        });
+      }
+    }
+    function filldatalist(input, optionValues, optionPrefix) {
+      const list = input.list;
+      if (list && optionValues.length > 0) {
+        list.innerHTML = "";
+        const usedOptions = optionPrefix.split(separator).map(value => value.trim());
+        for (const optionsValue of optionValues) {
+          if (usedOptions.indexOf(optionsValue) < 0) {
+            const option = document.createElement("option");
+            option.value = optionPrefix + optionsValue;
+            list.append(option);
+          }
+        }
+      }
+    }
+  }
   
 </script>

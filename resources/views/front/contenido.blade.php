@@ -46,6 +46,7 @@
                     @else
                         <i class="fa pe-7s-like" id="like" data-toggle="Me gusta"></i>
                     @endif  
+                    <i class="fa pe-7s-attention" id="report" data-toggle="Reportar contenido" style="float: right;"> </i>
                 @endif              
                 <i class="fa pe-7s-paper-plane" id="enviar" data-toggle="Enviar"> </i>
             </div>
@@ -61,10 +62,12 @@
             @foreach ($comentarios as $item)
                 @if ($item->comentario!=null||$item->comentario!="")
                     <div class="comentario">
+                        <span class="fecha-contingut" style="float: right;">{{date("d/m/Y",strtotime($item->created_at))}}</span>
                         <a href="{{asset('/usuaris/'.$item->id_usuari)}}">
                             <img class="foto-coment" src={{asset("images/perfil/usuarios/".$item->foto)}}>
                         </a>
-                    <p class="text-comment">{{$item->comentario}}</p>
+                        <p class="text-comment">{{$item->comentario}}</p>
+                        
                     </div>
                 @endif            
             @endforeach

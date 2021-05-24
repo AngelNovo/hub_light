@@ -7,25 +7,33 @@
       <div class="xats-disp">
         <div class="card-header">Chat 
           <button type="button" class="btn btn-secondary closeButon" data-dismiss="modal" form="formModal"><i class="fa pe-7s-close"></i></button>
-          <i class="fa pe-7s-angle-up showChat" title="Ver Chat" style="color: black"> </i>
+          <i class="fa pe-7s-angle-up showChat" id="iconDown" title="Ver Chat" style="color: black"> </i>
         </div>
-        <div></div>
-        <div class="row">
+        <div class="row addChat">
           <div class="Agrega">
             +
           </div>
           <div class="chat-msg">
             Agrega un nuevo chat
           </div>
+          <div>
+              <input type="text" list="nouChat" multiple="multiple" name="nouChatUsr"/>
+              <datalist id="nouChat"> </datalist> 
+          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0">
           <div class="card">
-            <div class="card-header">Chat 
+            <div class="card-header"> 
               <button type="button" class="btn btn-secondary closeButon" data-dismiss="modal" form="formModal"><i class="fa pe-7s-close"></i></button>
-              <i class="fa pe-7s-angle-down showChat" title="Ver Chat"> </i>
-              <i class="fa pe-7s-add-user" title="Añadir Usuario"> </i>
+              <div class="div-nouUser d-flex">
+                <h6>Chat</h6>
+                <i class="fa pe-7s-angle-down showChat" title="Ver Chat"> </i>
+                <input type="text" list="nouUser" multiple="multiple" name="nouUser"/>
+                <datalist id="nouUser"> </datalist> 
+                <i class="fa pe-7s-add-user button-add-new-user" title="Añadir Usuario"> </i>
+              </div>
             </div>
               <div class="card-body height3">
                 <ul class="chat-list">                                  
@@ -49,10 +57,10 @@
 {{-- Scripts --}}
 <script>
   // Document Ready
-  let idChat=1;
+  let idChat;
   $(document).ready(function(){
+    $("#iconDown").hide();
     rebreChats();
-    rebreMissatges();
     $(".showChat").on("click",function(){
       $(".xats-disp").slideToggle();
     });
@@ -83,13 +91,22 @@
             let contenidor=$("<div>");
             contenidor.addClass("row");
             contenidor.addClass("addChat");
+            contenidor.addClass("selectChat");
+            contenidor.attr("chat-val",element.id_xat);
             let chatImg=$("<div>");
             chatImg.addClass("foto-Chats");
             let fotoChat=$("<img>");
             let nomChat=$("<p>");
             nomChat.addClass("chat-msg");
             let lastMensage=$("<p>");
-            lastMensage.text(element.last_message.missatge);
+              let iconMSG=$("<i>");
+            iconMSG.addClass("pe-7s-chat");
+            iconMSG.addClass("fa");
+            iconMSG.addClass("iconMSG");
+            lastMensage.append(iconMSG);
+            if(element.last_message!=null){
+              lastMensage.append($("<span>").text(element.last_message.missatge));
+            }
             lastMensage.addClass("chat-msg");
             if(element.nom_xat!=""&&element.nom_xat!=null&&element.nom_xat!=undefined){
               nomChat.text(element.nom_xat);
@@ -110,11 +127,17 @@
             contenidor.append(lastMensage);
             $(".xats-disp").append(contenidor);
           });
+          $(".selectChat").on("click",function(){
+            console.log(":)");
+            idChat=$(this).attr("chat-val");
+            console.log(idChat);
+            rebreMissatges(idChat);
+          });
         }
     });
   }
 
-  function rebreMissatges(){
+  function rebreMissatges(idChat){
     let AUTH=JSON.parse($("#Auth").val());
     $.ajax({
         url: "/chats/missatges/"+idChat,
@@ -123,10 +146,41 @@
         },
         type: "GET",
         dataType: 'json',
-        success: function(data){                   
+        success: function(data){   
+          data=data.sort(function (a, b) {
+          return (a.id - b.id)
+        });                
           console.log(data);
+          $(".chat-list li").remove();
           //Mensages
+          let uFecha="";
+          let fechaHoy=new Date();
           $.each(data, function(index,element){
+            let fecha=new Date(element.created_at);
+            if(uFecha!=(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())){
+              let liFecha=$("<li>");
+              if((fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())==(fechaHoy.getDate()+"/"+(fechaHoy.getMonth()+1)+"/"+fechaHoy.getFullYear())){
+                liFecha.text("Hoy");
+              }else {
+                let fechaAyer="";
+                if(fechaHoy.getDate()-1!=0){
+                  fechaAyer=(fechaHoy.getDate()-1)+"/"+(fechaHoy.getMonth()+1)+"/"+fechaHoy.getFullYear();
+                }else if(fechaHoy.getMonth()!=0){
+                  fechaAyer=fechaHoy.getDate()+"/"+fechaHoy.getMonth()+"/"+fechaHoy.getFullYear();
+                }else{
+                  fechaAyer=fechaHoy.getDate()+"/"+fechaHoy.getMonth()+"/"+(fechaHoy.getFullYear()-1);
+                }
+                if((fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())==fechaAyer){
+                  liFecha.text("Ayer");
+                }else{
+                  liFecha.text(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear());
+                }
+              }
+              liFecha.css("color","black");
+              liFecha.css("text-align","center");
+              uFecha=fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear();
+              $(".chat-list").append(liFecha);
+            }
             let li=$("<li>");
             if(element.id_usuari==AUTH.id){
               li.addClass("out");
@@ -148,7 +202,6 @@
             let msg=$("<p>");
             msg.text(element.missatge);
             let hora=$("<span>");
-            let fecha=new Date(element.created_at);
             hora.text(fecha.getHours()+":"+fecha.getMinutes());
             chatMessage.append(name);
             chatMessage.append(msg);
@@ -156,8 +209,10 @@
             chatBody.append(chatMessage); 
             li.append(chatImg);
             li.append(chatBody);            
-            $(".chat-list").prepend(li);
-          }); 
+            $(".chat-list").append(li);
+          });
+          $(".xats-disp").slideUp(); 
+          $("#iconDown").show();
         }
     });
   }
@@ -183,4 +238,28 @@
         }
       });
   }
+
+  function creaChat(){
+    let users=$("#newMsg").val();
+    console.log(idChat);
+    console.log(missatge);
+    $.ajax({
+        url: "/chats/missatges",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        data: {
+            "missatge":missatge,
+            "id_xat":idChat
+        },
+        success: function(data){
+           console.log(data);
+        },error: function(data){
+           console.log(data);
+        }
+      });
+  }
+
+  
 </script>

@@ -13,6 +13,8 @@ body{
     background-color: rgb(246, 248, 232);
     position: absolute;
     z-index: 100;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
 }
 
 .card-header i{
@@ -54,6 +56,18 @@ body{
 .chat-msg{
     margin-left: 10px;
     padding: 5px;
+}
+
+.addChat{
+    margin-bottom: 10px;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.addChat:hover{
+    background-color: rgb(41, 41, 41,0.1);
 }
 
 .chat-list {
@@ -159,7 +173,7 @@ body{
 }
 
 .card-body{
-    max-height: 50vh;
+    height: 50vh;
     overflow-y: auto;
 }
 
@@ -175,4 +189,32 @@ body{
 
 .butonSendMSG{
     margin: 2px;
+}
+
+.iconMSG{
+    font-size: 20px;
+}
+
+.div-nouUser{
+    width: 60%;
+}
+
+.div-nouUser input{
+    max-width: 70%;
+}
+
+.button-add-new-user{
+    cursor: pointer;
+    border-radius: 50%;
+    min-width: 30px;
+    min-height: 30px;
+    margin-left: 5px;
+}
+
+.button-add-new-user:hover{
+    background-color: rgb(255, 255, 255,0.2);
+}
+
+.showChat{
+    cursor: pointer;
 }

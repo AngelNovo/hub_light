@@ -63,6 +63,7 @@ class InteraccioController extends Controller
         ->join("contingut","contingut.id","=","interaccio.id_contingut")
         ->join("users","users.id","=","interaccio.id_usuari")
         ->orderBy("interaccio.created_at","desc")
+        ->select("interaccio.id_usuari","users.name","interaccio.created_at","users.foto","interaccio.comentario")
         ->get();
         return $comments;
     }

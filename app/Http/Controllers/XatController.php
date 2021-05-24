@@ -73,7 +73,7 @@ class XatController extends Controller
                 $contingut=ContingutModel::where('id',$m->id_contingut)
                 ->select('portada','url','tipus_contingut')
                 ->get();
-                $m->contingut=$contingut;
+                $m->contingut=$contingut[0];
             }
         }
 
@@ -107,7 +107,7 @@ class XatController extends Controller
                 $contingut=ContingutModel::where('id',$m->id_contingut)
                 ->select('portada','url','tipus_contingut')
                 ->get();
-                $m->contingut=$contingut;
+                $m->contingut=$contingut[0];
             }
         }
 

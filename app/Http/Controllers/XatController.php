@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContingutModel;
 use App\Models\MissatgeModel;
 use App\Models\SeguidorsModel;
 use App\Models\XatUsuarisModel;
@@ -63,15 +64,23 @@ class XatController extends Controller
         ->groupBy("missatge.id")
         ->get();
 
+        foreach($missatges as $m) {
+            if($m->id_contingut!=null) {
+                $contingut=ContingutModel::where('id',$m->id_contingut)
+                ->select('portada','url','tipus_contingut')
+                ->get();
+                $m->contingut=$contingut;
+            }
+        }
 
         if(sizeof($missatges)==0) {
             return [];
         }
-        $max=MissatgeModel::where('id_xat',$idChat)->latest('id')->first();
-        $update=XatUsuarisModel::where(['id_usuari'=>Auth::user()->id,'id_xat'=>$idChat])
-        ->update([
-            "lastseen"=>$max->id
-        ]);
+        // $max=MissatgeModel::where('id_xat',$idChat)->latest('id')->first();
+        // $update=XatUsuarisModel::where(['id_usuari'=>Auth::user()->id,'id_xat'=>$idChat])
+        // ->update([
+        //     "lastseen"=>$max->id
+        // ]);
         return $missatges;
     }
 

@@ -64,6 +64,10 @@ class XatController extends Controller
         ->groupBy("missatge.id")
         ->get();
 
+        if(sizeof($missatges)==0) {
+            return [];
+        }
+
         foreach($missatges as $m) {
             if($m->id_contingut!=null) {
                 $contingut=ContingutModel::where('id',$m->id_contingut)
@@ -73,9 +77,6 @@ class XatController extends Controller
             }
         }
 
-        if(sizeof($missatges)==0) {
-            return [];
-        }
         $max=MissatgeModel::where('id_xat',$idChat)->latest('id')->first();
         $update=XatUsuarisModel::where(['id_usuari'=>Auth::user()->id,'id_xat'=>$idChat])
         ->update([
@@ -100,6 +101,16 @@ class XatController extends Controller
         if(sizeof($missatges)==0) {
             return [];
         }
+
+        foreach($missatges as $m) {
+            if($m->id_contingut!=null) {
+                $contingut=ContingutModel::where('id',$m->id_contingut)
+                ->select('portada','url','tipus_contingut')
+                ->get();
+                $m->contingut=$contingut;
+            }
+        }
+
         $max=MissatgeModel::where('id_xat',$request->input('id_xat'))->latest('id')->first();
         $update=XatUsuarisModel::where(['id_usuari'=>Auth::user()->id,'id_xat'=>$request->input('id_xat')])
         ->update([

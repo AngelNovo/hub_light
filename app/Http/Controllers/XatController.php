@@ -76,11 +76,11 @@ class XatController extends Controller
         if(sizeof($missatges)==0) {
             return [];
         }
-        // $max=MissatgeModel::where('id_xat',$idChat)->latest('id')->first();
-        // $update=XatUsuarisModel::where(['id_usuari'=>Auth::user()->id,'id_xat'=>$idChat])
-        // ->update([
-        //     "lastseen"=>$max->id
-        // ]);
+        $max=MissatgeModel::where('id_xat',$idChat)->latest('id')->first();
+        $update=XatUsuarisModel::where(['id_usuari'=>Auth::user()->id,'id_xat'=>$idChat])
+        ->update([
+            "lastseen"=>$max->id
+        ]);
         return $missatges;
     }
 

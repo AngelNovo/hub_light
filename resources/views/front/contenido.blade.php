@@ -49,6 +49,10 @@
                     <i class="fa pe-7s-attention" id="report" data-toggle="Reportar contenido" style="float: right;"> </i>
                 @endif              
                 <i class="fa pe-7s-paper-plane" id="enviar" data-toggle="Enviar"> </i>
+                <span>
+                    <select class="enviaCont" multiple="multiple"></select>
+                    <button type="button" class="btn btn-success button-envCont">Enviar</button>
+                </span>
             </div>
         </div>
         @endif

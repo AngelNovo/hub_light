@@ -16,7 +16,7 @@
           </div>
             
             <div class="Agrega">
-              <select id="nouChat" multiple="multiple"> <option value="1">Otro</option> </select>
+              <select id="nouChat" multiple="multiple"></select>
               <i class="nouChatButton">+</i>
             </div>
         </div>
@@ -88,7 +88,7 @@
     });
 
     $(".nouChatButton").on("click",function(){
-      console.log($("#nouChat").val());
+      creaChat();
     });
   });
 
@@ -131,17 +131,15 @@
               lastMensage.append($("<span>").text(element.last_message.missatge));
             }
             lastMensage.addClass("chat-msg");
-            if(element.nom_xat!=""&&element.nom_xat!=null&&element.nom_xat!=undefined){
-              nomChat.text(element.nom_xat);
-            }else{
-              let nom="";
+            let nom=element.nom_xat;
+            if(element.nom_xat==""||element.nom_xat==null||element.nom_xat==undefined){          
               $.each(element.integrantes, function(i,el){
                 if(el.id_usuari!=element.id_usuari){
                   nom+=el.name+" ";
                 }
               });
-              nomChat.text(nom);
             }
+            nomChat.text(nom);
             let random=Math.floor(Math.random() * integrantes.length); 
             fotoChat.attr("src","{{asset('images/perfil/usuarios/')}}/"+integrantes[random]);
             chatImg.append(fotoChat);
@@ -149,10 +147,15 @@
             contenidor.append(nomChat);
             contenidor.append(lastMensage);
             $(".xats-disp").append(contenidor);
+
+            $(".enviaCont").append($("<option>").val(element.id_xat).text(nom));
           });
           $(".selectChat").on("click",function(){
             idChat=$(this).attr("chat-val");
             rebreMissatges(idChat,0);
+          });
+          $('.enviaCont').multiselect({
+            includeSelectAllOption: true,
           });
         }
     });
@@ -346,18 +349,16 @@
   }
 
   function creaChat(){
-    let users=$("#newMsg").val();
-    console.log(idChat);
-    console.log(missatge);
+    let users= $("#nouChat").val();
     $.ajax({
-        url: "/chats/missatges",
+        url: "/chats/create",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "POST",
         data: {
-            "missatge":missatge,
-            "id_xat":idChat
+            "users":users,
+            "nom":null
         },
         success: function(data){
            console.log(data);

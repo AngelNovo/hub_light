@@ -80,6 +80,11 @@ class SeguidorsController extends Controller
             ->update([
                 "removed"=>1
             ]);
+        }else if($request->input('tipo')=="interaccion") {
+            $interaccion=InteraccioModel::where('id',$request->input('id'))
+            ->update([
+                "visto"=>1
+            ]);
         }
         return 1;
     }

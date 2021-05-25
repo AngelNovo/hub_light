@@ -156,12 +156,13 @@ class XatController extends Controller
     public function startChat(Request $request) {
         $req=$request->input('users');
         $create=0;
-        $xat=XatModel::create();
+        $xat=XatModel::create([
+            "nom"=>($request->input('nom')==null) ? '' : $request->input('nom'),
+            "url_foto"=>''
+        ]);
         foreach($req as $r) {
             $create=XatUsuarisModel::create([
                 "id_xat"=>$xat->id,
-                "nom"=>$request->input('nom'),
-                "url"=>null,
                 "id_usuari"=>$r,
                 "lastseen"=>0
             ]);

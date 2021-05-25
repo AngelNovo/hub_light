@@ -6,32 +6,30 @@
     <div class="modal-content">
       <div class="xats-disp">
         <div class="card-header">Chat 
-          <button type="button" class="btn btn-secondary closeButon" data-dismiss="modal" form="formModal"><i class="fa pe-7s-close"></i></button>
+          <button type="button" class="btn btn-secondary closeButon chat-close" data-dismiss="modal" form="formModal"><i class="fa pe-7s-close"></i></button>
           <i class="fa pe-7s-angle-up showChat" id="iconDown" title="Ver Chat" style="color: black"> </i>
         </div>
         <div class="row addChat">
-          <div class="Agrega">
-            +
-          </div>
+          
           <div class="chat-msg">
             Agrega un nuevo chat
           </div>
-          <div>
-              <input type="text" list="nouChat" multiple="multiple" name="nouChatUsr"/>
-              <datalist id="nouChat"> </datalist> 
-          </div>
+            
+            <div class="Agrega">
+              <select id="nouChat" multiple="multiple"> <option value="1">Otro</option> </select>
+              <i class="nouChatButton">+</i>
+            </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-0">
           <div class="card">
             <div class="card-header"> 
-              <button type="button" class="btn btn-secondary closeButon" data-dismiss="modal" form="formModal"><i class="fa pe-7s-close"></i></button>
+              <button type="button" class="btn btn-secondary closeButon chat-close" data-dismiss="modal" form="formModal"><i class="fa pe-7s-close"></i></button>
               <div class="div-nouUser d-flex">
                 <h6>Chat</h6>
                 <i class="fa pe-7s-angle-down showChat" title="Ver Chat"> </i>
-                <input type="text" list="nouUser" multiple="multiple" name="nouUser"/>
-                <datalist id="nouUser"> </datalist> 
+                <select id="addUsers" multiple="multiple"> </select>
                 <i class="fa pe-7s-add-user button-add-new-user" title="Añadir Usuario"> </i>
               </div>
             </div>
@@ -58,7 +56,8 @@
 <script>
   // Document Ready
   let idChat;
-  multipleData();
+  let interval=null;
+  let chatActive=false;
   $(document).ready(function(){
     $("#iconDown").hide();
     rebreChats();
@@ -67,6 +66,29 @@
     });
     $(".butonSendMSG").on("click",function(){
       enviaMSG();
+    });
+    meterAmigos();
+    $(".chat-close, .enable-chat-modal").on("click",function(){
+      
+      if(chatActive){
+        if(interval!=null){
+          clearInterval(interval);
+          interval=null;
+        }
+        chatActive=false;
+      }else{
+        if(idChat!=null){
+          interval=setInterval(function(){
+          rebreLast(idChat);
+          console.log(idChat);
+        }, 5000);
+        chatActive=true;
+        }
+      }
+    });
+
+    $(".nouChatButton").on("click",function(){
+      console.log($("#nouChat").val());
     });
   });
 
@@ -154,6 +176,10 @@
           return (a.id - b.id)
         });                
           console.log(data);
+          if(interval!=null){
+            clearInterval(interval);
+            interval=null;
+          }
           $(".chat-list li").remove();
           //Mensages
           let uFecha="";
@@ -217,7 +243,11 @@
               aCont.attr("href","{{asset('contingut/')}}"+"/"+element.id_contingut);
               aCont.addClass("msgContingut");
               let imgCon=$("<img>");
-              imgCon.attr("src","{{asset('images/perfil/usuarios/')}}/"+element.foto);
+              if(element.contingut.tipus_contingut==1){
+                imgCon.attr("src","{{asset('contenido/1/')}}/"+element.contingut.url);
+              }else{
+                imgCon.attr("src","{{asset('contenido/1/')}}/"+element.contingut.portada);
+              }
               aCont.append(imgCon);
               chatMessage.append(aCont);
             }
@@ -227,8 +257,15 @@
             li.append(chatBody);            
             $(".chat-list").append(li);
           });
+          rebreLast(idChat);
           $(".xats-disp").slideUp(); 
           $("#iconDown").show();
+          interval=setInterval(function(){
+            rebreLast(idChat);
+            console.log(idChat);
+          }, 5000);
+          chatActive=true;
+          $('.card-body').scrollTop($('.card-body')[0].scrollHeight);
         }
     });
   }
@@ -247,7 +284,6 @@
           data=data.sort(function (a, b) {
           return (a.id - b.id)
         });                
-          console.log(data);
           //Mensages
           $.each(data, function(index,element){
             let fecha=new Date(element.created_at);
@@ -284,8 +320,6 @@
         }
     });
   }
-
-
 
   function enviaMSG(){
     let missatge=$("#newMsg").val();
@@ -333,44 +367,29 @@
       });
   }
 
-  function multipleData(){
-    const separator = ',';
-    for (const input of document.getElementsByTagName("input")) {
-      if (!input.multiple) {
-        continue;
-      }
-      if (input.list instanceof HTMLDataListElement) {
-        const optionsValues = Array.from(input.list.options).map(opt => opt.value);
-        let valueCount = input.value.split(separator).length;
-        input.addEventListener("input", () => {
-          const currentValueCount = input.value.split(separator).length;
-          // Do not update list if the user doesn't add/remove a separator
-          // Current value: "a, b, c"; New value: "a, b, cd" => Do not change the list
-          // Current value: "a, b, c"; New value: "a, b, c," => Update the list
-          // Current value: "a, b, c"; New value: "a, b" => Update the list
-          if (valueCount !== currentValueCount) {
-            const lsIndex = input.value.lastIndexOf(separator);
-            const str = lsIndex !== -1 ? input.value.substr(0, lsIndex) + separator : "";
-            filldatalist(input, optionsValues, str);
-            valueCount = currentValueCount;
-          }
+  function meterAmigos(){
+    $.ajax({
+        url: "/chats/users/amigos",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "GET",
+        success: function(data){
+           console.log(data);
+           $.each(data, function(index,element){
+            let option=$("<option>");
+            option.val(element.id_user);
+            option.text(element.name);
+            $("#nouChat, #addUsers").append(option);
+           });
+
+           $('#nouChat, #addUsers').multiselect({
+          includeSelectAllOption: true,
         });
-      }
-    }
-    function filldatalist(input, optionValues, optionPrefix) {
-      const list = input.list;
-      if (list && optionValues.length > 0) {
-        list.innerHTML = "";
-        const usedOptions = optionPrefix.split(separator).map(value => value.trim());
-        for (const optionsValue of optionValues) {
-          if (usedOptions.indexOf(optionsValue) < 0) {
-            const option = document.createElement("option");
-            option.value = optionPrefix + optionsValue;
-            list.append(option);
-          }
+        },error: function(data){
+           console.log(data);
         }
-      }
-    }
+      });
   }
   
 </script>

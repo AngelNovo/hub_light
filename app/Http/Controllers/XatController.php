@@ -66,7 +66,7 @@ class XatController extends Controller
         ->whereNotIn("id_usuari",$aux)
         ->join('users as u1','u1.id','=','seguidors.id_usuari')
         ->get();
-        // return $amigos;
+        return $amigos;
         $aux=[];
         foreach($amigos as $a) {
             if($a->id_usuari != $usuarioActivo) {
@@ -161,6 +161,7 @@ class XatController extends Controller
         foreach($xats as $x) {
             $missatge=MissatgeModel::create([
                 "id_usuari"=>Auth::user()->id,
+                "missatge"=>"",
                 "id_contingut"=>$request->input('id_contingut'),
                 "id_xat"=>$x
             ]);

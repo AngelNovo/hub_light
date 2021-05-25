@@ -105,6 +105,7 @@
         dataType: 'json',
         success: function(data){                   
           console.log(data);
+          $(".xats-disp").find(".selectChat").remove();
           //Chats
           $.each(data, function(index,element){
             let integrantes=[];
@@ -357,7 +358,8 @@
   function creaChat(){
     let users= $("#nouChat").val();
     users.push(""+AUTH.id);
-    $.ajax({
+    if(users.length>1){
+      $.ajax({
         url: "/chats/create",
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -370,10 +372,14 @@
         success: function(data){
            console.log(data);
            console.log(users);
+           rebreChats();
         },error: function(data){
            console.log(data);
         }
       });
+    }else{
+      alert("Por favor, inserte minimo un usuario");
+    }
   }
 
   function meterAmigos(){

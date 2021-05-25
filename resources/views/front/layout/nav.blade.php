@@ -144,26 +144,37 @@
         type: "GET",
         dataType: 'json',
         success: function(data){     
+          console.log(data);
           $(".notificaciones-div").append($("<p>").text("Peticiones de amistad"));
           $.each(data[0], function(index,element){
-            console.log(element);
             let li=$("<a>");
             li.addClass("dropdown-item");
-            li.text(element.explicacio); 
+            li.text("Petición de amistad de "+element.name); 
             let bclose=$("<button>");
             bclose.addClass("btn");
             bclose.addClass("btn-danger");
             bclose.addClass("notification-buttons");
+            bclose.attr("id-not",element.id);
+            bclose.attr("tipus-not",element.tipo);
             let icon=$("<i>");
             icon.addClass("pe-7s-close");
             bclose.append(icon);
+            let bconfirm=$("<button>");
+            bconfirm.addClass("btn");
+            bconfirm.addClass("btn-success");
+            bconfirm.addClass("notification-buttons");
+            bconfirm.attr("id-not",element.id);
+            bconfirm.attr("tipus-not",element.tipo);
+            let bicon=$("<i>");
+            bicon.addClass("pe-7s-like2");
+            bconfirm.append(bicon);
+            li.append(bconfirm);
             li.append(bclose);
             $(".notificaciones-div").append(li);
           }); 
           $(".notificaciones-div").append($("<div>").addClass("dropdown-divider"));  
           $(".notificaciones-div").append($("<p>").text("Interacciones"));
           $.each(data[1], function(index,element){
-            console.log(element);
             let canN=true;
             let descripcio="Has recibido un ";
             if(element.megusta==1&&element.comentario!=null&&element.comentario!=""){
@@ -183,6 +194,8 @@
               bclose.addClass("btn");
               bclose.addClass("btn-danger");
               bclose.addClass("notification-buttons");
+              bclose.attr("id-not",element.id);
+              bclose.attr("tipus-not",element.tipo);
               let icon=$("<i>");
               icon.addClass("pe-7s-close");
               bclose.append(icon);
@@ -193,7 +206,6 @@
           $(".notificaciones-div").append($("<div>").addClass("dropdown-divider"));
           $(".notificaciones-div").append($("<p>").text("Avisos"));
           $.each(data[2], function(index,element){
-            console.log(element); 
             let li=$("<a>");
             li.addClass("dropdown-item");
             li.text(element.explicacio); 
@@ -201,6 +213,8 @@
             bclose.addClass("btn");
             bclose.addClass("btn-danger");
             bclose.addClass("notification-buttons");
+            bclose.attr("id-not",element.id);
+            bclose.attr("tipus-not",element.tipo);
             let icon=$("<i>");
             icon.addClass("pe-7s-close");
             bclose.append(icon);
@@ -208,7 +222,58 @@
             $(".notificaciones-div").append(li);
           }); 
           $(".notificaciones-div").append($("<div>").addClass("dropdown-divider"));
+          $(".notification-buttons").on("click",function(){
+            let id=$(this).attr("id-not");
+            let tipus=$(this).attr("tipus-not");
+            if($(this).hasClass("btn-success")){
+              aceptarNotificacion(id,tipus);
+            }else{
+              esborarNotificacion(id,tipus);
+            }
+          });
         }
     });
   }
+
+  function aceptarNotificacion(id,idCont) {
+    console.log(id+"/"+idCont);
+    $.ajax({
+        url: "/notificacion/"+id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "PUT",
+        data: {
+            "tipo":idCont,
+            "id":id
+        },
+        dataType: 'json',
+        success: function(data){  
+        },error: function(data){
+           console.log(data);
+        }
+    });
+  }
+
+  function esborarNotificacion(id,idCont) {
+    console.log(id+"/"+idCont);
+    $.ajax({
+        url: "/notificaciones/delete/"+id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "PUT",
+        data: {
+            "tipo":idCont,
+            "id":id
+        },
+        dataType: 'json',
+        success: function(data){  
+          console.log("hola"); 
+        },error: function(data){
+           console.log(data);
+        }
+    });
+  }
+  
 </script>

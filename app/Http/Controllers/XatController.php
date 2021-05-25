@@ -66,6 +66,7 @@ class XatController extends Controller
         ->whereNotIn("id_usuari",$aux)
         ->join('users as u1','u1.id','=','seguidors.id_usuari')
         ->get();
+        // return $amigos;
         $aux=[];
         foreach($amigos as $a) {
             if($a->id_usuari != $usuarioActivo) {

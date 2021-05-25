@@ -89,7 +89,7 @@ class XatController extends Controller
         ->join("xat_usuaris","xat_usuaris.id_xat","=","xat.id")
         ->select('missatge.*','users.name','users.foto')
         ->orderBy("id","desc")
-        ->groupBy("missatge.id")
+        // ->groupBy("missatge.id")
         ->get();
 
         if(sizeof($missatges)==0) {
@@ -122,7 +122,6 @@ class XatController extends Controller
         ->take(10)
         ->skip($request->input('index'))
         ->orderBy("id","desc")
-        ->groupBy("missatge.id")
         ->get();
 
 

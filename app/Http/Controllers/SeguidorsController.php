@@ -30,12 +30,14 @@ class SeguidorsController extends Controller
         $notificaciones=[];
         $seguidors=SeguidorsModel::where(['id_seguit'=>Auth::user()->id,"acceptat"=>0])
             ->join("users","users.id","=","id_usuari")
+            ->select("seguidors.id as id_notificacio","users.name")
             ->get();
         foreach($seguidors as $s) {
             $s->tipo="amistad";
         }
         $interaccions=InteraccioModel::where(['visto'=>0,'contingut.propietari'=>Auth::user()->id])
         ->join("contingut","contingut.id","=","id_contingut")
+        ->select("interaccio.*")
         ->get();
         foreach($interaccions as $i) {
             $i->tipo="interaccion";

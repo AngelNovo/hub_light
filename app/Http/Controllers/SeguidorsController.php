@@ -77,7 +77,7 @@ class SeguidorsController extends Controller
             $amistad=SeguidorsModel::where('id',$request->input('id'))
             ->delete();
         }else if($request->input('tipo')=="aviso"){
-            $interaccion=AvisModel::where('id',$request->input('id'))
+            $interaccion=AvisUsuariModel::where('id',$request->input('id'))
             ->update([
                 "removed"=>1
             ]);

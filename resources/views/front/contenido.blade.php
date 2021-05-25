@@ -49,9 +49,9 @@
                     <i class="fa pe-7s-attention" id="report" data-toggle="Reportar contenido" style="float: right;"> </i>
                 @endif              
                 <i class="fa pe-7s-paper-plane" id="enviar" data-toggle="Enviar"> </i>
-                <span>
+                <span class="span-envia-cont">
                     <select class="enviaCont" multiple="multiple"></select>
-                    <button type="button" class="btn btn-success button-envCont">Enviar</button>
+                    <button type="button" class="btn btn-success button-envCont" value="{{$results->id}}">Enviar</button>
                 </span>
             </div>
         </div>
@@ -118,6 +118,10 @@
             }
             enviaLike();
             
+        });
+        $(".span-envia-cont").hide();
+        $("#enviar").on("click",function(){
+            $(this).parent().find(".span-envia-cont").fadeIn();
         });
     });
 

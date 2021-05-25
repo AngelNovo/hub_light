@@ -112,8 +112,23 @@ function cargarContenido(){
               enviar.addClass("fa");
               enviar.addClass("pe-7s-paper-plane");
               enviar.addClass("enviar");
-              enviar.attr("data-toggle","Enviar");            
+              enviar.attr("data-toggle","Enviar");    
+              let spanEnvia=$("<span>");
+              spanEnvia.addClass("span-envia-cont");
+              let selectChats=$("<select>");
+              selectChats.addClass("enviaCont");
+              selectChats.attr("multiple","multiple");
+              let butonEnviaCont=$("<button>");
+              butonEnviaCont.attr("type","button");
+              butonEnviaCont.addClass("btn");
+              butonEnviaCont.addClass("btn-success");
+              butonEnviaCont.addClass("button-envCont");
+              butonEnviaCont.val(element.contingut_id);
+              butonEnviaCont.text("Enviar");
+              spanEnvia.append(selectChats);
+              spanEnvia.append(butonEnviaCont);
               divI.append(enviar);
+              divI.append(spanEnvia); 
             headerFooter.append(divI);
             footer.append(headerFooter);
           }
@@ -257,6 +272,10 @@ function cargarContenido(){
           var comentaris=$(this).parent().parent();
           comentaris=comentaris.find(".border-bot").find("div");
           enviaComent(idCont,msg,idProp,comentaris);    
+        });
+        $(".span-envia-cont").hide();
+        $(".enviar").on("click",function(){
+          $(this).parent().find(".span-envia-cont").fadeIn();
         });       
       }
     });

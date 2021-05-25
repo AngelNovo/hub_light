@@ -33,6 +33,12 @@
         <li class="nav-item enable-chat-modal">
           <a class="nav-link" data-toggle="modal" data-target="#ChatModal"><i class="fa pe-7s-mail" title="Mis mensages"> </i></a>
         </li>
+        {{-- Notificaciones --}}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa pe-7s-news-paper" title="Notificaciones"> </i></a>
+          <div class="dropdown-menu notificaciones-div" aria-labelledby="navbarDropdown">
+          </div>
+        </li>
         {{-- Desplegable Perfil --}}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="Nav-Perfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -45,8 +51,8 @@
               <p>¡Bienvenido {{Auth::user()->alies}} !</p>
             @endif             
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href={{url("/usuaris/".Auth::user()->id)}}><i class="fa pe-7s-id" title="Cerrar sesión"> </i><span>Perfil</span></a>
-            <a class="dropdown-item"href={{url("/opciones/".Auth::user()->id)}}><i class="fa pe-7s-config" title="Cerrar sesión"> </i>Opciones</a>
+            <a class="dropdown-item" href={{url("/usuaris/".Auth::user()->id)}}><i class="fa pe-7s-id" title="Ver perfil"> </i><span>Perfil</span></a>
+            <a class="dropdown-item"href={{url("/opciones/".Auth::user()->id)}}><i class="fa pe-7s-config" title="Editar perfil"> </i>Opciones</a>
             {{-- Enllaç a backend --}}
             @if (Auth::user()->es_admin===1)
               <a class="dropdown-item" href={{url('/back/admin/home')}}> <i class="fa pe-7s-server" title="Subir contenido"> </i><span>Backoffice</span></a>
@@ -74,6 +80,7 @@
 <script>
   $(document).ready(function(){
     buscador();
+    getNotificaciones();
     $("#submit-buscador").on("click",function(e){
       e.preventDefault();
       var inputvalue=$("#buscador").val();
@@ -124,6 +131,83 @@
             option.attr("data-id",element.id);
             $("#cercador").append(option);
           });  
+        }
+    });
+  }
+
+  function getNotificaciones(){
+    $.ajax({
+      url: "/notificaciones",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "GET",
+        dataType: 'json',
+        success: function(data){     
+          $(".notificaciones-div").append($("<p>").text("Peticiones de amistad"));
+          $.each(data[0], function(index,element){
+            console.log(element);
+            let li=$("<a>");
+            li.addClass("dropdown-item");
+            li.text(element.explicacio); 
+            let bclose=$("<button>");
+            bclose.addClass("btn");
+            bclose.addClass("btn-danger");
+            bclose.addClass("notification-buttons");
+            let icon=$("<i>");
+            icon.addClass("pe-7s-close");
+            bclose.append(icon);
+            li.append(bclose);
+            $(".notificaciones-div").append(li);
+          }); 
+          $(".notificaciones-div").append($("<div>").addClass("dropdown-divider"));  
+          $(".notificaciones-div").append($("<p>").text("Interacciones"));
+          $.each(data[1], function(index,element){
+            console.log(element);
+            let canN=true;
+            let descripcio="Has recibido un ";
+            if(element.megusta==1&&element.comentario!=null&&element.comentario!=""){
+              descripcio+="like";
+            }else if(element.megusta==1){
+              descripcio+="like y comentario";
+            }else if(element.comentario!=null&&element.comentario!=""){
+              descripcio+="comentario"; 
+            }else{
+              canN=false;
+            }
+            if(canN){
+              let li=$("<a>");
+              li.addClass("dropdown-item");
+              li.text(descripcio); 
+              let bclose=$("<button>");
+              bclose.addClass("btn");
+              bclose.addClass("btn-danger");
+              bclose.addClass("notification-buttons");
+              let icon=$("<i>");
+              icon.addClass("pe-7s-close");
+              bclose.append(icon);
+              li.append(bclose);
+              $(".notificaciones-div").append(li);
+            }
+          }); 
+          $(".notificaciones-div").append($("<div>").addClass("dropdown-divider"));
+          $(".notificaciones-div").append($("<p>").text("Avisos"));
+          $.each(data[2], function(index,element){
+            console.log(element); 
+            let li=$("<a>");
+            li.addClass("dropdown-item");
+            li.text(element.explicacio); 
+            let bclose=$("<button>");
+            bclose.addClass("btn");
+            bclose.addClass("btn-danger");
+            bclose.addClass("notification-buttons");
+            let icon=$("<i>");
+            icon.addClass("pe-7s-close");
+            bclose.append(icon);
+            li.append(bclose);
+            $(".notificaciones-div").append(li);
+          }); 
+          $(".notificaciones-div").append($("<div>").addClass("dropdown-divider"));
         }
     });
   }

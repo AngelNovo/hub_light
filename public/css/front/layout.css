@@ -91,6 +91,16 @@ i{
 .dropdown-divider{
     border-top: 1px dashed #344637;
 }
+
+.notification-buttons{
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    margin-left: 5px;
+}
+.notification-buttons i{
+    font-size: 25px;
+}
 /* ==================================== contenido ===============================================*/
 .content{
     padding-top: 120px;

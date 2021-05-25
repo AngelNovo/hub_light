@@ -17,7 +17,7 @@
             
             <div class="Agrega">
               <select id="nouChat" multiple="multiple"></select>
-              <i class="nouChatButton">+</i>
+              <i class="fa pe-7s-plus nouChatButton" title="Añadir Chat"> </i>
             </div>
         </div>
       </div>
@@ -62,13 +62,14 @@
   $(document).ready(function(){
     $("#iconDown").hide();
     rebreChats();
+    meterAmigos();
     $(".showChat").on("click",function(){
       $(".xats-disp").slideToggle();
     });
     $(".butonSendMSG").on("click",function(){
       enviaMSG();
     });
-    meterAmigos();
+    
     $(".chat-close, .enable-chat-modal").on("click",function(){
       
       if(chatActive){
@@ -158,6 +159,11 @@
           $('.enviaCont').multiselect({
             includeSelectAllOption: true,
           });
+          $(".button-envCont").on("click",function(){
+            let idCont=$(this).val();
+            let xats=$(this).parent().find(".enviaCont").val();
+            comparteixCont(idCont,xats);
+          });
         }
     });
   }
@@ -187,6 +193,7 @@
           //Mensages
           let uFecha="";
           let fechaHoy=new Date();
+          meterAmigosChat();
           $.each(data, function(index,element){
             let fecha=new Date(element.created_at);
             if(uFecha!=(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())){
@@ -382,12 +389,59 @@
             let option=$("<option>");
             option.val(element.id_user);
             option.text(element.name);
-            $("#nouChat, #addUsers").append(option);
+            $("#nouChat").append(option);
            });
 
-           $('#nouChat, #addUsers').multiselect({
+           $('#nouChat').multiselect({
           includeSelectAllOption: true,
         });
+        },error: function(data){
+           console.log(data);
+        }
+      });
+  }
+
+  function meterAmigosChat(){
+    $.ajax({
+        url: "/chats/users/amigos/"+idChat,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "GET",
+        success: function(data){
+           console.log(data);
+           $.each(data, function(index,element){
+            let option=$("<option>");
+            option.val(element.id_user);
+            option.text(element.name);
+            $("#addUsers").append(option);
+           });
+
+           $('#addUsers').multiselect({
+          includeSelectAllOption: true,
+        });
+        },error: function(data){
+           console.log(data);
+        }
+      });
+  }
+
+  function comparteixCont(idCont,xats){
+    console.log(xats);
+    $.ajax({
+        url: "/chats/missatges/content",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        data: {
+            "id_contingut":idCont,
+            "id_xat":xats,
+            "missatge":null
+        },
+        success: function(data){
+           console.log(data);
+           $(".span-envia-cont").hide();
         },error: function(data){
            console.log(data);
         }

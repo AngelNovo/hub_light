@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ContingutModel;
 use App\Models\MissatgeModel;
 use App\Models\SeguidorsModel;
+use App\Models\XatModel;
 use App\Models\XatUsuarisModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -129,11 +130,14 @@ class XatController extends Controller
     }
 
     public function sendContent(Request $request) {
-        $missatge=MissatgeModel::create([
-            "id_usuari"=>Auth::user()->id,
-            "id_contingut"=>$request->input('id_contingut'),
-            "id_xat"=>$request->input("id_xat")
-        ]);
+        $xats=$request->input("id_xat");
+        foreach($xats as $x) {
+            $missatge=MissatgeModel::create([
+                "id_usuari"=>Auth::user()->id,
+                "id_contingut"=>$request->input('id_contingut'),
+                "id_xat"=>$x
+            ]);
+        }
         return $missatge;
     }
 
@@ -143,6 +147,19 @@ class XatController extends Controller
         foreach($req as $r) {
             $create=XatUsuarisModel::create([
                 "id_xat"=>$request->input('id_xat'),
+                "id_usuari"=>$r->id_usuari,
+                "lastseen"=>0
+            ]);
+        }
+    }
+
+    public function startChat(Request $request) {
+        $req=$request->input('users');
+        $create=0;
+        $xat=XatModel::create();
+        foreach($req as $r) {
+            $create=XatUsuarisModel::create([
+                "id_xat"=>$xat->id,
                 "id_usuari"=>$r->id_usuari,
                 "lastseen"=>0
             ]);

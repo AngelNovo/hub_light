@@ -124,6 +124,7 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::get('/chats/users/amigos',[XatController::class,'getAmigos']);
     Route::post('/chats/users/amigos',[XatController::class,'createChat']);
+    Route::post('/chats/create',[XatController::class,'startChat']);
 
     // Notificaciones
     Route::get('/notificaciones',[SeguidorsController::class,'getNotificaciones']);

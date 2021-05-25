@@ -55,6 +55,32 @@ class XatController extends Controller
         return $aux;
     }
 
+    public function getAmigosNotChat($idXat) {
+        $usersChat=XatUsuarisModel::where('id_xat',$idXat)->get();
+        $aux=[];
+        foreach($usersChat as $u) {
+            $aux[]=$u->id_usuari;
+        }
+        $usuarioActivo=Auth::user()->id;
+        $amigos=SeguidorsModel::whereRaw("(id_usuari = $usuarioActivo or id_seguit = $usuarioActivo) and  acceptat=1")
+        ->whereNotIn("id_usuari",$aux)
+        ->join('users as u1','u1.id','=','seguidors.id_usuari')
+        ->get();
+        $aux=[];
+        foreach($amigos as $a) {
+            if($a->id_usuari != $usuarioActivo) {
+                $auxObj["id_user"]=$a->id_usuari;
+                $auxObj["name"]=$a->name;
+                $aux[]=$auxObj;
+            }else {
+                $auxObj["id_user"]=$a->id_seguit;
+                $auxObj["name"]=$a->name;
+                $aux[]=$auxObj;
+            }
+        }
+        return $aux;
+    }
+
     public function getMissatges($idChat) {
         $missatges=MissatgeModel::whereRaw("missatge.id_xat = $idChat and missatge.id > xat_usuaris.lastseen and xat_usuaris.id_usuari=".Auth::user()->id)
         ->join("users","users.id","=","missatge.id_usuari")

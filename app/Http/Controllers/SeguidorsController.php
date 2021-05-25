@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AvisModel;
 use App\Models\AvisUsuariModel;
 use App\Models\InteraccioModel;
 use App\Models\SeguidorsModel;
@@ -76,7 +77,7 @@ class SeguidorsController extends Controller
             $amistad=SeguidorsModel::where('id',$request->input('id'))
             ->delete();
         }else if($request->input('tipo')=="aviso"){
-            $interaccion=InteraccioModel::where('id',$request->input('id'))
+            $interaccion=AvisModel::where('id',$request->input('id'))
             ->update([
                 "removed"=>1
             ]);

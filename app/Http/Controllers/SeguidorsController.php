@@ -43,8 +43,9 @@ class SeguidorsController extends Controller
         foreach($interaccions as $i) {
             $i->tipo="interaccion";
         }
-        $avis_usuari=AvisUsuariModel::where(['id_usuari'=>Auth::user()->id,"acceptat"=>1,"removed"=>0])
+        $avis_usuari=AvisUsuariModel::where(['id_usuari'=>Auth::user()->id,"acceptat"=>1,"avis_usuari.removed"=>0])
         ->join("avis","avis.id","=","id_avis")
+        ->select("avis_usuari.id","avis.explicacio")
         ->get();
         foreach($avis_usuari as $a) {
             $a->tipo="aviso";

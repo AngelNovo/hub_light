@@ -10,5 +10,5 @@ class AvisUsuariModel extends Model
     use HasFactory;
     protected $table = 'avis_usuari';
     protected $primaryKey= "id";
-    protected $fillable = ['id_usuari','id_avis','created_at','updated_at'];
+    protected $fillable = ['id_usuari','id_avis','removed','created_at','updated_at'];
 }

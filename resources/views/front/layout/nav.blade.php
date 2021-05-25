@@ -227,8 +227,10 @@
             let tipus=$(this).attr("tipus-not");
             if($(this).hasClass("btn-success")){
               aceptarNotificacion(id,tipus);
+              $(this).parent().remove();
             }else{
               esborarNotificacion(id,tipus);
+              $(this).parent().remove();
             }
           });
         }

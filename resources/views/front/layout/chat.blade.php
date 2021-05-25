@@ -321,6 +321,19 @@
             hora.text(fecha.getHours()+":"+fecha.getMinutes());
             chatMessage.append(name);
             chatMessage.append(msg);
+            if(element.id_contingut!=null){
+              let aCont=$("<a>");
+              aCont.attr("href","{{asset('contingut/')}}"+"/"+element.id_contingut);
+              aCont.addClass("msgContingut");
+              let imgCon=$("<img>");
+              if(element.contingut.tipus_contingut==1){
+                imgCon.attr("src","{{asset('contenido/1/')}}/"+element.contingut.url);
+              }else{
+                imgCon.attr("src","{{asset('contenido/1/')}}/"+element.contingut.portada);
+              }
+              aCont.append(imgCon);
+              chatMessage.append(aCont);
+            }
             chatMessage.append(hora);  
             chatBody.append(chatMessage); 
             li.append(chatImg);

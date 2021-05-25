@@ -28,7 +28,9 @@ class SeguidorsController extends Controller
 
     public function getNotificaciones() {
         $notificaciones=[];
-        $seguidors=SeguidorsModel::where(['id_seguit'=>Auth::user()->id,"acceptat"=>0])->get();
+        $seguidors=SeguidorsModel::where(['id_seguit'=>Auth::user()->id,"acceptat"=>0])
+            ->join("users","users.id","=","id_usuari")
+            ->get();
         foreach($seguidors as $s) {
             $s->tipo="amistad";
         }

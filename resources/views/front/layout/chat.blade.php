@@ -55,6 +55,7 @@
 {{-- Scripts --}}
 <script>
   // Document Ready
+  let AUTH=JSON.parse($("#Auth").val());
   let idChat;
   let interval=null;
   let chatActive=false;
@@ -162,7 +163,6 @@
   }
 
   function rebreMissatges(idChat,index){
-    let AUTH=JSON.parse($("#Auth").val());
     $.ajax({
         url: "/chats/missatges/anterior",
         headers: {
@@ -275,7 +275,6 @@
 
 
   function rebreLast(idChat){
-    let AUTH=JSON.parse($("#Auth").val());
     $.ajax({
         url: "/chats/missatges/"+idChat,
         headers: {
@@ -350,6 +349,7 @@
 
   function creaChat(){
     let users= $("#nouChat").val();
+    users.push(""+AUTH.id);
     $.ajax({
         url: "/chats/create",
         headers: {
@@ -362,6 +362,7 @@
         },
         success: function(data){
            console.log(data);
+           console.log(users);
         },error: function(data){
            console.log(data);
         }

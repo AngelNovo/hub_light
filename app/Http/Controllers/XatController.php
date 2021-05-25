@@ -147,7 +147,7 @@ class XatController extends Controller
         foreach($req as $r) {
             $create=XatUsuarisModel::create([
                 "id_xat"=>$request->input('id_xat'),
-                "id_usuari"=>$r->id_usuari,
+                "id_usuari"=>$r,
                 "lastseen"=>0
             ]);
         }

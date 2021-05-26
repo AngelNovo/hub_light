@@ -59,6 +59,9 @@ class ContingutController extends Controller
         foreach($destacados as $d) {
             $array[]=$d->id_contingut;
         }
+
+        $take=5;
+
         $destacadosContenido=ContingutModel::whereIn("contingut.propietari",$array)
         ->join('users','users.id','=','propietari')
         ->select(
@@ -81,6 +84,8 @@ class ContingutController extends Controller
             "contingut.created_at"
         )
         ->orderBy("contingut.created_at","desc")
+        ->take($take)
+        ->skip($offset*$take)
         ->get();
 
         // $aux0=[];
@@ -131,11 +136,12 @@ class ContingutController extends Controller
     }
 
     public function getAll($offset) {
+        $take=30;
         $results = DB::table('contingut')
         ->select('contingut.id','portada', 'link_copyright', 'url', 'descripcio', 'majoria_edat', 'reportat', 'users.name as propietario', 'tipus_contingut', 'drets_autor','contingut.created_at', 'contingut.updated_at')
         ->join('users','users.id','=','contingut.propietari')
         ->orderBy('created_at',"desc")
-        ->skip($offset)->take(30)
+        ->skip($offset*$take)->take($take)
         ->get();
         return $results;
         // return view ('front.explorar')->with('results',$results);
@@ -211,11 +217,12 @@ class ContingutController extends Controller
         $recomenatsListArray=explode(';',$recomenatsListRaw);
         // return $recomenatsListArray;
 
+        $take = 30;
         $recomendados = ContingutModel::
         whereIn("tags.nombre",$recomenatsListArray)
         ->join("contingut_tag","contingut_tag.id_contingut","=","id")
         ->join("tags","tags.id","=","contingut_tag.id_tag")
-        ->skip($offset)->take(30)
+        ->skip($offset*$take)->take($take)
         ->get();
         return $recomendados;
         // return view('front.recomendados')->with('info',$info);

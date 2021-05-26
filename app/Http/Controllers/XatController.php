@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnalitiquesGeneralsModel;
 use App\Models\ContingutModel;
 use App\Models\MissatgeModel;
 use App\Models\SeguidorsModel;
@@ -9,6 +10,7 @@ use App\Models\XatModel;
 use App\Models\XatUsuarisModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class XatController extends Controller
 {
@@ -152,6 +154,14 @@ class XatController extends Controller
             "id_xat"=>$request->input("id_xat"),
             "id_usuari"=>Auth::user()->id
         ]);
+
+        $actius = DB::table('analitiques_generals')->max('id');
+        $analitiques = AnalitiquesGeneralsModel::find($actius);
+        $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
+        ->update([
+            "missatges_totals"=>$analitiques->missatges_totals+1
+        ]);
+
         return $missatge;
     }
 

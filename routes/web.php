@@ -11,6 +11,7 @@ use App\Http\Controllers\TipusUsuariController;
 use App\Http\Controllers\UsuariController;
 use App\Http\Controllers\XatController;
 use App\Http\Middleware\checkSession;
+use App\Models\ContingutModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 // *Usuari*
 Route::get('/usuaris',[UsuariController::class,'getAll']);
 Route::get('/usuaris/{id}',[UsuariController::class,'get']);
+Route::get('/usuarispubli/{idUsuari}/{offset}',[UsuariController::class,'getPublicaciones']);
 Route::get('/logout',[UsuariController::class,'logout']);
 Route::put('/usuaris/update',[UsuariController::class,'update']);
 Route::put('/usuaris/update/foto',[UsuariController::class,'updateFoto']);
@@ -132,6 +134,9 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/notificaciones',[SeguidorsController::class,'getNotificaciones']);
     Route::put('/notificacion/{id}',[SeguidorsController::class,'acceptNotificacion']);
     Route::put('/notificaciones/delete/{id}',[SeguidorsController::class,'deleteNotificacion']);
+
+    // Contingut
+    Route::delete('/delete/contingut/{id}',[ContingutController::class,'deleteContenido']);
     });
 });
 

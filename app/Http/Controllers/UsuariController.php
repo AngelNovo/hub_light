@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\EmailPassword;
+use App\Models\ContingutModel;
 use App\Models\SeguidorsModel;
 use App\Models\User;
 use Carbon\Carbon;
@@ -33,6 +34,15 @@ class UsuariController extends Controller
         return view('front.perfil')
             ->with('user',$result)
             ->with('amistad', (sizeof($resultAmistad)>0)?1:0);
+    }
+
+    public function getPublicaciones($idUser,$offset) {
+        $take=30;
+        $publicaciones=ContingutModel::where('propietario',$idUser)
+        ->take($take)
+        ->skip($offset*$take)
+        ->get();
+        return $publicaciones;
     }
 
     public function opciones($id) {

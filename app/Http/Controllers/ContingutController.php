@@ -417,4 +417,16 @@ class ContingutController extends Controller
         }
     }
 
+    public function deleteContenido($idContenido) {
+        $contenido =ContingutModel::where('id',$idContenido)
+        ->delete();
+        $actius = DB::table('analitiques_generals')->max('id');
+        $analitiques = AnalitiquesGeneralsModel::find($actius);
+        $aux2 = AnalitiquesGeneralsModel::where('id',$actius)
+        ->update([
+            "contenido_total"=>$analitiques->contenido_total-1
+        ]);
+        return $contenido;
+    }
+
 }

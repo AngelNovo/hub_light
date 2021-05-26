@@ -14,8 +14,11 @@
     <div class="col-sm-6 col-lg-4 border rounded">
         <canvas id="user"></canvas>
     </div>
-    <div class="col-sm-6 col-lg-4 border rounded">
+    <div class="col-sm-6 col-lg-6 border rounded">
         <canvas id="active"></canvas>
+    </div>
+    <div class="col-sm-6 col-lg-6 border rounded">
+        <canvas id="msg"></canvas>
     </div>
 </div>
 
@@ -106,5 +109,33 @@
     });
 
     // Fin tercer chart
+
+    // Cuarto chart
+    data_content=[];
+    labels_content=[];
+    for(let d of data_raw) {
+        console.log(d);
+        data_content.push(d.missatges_totals);
+        let aux = d.created_at.split("T")
+        labels_content.push(aux[0]);
+    }
+    const line2 = {
+        labels: labels_content,
+        datasets: [{
+            label: 'Mensajes totales',
+            data: data_content,
+            fill: true,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.4
+        }]
+    };
+
+    let ctx4 = document.getElementById("msg").getContext("2d");
+    let msg= new Chart(ctx4,{
+        // bar, line, radar, pie
+        type:"line",
+        data:line2,
+    });
+    // Fin cuarto chart
 </script>
 @endsection

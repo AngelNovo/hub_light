@@ -114,6 +114,9 @@ class UsuariController extends Controller
             $alies=$request->alias;
             $update["alies"]=$alies;
         }
+        if(isset($request->input('password'))) {
+            $update["password"]=$request->input('password');
+        }
         // Update
         $usuari = User::where('id',Auth::user()->id)
         ->update($update);

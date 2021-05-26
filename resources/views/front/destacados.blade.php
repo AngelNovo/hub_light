@@ -276,7 +276,8 @@ function cargarContenido(){
         $(".span-envia-cont").hide();
         $(".enviar").on("click",function(){
           $(this).parent().find(".span-envia-cont").fadeIn();
-        });       
+        });  
+        $("body").append($("<input>").attr("id","loader").hide());     
       }
     });
 

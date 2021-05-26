@@ -68,7 +68,7 @@
             $(".contingut").append(object);
           }); 
           // End Foreach       
-
+          $("body").append($("<input>").attr("id","loader").hide());
         }
         });
     }

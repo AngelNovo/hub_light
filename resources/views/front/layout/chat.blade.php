@@ -59,10 +59,10 @@
   let idChat;
   let interval=null;
   let chatActive=false;
-  $(document).ready(function(){
+  $("#loader").ready(function(){
     $("#iconDown").hide();
     rebreChats();
-    meterAmigos();
+    
     $(".showChat").on("click",function(){
       $(".xats-disp").slideToggle();
     });
@@ -153,6 +153,7 @@
 
             $(".enviaCont").append($("<option>").val(element.id_xat).text(nom));
           });
+          meterAmigos();
           $(".selectChat").on("click",function(){
             idChat=$(this).attr("chat-val");
             rebreMissatges(idChat,0);

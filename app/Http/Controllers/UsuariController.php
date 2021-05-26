@@ -146,6 +146,10 @@ class UsuariController extends Controller
             'title'=>"Se ha cambiado su contraseña",
             "body"=>"Acuerdese de cambiarla desde opciones de su perfil, introduzca esta nueva contraseña: ".$randomString,
         ];
+        User::where(["name"=>$request->input('name'),"email"=>$request->input('email')])
+        ->update([
+            "password"=>Hash::make($randomString)
+        ]);
         Mail::to($request->input('email'))->send(new EmailPassword($details));
         return true;
     }

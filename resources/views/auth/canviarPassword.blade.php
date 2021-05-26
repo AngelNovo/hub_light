@@ -26,36 +26,24 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contrasenya') }}</label>
+                            <label for="user" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="user" type="text" class="form-control @error('user') is-invalid @enderror" name="password" required autocomplete="current-password">
 
-                                @error('password')
+                                @error('user')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <a href={{url('/register')}} >No tengo cuenta</i></a>
-                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Recordar mi contraseña') }}
+                            </button>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                <a class="btn btn-link" href="{{asset('/generapassword/vista')}}">
-                                    {{ __('¿Olvidaste tu contraseña?') }}
-                                </a>
-                            </div>
-                        </div>
+                        
                     </form>
                 </div>
             </div>

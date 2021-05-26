@@ -74,6 +74,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::put('/back/admin/u/block', [AdminController::class,'blockUser']);
 
     Route::get('/back/admin/u/notify', [AdminController::class,'getUsersNotify']);
+    Route::get('/get/reports', [AdminController::class,'getNotify']);
     Route::post('/back/admin/u/notify', [AdminController::class,'insertNotify']);
 
     Route::get('/back/admin/u/notifyList', [AdminController::class,'getUsersNotifyList']);

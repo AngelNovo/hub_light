@@ -195,4 +195,9 @@ class AdminController extends Controller
         ->delete();
         return true;
     }
+
+    public function getNotify() {
+        $avis = AvisModel::select("id","explicacio")->get();
+        return $avis;
+    }
 }

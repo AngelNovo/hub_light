@@ -127,8 +127,22 @@ function cargarContenido(){
               butonEnviaCont.text("Enviar");
               spanEnvia.append(selectChats);
               spanEnvia.append(butonEnviaCont);
+              let spanReport=$("<span>");
+                spanReport.addClass("span-envia-report");
+              let selectReport=$("<select>");
+              selectReport.addClass("envia-report");
+              let butonEnviaRep=$("<button>");
+                butonEnviaRep.attr("type","button");
+                butonEnviaRep.addClass("btn");
+                butonEnviaRep.addClass("btn-success");
+                butonEnviaRep.addClass("button-envRep");
+                butonEnviaRep.val(element.propietari);
+                butonEnviaRep.text("Enviar");
+                spanReport.append(selectReport);
+                spanReport.append(butonEnviaRep);
               divI.append(enviar);
               divI.append(spanEnvia); 
+              divI.append(spanReport);
             headerFooter.append(divI);
             footer.append(headerFooter);
           }
@@ -274,10 +288,19 @@ function cargarContenido(){
           enviaComent(idCont,msg,idProp,comentaris);    
         });
         $(".span-envia-cont").hide();
+        $(".span-envia-report").hide();
         $(".enviar").on("click",function(){
           $(this).parent().find(".span-envia-cont").fadeIn();
+          $(".span-envia-report").fadeOut();
         });  
-        $("body").append($("<input>").attr("id","loader").hide());     
+        $("body").append($("<input>").attr("id","loader").hide());  
+        rebreChats();
+        
+        $(".report").on("click",function(){
+          $(this).parent().find(".span-envia-report").fadeIn();
+          $(".span-envia-cont").fadeOut();
+        });
+        getReports();   
       }
     });
 

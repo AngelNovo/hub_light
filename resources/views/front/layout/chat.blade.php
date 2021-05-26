@@ -59,9 +59,8 @@
   let idChat;
   let interval=null;
   let chatActive=false;
-  $("#loader").ready(function(){
+  $(document).ready(function(){
     $("#iconDown").hide();
-    rebreChats();
     
     $(".showChat").on("click",function(){
       $(".xats-disp").slideToggle();
@@ -458,6 +457,54 @@
             "id_contingut":idCont,
             "id_xat":xats,
             "missatge":null
+        },
+        success: function(data){
+           console.log(data);
+           $(".span-envia-cont").hide();
+        },error: function(data){
+           console.log(data);
+        }
+      });
+  }
+
+  function getReports(){
+    $.ajax({
+        url: "/get/reports",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "GET",
+        success: function(data){
+           console.log(data);
+           $.each(data, function(index,element){
+            let option=$("<option>");
+            option.val(element.id);
+            option.text(element.explicacio);
+            $(".envia-report").append(option);
+            $(".span-envia-report").hide();
+           });
+           $(".button-envRep").on("click",function(){
+            let idusr=$(this).val();
+            let rep=$(this).parent().find(".envia-report").val();
+            enviaReport(idusr,rep);
+          });
+        },error: function(data){
+           console.log(data);
+        }
+      });
+  }
+
+  function enviaReport(idusr,rep){
+    console.log(idusr+"/"+rep);
+    $.ajax({
+        url: "/back/admin/u/notify",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        data: {
+            "user":idusr,
+            "avis":rep
         },
         success: function(data){
            console.log(data);

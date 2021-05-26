@@ -47,11 +47,17 @@
                         <i class="fa pe-7s-like" id="like" data-toggle="Me gusta"></i>
                     @endif  
                     <i class="fa pe-7s-attention" id="report" data-toggle="Reportar contenido" style="float: right;"> </i>
+                    
+                    
                 @endif              
                 <i class="fa pe-7s-paper-plane" id="enviar" data-toggle="Enviar"> </i>
                 <span class="span-envia-cont">
                     <select class="enviaCont" multiple="multiple"></select>
                     <button type="button" class="btn btn-success button-envCont" value="{{$results->id}}">Enviar</button>
+                </span>
+                <span class="span-envia-report">
+                    <select class="envia-report"></select>
+                    <button type="button" class="btn btn-success button-envRep" value="{{$results->id_user}}">Enviar</button>
                 </span>
             </div>
         </div>
@@ -120,10 +126,18 @@
             
         });
         $(".span-envia-cont").hide();
+        $(".span-envia-report").hide();
         $("#enviar").on("click",function(){
             $(this).parent().find(".span-envia-cont").fadeIn();
+            $(".span-envia-report").fadeOut();
+        });
+        $("#report").on("click",function(){
+          $(this).parent().find(".span-envia-report").fadeIn();
+          $(".span-envia-cont").fadeOut();
         });
         $("body").append($("<input>").attr("id","loader").hide());
+        rebreChats();
+        getReports();
     });
 
     function enviaComent(){

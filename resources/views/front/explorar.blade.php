@@ -8,6 +8,7 @@
 </div>
 {{-- Scripts --}}
 <script>
+    let canReset=false;
     // Document Ready
     $(document).ready(function(){
         // Marcar Navbar
@@ -15,6 +16,7 @@
         $("#Nav-Explorar").addClass("isSelected");
         // Carregar contingut
         cargarContenido(0);
+        
     });  
     // Funcio carregar contingut
     function cargarContenido(index){
@@ -69,6 +71,20 @@
           // End Foreach       
           $("body").append($("<input>").attr("id","loader").hide());
           rebreChats();
+          canReset=true;
+          if(index==0){
+            $(window).on("scroll", function() {
+                if(canReset){
+                    console.log($(".contingut").height()+"/"+($(window).height()+$(window).scrollTop()));
+                    if($(".contingut").height()<($(window).height()+$(window).scrollTop())){
+                        console.log(":)");
+                        canReset=false;
+                        index++;
+                        cargarContenido(index);
+                    }
+                }
+            });
+          }
         }
         });
     }

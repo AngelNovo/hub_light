@@ -29,6 +29,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 </head>
 <body>
+  @if (isset(Auth::user()->id))
+    @if (Auth::user()->suspes==1)
+      <script>window.location= "/logout"</script>
+    @endif
+  @endif
   <input type="hidden" id="Auth" value="{{(isset(Auth::user()->id)) ? Auth::user() : 0}}">
     @include("front.layout.nav")
     @yield("content")

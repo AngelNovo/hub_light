@@ -133,18 +133,20 @@ class UsuariController extends Controller
         return redirect('/');
     }
 
-    public function genPassword() {
-        $email="angelnovo15@gmail.com";
+    public function genPassword(Request $request) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < $charactersLength; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
+        $user=User::where(["name"=>$request->input('name'),"email"=>$request->input('email')])->get();
+        if(sizeof($user)==0)  return false ;
         $details = [
             'title'=>"Se ha cambiado su contraseña",
             "body"=>"Acuerdese de cambiarla desde opciones de su perfil, introduzca esta nueva contraseña: ".$randomString,
         ];
-        Mail::to($email)->send(new EmailPassword($details));
+        Mail::to($request->input('email'))->send(new EmailPassword($details));
+        return true;
     }
 }

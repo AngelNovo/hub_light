@@ -157,3 +157,6 @@ Route::get('/verifica/{id}',[UsuariController::class,'verifica']);
 
 // Autogenerar contraseña
 Route::get('/generepassword',[UsuariController::class,'genPassword']);
+Route::get('/generapassword/vista',function() {
+    return view('front.canviarPasword');
+});

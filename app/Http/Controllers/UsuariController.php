@@ -114,7 +114,7 @@ class UsuariController extends Controller
             $alies=$request->alias;
             $update["alies"]=$alies;
         }
-        if(isset($request->input('password'))) {
+        if(isset($request->password)) {
             $update["password"]=$request->input('password');
         }
         // Update

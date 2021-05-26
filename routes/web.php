@@ -156,7 +156,7 @@ Route::get('/destacados/vista',[ContingutController::class,'getDestacadosVista']
 Route::get('/verifica/{id}',[UsuariController::class,'verifica']);
 
 // Autogenerar contraseña
-Route::get('/generepassword',[UsuariController::class,'genPassword']);
+Route::post('/generepassword',[UsuariController::class,'genPassword']);
 Route::get('/generapassword/vista',function() {
     return view('auth.canviarPassword');
 });

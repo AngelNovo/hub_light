@@ -101,7 +101,29 @@ i{
 .notification-buttons i{
     font-size: 25px;
 }
+
 /* ==================================== contenido ===============================================*/
+.modal-subir{
+    z-index: 99999;
+    bottom: 85px;
+    right: 20px;
+    position: fixed;
+    background-color: var(--greenShadow);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.modal-chat{
+    z-index: 99999;
+    bottom: 20;
+    right: 20;
+    position: fixed;
+    background-color: var(--greenShadow);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+}
 .content{
     padding-top: 120px;
     padding-left: 15%;

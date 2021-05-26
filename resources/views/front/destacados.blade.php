@@ -79,6 +79,20 @@ function cargarContenido(){
             in_contingut.attr("src","{{asset('/contenido/3/')}}/"+element.url);
             in_contingut.attr("controls","controls");
             in_contingut.css("cursor","pointer");
+          }else{
+            con_contingut.css("background-image", "url('{{asset('/contenido/1/')}}/"+element.portada+"')");
+            in_contingut=$("<a>");
+            in_contingut.attr("button");
+            in_contingut.attr("href","{{asset('/contenido')}}/"+element.tipus_contingut+"/"+element.url);
+            if(element.titulo!=null&&element.titulo!=""){
+              in_contingut.attr("download",element.titulo)
+            }else{
+              in_contingut.attr("download",element.url)
+            }
+            in_contingut.addClass("btn");
+            in_contingut.addClass("btn-success");
+            in_contingut.addClass("download");
+            in_contingut.text("Descargar contenido");
           }
           con_contingut.append(in_contingut);
           row.append(con_contingut);
@@ -259,6 +273,7 @@ function cargarContenido(){
             }
           }   
         });
+        // Like
         $(".like").on("click",function(){
           let input=$(this).parent().parent().parent();
           input= input.find(".formComentaris").find(".form-group");
@@ -277,6 +292,8 @@ function cargarContenido(){
           console.log(idCont+"/"+megusta+"/"+idProp);
           enviaLike(idCont,megusta,idProp);
         });
+
+        //Comentario
         $(".submit-comment").on("click",function(){
           let input=$(this).parent().parent().parent();
           input= input.find(".formComentaris").find(".form-group");

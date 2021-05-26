@@ -27,12 +27,6 @@
       {{-- Perfil --}}     
       @if (isset(Auth::user()->id))
         {{-- Usuari Identificat --}}
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal"><i class="fa pe-7s-upload" title="Subir contenido"> </i></a>
-        </li>
-        <li class="nav-item enable-chat-modal">
-          <a class="nav-link" data-toggle="modal" data-target="#ChatModal"><i class="fa pe-7s-mail" title="Mis mensages"> </i></a>
-        </li>
         {{-- Notificaciones --}}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa pe-7s-news-paper" title="Notificaciones"> </i></a>
@@ -77,6 +71,14 @@
     </form>
   </div>
 </nav>
+@if (isset(Auth::user()->id))
+<div class="modal-subir">
+  <a data-toggle="modal" data-target="#exampleModal"><i class="fa pe-7s-upload" title="Subir contenido"> </i></a>
+</div>
+<div class="modal-chat">
+  <a data-toggle="modal" data-target="#ChatModal"><i class="fa pe-7s-mail" title="Mis mensages"> </i></a>
+</div>
+@endif
 <script>
   $(document).ready(function(){
     buscador();

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href={{asset("/css/front/explorar.css")}}>
 <div class="content">
     {{-- Contingut --}}
-    <div class="contingut row container-fluid  img-responsive"> </div>
+    <div class="contingut container-fluid  img-responsive container"> </div>
 </div>
 {{-- Scripts --}}
 <script>
@@ -33,7 +33,6 @@
             // Creacio de objecte i classes
             let object=$("<a>");
             object.addClass("publicacio");
-            object.addClass("col-*-*");
             object.attr("href","/contingut/"+element.id);
             let img=$("<img>");
             img.addClass("image-thumbnail");

@@ -14,13 +14,13 @@
 }
 
 .publicacio{
-    max-width: 300px;
-    max-height: 300px;
     margin: 5px;
+    max-width: 30%;
+    display: flex;
+    align-items: center;
 }
 .publicacio>img{
-    max-width: 300px;
-    max-height: 300px;
+    width: 100%;
 }
 .publicacio>i>img{
     width: 23px;
@@ -62,30 +62,41 @@
     }
 
     .publicacio{
-        max-width: 200px;
-        max-height: 200px;
-    }
-    .publicacio img{
-        max-width: 200px;
-        max-height: 200px;
-    }
-  }
-  
-  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-  @media screen and (max-width: 600px) {
-    .column {
-      -ms-flex: 100%;
-      flex: 100%;
-      max-width: 100%;
-    }
-    .publicacio{
-        max-width: 100px;
-        max-height: 100px;
-    }
-    .publicacio img{
-        max-width: 100px;
-        max-height: 100px;
+      max-width: 45%;
     }
   }
 
   
+
+ * {
+   box-sizing: border-box;
+  }
+.container { 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  } 
+.container > div {
+  font-size: 5vw;
+  padding: .5em;
+  color: white;
+  margin: 10px;
+  border-radius: 3px;
+  background: yellowgreen;
+  border: 5px solid black;
+}
+.container > div:nth-child(odd) {
+  width: 10%;
+  }
+.container > div:nth-child(even) {
+  width: 20%;
+  }
+.container > div:nth-child(2),
+.container > div:nth-child(4),
+.container > div:nth-child(9) {
+  width: 60%;
+  }
+body {
+  margin: 0;
+}

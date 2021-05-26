@@ -12,7 +12,6 @@
             </div>
         </a>
         <h2>{{$results->titulo}}</h2>
-        <p>{{$amistad}}</p>
     </div>
     {{-- Contingut --}}
     @if ($results->tipus_contingut==1)
@@ -31,6 +30,16 @@
         @if ($results->tipus_contingut==3)
             <div class="contingut-principal" style="background-image:url({{asset('/contenido/1/'.$results->portada)}});">
                 <audio controls="controls" style="cursor: pointer;" src={{asset('/contenido/3/'.$results->url)}} data-toggle="tooltip" data-placement="right" class="music-arxiu"></audio>
+            </div>
+        @endif
+
+        @if ($results->tipus_contingut==2||$results->tipus_contingut==5)
+            <div class="contingut-principal" style="background-image:url({{asset('/contenido/1/'.$results->portada)}});">
+                @if ($results->titulo!=null&&$results->titulo!="")
+                <a type="button" href="{{asset('/contenido/'.$results->tipus_contingut.'/'.$results->url)}}" download="{{$results->titulo}}" class="btn btn-success download">Descargar contenido</a>
+                @else
+                <a type="button" href="{{asset('/contenido/'.$results->tipus_contingut.'/'.$results->url)}}" download="{{$results->url}}" class="btn btn-success download">Descargar contenido</a>
+                @endif
             </div>
         @endif
     @endif

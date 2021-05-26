@@ -116,8 +116,8 @@ i{
 
 .modal-chat{
     z-index: 99999;
-    bottom: 20;
-    right: 20;
+    bottom: 20px;
+    right: 20px;
     position: fixed;
     background-color: var(--greenShadow);
     cursor: pointer;

@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class UsuariController extends Controller
@@ -115,7 +116,7 @@ class UsuariController extends Controller
             $update["alies"]=$alies;
         }
         if(isset($request->password)) {
-            $update["password"]=md5($request->input('password'));
+            $update["password"]=Hash::make($request->input('password'));
         }
         // Update
         $usuari = User::where('id',Auth::user()->id)

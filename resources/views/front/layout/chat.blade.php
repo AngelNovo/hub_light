@@ -59,6 +59,7 @@
   let idChat;
   let interval=null;
   let chatActive=false;
+  let indexChat=0;
   $(document).ready(function(){
     $("#iconDown").hide();
     
@@ -93,15 +94,12 @@
     });
 
     $(".chat-container").on("scroll", function() {
-      console.log(($(".chat-container").height())+"/"+$(".chat-container").scrollTop());
-      console.log($(".fechaChat:first-of-type").text());
-      // if(($(".content").height()-margen)<$(window).scrollTop()){
-      //     // console.log(":)");
-      //     canReset=false;
-      //     indexCarga++;
-      //     cargarContenido();
-      // }
-                
+      if($(".chat-container").scrollTop()==0){
+        console.log($(".fechaChat:first-of-type").text());
+        $(".fechaChat:first-of-type").remove();
+        indexChat++;
+        CarregaMissatgesAnteriors(idChat,indexChat)
+      }      
     });
   });
 
@@ -290,6 +288,7 @@
           }, 5000);
           chatActive=true;
           $('.card-body').scrollTop($('.card-body')[0].scrollHeight);
+          indexChat=0;
         }
     });
   }
@@ -529,6 +528,106 @@
            console.log(data);
         }
       });
+  }
+
+  function CarregaMissatgesAnteriors(idChat,index){
+    $.ajax({
+        url: "/chats/missatges/anterior",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        data: {
+            "id_xat":idChat,
+            "index":index
+        },
+        dataType: 'json',
+        success: function(data){   
+          if(data.length>0){
+            data=data.sort(function (a, b) {
+          return (b.id - a.id)
+        });                
+          console.log(data);
+          //Mensages
+          let uFecha="";
+          let fechaHoy=new Date();
+          $.each(data, function(index,element){
+            let fecha=new Date(element.created_at);
+            if(uFecha!=(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())){
+              let liFecha=$("<li>");
+              if((fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())==(fechaHoy.getDate()+"/"+(fechaHoy.getMonth()+1)+"/"+fechaHoy.getFullYear())){
+                liFecha.text("Hoy");
+              }else {
+                let fechaAyer="";
+                if(fechaHoy.getDate()-1!=0){
+                  fechaAyer=(fechaHoy.getDate()-1)+"/"+(fechaHoy.getMonth()+1)+"/"+fechaHoy.getFullYear();
+                }else if(fechaHoy.getMonth()!=0){
+                  fechaAyer=fechaHoy.getDate()+"/"+fechaHoy.getMonth()+"/"+fechaHoy.getFullYear();
+                }else{
+                  fechaAyer=fechaHoy.getDate()+"/"+fechaHoy.getMonth()+"/"+(fechaHoy.getFullYear()-1);
+                }
+                if((fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())==fechaAyer){
+                  liFecha.text("Ayer");
+                }else{
+                  liFecha.text(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear());
+                }
+              }
+              liFecha.css("color","black");
+              liFecha.css("text-align","center");
+              liFecha.addClass("fechaChat");
+              uFecha=fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear();
+              $(".chat-list").prepend(liFecha);
+            }
+            let li=$("<li>");
+            if(element.id_usuari==AUTH.id){
+              li.addClass("out");
+            }else{
+              li.addClass("in");
+            }
+            let chatImg=$("<div>");
+            chatImg.addClass("chat-img");
+            let imgPerf=$("<img>");
+            imgPerf.attr("alt","Avtar");
+            imgPerf.attr("src","{{asset('images/perfil/usuarios/')}}/"+element.foto);
+            chatImg.append(imgPerf);
+            let chatBody=$("<div>");
+            chatBody.addClass("chat-body");
+            let chatMessage=$("<div>");
+            chatMessage.addClass("chat-message");
+            let name=$("<h5>");
+            name.text(element.name);
+            let msg=$("<p>");
+            msg.text(element.missatge);
+            let hora=$("<p>");
+            let minuto=fecha.getMinutes();
+            if(minuto<10){
+              minuto="0"+minuto;
+            }
+            hora.text(fecha.getHours()+":"+minuto);
+            chatMessage.append(name);
+            chatMessage.append(msg);
+            if(element.id_contingut!=null){
+              let aCont=$("<a>");
+              aCont.attr("href","{{asset('contingut/')}}"+"/"+element.id_contingut);
+              aCont.addClass("msgContingut");
+              let imgCon=$("<img>");
+              if(element.contingut.tipus_contingut==1){
+                imgCon.attr("src","{{asset('contenido/1/')}}/"+element.contingut.url);
+              }else{
+                imgCon.attr("src","{{asset('contenido/1/')}}/"+element.contingut.portada);
+              }
+              aCont.append(imgCon);
+              chatMessage.append(aCont);
+            }
+            chatMessage.append(hora);  
+            chatBody.append(chatMessage); 
+            li.append(chatImg);
+            li.append(chatBody);            
+            $(".chat-list").prepend(li);
+          });
+          }
+        }
+    });
   }
   
 </script>

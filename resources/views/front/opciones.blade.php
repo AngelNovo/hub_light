@@ -204,7 +204,7 @@ function cargarContenido(index){
         if(confirm("Estas seguro que quieres borrar el conteido?")){
             console.log("esborrar"+idCont);
             $.ajax({
-            url: "/delete/contingut/+idCont",
+            url: "/delete/contingut/"+idCont,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },

@@ -48,7 +48,7 @@
                     <h1>{{$user->name}}</h1>
                 </div>
                 {{-- Alies --}}
-                <div class="desc" id="Alias-Input">Alias:<input id="text-Alias" name="alias" type="text" value={{$user->alies}} form="formPerfil" /></div>
+                <div class="desc" id="Alias-Input">Alias:<input id="text-Alias" name="alias" type="text" value="{{$user->alies}}" form="formPerfil" /></div>
                 <div class="desc" id="password-Input">Contraseña:<input id="password" name="password" type="password" form="formPerfil" /></div>
                 {{-- Data Naixament --}}  
                 <div class="desc" title="Fecha Nacimiento"><i class="pe-7s-gift"></i>{{date("d/m/Y",strtotime($user->data_naixement))}}</div>

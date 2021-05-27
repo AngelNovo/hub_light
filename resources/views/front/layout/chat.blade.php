@@ -447,7 +447,7 @@
            console.log(data);
            $.each(data, function(index,element){
             let option=$("<option>");
-            option.val(element.id);
+            option.val(element.id_user);
             option.text(element.name);
             $("#addUsers").append(option);
            });
@@ -475,7 +475,7 @@
         type: "POST",
         data: {
             "id_xat":idChat,
-            "id_usuari":usuari
+            "users":usuari
         },
         success: function(data){
            console.log(data);

@@ -153,7 +153,8 @@ Route::get('/destacados',[ContingutController::class,'getDestacados']);
 Route::get('/destacados/vista',[ContingutController::class,'getDestacadosVista']);
 
 // Etiquetas
-// Route::get('/tags/{id}',[]);
+Route::get('/tagsview/{id}',[TagsController::class,'getByIdView']);
+Route::get('/tags/{id}/{offset}',[TagsController::class,'getById']);
 
 // Verificar correo
 Route::get('/verifica/{id}',[UsuariController::class,'verifica']);

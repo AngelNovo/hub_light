@@ -20,6 +20,20 @@ class UsuariController extends Controller
         return $results;
     }
     public function get($id) {
+        // Seguidor bool
+        $bool=SeguidorsModel::whereRaw("id_seguit=$id or id_usuari=$id")->get()->first();
+        if(!empty($bool)) {
+            if($bool->acceptat==1) {
+                $bool=1;
+            }else {
+                $bool=0;
+            }
+        }else {
+            $bool=0;
+        }
+        // Info seguidor
+        $bool=SeguidorsModel::whereRaw("id_seguit=$id or id_usuari=$id")->get();
+        $bool=(sizeof($bool)==0) ? false : true ;
         // Info de usuario
         $result = User::find($id);
         $resultAmistad=0;
@@ -34,7 +48,8 @@ class UsuariController extends Controller
 
         return view('front.perfil')
             ->with('user',$result)
-            ->with('amistad', (sizeof($resultAmistad)>0)?1:0);
+            ->with('amistad', (sizeof($resultAmistad)>0)?1:0)
+            ->with('seguit',$bool);
     }
 
     public function getPublicaciones($idUser,$offset) {

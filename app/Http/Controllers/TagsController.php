@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContingutModel;
 use App\Models\ContingutTagModel;
 use App\Models\TagsModel;
 use Illuminate\Http\Request;
@@ -30,5 +31,19 @@ class TagsController extends Controller
             'nombre'=>$request->input('nombre')
         ]);
         return redirect('/back/admin/tags');
+    }
+
+    public function getByIdView($idTag) {
+        return view('front.etiqueta')->with('idTag',$idTag);
+    }
+
+    public function getById($idTag,$offset) {
+        $take=30;
+        $contentTags=ContingutModel::where('contingut_tag.id_tag',$idTag)
+        ->join("contingut_tag","contingut_tag.id_contingut","=","contingut.id")
+        ->take($take)
+        ->skip($take*$offset)
+        ->get();
+        return $contentTags;
     }
 }

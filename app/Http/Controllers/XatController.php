@@ -116,13 +116,14 @@ class XatController extends Controller
     }
 
     public function getMissatgesAnteriores(Request $request) {
+        $take=10;
         $missatges=MissatgeModel::whereRaw("missatge.id_xat =  {$request->input('id_xat')} and missatge.id <= xat_usuaris.lastseen and xat_usuaris.id_usuari=".Auth::user()->id)
         ->join("users","users.id","=","missatge.id_usuari")
         ->join("xat","xat.id","=","missatge.id_xat")
         ->join("xat_usuaris","xat_usuaris.id_xat","=","xat.id")
         ->select('missatge.*','users.name','users.foto')
-        ->take(10)
-        ->skip($request->input('index'))
+        ->take($take)
+        ->skip($request->input('index')*$take)
         ->orderBy("id","desc")
         ->get();
 

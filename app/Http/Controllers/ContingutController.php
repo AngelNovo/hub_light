@@ -32,9 +32,10 @@ class ContingutController extends Controller
         if($now-$last_data>=1){
             $new_statistic=AnalitiquesGeneralsModel::create([
                 "usuaris_suspes"=>$content->usuaris_suspes,
+                "contenido_total"=>$content->contenido_total,
+                "missatges_totals"=>$content->missatges_totals,
                 "usuaris_actius"=>$content->usuaris_actius,
                 "usuaris_enperill"=>$content->usuaris_enperill,
-                "contenido_total"=>$content->contenido_total
             ]);
         }
         $seguits=SeguidorsModel::whereRaw('acceptat=1 and (id_seguit='.Auth::user()->id.' or id_usuari='.Auth::user()->id.')')

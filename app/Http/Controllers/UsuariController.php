@@ -39,7 +39,7 @@ class UsuariController extends Controller
 
     public function getPublicaciones($idUser,$offset) {
         $take=30;
-        $publicaciones=ContingutModel::where('propietario',$idUser)
+        $publicaciones=ContingutModel::where('propietari',$idUser)
         ->take($take)
         ->skip($offset*$take)
         ->get();

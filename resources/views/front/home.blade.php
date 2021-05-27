@@ -9,6 +9,7 @@
     {{-- Scripts --}}
     <script>
     // Document Ready
+    let canReset=true;
     let indexCarga=0;
     $(document).ready(function(){
         // Marcar Navbar
@@ -318,7 +319,22 @@ function cargarContenido(){
           $(this).parent().find(".span-envia-report").fadeIn();
           $(".span-envia-cont").fadeOut();
         });
-        getReports();   
+        getReports();  
+        canReset=true;
+          if(indexCarga==0){
+            let margen=$(".content").height()*0.3;
+            $(window).on("scroll", function() {
+                if(canReset){
+                    // console.log(($(".content").height()-margen)+"/"+$(window).scrollTop()+"/"+margen);
+                    if(($(".content").height()-margen)<$(window).scrollTop()){
+                        // console.log(":)");
+                        canReset=false;
+                        indexCarga++;
+                        cargarContenido();
+                    }
+                }
+            });
+          } 
       }
     });
 

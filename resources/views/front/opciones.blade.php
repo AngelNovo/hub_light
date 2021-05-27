@@ -7,6 +7,7 @@
 @endif
 {{-- Css --}}
 <link rel="stylesheet" href={{asset("/css/front/perfil.css")}}>
+<link rel="stylesheet" href={{asset("/css/front/explorar.css")}}>
 <div class="content">
     <div class="row">
         {{-- Carta de perfil --}}
@@ -63,7 +64,8 @@
         <form id="formPerfil" action="/opciones/perfil" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
-        </form>              
+        </form>   
+        <div class="contingut container-fluid  img-responsive container"> </div>           
     </div>
 </div>
 {{-- Scripts --}}
@@ -110,7 +112,114 @@
 
             }
         });
-
+        cargarContenido(0);
     });
+// Funcio carregar contingut
+function cargarContenido(index){
+            // Ajax
+            $.ajax({
+            url: "/usuarispubli/{{$user->id}}/"+index,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "GET",
+            dataType: 'json',
+            success: function(data){
+                // Ajax correcte
+                //Start Foreach    
+              $.each(data, function(index,element){
+                // Creacio de objecte i classes
+                let object=$("<a>");
+                object.addClass("publicacio");
+                object.attr("onclick","redirectContingut("+element.id+")");
+                let img=$("<img>");
+                img.addClass("image-thumbnail");
+                let icon=$("<i>");
+                icon.addClass("fas");
+                // Asignacio imatge
+                if(element.tipus_contingut==1){
+                    img.attr("src",'{{asset("contenido/1")}}/'+element.url);
+                }else{
+                    img.attr("src",'{{asset("contenido/1")}}/'+element.portada);
+                }
+                // Icona del contingut
+                switch(element.tipus_contingut){
+                    case  1:
+                    icon.append($("<img>").attr("src",'{{asset("iconos/img.svg")}}'));
+                    break;
+                    case 2:
+                    icon.append($("<img>").attr("src",'{{asset("iconos/text.svg")}}'));
+                    break;
+                    case 3:
+                    icon.append($("<img>").attr("src",'{{asset("iconos/music.svg")}}'));
+                    break;
+                    case 4:
+                    icon.append($("<img>").attr("src",'{{asset("iconos/video.svg")}}'));
+                    break;
+                    case 5:
+                    icon.append($("<img>").attr("src",'{{asset("iconos/otros.svg")}}'));
+                    break;
+                }
+                let bclose=$("<button>");
+                bclose.addClass("btn");
+                bclose.addClass("btn-danger");
+                bclose.addClass("delete-buttons");
+                bclose.val(element.id);
+                let ico=$("<i>");
+                ico.addClass("pe-7s-close");
+                bclose.append(ico);
+                $(bclose).on("click",function(e){
+                  e.preventDefault;
+                  e.stopPropagation();
+                esborraPublicacio($(this).val());
+                });
+                object.append(icon);
+                object.append(img);
+                object.append(bclose);
+                $(".contingut").append(object);
+                
+              }); 
+              // End Foreach       
+              rebreChats();
+              
+              canReset=true;
+              if(index==0){
+                $(window).on("scroll", function() {
+                    if(canReset){
+                        // console.log($(".contingut").height()+"/"+($(window).height()+$(window).scrollTop()));
+                        if($(".contingut").height()<($(window).height()+$(window).scrollTop())){
+                            // console.log(":)");
+                            canReset=false;
+                            index++;
+                            cargarContenido(index);
+                        }
+                    }
+                });
+              }
+              
+            }
+            });
+        }
+        function esborraPublicacio(idCont){
+        if(confirm("Estas seguro que quieres borrar el conteido?")){
+            console.log("esborrar"+idCont);
+            $.ajax({
+            url: "/delete/contingut/+idCont",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "DELETE",
+            success: function(data){
+            console.log(":)");
+            },error: function(data){
+            console.log(data);
+            }
+            });
+        }
+    }
+    function redirectContingut(id){
+        window.location= "/contingut/"+id;
+    }
 </script>
 @endsection
+

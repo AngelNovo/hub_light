@@ -13,7 +13,6 @@
     $(document).ready(function(){
         // Marcar Navbar
         $(".isSelected").removeClass("isSelected");
-        $("#Nav-Explorar").addClass("isSelected");
         // Carregar contingut
         cargarContenido(0);
         

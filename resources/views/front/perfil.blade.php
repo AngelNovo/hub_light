@@ -3,6 +3,7 @@
 @section("content")
 {{-- Css --}}
 <link rel="stylesheet" href={{asset("/css/front/perfil.css")}}>
+<link rel="stylesheet" href={{asset("/css/front/explorar.css")}}>
 <div class="content">
     <div class="row">
         {{-- Carta de perfil --}}
@@ -49,13 +50,15 @@
                     <div class="desc" title="Fecha Nacimiento"><i class="pe-7s-gift"></i>{{date("d/m/Y",strtotime($user->data_naixement))}}</div>
                     {{-- Creacio Compta --}}
                     <div class="desc" title="Fecha Creacion Usuario"><i class="pe-7s-stopwatch"></i>{{$user->created_at->diffForHumans()}}</div>
-                </div>  
-            </div>                     
+                </div> 
+                <div class="contingut container-fluid  img-responsive container"> </div> 
+            </div>            
         </div>
     </div>
 </div>
 {{-- Scripts --}}
 <script>
+    let canReset=false;
     // Document Ready
     $(document).ready(function(){
         // Marcar Navbar
@@ -64,6 +67,7 @@
         $("#seguir_boton").on("click",function(){
             seguir();
         });
+        cargarContenido(0);
     });   
 
     function seguir(){
@@ -98,5 +102,78 @@
         }
         });
     }
+
+    // Funcio carregar contingut
+    function cargarContenido(index){
+            // Ajax
+            $.ajax({
+            url: "/usuarispubli/{{$user->id}}/"+index,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "GET",
+            dataType: 'json',
+            success: function(data){
+                // Ajax correcte
+                //Start Foreach    
+              $.each(data, function(index,element){
+                // Creacio de objecte i classes
+                let object=$("<a>");
+                object.addClass("publicacio");
+                object.attr("href","/contingut/"+element.id);
+                let img=$("<img>");
+                img.addClass("image-thumbnail");
+                let icon=$("<i>");
+                icon.addClass("fas");
+                // Asignacio imatge
+                if(element.tipus_contingut==1){
+                    img.attr("src",'{{asset("contenido/1")}}/'+element.url);
+                }else{
+                    img.attr("src",'{{asset("contenido/1")}}/'+element.portada);
+                }
+                // Icona del contingut
+                switch(element.tipus_contingut){
+                    case  1:
+                    icon.append($("<img>").attr("src",'{{asset("iconos/img.svg")}}'));
+                    break;
+                    case 2:
+                    icon.append($("<img>").attr("src",'{{asset("iconos/text.svg")}}'));
+                    break;
+                    case 3:
+                    icon.append($("<img>").attr("src",'{{asset("iconos/music.svg")}}'));
+                    break;
+                    case 4:
+                    icon.append($("<img>").attr("src",'{{asset("iconos/video.svg")}}'));
+                    break;
+                    case 5:
+                    icon.append($("<img>").attr("src",'{{asset("iconos/otros.svg")}}'));
+                    break;
+                }
+                object.append(icon);
+                object.append(img);
+                $(".contingut").append(object);
+              }); 
+              // End Foreach       
+              $("body").append($("<input>").attr("id","loader").hide());
+              rebreChats();
+              canReset=true;
+              if(index==0){
+                $(window).on("scroll", function() {
+                    if(canReset){
+                        // console.log($(".contingut").height()+"/"+($(window).height()+$(window).scrollTop()));
+                        if($(".contingut").height()<($(window).height()+$(window).scrollTop())){
+                            // console.log(":)");
+                            canReset=false;
+                            index++;
+                            cargarContenido(index);
+                        }
+                    }
+                });
+              }
+            }
+
+            });
+        }
+    
 </script>
 @endsection

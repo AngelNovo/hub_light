@@ -206,9 +206,10 @@ body{
 .button-add-new-user{
     cursor: pointer;
     border-radius: 50%;
-    min-width: 30px;
-    min-height: 30px;
+    width: 35px;
+    height: 35px;
     margin-left: 5px;
+    padding-left: 5px;
 }
 
 .button-add-new-user:hover{
@@ -234,4 +235,6 @@ body{
     max-height: 200px;
 }
 
-
+.card-header .multiselect {
+    color: white;
+}

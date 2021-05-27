@@ -194,6 +194,10 @@
         event.preventDefault();
       }
     });
+
+    $("#arxiu").on("change",function(){
+      console.log($("#arxiu")[0].files[0].size);
+    });
   });
   // Dades Drets Autor
   function getDerechos() {
@@ -234,6 +238,7 @@
       success: function(data){
         // Success
         // Start Foreach
+        console.log(data);
         $.each(data, function(index,element){
           // Opcions Select
           var option=$("<option>");
@@ -369,6 +374,11 @@
             error=error+"¡Extension incorrecta!";
             validacion=false;
           }
+          let espai=parseInt(tipoC[0].espai,10)*1000;
+          if($("#arxiu-i")[0].files[0].size>espai){
+            error=error+"¡Archivo muy pesado!";
+            validacion=false;
+          }
         }
         break;
       // Texte
@@ -390,6 +400,11 @@
           error=error+"¡No se encuentra el titulo!";
           validacion=false;
         }
+        let espai=parseInt(tipoC[1].espai,10)*1000;
+        if($("#arxiu")[0].files[0].size>espai){
+            error=error+"¡Archivo muy pesado!";
+            validacion=false;
+          }
         break;
       // Musica
       case "3":
@@ -402,6 +417,11 @@
           filename= $("#arxiu-m").val().split('.').pop();
           if(!validaExt(filename,tipoC[2].Descripcio)){
             error=error+"¡Extension incorrecta!";
+            validacion=false;
+          }
+          let espai=parseInt(tipoC[2].espai,10)*1000;
+          if($("#arxiu-m")[0].files[0].size>espai){
+            error=error+"¡Archivo muy pesado!";
             validacion=false;
           }
         }
@@ -419,6 +439,11 @@
             error=error+"¡Extension incorrecta!";
             validacion=false;
           }
+          let espai=parseInt(tipoC[3].espai,10)*1000;
+          if($("#arxiu-v")[0].files[0].size>espai){
+            error=error+"¡Archivo muy pesado!";
+            validacion=false;
+          }
         }
         break;
       // Altres
@@ -432,6 +457,11 @@
           filename= $("#arxiu").val().split('.').pop();
           if(!validaExt(filename,tipoC[4].Descripcio)){
             error=error+"¡Extension incorrecta!";
+            validacion=false;
+          }
+          let espai=parseInt(tipoC[4].espai,10)*1000;
+          if($("#arxiu")[0].files[0].size>espai){
+            error=error+"¡Archivo muy pesado!";
             validacion=false;
           }
         }

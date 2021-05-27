@@ -21,7 +21,7 @@
     function cargarContenido(index){
         // Ajax
         $.ajax({
-        url: "/explorar/"+index,
+        url: "/tags/{{$idTag}}/"+index,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },

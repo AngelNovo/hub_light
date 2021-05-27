@@ -100,7 +100,7 @@
           window.location= "/contingut/"+$('option[value="'+inputvalue+'"]').attr("data-id");
           break;
         case "#":
-
+          window.location= "/tagsview/"+$('option[value="'+inputvalue+'"]').attr("data-id");
           break;
 
       }

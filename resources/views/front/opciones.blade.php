@@ -126,7 +126,10 @@ function cargarContenido(index){
             dataType: 'json',
             success: function(data){
                 // Ajax correcte
-                //Start Foreach    
+                //Start Foreach  
+                data=data.sort(function (a, b) {
+                    return (b.id - a.id)
+                    });  
               $.each(data, function(index,element){
                 // Creacio de objecte i classes
                 let object=$("<a>");

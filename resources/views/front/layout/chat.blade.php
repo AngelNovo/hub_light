@@ -443,6 +443,41 @@
         },
         type: "GET",
         success: function(data){
+          console.log("MAMIG");
+           console.log(data);
+           $.each(data, function(index,element){
+            let option=$("<option>");
+            option.val(element.id);
+            option.text(element.name);
+            $("#addUsers").append(option);
+           });
+
+           $('#addUsers').multiselect({
+          includeSelectAllOption: true,
+        });
+        $(".button-add-new-user").on("click",function(){
+            añadirAmigosChat();
+          });
+        },error: function(data){
+           console.log(data);
+        }
+      });
+  }
+
+  function añadirAmigosChat(){
+    let usuari=$("#addUsers").val()
+    console.log(usuari);
+    $.ajax({
+        url: "/chats/users/amigos",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: "POST",
+        data: {
+            "id_xat":idChat,
+            "id_usuari":usuari
+        },
+        success: function(data){
            console.log(data);
            $.each(data, function(index,element){
             let option=$("<option>");

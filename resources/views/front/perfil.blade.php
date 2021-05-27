@@ -20,7 +20,9 @@
                 </div>
                 {{-- Seguir --}}
                 @if (Auth::user()->id != $user->id)
-                    <button class="button-seguir btn btn-primary" id="seguir_boton">Seguir</button>
+                    @if (!$seguit)
+                        <button class="button-seguir btn btn-primary" id="seguir_boton">Seguir</button>
+                    @endif
                 @endif
                 {{-- Activitat Usuari --}}
                 @if ($user->actiu==1)
@@ -116,6 +118,9 @@
             success: function(data){
                 // Ajax correcte
                 //Start Foreach    
+                data=data.sort(function (a, b) {
+                return (b.id - a.id)
+                });
               $.each(data, function(index,element){
                 // Creacio de objecte i classes
                 let object=$("<a>");

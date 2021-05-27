@@ -14,7 +14,7 @@
         $(document).ready(function(){
             // Marcar Navbar
             $(".isSelected").removeClass("isSelected");
-            $("#Nav-Explorar").addClass("isSelected");
+            $("#Nav-Recomendados").addClass("isSelected");
             // Carregar contingut
             cargarContenido(0);
             
@@ -31,7 +31,8 @@
             dataType: 'json',
             success: function(data){
                 // Ajax correcte
-                //Start Foreach    
+                //Start Foreach   
+                console.log(data); 
               $.each(data, function(index,element){
                 // Creacio de objecte i classes
                 let object=$("<a>");

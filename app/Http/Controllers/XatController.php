@@ -6,6 +6,7 @@ use App\Models\AnalitiquesGeneralsModel;
 use App\Models\ContingutModel;
 use App\Models\MissatgeModel;
 use App\Models\SeguidorsModel;
+use App\Models\User;
 use App\Models\XatModel;
 use App\Models\XatUsuarisModel;
 use Illuminate\Http\Request;
@@ -39,58 +40,41 @@ class XatController extends Controller
     public function getAmigos()
     {
         $usuarioActivo = Auth::user();
-        $amigos = SeguidorsModel::whereRaw("(id_usuari = $usuarioActivo or id_seguit = $usuarioActivo) and  acceptat=1")
+        $amigos = SeguidorsModel::whereRaw("(id_usuari = $usuarioActivo->id or id_seguit = $usuarioActivo->id) and  acceptat=1")
             ->join('users as u1', 'u1.id', '=', 'seguidors.id_usuari')
-            ->join('users as u2', 'u2.id', '=', 'seguidors.id_seguit')
-            // ->select("u1.id","u1.name")
-            ->select("u1.name as nombre", "u2.name as nombre2")
             ->get();
+        $ids=[];
+        foreach($amigos as $a) {
+            $ids[]=($a->id_usuari==$usuarioActivo->id) ? $a->id_seguit : $a->id_usuari ;
+        }
+        $amigos=User::whereIn('id',$ids)
+        ->select('id as id_user','name')
+        ->get();
         $aux = [];
         return $amigos;
-        foreach ($amigos as $a) {
-            if ($a->id_usuari != $usuarioActivo->id) {
-                $auxObj["id_user"] = $a->id_usuari;
-
-                $auxObj["name"] = $a->nombre;
-
-                $aux[] = $auxObj;
-            } else {
-                $auxObj["id_user"] = $a->id_seguit;
-
-                $auxObj["name"] = $a->nombre2;
-
-                $aux[] = $auxObj;
-            }
-        }
-        return $aux;
     }
 
-    public function getAmigosNotChat(Request $request)
+    public function getAmigosNotChat($idXat)
     {
-        $usersChat = XatUsuarisModel::where('id_xat', $request->input('id_xat'))->get();
+        $usersChat = XatUsuarisModel::where('id_xat', $idXat)->get();
         $aux = [];
         foreach ($usersChat as $u) {
             $aux[] = $u->id_usuari;
         }
         $usuarioActivo = Auth::user()->id;
         $amigos = SeguidorsModel::whereRaw("(id_usuari = $usuarioActivo or id_seguit = $usuarioActivo) and  acceptat=1")
-            ->whereNotIn("id_usuari", $aux)
             ->join('users as u1', 'u1.id', '=', 'seguidors.id_usuari')
             ->get();
-        // return $amigos;
-        $aux = [];
-        foreach ($amigos as $a) {
-            if ($a->id_usuari != $usuarioActivo) {
-                $auxObj["id_user"] = $a->id_usuari;
-                $auxObj["name"] = $a->name;
-                $aux[] = $auxObj;
-            } else {
-                $auxObj["id_user"] = $a->id_seguit;
-                $auxObj["name"] = $a->name;
-                $aux[] = $auxObj;
-            }
+        $ids=[];
+        foreach($amigos as $a) {
+           if(!in_array($a->id_usuari,$aux) || !in_array($a->id_seguit,$aux)) {
+                $ids[]=($a->id_usuari==Auth::user()->id) ? $a->id_seguit : $a->id_usuari ;
+           }
         }
-        return $aux;
+        $amigos=User::whereIn('id',$ids)
+        ->select('id as id_user','name')
+        ->get();
+        return $amigos;
     }
 
     public function getMissatges($idChat)

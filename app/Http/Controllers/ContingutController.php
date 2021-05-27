@@ -35,7 +35,7 @@ class ContingutController extends Controller
                 "contenido_total"=>$content->contenido_total,
                 "missatges_totals"=>$content->missatges_totals,
                 "usuaris_actius"=>$content->usuaris_actius,
-                "usuaris_enperill"=>$content->usuaris_enperill,
+                "usuaris_enperill"=>$content->usuaris_enperill
             ]);
         }
         $seguits=SeguidorsModel::whereRaw('acceptat=1 and (id_seguit='.Auth::user()->id.' or id_usuari='.Auth::user()->id.')')

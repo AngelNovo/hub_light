@@ -33,7 +33,7 @@
                 <i class="fa pe-7s-add-user button-add-new-user" title="Añadir Usuario"> </i>
               </div>
             </div>
-              <div class="card-body height3">
+              <div class="card-body height3 chat-container">
                 <ul class="chat-list">                                  
                 </ul>
               </div>
@@ -90,6 +90,18 @@
 
     $(".nouChatButton").on("click",function(){
       creaChat();
+    });
+
+    $(".chat-container").on("scroll", function() {
+      console.log(($(".chat-container").height())+"/"+$(".chat-container").scrollTop());
+      console.log($(".fechaChat:first-of-type").text());
+      // if(($(".content").height()-margen)<$(window).scrollTop()){
+      //     // console.log(":)");
+      //     canReset=false;
+      //     indexCarga++;
+      //     cargarContenido();
+      // }
+                
     });
   });
 
@@ -218,6 +230,7 @@
               }
               liFecha.css("color","black");
               liFecha.css("text-align","center");
+              liFecha.addClass("fechaChat");
               uFecha=fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear();
               $(".chat-list").append(liFecha);
             }
@@ -268,7 +281,7 @@
             li.append(chatBody);            
             $(".chat-list").append(li);
           });
-          rebreLast(idChat);
+          rebreLast(idChat,true);
           $(".xats-disp").slideUp(); 
           $("#iconDown").show();
           interval=setInterval(function(){
@@ -282,7 +295,7 @@
   }
 
 
-  function rebreLast(idChat){
+  function rebreLast(idChat,isFirst=false){
     $.ajax({
         url: "/chats/missatges/"+idChat,
         headers: {
@@ -340,6 +353,9 @@
             li.append(chatBody);            
             $(".chat-list").append(li);
           });
+          if(data.length>0||isFirst){
+            $('.card-body').scrollTop($('.card-body')[0].scrollHeight);
+          }
         }
     });
   }

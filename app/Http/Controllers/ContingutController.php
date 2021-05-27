@@ -420,6 +420,7 @@ class ContingutController extends Controller
     }
 
     public function deleteContenido($idContenido) {
+        return $idContenido;
         $contenido =ContingutModel::where('id',$idContenido)
         ->delete();
         $actius = DB::table('analitiques_generals')->max('id');

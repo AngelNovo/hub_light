@@ -7,7 +7,7 @@ $(document).ready(function() {
         let id=$(this).data("id");
 
         $.ajax({
-            url: (pag==="admin") ? "/back/admin/u/adminify/" : "/back/admin/u/block/",
+            url: (pag==="admin") ? "/back/admin/u/adminify" : "/back/admin/u/block",
             // url: url,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -152,6 +152,9 @@ Route::get('/explorar/{off}',[ContingutController::class,'getAll']);
 Route::get('/destacados',[ContingutController::class,'getDestacados']);
 Route::get('/destacados/vista',[ContingutController::class,'getDestacadosVista']);
 
+// Etiquetas
+// Route::get('/tags/{id}',[]);
+
 // Verificar correo
 Route::get('/verifica/{id}',[UsuariController::class,'verifica']);
 

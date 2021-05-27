@@ -217,6 +217,7 @@ class ContingutController extends Controller
         $info=User::where('id',$auth)->get();
         $recomenatsListRaw=$info[0]->recomenat;
         $recomenatsListArray=explode(';',$recomenatsListRaw);
+        $recomenatsListArray=array_filter($recomenatsListArray);
         // return $recomenatsListArray;
 
         $take = 30;
@@ -225,6 +226,8 @@ class ContingutController extends Controller
         ->join("contingut_tag","contingut_tag.id_contingut","=","id")
         ->join("tags","tags.id","=","contingut_tag.id_tag")
         ->skip($offset*$take)->take($take)
+        ->orderBy("contingut.id","desc")
+        ->select("contingut.*")
         ->get();
         return $recomendados;
         // return view('front.recomendados')->with('info',$info);

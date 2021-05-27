@@ -33,27 +33,36 @@ class InteraccioController extends Controller
         // return $interaccio->id_contingut;
 
         if(null!==($request->input('megusta'))) {
-            $recomenats=ContingutTagModel::where('id_contingut',$interaccio->id_contingut)
-            ->join('tags','tags.id',"=",'.id_tag')
-            ->select("tags.nombre")
-            ->get();
-            $usuario = User::where('id',Auth::user()->id)->get()->first();
-            $recomenatsRaw=explode(";",$usuario->recomenat);
-            // return $recomenatsRaw;
-            foreach($recomenats as $r){
-                if(sizeof($recomenatsRaw)>30) {
-                    array_pop($usuario->recom);
-                    array_unshift($recomenatsRaw,$r->nombre);
-                }else {
-                    array_unshift($recomenatsRaw,$r->nombre);
+            if($request->input('megusta')==1){
+                $recomenats=ContingutTagModel::where('id_contingut',$interaccio->id_contingut)
+                ->join('tags','tags.id',"=",'.id_tag')
+                ->select("tags.nombre")
+                ->get();
+                $usuario = User::where('id',Auth::user()->id)->get()->first();
+                $recomenatsRaw=explode(";",$usuario->recomenat);
+                $count=0;
+                foreach($recomenats as $r){
+                    foreach($recomenatsRaw as $rw) {
+                        if($rw!=$r) {
+                            $count++;
+                        }
+                    }
+                    if($count==sizeof($recomenats)-1) {
+                        if(sizeof($recomenatsRaw)>30) {
+                            array_pop($usuario->recomenat);
+                            array_unshift($recomenatsRaw,$r->nombre);
+                        }else {
+                            array_unshift($recomenatsRaw,$r->nombre);
+                        }
+                        $count=0;
+                    }
                 }
-
+                $recomenatsFinal=implode(';',$recomenatsRaw);
+                $user=User::where('id',Auth::user()->id)
+                ->update([
+                    "recomenat"=>$recomenatsFinal
+                ]);
             }
-            $recomenatsFinal=implode(';',$recomenatsRaw);
-            $user=User::where('id',Auth::user()->id)
-            ->update([
-                "recomenat"=>$recomenatsFinal
-            ]);
         }
 
         //4: devolvemos una respuesta response() con el valor que queramos

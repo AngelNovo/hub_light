@@ -227,7 +227,7 @@ class ContingutController extends Controller
         ->join("tags","tags.id","=","contingut_tag.id_tag")
         ->skip($offset*$take)->take($take)
         ->orderBy("contingut.id","desc")
-        ->select("contingut.*")
+        ->selectRaw("distinct contingut.*")
         ->get();
         return $recomendados;
         // return view('front.recomendados')->with('info',$info);

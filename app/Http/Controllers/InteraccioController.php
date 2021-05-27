@@ -40,28 +40,35 @@ class InteraccioController extends Controller
                 ->get();
                 $usuario = User::where('id',Auth::user()->id)->get()->first();
                 $recomenatsRaw=explode(";",$usuario->recomenat);
+                $recomenatsRaw=array_filter($recomenatsRaw);
+                // $recomenatsRaw=array_filter($recomenatsRaw);
                 $count=0;
                 foreach($recomenats as $r){
                     foreach($recomenatsRaw as $rw) {
-                        if($rw!=$r) {
+                        if($rw!=$r->nombre) {
                             $count++;
                         }
                     }
-                    if($count==sizeof($recomenats)-1) {
+                    if($count==sizeof($recomenatsRaw)) {
+                        // return $recomenatsRaw;
                         if(sizeof($recomenatsRaw)>30) {
                             array_pop($usuario->recomenat);
                             array_unshift($recomenatsRaw,$r->nombre);
                         }else {
                             array_unshift($recomenatsRaw,$r->nombre);
                         }
-                        $count=0;
                     }
+                    $count=0;
                 }
+                // return $recomenats;
+                $recomenatsRaw=array_filter($recomenatsRaw);
                 $recomenatsFinal=implode(';',$recomenatsRaw);
-                $user=User::where('id',Auth::user()->id)
-                ->update([
-                    "recomenat"=>$recomenatsFinal
-                ]);
+                if(sizeof($recomenatsRaw)>0) {
+                    $user=User::where('id',Auth::user()->id)
+                    ->update([
+                        "recomenat"=>$recomenatsFinal
+                    ]);
+                }
             }
         }
 

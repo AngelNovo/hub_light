@@ -8,6 +8,6 @@
 </head>
 <body>
     <h2>{{$details['title']}}</h2>
-    <a href="{{'laravel.test/verifica/'.$details['id']}}" target="_blank">{{$details['body']}}</a>
+    <a href="{{'https://projecthublight.tk/verifica/'.$details['id']}}" target="_blank">{{$details['body']}}</a>
 </body>
 </html>

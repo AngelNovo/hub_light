@@ -103,6 +103,7 @@ class UsuariController extends Controller
         $update=[];
 
         $nombre=Auth::user()->foto;
+        $fondo=Auth::user()->fondo;
         $request->validate([
             'foto'=>'mimes:jpg,png,jpeg,gif|max:4096',
             'fondo'=>'mimes:jpg,png,jpeg,gif|max:4096'
@@ -118,7 +119,7 @@ class UsuariController extends Controller
         }
         // Fondo
         if(isset($request->fondo)) {
-            if($nombre!=="fondoDefault.jpg") {
+            if($fondo!=="fondoDefault.jpg") {
                 unlink(public_path("/images/perfil/usuarios/fondo/".Auth::user()->fondo));
             }
             $fondo=time().'-'.Auth::user()->name.'.'.$request->fondo->extension();

@@ -34,6 +34,9 @@ class TagsController extends Controller
     }
 
     public function getByIdView($idTag) {
+        $tags=TagsModel::where('id',$idTag)->get()->first();
+        // return $tags;
+        if(!isset($tags->nombre)) return redirect('/notfound');
         return view('front.etiqueta')->with('idTag',$idTag);
     }
 

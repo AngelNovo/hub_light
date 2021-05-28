@@ -152,7 +152,7 @@ class ContingutController extends Controller
 
         $propietari=ContingutModel::where('id',$id)->get()->first();
         // return $propietari;
-        if(!isset($propietari->propietari)) return 0;
+        if(!isset($propietari->propietari)) return redirect('/notfound');
         if(isset(Auth::user()->id)) {
             if(Auth::user()->id==$propietari->propietari) {
                 $interaccio=InteraccioModel::where('id_contingut',$id)
@@ -190,6 +190,7 @@ class ContingutController extends Controller
         ->join("contingut","contingut.id","=","id_contingut")
         ->join("users","users.id","=","id_usuari")
         ->orderBy('interaccio.created_at','desc')
+        ->select("interaccio.created_at","users.foto","interaccio.comentario","interaccio.id_usuari")
         ->get();
         // Comprueba si los usuarios son amigos
         if(isset(Auth::user()->id)){

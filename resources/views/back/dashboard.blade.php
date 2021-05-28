@@ -114,7 +114,7 @@
     data_content=[];
     labels_content=[];
     for(let d of data_raw) {
-        console.log(d);
+        // console.log(d);
         data_content.push(d.missatges_totals);
         let aux = d.created_at.split("T")
         labels_content.push(aux[0]);

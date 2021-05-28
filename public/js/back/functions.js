@@ -53,7 +53,7 @@ function adultify(id,value) {
         success: function(data){
             // window.location="/back/admin/adultify";
             document.getElementById(id).value = 0
-            console.log(data);
+            // console.log(data);
         }
 
     });
@@ -94,7 +94,7 @@ function editTypeContent(id,campo,valor) {
 
         success: function(data){
             // window.location="/back/admin/adultify";
-            console.log(data);
+            // console.log(data);
         }
 
     });
@@ -134,7 +134,7 @@ function editRight(id,valor) {
 
         success: function(data){
             // window.location="/back/admin/rights";
-            console.log(data);
+            // console.log(data);
         }
 
     });

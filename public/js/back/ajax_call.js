@@ -16,7 +16,7 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function(data){
-                console.log(data);
+                // console.log(data);
             }
         });
     });

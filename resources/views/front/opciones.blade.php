@@ -205,7 +205,6 @@ function cargarContenido(index){
         }
         function esborraPublicacio(idCont){
         if(confirm("Estas seguro que quieres borrar el conteido?")){
-            console.log("esborrar"+idCont);
             $.ajax({
             url: "/delete/contingut/"+idCont,
             headers: {
@@ -213,9 +212,7 @@ function cargarContenido(index){
             },
             type: "DELETE",
             success: function(data){
-            console.log(data);
             },error: function(data){
-            console.log(data);
             }
             });
         }

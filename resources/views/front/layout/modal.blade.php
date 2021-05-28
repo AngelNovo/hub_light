@@ -196,7 +196,6 @@
     });
 
     $("#arxiu").on("change",function(){
-      console.log($("#arxiu")[0].files[0].size);
     });
   });
   // Dades Drets Autor
@@ -238,7 +237,6 @@
       success: function(data){
         // Success
         // Start Foreach
-        console.log(data);
         $.each(data, function(index,element){
           // Opcions Select
           var option=$("<option>");
@@ -478,7 +476,8 @@
     // Ensenya els errors si ni ha
     if(!validacion){
       alert(error);
-      console.log(error+"/"+validacion);
+    }else{
+      $("#loadScreen").show();
     }
     // Torna bool
     return validacion;
@@ -488,7 +487,6 @@
     var ext=disp.split(" ");
     let correctExt=false;
     $.each(ext, function(index,element){
-      console.log(element+"/"+arxiu);
       if(element==arxiu){
         correctExt=true;
         return true;

@@ -121,7 +121,6 @@
             e.preventDefault();
             enviaComent();
         });
-        console.log("{{$like}}");
         $("#like").on("click",function(e){
 
             if($("#megusta").prop("checked")){
@@ -164,7 +163,6 @@
             "idProp":idProp
         },
         success: function(data){
-           console.log(data);
         }
         });
     }
@@ -189,9 +187,7 @@
             "idProp":idProp
         },
         success: function(data){
-           console.log(data);
         },error: function(data){
-           console.log(data);
         }
         });
     }

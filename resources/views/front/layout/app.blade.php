@@ -17,6 +17,7 @@
     {{-- Favicon --}}
     <link rel="icon" href={{asset("/favicon.ico")}}>
     {{-- Css layout --}}
+    <link rel="stylesheet" href={{asset("/css/front/loadingscreen.css")}}>
     <link rel="stylesheet" href={{asset("/css/front/layout.css")}}>
     {{-- Iconos Pe-7 --}}
     <link rel="stylesheet" href={{asset("/css/front/pe-icon-7-stroke.css")}}>
@@ -29,6 +30,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 </head>
 <body>
+<div id="loadScreen">
+  <div id="loader">
+    <div id="shadow"></div>
+    <div id="box"></div>
+  </div>
+</div>
+  
   @if (isset(Auth::user()->id))
     @if (Auth::user()->suspes==1)
       <script>window.location= "/logout"</script>
@@ -42,3 +50,10 @@
     @include("front.layout.footer")
 </body>
 </html>
+<script>
+  window.onload=function(){
+        $("img").onload = function() {
+      };
+    $("#loadScreen").hide();
+  };
+</script>

@@ -86,10 +86,8 @@
     $("#submit-buscador").on("click",function(e){
       e.preventDefault();
       var inputvalue=$("#buscador").val();
-      console.log();
       var type=inputvalue[0];
       var id=$('option[value="'+inputvalue+'"]').attr("data-id");
-      console.log(type);
       switch(type){
         case  "@":
         if(id!=undefined){
@@ -146,7 +144,6 @@
         type: "GET",
         dataType: 'json',
         success: function(data){     
-          console.log(data);
           $(".notificaciones-div").append($("<p>").text("Peticiones de amistad"));
           $.each(data[0], function(index,element){
             let li=$("<a>");
@@ -240,7 +237,6 @@
   }
 
   function aceptarNotificacion(id,idCont) {
-    console.log(id+"/"+idCont);
     $.ajax({
         url: "/notificacion/"+id,
         headers: {
@@ -254,13 +250,11 @@
         dataType: 'json',
         success: function(data){  
         },error: function(data){
-           console.log(data);
         }
     });
   }
 
   function esborarNotificacion(id,idCont) {
-    console.log(id+"/"+idCont);
     $.ajax({
         url: "/notificaciones/delete/"+id,
         headers: {
@@ -273,9 +267,7 @@
         },
         dataType: 'json',
         success: function(data){  
-          console.log("hola"); 
         },error: function(data){
-           console.log(data);
         }
     });
   }

@@ -1,5 +1,8 @@
 
 
+.modal{
+    z-index: 999999;
+}
 .modal-body{
     max-height: 70vh;
     overflow-y: auto;

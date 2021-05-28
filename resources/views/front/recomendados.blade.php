@@ -32,7 +32,6 @@
             success: function(data){
                 // Ajax correcte
                 //Start Foreach   
-                console.log(data); 
               $.each(data, function(index,element){
                 // Creacio de objecte i classes
                 let object=$("<a>");

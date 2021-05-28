@@ -82,7 +82,6 @@
         if(idChat!=null){
           interval=setInterval(function(){
           rebreLast(idChat);
-          console.log(idChat);
         }, 5000);
         chatActive=true;
         }
@@ -95,7 +94,6 @@
 
     $(".chat-container").on("scroll", function() {
       if($(".chat-container").scrollTop()==0){
-        console.log($(".fechaChat:first-of-type").text());
         $(".fechaChat:first-of-type").remove();
         indexChat++;
         CarregaMissatgesAnteriors(idChat,indexChat)
@@ -113,7 +111,6 @@
         type: "GET",
         dataType: 'json',
         success: function(data){                   
-          console.log(data);
           $(".xats-disp").find(".selectChat").remove();
           //Chats
           $.each(data, function(index,element){
@@ -195,7 +192,6 @@
           data=data.sort(function (a, b) {
           return (a.id - b.id)
         });                
-          console.log(data);
           if(interval!=null){
             clearInterval(interval);
             interval=null;
@@ -284,7 +280,6 @@
           $("#iconDown").show();
           interval=setInterval(function(){
             rebreLast(idChat);
-            console.log(idChat);
           }, 5000);
           chatActive=true;
           $('.card-body').scrollTop($('.card-body')[0].scrollHeight);
@@ -361,8 +356,6 @@
 
   function enviaMSG(){
     let missatge=$("#newMsg").val();
-    console.log(idChat);
-    console.log(missatge);
     $.ajax({
         url: "/chats/missatges",
         headers: {
@@ -374,11 +367,9 @@
             "id_xat":idChat
         },
         success: function(data){
-           console.log(data);
            missatge=$("#newMsg").val("");
            rebreLast(idChat);
         },error: function(data){
-           console.log(data);
         }
       });
   }
@@ -398,11 +389,8 @@
             "nom":null
         },
         success: function(data){
-           console.log(data);
-           console.log(users);
            rebreChats();
         },error: function(data){
-           console.log(data);
         }
       });
     }else{
@@ -418,7 +406,6 @@
         },
         type: "GET",
         success: function(data){
-           console.log(data);
            $.each(data, function(index,element){
             let option=$("<option>");
             option.val(element.id_user);
@@ -430,7 +417,6 @@
           includeSelectAllOption: true,
         });
         },error: function(data){
-           console.log(data);
         }
       });
   }
@@ -443,8 +429,6 @@
         },
         type: "GET",
         success: function(data){
-          console.log("MAMIG");
-           console.log(data);
            $.each(data, function(index,element){
             let option=$("<option>");
             option.val(element.id_user);
@@ -459,14 +443,12 @@
             añadirAmigosChat();
           });
         },error: function(data){
-           console.log(data);
         }
       });
   }
 
   function añadirAmigosChat(){
     let usuari=$("#addUsers").val()
-    console.log(usuari);
     $.ajax({
         url: "/chats/users/amigos",
         headers: {
@@ -478,7 +460,6 @@
             "users":usuari
         },
         success: function(data){
-           console.log(data);
            $.each(data, function(index,element){
             let option=$("<option>");
             option.val(element.id_user);
@@ -490,13 +471,11 @@
           includeSelectAllOption: true,
         });
         },error: function(data){
-           console.log(data);
         }
       });
   }
 
   function comparteixCont(idCont,xats){
-    console.log(xats);
     $.ajax({
         url: "/chats/missatges/content",
         headers: {
@@ -509,10 +488,8 @@
             "missatge":null
         },
         success: function(data){
-           console.log(data);
            $(".span-envia-cont").hide();
         },error: function(data){
-           console.log(data);
         }
       });
   }
@@ -525,7 +502,6 @@
         },
         type: "GET",
         success: function(data){
-           console.log(data);
            $.each(data, function(index,element){
             let option=$("<option>");
             option.val(element.id);
@@ -539,13 +515,11 @@
             enviaReport(idusr,rep);
           });
         },error: function(data){
-           console.log(data);
         }
       });
   }
 
   function enviaReport(idusr,rep){
-    console.log(idusr+"/"+rep);
     $.ajax({
         url: "/back/admin/u/notify",
         headers: {
@@ -557,10 +531,8 @@
             "avis":rep
         },
         success: function(data){
-           console.log(data);
            $(".span-envia-cont").hide();
         },error: function(data){
-           console.log(data);
         }
       });
   }
@@ -582,7 +554,6 @@
             data=data.sort(function (a, b) {
           return (b.id - a.id)
         });                
-          console.log(data);
           //Mensages
           let uFecha="";
           let fechaHoy=new Date();

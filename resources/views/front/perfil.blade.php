@@ -83,7 +83,6 @@
             "seguit":{{$user->id}}
         },
         success: function(data){
-           console.log("correcte");
         }
         });
     }
@@ -100,7 +99,6 @@
             "acceptat":1
         },
         success: function(data){
-           console.log("correcte");
         }
         });
     }

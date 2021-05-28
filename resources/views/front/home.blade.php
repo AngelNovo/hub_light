@@ -35,7 +35,6 @@ function cargarContenido(){
         let AUTH=JSON.parse($("#Auth").val());
         let contingut=$(".content");
         $.each(data, function(index,element){
-          console.log(element);
           let row= $("<div>");
           row.addClass("row");
           //Header
@@ -291,7 +290,6 @@ function cargarContenido(){
           }
           let idCont=input.find(".id_contingut").val();
           let idProp=input.find(".id_propitari").val();
-          console.log(idCont+"/"+megusta+"/"+idProp);
           enviaLike(idCont,megusta,idProp);
         });
 
@@ -351,9 +349,7 @@ function cargarContenido(){
             "idProp":idProp
         },
         success: function(data){
-           console.log(data);
         },error: function(data){
-           console.log(data);
         }
       });
   }
@@ -368,7 +364,6 @@ function cargarContenido(){
       dataType: 'json',
       success: function(data){
         let contador=0;
-        console.log(data);
         $.each(data, function(index,element){
           if(element.comentario!=null&&element.comentario!=""&&element.comentario!=undefined){
             let comentario=$("<div>");

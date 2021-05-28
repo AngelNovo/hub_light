@@ -151,7 +151,8 @@ class ContingutController extends Controller
     public function get($id) {
 
         $propietari=ContingutModel::where('id',$id)->get()->first();
-
+        // return $propietari;
+        if(!isset($propietari->propietari)) return 0;
         if(isset(Auth::user()->id)) {
             if(Auth::user()->id==$propietari->propietari) {
                 $interaccio=InteraccioModel::where('id_contingut',$id)

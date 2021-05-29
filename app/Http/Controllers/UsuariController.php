@@ -33,8 +33,8 @@ class UsuariController extends Controller
         }
         // return $bool;
         // Info seguidor
-        $bool=SeguidorsModel::whereRaw("id_seguit=$id or id_usuari=$id")->get();
-        $bool=(sizeof($bool)==0) ? false : true ;
+        // $bool=SeguidorsModel::whereRaw("id_seguit=$id or id_usuari=$id")->get();
+        // $bool=(sizeof($bool)==0) ? false : true ;
         // Info de usuario
         $result = User::find($id);
         $resultAmistad=0;

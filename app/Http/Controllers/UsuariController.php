@@ -23,7 +23,7 @@ class UsuariController extends Controller
         // Seguidor bool
         $bool=SeguidorsModel::whereRaw("(id_seguit=".Auth::user()->id." and id_usuari=$id) or (id_seguit=$id and id_usuari=".Auth::user()->id.")")->get()->first();
         if(!empty($bool)) {
-            if($bool->acceptat==1) {
+            if($bool->acceptat=="1") {
                 $bool="1";
             }else {
                 $bool="0";

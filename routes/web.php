@@ -164,3 +164,7 @@ Route::post('/generepassword',[UsuariController::class,'genPassword']);
 Route::get('/generapassword/vista',function() {
     return view('auth.canviarPassword');
 });
+
+Route::get('/terminos',function() {
+    return view('front.terminos');
+});

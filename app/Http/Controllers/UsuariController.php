@@ -90,7 +90,7 @@ class UsuariController extends Controller
             unlink(public_path("/images/perfil/usuarios/$nombre"));
         }
 
-        $newImageName=time().'-'.Auth::user()->name.'.'.$request->foto->extension();
+        $newImageName=time().'-'.trim(Auth::user()->name).'.'.$request->foto->extension();
 
         $request->foto->move(public_path('/images/perfil/usuarios'),$newImageName);
         $usuari = User::where('id',Auth::user()->id)
@@ -114,7 +114,7 @@ class UsuariController extends Controller
             if($nombre!=="avatar.jpg") {
                 unlink(public_path("/images/perfil/usuarios/$nombre"));
             }
-            $avatar=time().'-'.Auth::user()->name.'.'.$request->foto->extension();
+            $avatar=time().'-'.str_replace(' ', '', Auth::user()->name).'.'.$request->foto->extension();
             $update["foto"]=$avatar;
             $request->foto->move(public_path('/images/perfil/usuarios'),$avatar);
         }
@@ -123,7 +123,7 @@ class UsuariController extends Controller
             if($fondo!=="fondoDefault.jpg") {
                 unlink(public_path("/images/perfil/usuarios/fondo/".Auth::user()->fondo));
             }
-            $fondo=time().'-'.Auth::user()->name.'.'.$request->fondo->extension();
+            $fondo=time().'-'.str_replace(' ', '', Auth::user()->name).'.'.$request->fondo->extension();
             $update["fondo"]=$fondo;
             $request->fondo->move(public_path('/images/perfil/usuarios/fondo'),$fondo);
         }

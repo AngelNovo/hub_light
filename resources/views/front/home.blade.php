@@ -111,6 +111,9 @@ function cargarContenido(){
               like.addClass("pe-7s-like");
               like.addClass("like");
               like.attr("data-toggle","Me gusta");
+              like.on("click",function(){
+                likePublicacio($(this));
+              })
               let report=$("<i>");
               report.addClass("fa");
               report.addClass("pe-7s-attention");
@@ -183,7 +186,7 @@ function cargarContenido(){
           mostComent.text("--- Mostrar Comentarios ---");
           mostComent.attr("val","0");
           mostComent.on("click",function(){
-            mostraComentraisPublicacio();
+            mostraComentraisPublicacio($(this));
           });
           footer.append(contentFooter);
             //Footer-Footer
@@ -248,8 +251,7 @@ function cargarContenido(){
           contingut.append(row);           
         });
         // End Foreach
-        function mostraComentraisPublicacio(){
-          let form=$(this);
+        function mostraComentraisPublicacio(form){
           form=form.parent().find(".formComentaris");
           var comentaris=$(this).parent();
           comentaris=comentaris.find(".border-bot").find("div");
@@ -278,23 +280,23 @@ function cargarContenido(){
           }   
         };
         // Like
-        $(".like").on("click",function(){
-          let input=$(this).parent().parent().parent();
+        function likePublicacio(form){
+          let input=form.parent().parent().parent();
           input= input.find(".formComentaris").find(".form-group");
           let like= input.find(".inputMG");
           let megusta="0";
           if(like.prop("checked")){
             like.prop("checked",false);
-            $(this).removeClass("megusta");
+            form.removeClass("megusta");
           }else{
             like.prop("checked",true);
-            $(this).addClass("megusta");
+            form.addClass("megusta");
             megusta="1";
           }
           let idCont=input.find(".id_contingut").val();
           let idProp=input.find(".id_propitari").val();
           enviaLike(idCont,megusta,idProp);
-        });
+        };
 
         //Comentario
         $(".submit-comment").on("click",function(){
@@ -308,11 +310,7 @@ function cargarContenido(){
           enviaComent(idCont,msg,idProp,comentaris);    
         });
         $(".span-envia-cont").hide();
-        $(".span-envia-report").hide();
-        $(".enviar").on("click",function(){
-          $(this).parent().find(".span-envia-cont").fadeIn();
-          $(".span-envia-report").fadeOut();
-        });  
+        $(".span-envia-report").hide(); 
         $("body").append($("<input>").attr("id","loader").hide());  
         rebreChats();
         

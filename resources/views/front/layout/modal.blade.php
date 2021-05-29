@@ -90,7 +90,7 @@
               {{-- Llicencia --}}
               <div id="licencias">
                 <label for="linkCopy">Licencia</label>
-                <input id="linkCopy" name="linkCopy" type="text" placeholder="url"/>
+                <input id="linkCopy" name="linkCopy" type="text" placeholder="url para demostrar que la licencia exista"/>
               </div>
           </div>
         </div>
@@ -214,7 +214,12 @@
         $.each(data, function(index,element){
           // Opcions Select
           var option=$("<option>");
-          option.text(element.tipus);
+          if(element.id_dret==2){
+            option.text(element.tipus+" (No tengo Derechos de autor)");
+          }else{
+            option.text(element.tipus);
+          }
+          
           option.val(element.id_dret);
           $("#derechoA").append(option);
         });

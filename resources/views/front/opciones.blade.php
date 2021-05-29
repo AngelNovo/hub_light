@@ -212,6 +212,7 @@ function cargarContenido(index){
             },
             type: "DELETE",
             success: function(data){
+                location.reload();
             },error: function(data){
             }
             });

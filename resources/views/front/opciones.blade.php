@@ -13,14 +13,14 @@
         {{-- Carta de perfil --}}
         <div class="card hovercard">
             {{-- Fondo --}}
-            <div class="cardheader fondo-perfil" style="background-image: url({{asset('images/perfil/usuarios/fondo/'.$user->fondo)}});">
+            <div class="cardheader fondo-perfil" style="background-image: url('{{asset('images/perfil/usuarios/fondo/'.$user->fondo)}}');">
                 <input id="file-input-fondo" name="fondo" type="file" form="formPerfil"/>
             </div>
             {{-- Foto Perfil --}}
             <div class="avatar">
                 <label for="file-input">
                     <div class="upload-icon">
-                        <img style="cursor: pointer;" src={{asset('images/perfil/usuarios/'.$user->foto)}} alt="Foto de perfil" data-toggle="tooltip" data-placement="right" title="Haz clic para cambiar la foto de perfil" class="foto-perfil">
+                        <img style="cursor: pointer;" src="{{asset('images/perfil/usuarios/'.$user->foto)}}" alt="Foto de perfil" data-toggle="tooltip" data-placement="right" title="Haz clic para cambiar la foto de perfil" class="foto-perfil">
                     </div>
                 </label>
                 <input id="file-input" name="foto" hidden type="file" form="formPerfil"/>

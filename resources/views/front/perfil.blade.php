@@ -14,7 +14,7 @@
                 <div class="avatar">
                     <label>
                         <div class="upload-icon">
-                            <img src={{asset('images/perfil/usuarios/'.$user->foto)}} alt="Foto de perfil" data-toggle="tooltip" data-placement="right" title="Haz clic para cambiar la foto de perfil" class="foto-perfil">
+                            <img src="{{asset('images/perfil/usuarios/'.$user->foto)}}" alt="Foto de perfil" data-toggle="tooltip" data-placement="right" title="Haz clic para cambiar la foto de perfil" class="foto-perfil">
                         </div>
                     </label>
                 </div>

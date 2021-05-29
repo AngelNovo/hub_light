@@ -114,6 +114,12 @@
                         <a href={{url('/back/admin/rights')}} id="rights">Derechos de autor
                         </a>
                     </li>
+                    @if (Auth::user()->tipus===3)
+                        <li>
+                            <a href={{url('/back/admin/contenido')}} id="contSup">Eliminar contenido
+                            </a>
+                        </li>
+                    @endif
                   </ul>
                 </div>
             </li>

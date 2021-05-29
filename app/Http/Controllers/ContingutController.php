@@ -400,7 +400,7 @@ class ContingutController extends Controller
                     $exists=TagsModel::where('nombre',"=",$t)->get()->first();
                     if(!$exists) {
                         $tag=TagsModel::create([
-                            "nombre"=>trim(strtolower($t))
+                            "nombre"=>strtolower($t)
                         ]);
                         ContingutTagModel::create([
                             "id_contingut"=>$id_contingut+1,
@@ -435,6 +435,11 @@ class ContingutController extends Controller
             "contenido_total"=>$analitiques->contenido_total-1
         ]);
         return $contenido;
+    }
+
+    public function eliminar() {
+        $contenido=ContingutModel::all();
+        return view('back.supereliminar')->with('contenido',$contenido);
     }
 
 }

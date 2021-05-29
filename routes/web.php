@@ -100,6 +100,8 @@ Route::group(['middleware'=>'auth'], function() {
     Route::delete('/back/admin/rights',[DerechosAutorController::class,'deleteRight']);
     Route::put('/back/admin/rights',[DerechosAutorController::class,'edit']);
 
+    Route::get('/back/admin/contenido',[ContingutController::class,'eliminar']);
+
     // Opciones
     Route::get('/opciones/{id}',[UsuariController::class,'opciones']);
     Route::put('/opciones/perfil',[UsuariController::class,'updatePerfil']);

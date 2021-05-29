@@ -42,7 +42,7 @@
                   <textarea class="inputMsg" name="newMsg" maxlength="200" id="newMsg" rows="10"></textarea>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 p-0 d-flex">
-                  <button type="button" class="btn btn-primary butonSendMSG" id="submitForm" form="formModal">Subir</button>
+                  <button type="button" class="btn btn-primary butonSendMSG" form="formModal">Subir</button>
                 </div>
               </div>
             </div>

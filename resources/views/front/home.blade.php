@@ -181,7 +181,10 @@ function cargarContenido(){
           let mostComent=$("<span>");
           mostComent.addClass("most-coment");
           mostComent.text("--- Mostrar Comentarios ---");
-          mostComent.attr("val","0")
+          mostComent.attr("val","0");
+          mostComent.on("click",function(){
+            mostraComentraisPublicacio();
+          });
           footer.append(contentFooter);
             //Footer-Footer
             let inIdCont=$("<input>");
@@ -245,7 +248,7 @@ function cargarContenido(){
           contingut.append(row);           
         });
         // End Foreach
-        $(".most-coment").on("click",function(){
+        function mostraComentraisPublicacio(){
           let form=$(this);
           form=form.parent().find(".formComentaris");
           var comentaris=$(this).parent();
@@ -273,7 +276,7 @@ function cargarContenido(){
               eliminaComents(comentaris);
             }
           }   
-        });
+        };
         // Like
         $(".like").on("click",function(){
           let input=$(this).parent().parent().parent();

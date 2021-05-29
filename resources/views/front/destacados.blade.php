@@ -308,7 +308,6 @@ function cargarContenido(){
           $(this).parent().find(".span-envia-cont").fadeIn();
           $(".span-envia-report").fadeOut();
         });  
-        $("body").append($("<input>").attr("id","loader").hide());  
         rebreChats();
         
         $(".report").on("click",function(){

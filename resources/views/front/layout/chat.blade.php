@@ -167,6 +167,7 @@
           $('.enviaCont').multiselect({
             includeSelectAllOption: true,
           });
+          $(".button-envCont").off("click");
           $(".button-envCont").on("click",function(){
             let idCont=$(this).val();
             let xats=$(this).parent().find(".enviaCont").val();
@@ -502,6 +503,7 @@
         },
         type: "GET",
         success: function(data){
+          $(".envia-report option").remove();
            $.each(data, function(index,element){
             let option=$("<option>");
             option.val(element.id);
@@ -509,6 +511,7 @@
             $(".envia-report").append(option);
             $(".span-envia-report").hide();
            });
+           $(".button-envRep").off("click");
            $(".button-envRep").on("click",function(){
             let idusr=$(this).val();
             let rep=$(this).parent().find(".envia-report").val();
@@ -532,6 +535,7 @@
         },
         success: function(data){
            $(".span-envia-cont").hide();
+           $(".span-envia-report").hide();
         },error: function(data){
         }
       });

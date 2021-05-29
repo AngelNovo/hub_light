@@ -123,6 +123,9 @@ function cargarContenido(){
               if(element.like_bool=="1"){
                 like.addClass("megusta");
               }
+              report.on("click",function(){
+                publicacioEnviaReport($(this));
+              })
               divI.append(like);
               divI.append(report);
             }
@@ -130,7 +133,11 @@ function cargarContenido(){
               enviar.addClass("fa");
               enviar.addClass("pe-7s-paper-plane");
               enviar.addClass("enviar");
-              enviar.attr("data-toggle","Enviar");    
+              enviar.attr("data-toggle","Enviar");   
+              enviar.on("click",function(){
+                $(this).parent().find(".span-envia-cont").fadeIn();
+                $(".span-envia-report").fadeOut();
+              });   
               let spanEnvia=$("<span>");
               spanEnvia.addClass("span-envia-cont");
               let selectChats=$("<select>");
@@ -235,6 +242,9 @@ function cargarContenido(){
               buttonComent.addClass("btn-primary");
               buttonComent.addClass("submit-comment");
               buttonComent.text("Enviar");
+              buttonComent.on("click",function(){
+                enviaComentariPublicacio($(this));
+              })
               form.append(buttonComent);
               form.hide();
               footer.append(form);
@@ -252,29 +262,30 @@ function cargarContenido(){
         });
         // End Foreach
         function mostraComentraisPublicacio(form){
+          let esto=form;
           form=form.parent().find(".formComentaris");
-          var comentaris=$(this).parent();
+          var comentaris=esto.parent();
           comentaris=comentaris.find(".border-bot").find("div");
-          let input=$(this).parent();
+          let input=esto.parent();
           let id= input.find(".formComentaris").find(".form-group").find(".id_contingut").val();          
           if(form.is(':hidden')){
             form.slideDown();
-            $(this).text("--- Ocultar Comentarios ---");
+            esto.text("--- Ocultar Comentarios ---");
             mostraComents(comentaris,id);
           }else{
             form.slideUp();
-            $(this).text("--- Mostrar Comentarios ---");
+            esto.text("--- Mostrar Comentarios ---");
             eliminaComents(comentaris);
           } 
           if(form.attr("class")==undefined){
-            if( $(this).attr("val")=="0"){
-              $(this).text("--- Ocultar Comentarios ---");
-              $(this).attr("val","1");
-              id=$(this).parent().find(".id_contingut").val();
+            if(esto.attr("val")=="0"){
+              esto.text("--- Ocultar Comentarios ---");
+              esto.attr("val","1");
+              id=esto.parent().find(".id_contingut").val();
               mostraComents(comentaris,id);
             }else{
-              $(this).text("--- Mostrar Comentarios ---");
-              $(this).attr("val","0");
+              esto.text("--- Mostrar Comentarios ---");
+              esto.attr("val","0");
               eliminaComents(comentaris);
             }
           }   
@@ -299,25 +310,24 @@ function cargarContenido(){
         };
 
         //Comentario
-        $(".submit-comment").on("click",function(){
-          let input=$(this).parent().parent().parent();
+        function enviaComentariPublicacio(form){
+          let input=form.parent().parent().parent();
           input= input.find(".formComentaris").find(".form-group");
           let msg= input.find(".MSG").val();
           let idCont=input.find(".id_contingut").val();
           let idProp=input.find(".id_propitari").val();
-          var comentaris=$(this).parent().parent();
+          var comentaris=form.parent().parent();
           comentaris=comentaris.find(".border-bot").find("div");
           enviaComent(idCont,msg,idProp,comentaris);    
-        });
+        };
         $(".span-envia-cont").hide();
         $(".span-envia-report").hide(); 
-        $("body").append($("<input>").attr("id","loader").hide());  
         rebreChats();
         
-        $(".report").on("click",function(){
-          $(this).parent().find(".span-envia-report").fadeIn();
+        function publicacioEnviaReport(form){
+          form.parent().find(".span-envia-report").fadeIn();
           $(".span-envia-cont").fadeOut();
-        });
+        };
         getReports();  
         canReset=true;
           if(indexCarga==0){

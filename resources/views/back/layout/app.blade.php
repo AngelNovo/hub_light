@@ -27,7 +27,9 @@
                     $('[data-toggle="tooltip"]').tooltip();
                 });
                 // Genera el DataTable(paginación[libreria])
-                $("#tableContent").DataTable();
+                $("#tableContent").DataTable([
+                    page:false
+                ]);
             });
         </script>
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>

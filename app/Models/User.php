@@ -23,7 +23,7 @@ class User extends Authenticatable
         'password',
         'password',
         'email_verified_at',
-        'data-naixement',
+        'data_naixement',
         'actiu',
         'deshabilitat',
         'suspes',

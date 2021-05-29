@@ -21,16 +21,17 @@ class UsuariController extends Controller
     }
     public function get($id) {
         // Seguidor bool
-        $bool=SeguidorsModel::whereRaw("id_seguit=$id or id_usuari=$id")->get()->first();
+        $bool=SeguidorsModel::whereRaw("(id_seguit=".Auth::user()->id." and id_usuari=$id) or (id_seguit=$id and id_usuari=".Auth::user()->id.")")->get()->first();
         if(!empty($bool)) {
             if($bool->acceptat==1) {
-                $bool=1;
+                $bool="1";
             }else {
-                $bool=0;
+                $bool="0";
             }
         }else {
             $bool=0;
         }
+        // return $bool;
         // Info seguidor
         $bool=SeguidorsModel::whereRaw("id_seguit=$id or id_usuari=$id")->get();
         $bool=(sizeof($bool)==0) ? false : true ;

@@ -372,12 +372,13 @@ class ContingutController extends Controller
         $url=public_path('/contenido/'.$typeContent);
         // Mueve las imagenes a su directorio conveniente
         if($request->hasFile('portada')) {
-            $portada=time().'-'.Auth::user()->name.'.'.$request->portada->extension();
+            $portada=time().'-'.str_replace(' ', '', Auth::user()->name).'.'.$request->portada->extension();
             $request->portada->move(public_path('/contenido/1'),$portada);
         }
 
         if($request->hasFile('arxiu')) {
-            $archivo=time().'-'.Auth::user()->name.'.'.$request->arxiu->extension();
+            $archivo=time().'-'.str_replace(' ', '', Auth::user()->name).'.'.$request->arxiu->extension();
+            $archivo=trim($archivo);
             $request->arxiu->move($url,$archivo);
 
             $subido=ContingutModel::create([
@@ -396,7 +397,7 @@ class ContingutController extends Controller
             if(!empty($tags)) {
 
                 foreach($tags as $t) {
-                    $exists=TagsModel::where('nombre',"=",$t)->first();
+                    $exists=TagsModel::where('nombre',"=",$t)->get()->first();
                     if(!$exists) {
                         $tag=TagsModel::create([
                             "nombre"=>trim(strtolower($t))

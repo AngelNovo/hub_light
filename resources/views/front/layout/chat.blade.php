@@ -267,6 +267,16 @@
               }else{
                 imgCon.attr("src","{{asset('contenido/1/')}}/"+element.contingut.portada);
               }
+              console.log(element.contingut);
+              if(element.contingut.majoria_edat==1){
+                imgCon.css({
+   'filter'         : 'blur(30px)',
+   '-webkit-filter' : 'blur(30px)',
+   '-moz-filter'    : 'blur(30px)',
+   '-o-filter'      : 'blur(30px)',
+   '-ms-filter'     : 'blur(30px)'
+});
+            }  
               aCont.append(imgCon);
               chatMessage.append(aCont);
             }

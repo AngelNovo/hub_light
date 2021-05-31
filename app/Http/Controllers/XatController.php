@@ -95,7 +95,7 @@ class XatController extends Controller
         foreach ($missatges as $m) {
             if ($m->id_contingut != null) {
                 $contingut = ContingutModel::where('id', $m->id_contingut)
-                    ->select('portada', 'url', 'tipus_contingut')
+                    ->select('portada', 'url', 'tipus_contingut','majoria_edat')
                     ->get();
                 $m->contingut = $contingut[0];
             }
@@ -130,7 +130,7 @@ class XatController extends Controller
         foreach ($missatges as $m) {
             if ($m->id_contingut != null) {
                 $contingut = ContingutModel::where('id', $m->id_contingut)
-                    ->select('portada', 'url', 'tipus_contingut')
+                    ->select('portada', 'url', 'tipus_contingut','majoria_edat')
                     ->get();
                 $m->contingut = $contingut[0];
             }

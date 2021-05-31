@@ -29,8 +29,6 @@
               <div class="div-nouUser d-flex">
                 <h6>Chat</h6>
                 <i class="fa pe-7s-angle-down showChat" title="Ver Chat"> </i>
-                <select id="addUsers" multiple="multiple"> </select>
-                <i class="fa pe-7s-add-user button-add-new-user" title="Añadir Usuario"> </i>
               </div>
             </div>
               <div class="card-body height3 chat-container">
@@ -54,12 +52,13 @@
 </div>
 {{-- Scripts --}}
 <script>
-  // Document Ready
+  // Variables Globals
   let AUTH=JSON.parse($("#Auth").val());
   let idChat;
   let interval=null;
   let chatActive=false;
   let indexChat=0;
+  // Document Ready
   $(document).ready(function(){
     $("#iconDown").hide();
     
@@ -70,8 +69,8 @@
       enviaMSG();
     });
     
+    // Control actualitzar xat
     $(".chat-close, .enable-chat-modal").on("click",function(){
-      
       if(chatActive){
         if(interval!=null){
           clearInterval(interval);
@@ -91,7 +90,7 @@
     $(".nouChatButton").on("click",function(){
       creaChat();
     });
-
+    //Missatges anteriors
     $(".chat-container").on("scroll", function() {
       if($(".chat-container").scrollTop()==0){
         $(".fechaChat:first-of-type").remove();
@@ -100,7 +99,7 @@
       }      
     });
   });
-
+  // Rebre els xats
   function rebreChats(){
     let AUTH=JSON.parse($("#Auth").val());
     $.ajax({
@@ -110,9 +109,10 @@
         },
         type: "GET",
         dataType: 'json',
-        success: function(data){                   
+        success: function(data){  
+          //Chats                 
           $(".xats-disp").find(".selectChat").remove();
-          //Chats
+          // Start Foreach
           $.each(data, function(index,element){
             let integrantes=[];
             $.each(element.integrantes, function(i,el){
@@ -159,6 +159,7 @@
 
             $(".enviaCont").append($("<option>").val(element.id_xat).text(nom));
           });
+          // End Foreach
           meterAmigos();
           $(".selectChat").on("click",function(){
             idChat=$(this).attr("chat-val");
@@ -176,7 +177,7 @@
         }
     });
   }
-
+  // Rebre els missatges, per primer pic
   function rebreMissatges(idChat,index){
     $.ajax({
         url: "/chats/missatges/anterior",
@@ -189,7 +190,8 @@
             "index":index
         },
         dataType: 'json',
-        success: function(data){   
+        success: function(data){ 
+          //Mensages  
           data=data.sort(function (a, b) {
           return (a.id - b.id)
         });                
@@ -198,10 +200,9 @@
             interval=null;
           }
           $(".chat-list li").remove();
-          //Mensages
           let uFecha="";
           let fechaHoy=new Date();
-          meterAmigosChat();
+          // Start Foreach
           $.each(data, function(index,element){
             let fecha=new Date(element.created_at);
             if(uFecha!=(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())){
@@ -267,7 +268,6 @@
               }else{
                 imgCon.attr("src","{{asset('contenido/1/')}}/"+element.contingut.portada);
               }
-              console.log(element.contingut);
               if(element.contingut.majoria_edat==1){
                 imgCon.css({
    'filter'         : 'blur(30px)',
@@ -286,6 +286,8 @@
             li.append(chatBody);            
             $(".chat-list").append(li);
           });
+          // End Foreach
+          meterAmigosChat();
           rebreLast(idChat,true);
           $(".xats-disp").slideUp(); 
           $("#iconDown").show();
@@ -299,7 +301,7 @@
     });
   }
 
-
+  // rebre els missatges, que no ha vist l'usuari
   function rebreLast(idChat,isFirst=false){
     $.ajax({
         url: "/chats/missatges/"+idChat,
@@ -309,10 +311,11 @@
         type: "GET",
         dataType: 'json',
         success: function(data){   
+          //Mensages
           data=data.sort(function (a, b) {
           return (a.id - b.id)
         });                
-          //Mensages
+          // Start foreach
           $.each(data, function(index,element){
             let fecha=new Date(element.created_at);
             let li=$("<li>");
@@ -349,6 +352,15 @@
               }else{
                 imgCon.attr("src","{{asset('contenido/1/')}}/"+element.contingut.portada);
               }
+              if(element.contingut.majoria_edat==1){
+                imgCon.css({
+   'filter'         : 'blur(30px)',
+   '-webkit-filter' : 'blur(30px)',
+   '-moz-filter'    : 'blur(30px)',
+   '-o-filter'      : 'blur(30px)',
+   '-ms-filter'     : 'blur(30px)'
+});
+            }  
               aCont.append(imgCon);
               chatMessage.append(aCont);
             }
@@ -358,13 +370,14 @@
             li.append(chatBody);            
             $(".chat-list").append(li);
           });
+          // End foreach
           if(data.length>0||isFirst){
             $('.card-body').scrollTop($('.card-body')[0].scrollHeight);
           }
         }
     });
   }
-
+  // Enviar missatge
   function enviaMSG(){
     let missatge=$("#newMsg").val();
     $.ajax({
@@ -384,7 +397,7 @@
         }
       });
   }
-
+  // Crear un xat nou
   function creaChat(){
     let users= $("#nouChat").val();
     users.push(""+AUTH.id);
@@ -408,7 +421,7 @@
       alert("Por favor, inserte minimo un usuario");
     }
   }
-
+  // Añadir al select de chats los amigos que puedes añadir
   function meterAmigos(){
     $.ajax({
         url: "/chats/users/amigos",
@@ -431,7 +444,7 @@
         }
       });
   }
-
+  // Añadir al select del chat
   function meterAmigosChat(){
     $.ajax({
         url: "/chats/users/amigos/"+idChat,
@@ -440,6 +453,19 @@
         },
         type: "GET",
         success: function(data){
+          $(".button-add-new-user").remove();
+          $("#addUsers").parent().find(".btn-group").remove();
+          $("#addUsers").remove();
+          let select=$("<select>");
+          select.attr("id","addUsers");
+          select.attr("multiple","multiple");
+          let butonAddUser=$("<i>");
+          butonAddUser.addClass("fa");
+          butonAddUser.addClass("pe-7s-add-user");
+          butonAddUser.addClass("button-add-new-user");
+          butonAddUser.attr("title","Añadir Usuario");
+          $(".div-nouUser").append(select);
+          $(".div-nouUser").append(butonAddUser);
            $.each(data, function(index,element){
             let option=$("<option>");
             option.val(element.id_user);
@@ -457,7 +483,7 @@
         }
       });
   }
-
+  // Afegir usuaris a un xat que ja existeix
   function añadirAmigosChat(){
     let usuari=$("#addUsers").val()
     $.ajax({
@@ -485,7 +511,7 @@
         }
       });
   }
-
+  // Compartir Contingut
   function comparteixCont(idCont,xats){
     $.ajax({
         url: "/chats/missatges/content",
@@ -504,7 +530,7 @@
         }
       });
   }
-
+  // Rebre tipus de reports
   function getReports(){
     $.ajax({
         url: "/get/reports",
@@ -531,7 +557,7 @@
         }
       });
   }
-
+// Enviar el Report
   function enviaReport(idusr,rep){
     $.ajax({
         url: "/back/admin/u/notify",
@@ -550,7 +576,7 @@
         }
       });
   }
-
+// Carregar els missatges anteriors
   function CarregaMissatgesAnteriors(idChat,index){
     $.ajax({
         url: "/chats/missatges/anterior",
@@ -573,31 +599,6 @@
           let fechaHoy=new Date();
           $.each(data, function(index,element){
             let fecha=new Date(element.created_at);
-            if(uFecha!=(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())){
-              let liFecha=$("<li>");
-              if((fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())==(fechaHoy.getDate()+"/"+(fechaHoy.getMonth()+1)+"/"+fechaHoy.getFullYear())){
-                liFecha.text("Hoy");
-              }else {
-                let fechaAyer="";
-                if(fechaHoy.getDate()-1!=0){
-                  fechaAyer=(fechaHoy.getDate()-1)+"/"+(fechaHoy.getMonth()+1)+"/"+fechaHoy.getFullYear();
-                }else if(fechaHoy.getMonth()!=0){
-                  fechaAyer=fechaHoy.getDate()+"/"+fechaHoy.getMonth()+"/"+fechaHoy.getFullYear();
-                }else{
-                  fechaAyer=fechaHoy.getDate()+"/"+fechaHoy.getMonth()+"/"+(fechaHoy.getFullYear()-1);
-                }
-                if((fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())==fechaAyer){
-                  liFecha.text("Ayer");
-                }else{
-                  liFecha.text(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear());
-                }
-              }
-              liFecha.css("color","black");
-              liFecha.css("text-align","center");
-              liFecha.addClass("fechaChat");
-              uFecha=fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear();
-              $(".chat-list").prepend(liFecha);
-            }
             let li=$("<li>");
             if(element.id_usuari==AUTH.id){
               li.addClass("out");
@@ -636,6 +637,15 @@
               }else{
                 imgCon.attr("src","{{asset('contenido/1/')}}/"+element.contingut.portada);
               }
+              if(element.contingut.majoria_edat==1){
+                imgCon.css({
+   'filter'         : 'blur(30px)',
+   '-webkit-filter' : 'blur(30px)',
+   '-moz-filter'    : 'blur(30px)',
+   '-o-filter'      : 'blur(30px)',
+   '-ms-filter'     : 'blur(30px)'
+});
+            } 
               aCont.append(imgCon);
               chatMessage.append(aCont);
             }
@@ -644,6 +654,31 @@
             li.append(chatImg);
             li.append(chatBody);            
             $(".chat-list").prepend(li);
+            if(uFecha!=(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())){
+              let liFecha=$("<li>");
+              if((fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())==(fechaHoy.getDate()+"/"+(fechaHoy.getMonth()+1)+"/"+fechaHoy.getFullYear())){
+                liFecha.text("Hoy");
+              }else {
+                let fechaAyer="";
+                if(fechaHoy.getDate()-1!=0){
+                  fechaAyer=(fechaHoy.getDate()-1)+"/"+(fechaHoy.getMonth()+1)+"/"+fechaHoy.getFullYear();
+                }else if(fechaHoy.getMonth()!=0){
+                  fechaAyer=fechaHoy.getDate()+"/"+fechaHoy.getMonth()+"/"+fechaHoy.getFullYear();
+                }else{
+                  fechaAyer=fechaHoy.getDate()+"/"+fechaHoy.getMonth()+"/"+(fechaHoy.getFullYear()-1);
+                }
+                if((fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear())==fechaAyer){
+                  liFecha.text("Ayer");
+                }else{
+                  liFecha.text(fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear());
+                }
+              }
+              liFecha.css("color","black");
+              liFecha.css("text-align","center");
+              liFecha.addClass("fechaChat");
+              uFecha=fecha.getDate()+"/"+(fecha.getMonth()+1)+"/"+fecha.getFullYear();
+              $(".chat-list").prepend(liFecha);
+            }
           });
           }
         }

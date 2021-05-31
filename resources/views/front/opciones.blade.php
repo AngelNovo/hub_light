@@ -203,6 +203,7 @@ function cargarContenido(index){
             }
             });
         }
+        // Esborrar publicacio
         function esborraPublicacio(idCont){
         if(confirm("Estas seguro que quieres borrar el conteido?")){
             $.ajax({

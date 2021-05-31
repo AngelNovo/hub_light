@@ -51,7 +51,7 @@
 </body>
 </html>
 <script>
-
+// Eliminar pantalla de carrega
   $( document ).ajaxComplete(function() {
     $("#loadScreen").hide();
 });

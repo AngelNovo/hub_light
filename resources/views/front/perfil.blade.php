@@ -74,7 +74,7 @@
         });
         cargarContenido(0);
     });   
-
+    // Seguir usuari
     function seguir(){
         $.ajax({
         url: "/usuaris/add/friend",
@@ -89,7 +89,7 @@
         }
         });
     }
-
+    
     function aceptar(){
         $.ajax({
         url: "/usuaris/add/friend",

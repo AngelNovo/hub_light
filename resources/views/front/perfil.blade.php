@@ -20,9 +20,6 @@
                 </div>
                 {{-- Seguir --}}
                 @if (Auth::user()->id != $user->id)
-                <script>
-                    console.log({{$seguit}});
-                </script>
                     @if ($seguit==0)
                         <button class="button-seguir btn btn-primary" id="seguir_boton">Seguir</button>
                     @endif

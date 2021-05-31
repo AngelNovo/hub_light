@@ -47,6 +47,15 @@
                 }else{
                     img.attr("src",'{{asset("contenido/1")}}/'+element.portada);
                 }
+                if(element.majoria_edat==1){
+                img.css({
+   'filter'         : 'blur(30px)',
+   '-webkit-filter' : 'blur(30px)',
+   '-moz-filter'    : 'blur(30px)',
+   '-o-filter'      : 'blur(30px)',
+   '-ms-filter'     : 'blur(30px)'
+});
+            } 
                 // Icona del contingut
                 switch(element.tipus_contingut){
                     case  1:

@@ -51,9 +51,8 @@
 </body>
 </html>
 <script>
-  window.onload=function(){
-        $("img").onload = function() {
-      };
+
+  $( document ).ajaxComplete(function() {
     $("#loadScreen").hide();
-  };
+});
 </script>

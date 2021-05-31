@@ -96,6 +96,24 @@ function cargarContenido(){
             in_contingut.text("Descargar contenido");
           }
           con_contingut.append(in_contingut);
+          if(element.majoria_edat==1){
+            con_contingut.css({
+   'filter'         : 'blur(30px)',
+   '-webkit-filter' : 'blur(30px)',
+   '-moz-filter'    : 'blur(30px)',
+   '-o-filter'      : 'blur(30px)',
+   '-ms-filter'     : 'blur(30px)'
+});
+              con_contingut.on("click",function(){
+                con_contingut.css({
+   'filter'         : 'blur(0px)',
+   '-webkit-filter' : 'blur(0px)',
+   '-moz-filter'    : 'blur(0px)',
+   '-o-filter'      : 'blur(0px)',
+   '-ms-filter'     : 'blur(0px)'
+});
+              });
+            } 
           row.append(con_contingut);
           //Footer
           let footer=$("<div>");

@@ -168,5 +168,5 @@ Route::get('/generapassword/vista',function() {
 });
 
 Route::get('/terminos',function() {
-    return view('front.terminos');
+    return view('auth.terminos');
 });

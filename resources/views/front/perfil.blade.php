@@ -73,6 +73,7 @@
     });   
     // Seguir usuari
     function seguir(){
+        $("#seguir_boton").hide();
         $.ajax({
         url: "/usuaris/add/friend",
         headers: {

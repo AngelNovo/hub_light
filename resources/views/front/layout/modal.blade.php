@@ -189,8 +189,10 @@
     })
     // Funcio Envia Dades
     $("#submitForm").click(function(event){
+      $("#submitForm").hide();
       // Funcio Valida return bool
       if(!valida()){
+        $("#submitForm").show();
         event.preventDefault();
       }
     });

@@ -62,4 +62,9 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $(".isSelected").removeClass("isSelected");
+    });
+</script>
 @endsection

@@ -86,7 +86,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <a target="_blank" href="/terminos">Terminos y condiciones</a>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -94,10 +94,16 @@
                                 </button>
                             </div>
                         </div>
+                        <a href="/login">Ya tengo cuenta</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $(".isSelected").removeClass("isSelected");
+    });
+</script>
 @endsection

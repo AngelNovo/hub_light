@@ -89,7 +89,6 @@
     const bar = {
         labels: labels_active,
         datasets: [{
-            label: 'Usuarios conectados',
             data: data_active,
             fill: true,
             backgroundColor: [

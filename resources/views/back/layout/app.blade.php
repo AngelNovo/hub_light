@@ -28,7 +28,7 @@
                 });
                 // Genera el DataTable(paginación[libreria])
                 $("#tableContent").DataTable([
-                    page:false
+                    page:false,
                 ]);
             });
         </script>

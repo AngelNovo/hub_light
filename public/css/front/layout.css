@@ -20,6 +20,10 @@
     z-index: 1000;
 }
 
+.fa, a img, .foto-coment, .chat-img{
+    cursor: pointer;
+}
+
 .navbar-brand{
     font-size: 2em;
     font-family: LeagueSpartan;

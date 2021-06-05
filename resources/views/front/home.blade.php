@@ -341,7 +341,7 @@ function cargarContenido(){
         $(".span-envia-cont").hide();
         $(".span-envia-report").hide(); 
         rebreChats();
-        
+        // Enviar Reports
         function publicacioEnviaReport(form){
           form.parent().find(".span-envia-report").fadeIn();
           $(".span-envia-cont").fadeOut();
@@ -364,7 +364,7 @@ function cargarContenido(){
           } 
       }
     });
-
+    // Envia Likes
     function enviaLike(idCont,megusta,idProp){
         $.ajax({
         url: "/comment",
@@ -430,13 +430,13 @@ function cargarContenido(){
       }
     });
   }
-
+  // Amagar Comentaris
   function eliminaComents(contingut){
     contingut.find(".comentario").slideUp(function(){
       contingut.find(".comentario").remove();
     });
   }
-
+  // Enviar Comentaris
   function enviaComent(idCont,msg,idProp,contingut){
         $.ajax({
         url: "/comment",

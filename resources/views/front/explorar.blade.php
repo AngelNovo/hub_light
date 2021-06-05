@@ -78,7 +78,6 @@
             $(".contingut").append(object);
           }); 
           // End Foreach       
-          $("body").append($("<input>").attr("id","loader").hide());
           rebreChats();
           canReset=true;
           if(index==0){

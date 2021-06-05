@@ -134,7 +134,7 @@
         }
     });
   }
-
+// Rebre notificacions
   function getNotificaciones(){
     $.ajax({
       url: "/notificaciones",
@@ -235,7 +235,7 @@
         }
     });
   }
-
+  // Aceptar Notificacions
   function aceptarNotificacion(id,idCont) {
     $.ajax({
         url: "/notificacion/"+id,
@@ -253,7 +253,7 @@
         }
     });
   }
-
+  // Eliminar Notificacions
   function esborarNotificacion(id,idCont) {
     $.ajax({
         url: "/notificaciones/delete/"+id,

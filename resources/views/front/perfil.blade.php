@@ -19,9 +19,11 @@
                     </label>
                 </div>
                 {{-- Seguir --}}
-                @if (Auth::user()->id != $user->id)
-                    @if ($seguit==0)
-                        <button class="button-seguir btn btn-primary" id="seguir_boton">Seguir</button>
+                @if (isset(Auth::user()->id))
+                    @if (Auth::user()->id != $user->id)
+                        @if ($seguit==0)
+                            <button class="button-seguir btn btn-primary" id="seguir_boton">Seguir</button>
+                        @endif
                     @endif
                 @endif
                 {{-- Activitat Usuari --}}

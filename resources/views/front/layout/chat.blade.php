@@ -14,6 +14,9 @@
           <div class="chat-msg">
             Agrega un nuevo chat
           </div>
+          <div class="chat-msg-noF">
+            No tienes amigos con quien chatear
+          </div>
             
             <div class="Agrega">
               <select id="nouChat" multiple="multiple"></select>
@@ -440,6 +443,15 @@
            $('#nouChat').multiselect({
           includeSelectAllOption: true,
         });
+        if(data.length==0){
+          $(".Agrega").hide();
+          $(".chat-msg").hide();
+          $(".chat-msg-noF").show();
+        }else{
+          $(".Agrega").show();
+          $(".chat-msg").show();
+          $(".chat-msg-noF").hide();
+        }
         },error: function(data){
         }
       });

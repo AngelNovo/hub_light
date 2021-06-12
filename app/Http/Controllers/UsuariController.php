@@ -48,6 +48,7 @@ class UsuariController extends Controller
             ->orWhere('id_seguit',$id)
             ->orWhere('id_seguit',Auth::user()->id)
             ->get();
+            $resultAmistad=(empty($resultAmistad)) ? "0" : "1" ;
         }
 
         return view('front.perfil')

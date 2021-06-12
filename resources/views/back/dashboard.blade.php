@@ -90,6 +90,7 @@
         labels: labels_active,
         datasets: [{
             data: data_active,
+            label: "Usuarios Conectados",
             fill: true,
             backgroundColor: [
                 '#33FF74',

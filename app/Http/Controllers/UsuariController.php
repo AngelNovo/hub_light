@@ -21,15 +21,18 @@ class UsuariController extends Controller
     }
     public function get($id) {
         // Seguidor bool
-        $bool=SeguidorsModel::whereRaw("(id_seguit=".Auth::user()->id." and id_usuari=$id) or (id_seguit=$id and id_usuari=".Auth::user()->id.")")->get()->first();
-        if(isset($bool->acceptat)) {
-            if($bool->acceptat=="1") {
-                $bool="1";
+        $bool="0";
+        if(isset(Auth::user()->id)) {
+            $bool=SeguidorsModel::whereRaw("(id_seguit=".Auth::user()->id." and id_usuari=$id) or (id_seguit=$id and id_usuari=".Auth::user()->id.")")->get()->first();
+            if(isset($bool->acceptat)) {
+                if($bool->acceptat=="1") {
+                    $bool="1";
+                }else {
+                    $bool="0";
+                }
             }else {
                 $bool="0";
             }
-        }else {
-            $bool="0";
         }
         // return $bool;
         // Info seguidor
@@ -38,7 +41,7 @@ class UsuariController extends Controller
         // Info de usuario
         $result = User::find($id);
         $resultAmistad=0;
-
+        if(empty($result)) return redirect("/notfound");
         if(isset(Auth::user()->id)){
             $resultAmistad=SeguidorsModel::where('id_Usuari',Auth::user()->id)
             ->orWhere('id_usuari',$id)
@@ -49,7 +52,7 @@ class UsuariController extends Controller
 
         return view('front.perfil')
             ->with('user',$result)
-            ->with('amistad', (sizeof($resultAmistad)>0)?1:0)
+            ->with('amistad', ($resultAmistad>0)?1:0)
             ->with('seguit',$bool);
     }
 

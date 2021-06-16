@@ -402,9 +402,10 @@ class ContingutController extends Controller
                         $tag=TagsModel::create([
                             "nombre"=>strtolower($t)
                         ]);
+                        $lastTag=TagsModel::max('id');
                         ContingutTagModel::create([
                             "id_contingut"=>$id_contingut+1,
-                            "id_tag"=>$tag->id
+                            "id_tag"=>$lastTag
                         ]);
                     }else {
                         ContingutTagModel::create([

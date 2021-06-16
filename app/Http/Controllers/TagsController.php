@@ -15,7 +15,7 @@ class TagsController extends Controller
     }
 
     public function getTags() {
-        $tags = TagsModel::all();
+        $tags = TagsModel::orderBy("id","desc")->get();
         return view('back.tags')->with('tags',$tags);
     }
 
